@@ -1,12 +1,21 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import skeleton.Logger;
+
+
 public class Inventory {
     private final int size = 10;
+    private List<Resource> materials = new ArrayList<>();
     
 
     public void addResource(Resource r)
     {
 
+        if(materials.size() < size)
+            Logger.log(r, "callBack", "epik callback", this);
     }
 
     public Resource removeResource(String rName)
