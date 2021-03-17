@@ -38,7 +38,8 @@ public class Logger {
         for (int i = 0; i < stackDebth; i++)
             System.out.print("\t");
 
-        String str = obj.getClass().getSimpleName() + "." + funcName + "()";
+        //String str = obj.getClass().getSimpleName() + "." + funcName + "()";
+        String str =  "(" + obj.getClass().getSimpleName() + ") "  + funcName + "()";
 
         if (!comment.equals(""))
             str += (" -- " + comment);
@@ -63,11 +64,11 @@ public class Logger {
      * @param args argumentumok amivel hívjuk a függvényt
      * @return T hívott függvény visszatérési értéke ha érdekes
      */
-    public static <T> T log(Object obj, String funcName, String comment, Object... args) {
+    public static <T> T log(Object obj, String objName, String funcName, String comment, Object... args) {
         T res = null;
         try {
             Method m = findMethod(obj, funcName);
-            startFunctionLogComment(obj, m.getName(), comment);
+            startFunctionLogComment(obj, objName + "." + m.getName(), comment);
             res = (T) m.invoke(obj, args);
             endFunctionLog();
         } catch (Exception e) {

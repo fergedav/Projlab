@@ -11,7 +11,11 @@ public class Asteroid extends Orbit {
     }
 
     private void reaction()
-    {}
+    {
+        if(inSunlight && core != null && layers == 0)
+            core.reaction(this);
+
+    }
 
     public void explosion()
     {}
@@ -36,8 +40,7 @@ public class Asteroid extends Orbit {
 
         core = r;
 
-        if(inSunlight)
-            core.reaction(this);
+        
         
         return true;
     }

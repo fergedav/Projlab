@@ -16,7 +16,8 @@ public class Test {
 
     public boolean f2(int n)
     {
-        Logger.log(this, "f1", "");
+        //f1();
+        Logger.log(this, "t1", "f1", "");
         return n == 0;
     }
 }
