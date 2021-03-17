@@ -15,7 +15,7 @@ public class Inventory {
     {
 
         if(materials.size() < size)
-            Logger.log(r, "callBack", "epik callback", this);
+            Logger.log(r, "r", "callBack", "epik callback", this);
     }
 
     public Resource removeResource(String rName)
