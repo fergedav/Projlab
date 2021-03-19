@@ -6,15 +6,20 @@ public class Stargate extends Orbit {
     private Asteroid myStop;
 
     private void dieAnother()
-    {}
+    {
+        if(myStop!=null)
+            myStop.removeNeighbour(this);
+    }
 
     private Asteroid transport(Traveler t)
     {
-        return null;
+        return myStop.addTraveler(t);
     }
 
     public void die()
-    {}
+    {
+        myPair.dieAnother();
+    }
 
     public void entagle(Stargate other)
     {
@@ -27,6 +32,14 @@ public class Stargate extends Orbit {
     }
 
     public void place(Orbit o)
-    {}
-
+    {
+        myStop = (Asteroid) o;
+        isPlaced = true;
+    }
+    @Override
+    public Orbit addTraveler(Traveler t){
+        if(myPair.isPlaced())
+            return myPair.transport(t);
+        return this;
+    }
 }
