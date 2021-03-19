@@ -26,6 +26,7 @@ public class Controler {
      */
     private int settlersAlive = 0; // nem lenne több értelme egy List.Count()-t hívó függvénynek?
 
+
     /**
      * 
      */
@@ -34,6 +35,7 @@ public class Controler {
     /**
      * a játékban  éppen aktuálisan létező összes Settler típusú objektumot tároló privát lista.
      */
+
     private List<Settler> settlers = new ArrayList<>();
     
     /**
@@ -79,5 +81,10 @@ public class Controler {
     public void robotDie(Robot r)
     {
         robots.remove(r);
+    }
+
+    public void settlerDie(Settler s)
+    {
+
     }
 }
