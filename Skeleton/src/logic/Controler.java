@@ -51,4 +51,9 @@ public class Controler {
     {
         robots.remove(r);
     }
+
+    public void settlerDie(Settler s)
+    {
+
+    }
 }

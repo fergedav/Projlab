@@ -22,6 +22,7 @@ public abstract class Orbit {
         return this;
     }
 
+
     /**
      * Visszatér az Orbiton jelenleg tartózkodó utazók listájával
      * @return Orbiton jelenleg tartózkodó utazók
@@ -57,6 +58,7 @@ public abstract class Orbit {
     {
         neighbours.remove(o);
     }
+
 
     /**
      * Visszatér az orbit i-edik szomszédjával. Ha i-edik szomszéd nem létezik null-t ad vissza.
