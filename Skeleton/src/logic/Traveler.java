@@ -2,7 +2,7 @@ package logic;
 
 public class Traveler {
 
-    protected Inventory inventory = new Inventory();
+    protected Inventory inventory;
     protected Orbit currentLocation;
     protected Controler controler;
 
