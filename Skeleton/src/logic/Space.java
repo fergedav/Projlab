@@ -20,7 +20,14 @@ public class Space {
 
     /// Singleton ends here
 
+    /**
+     * Megszabja, hogy hány körönként legyen napvihar.
+     */
     private int sunstorm_time;
+
+    /**
+     * A játékban található összes Orbit egy listában tárolva.
+     */
     private List<Orbit> orbits;
 
     //csak a skeleton idejére, a tesztelést segíteni
@@ -29,6 +36,9 @@ public class Space {
         sunstorm_time = t;
     }
 
+    /**
+     * Meghívja minden aszteroidán a sunstormArrive metódust.
+     */
     private void sunstormCall()
     {
         for(Orbit o: orbits){
@@ -36,6 +46,9 @@ public class Space {
         }
     }
 
+    /**
+     * Meghívja minden aszteroidán a sunLightArrive metódust.
+     */
     private void sunLightCall()
     {
         for(Orbit o: orbits){
@@ -43,11 +56,19 @@ public class Space {
         }
     }
 
+    /**
+     * Eggyel csökkenti a sunstorm_time értékét.
+     */
     private void sunstormDecrease()
     {
         sunstorm_time--;
     }
 
+    /**
+     * Lépteti a Space-t. Ha éppen napvihar kör van, meghívja a SunstormCall() metódust,
+     * ami szól minden aszteroidának, hogy napvihar van. Emellett minden körben meghívja
+     * a SunLightCall() metódust, amely kijelöl egy terülelet, ahol napfény lesz.
+     */
     public void step()
     {
         if(sunstorm_time == 0)
@@ -61,11 +82,18 @@ public class Space {
         sunLightCall();
     }
 
+    /**
+     * Hozzáadadja a paraméterként kapott Orbitot az orbits listához.
+     * @param o
+     */
     public void addOrbit(Orbit o)
     {
         orbits.add(o);
     }
-
+    /**
+     * Kiveszi a paraméterként kapott Orbitot az orbits listából.
+     * @param o
+     */
     public void removeOrbit(Orbit o)
     {
         orbits.remove(o);
