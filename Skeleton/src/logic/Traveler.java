@@ -3,6 +3,7 @@ package logic;
 public abstract class Traveler {
 
     protected Inventory inventory = new Inventory(10);
+
     protected Orbit currentLocation;
     protected Controler controler;
 

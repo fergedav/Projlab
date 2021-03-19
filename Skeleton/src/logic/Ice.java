@@ -6,5 +6,9 @@ public class Ice extends Resource {
     public void callBack(Inventory inv) {
         inv.addIce(this);
     }
+    @Override
+	public void reaction(Asteroid a) {
+        a.retrieveResource();
+    }
 
 }
