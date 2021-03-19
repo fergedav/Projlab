@@ -136,4 +136,9 @@ public abstract class Orbit {
         return layers;
     }
 
+    public int numOfNeighbor()
+    {
+        return neighbours.size();
+    }
+
 }

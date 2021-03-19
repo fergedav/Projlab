@@ -19,7 +19,7 @@ public class Stargate extends Orbit {
      * @param t az érkezett utazó
      * @return A teleportkapuhoz tartozó aszteroida.
      */
-    private Asteroid transport(Traveler t)
+    private Orbit transport(Traveler t)
     {
         return myStop.addTraveler(t);
     }
