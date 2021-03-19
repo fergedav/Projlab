@@ -1,7 +1,5 @@
 package logic;
 
-import skeleton.Logger;
-
 public class Iron extends Resource {
 
     @Override

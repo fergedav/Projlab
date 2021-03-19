@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-import skeleton.Logger;
-
-
 public class Inventory {
     private final int size;
 
