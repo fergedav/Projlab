@@ -7,7 +7,7 @@ public class Stargate extends Orbit {
 
     private void dieAnother()
     {
-        if(myStop != null)
+        if(myStop!=null)
             myStop.removeNeighbour(this);
     }
 
