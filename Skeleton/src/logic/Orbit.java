@@ -15,7 +15,7 @@ public abstract class Orbit {
         return null;
     }
 
-    public Traveler[] getTravelers()
+    public List<Traveler> getTravelers()
     {
         return null;
     }
@@ -29,7 +29,7 @@ public abstract class Orbit {
     public void removeNeighbour()
     {}
 
-    public Orbit getNeighbour()
+    public Orbit getNeighbour(int i)
     {
         return null;
     }

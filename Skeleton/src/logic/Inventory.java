@@ -61,4 +61,8 @@ public class Inventory {
         return false;
     }
 
+    public void addInventory(Inventory i)
+    {
+
+    }
 }

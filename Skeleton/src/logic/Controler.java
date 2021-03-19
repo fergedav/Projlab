@@ -34,12 +34,17 @@ public class Controler {
     public void endGame()
     {}
 
-    public void addRobot()
+    public void addRobot(Robot r)
     {
 
     }
 
     public void robotDie(Robot r)
+    {
+
+    }
+
+    public void settlerDie(Settler s)
     {
 
     }
