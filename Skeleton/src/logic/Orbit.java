@@ -10,32 +10,39 @@ public abstract class Orbit {
     protected int x; //senki nem tárolja a koordinátákat tömbben xd
     protected int y;
 
-    public Asteroid addTraveler(Traveler t)
+    public Orbit addTraveler(Traveler t)
     {
-        return null;
+        travelers.add(t);
+        return this;
     }
 
-    public Traveler[] getTravelers()
+    public List<Traveler> getTravelers()
     {
-        return null;
+        return travelers;
     }
 
     public void removeTraveler(Traveler t)
-    {}
+    {
+        travelers.remove(t);
+    }
 
     public void addNeighbour(Orbit o)
-    {}
-
-    public void removeNeighbour()
-    {}
-
-    public Orbit getNeighbour()
     {
-        return null;
+        neighbours.add(o);
+    }
+
+    public void removeNeighbour(Orbit o)
+    {
+        neighbours.remove(o);
+    }
+
+    public Orbit getNeighbour(int i)
+    {
+        return neighbours.get(i);
     }
 
     public void drilled()
-    {}
+    { }
 
     public Resource retrieveResource()
     {
@@ -48,10 +55,18 @@ public abstract class Orbit {
     }
 
     public void sunstormArrive()
-    {}
+    {
+        for (Traveler t : travelers) {
+            t.die();
+        }
+    }
 
     public void sunLightArrive(int x1, int y1, int x2, int y2)
-    {}
+    {
+        for (Traveler t : travelers) {
+            t.die();
+        }
+    }
 
     public int getLayers()
     {
