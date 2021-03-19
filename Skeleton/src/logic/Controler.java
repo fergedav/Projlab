@@ -21,7 +21,7 @@ public class Controler {
     /// Singleton ends here
 
     private int settlersAlive = 0; // nem lenne több értelme egy List.Count()-t hívó függvénynek?
-    private Space spacee = Space.getInstance();
+    private Space space = Space.getInstance();
     private List<Settler> settlers = new ArrayList<>();
     private List<Robot> robots = new ArrayList<>();
 
