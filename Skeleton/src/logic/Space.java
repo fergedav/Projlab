@@ -15,25 +15,25 @@ public class Space {
     }
 
     /**
-     * visszaaf egy space példányt
+     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az első létrehozott Space.
      * 
-     * ha True-t kap, új példányt ad vissza, amit nem jegyez be (!!) statikus tagjába.
-     * ha false-t akkor, ha van már létező példány akkor azt adja vissza, ha nincs akkor újat.
-     * 
-     * @param NEEEEEW új példányt kérsz?
-     * @return a space objektum
+     * @return a Space objektum
      */
-    public static Space getInstance(boolean NEEEEEW)
+    public static Space getInstance()
     {
-        if(!NEEEEEW){
-            if(instance == null)
-            instance = new Space();
-            return instance;
-        }
-        
-        return new Space();
-        
+        if(instance == null)
+        instance = new Space();
+        return instance;
     }
+    /**
+     * ez csak a teszteléshez kell
+     * @return az új space obj.
+     */
+    public Space getNewSpace()
+    {
+        return new Space();
+    }
+
 
     /// Singleton ends here
 

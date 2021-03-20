@@ -11,7 +11,7 @@ public abstract class Traveler {
 
     protected Traveler()
     {
-        controler = Controler.getInstance();
+        controler = Controler.getInstance(false);
     }
 
     /** 

@@ -3,7 +3,6 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.sampled.Control;
 
 import skeleton.Logger;
 
@@ -16,38 +15,40 @@ public class Controler {
     {}
 
      /**
-     * visszaaf egy space példányt
+     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az első létrehozott controllert.
      * 
-     * ha True-t kap, új példányt ad vissza, amit nem jegyez be (!!) statikus tagjába.
-     * ha false-t akkor, ha van már létező példány akkor azt adja vissza, ha nincs akkor újat.
-     * 
-     * @param NEEEEEW új példányt kérsz?
-     * @return a space objektum
+     * @return a Controler objektum
      */
-    public static Controler getInstance(boolean NEEEEEW)
+    public static Controler getInstance()
     {
-        if(!NEEEEEW){
-            if(instance == null)
-            instance = new Controler();
-            return instance;
-        }
-        
+        if(instance == null)
+        instance = new Controler();
+        return instance;
+    }
+    /**
+     *  teszteléshez szükséges, új példányt ad vissza mindig.
+     */ 
+    public static Controler getNewInstance()
+    {
         return new Controler();
-        
     }
 
     /// Singleton ends here
 
-    /**
-     * ebben a privát változóban van számon tartva, hogy hány telepes van még életben, azaz, hány játékos van még játékban. 
-     * Értéke a settlers lista elemszáma.
-     */
-    private int settlersAlive = 0; // nem lenne több értelme egy List.Count()-t hívó függvénynek?
 
     /**
      * 
      */
-    private Space space = Space.getInstance();
+    private Space space = Space.getInstance(true);
+
+    /**
+     * Csak a tesztelés során kell.
+     * @return ha controller space ja.
+     */
+    public Space getSpace()
+    {
+        return space;
+    }
 
     /**
      * a játékban  éppen aktuálisan létező összes Settler típusú objektumot tároló privát lista.
@@ -117,8 +118,6 @@ public class Controler {
         Logger.startFunctionLogComment(this, "settlerDie", "");
 
         settlers.remove(s);
-
-        settlersAlive--;
 
         if(settlers.size()==0)
             endGame();
