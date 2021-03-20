@@ -635,8 +635,8 @@ public class SkeletonMain {
         Controler c = Controler.getInstance();
         Space s = Space.getInstance();
         s.setSunstorm_time(5);
-        Asteroid a1 = new Asteroid(1,8,2,new Uran());
-        Asteroid a2 = new Asteroid(2,8,3, null);
+        Asteroid a1 = new Asteroid(1,8,0,new Uran());
+        Asteroid a2 = new Asteroid(2,8,0, null);
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
         s.addOrbit(a1);
@@ -658,7 +658,7 @@ public class SkeletonMain {
 
         Space s = Space.getInstance();
         s.setSunstorm_time(5);
-        Asteroid a = new Asteroid(1,8,2,new Ice());
+        Asteroid a = new Asteroid(1,8,0,new Ice());
         s.addOrbit(a);
 
         Logger.formatPrint("_8_4_SunlightArrivesToFullyDrilledAsteroidWithIce");
