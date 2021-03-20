@@ -683,6 +683,7 @@ public class SkeletonMain {
         seged.addIron(new Iron());
         seged.addIce(new Ice());
         s.stargate();
+        
         Logger.formatPrint("_6_3_SuccessfulStargatePlace");
 
         s.stargate();
