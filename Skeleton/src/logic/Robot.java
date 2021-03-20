@@ -13,7 +13,7 @@ public class Robot extends Traveler {
     {
         Logger.startFunctionLogComment(this, "whereTo", "");
         int num = currentLocation.numOfNeighbor();
-        Random r = new Random();
+        Random r = new Random(num);
         Logger.endFunctionLog();
         return r.nextInt(num);
     }
