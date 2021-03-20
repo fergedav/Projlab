@@ -65,6 +65,10 @@ public class Space {
         Logger.endFunctionLog();
     }
 
+    public void tempSunstormCall(){
+        sunstormCall();
+    }
+
     /**
      * Meghívja minden aszteroidán a sunLightArrive metódust.
      */
