@@ -10,9 +10,13 @@ public class Controler {
     ///Singleton stuff
     private static Controler instance;
     private boolean gameIsOn;
+    private Space space;
+
 
     private Controler()
-    {}
+    {
+        space = Space.getNewSpace();
+    }
 
      /**
      * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az első létrehozott controllert.
@@ -28,19 +32,16 @@ public class Controler {
     /**
      *  teszteléshez szükséges, új példányt ad vissza mindig.
      */ 
-    public static Controler getNewInstance()
+    public static Controler getNewControler()
     {
-        return new Controler();
+        instance = new Controler();
+        return instance;
     }
 
     /// Singleton ends here
 
 
-    /**
-     * 
-     */
-    private Space space = Space.getInstance();
-
+    
     /**
      * Csak a tesztelés során kell.
      * @return ha controller space ja.
