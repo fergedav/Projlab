@@ -13,8 +13,10 @@ public class Stargate extends Orbit {
     private void dieAnother()
     {
         Logger.startFunctionLogComment(this, "dieAnother", "");
+
         if(myStop!=null)
             myStop.removeNeighbour(this);
+
         Logger.endFunctionLog();
     }
 
@@ -26,8 +28,11 @@ public class Stargate extends Orbit {
     private Orbit transport(Traveler t)
     {
         Logger.startFunctionLogComment(this, "transport", "");
+
         Orbit ret_o = myStop.addTraveler(t);
+
         Logger.endFunctionLog();
+
         return ret_o;
     }
 
@@ -35,8 +40,11 @@ public class Stargate extends Orbit {
      * Megöli a kapu párját.
      */
     public void die()
-    {   Logger.startFunctionLogComment(this, "die", "");
+    {  
+        Logger.startFunctionLogComment(this, "die", "");
+
         myTwin.dieAnother();
+
         Logger.endFunctionLog();
     }
 
@@ -47,7 +55,9 @@ public class Stargate extends Orbit {
     public void entagle(Stargate other)
     {
         Logger.startFunctionLogComment(this, "entangle", "");
+
         myTwin = other;
+
         Logger.endFunctionLog();
     }
 
@@ -55,8 +65,12 @@ public class Stargate extends Orbit {
      * Visszaadja, hogy le van-e helyezve a kapu.
      * @return true, ha le van helyezve.
      */
-    public boolean isPlaced()
+    public boolean getPlaced()
     {
+        Logger.startFunctionLogComment(this, "getPlaced", "");
+
+        Logger.endFunctionLog();
+
         return isPlaced;
     }
 
@@ -67,8 +81,10 @@ public class Stargate extends Orbit {
     public void place(Orbit o)
     {
         Logger.startFunctionLogComment(this, "place", "");
+
         myStop = (Asteroid) o;
         isPlaced = true;
+        
         Logger.endFunctionLog();
     }
     
@@ -79,14 +95,18 @@ public class Stargate extends Orbit {
      */
     @Override
     public Orbit addTraveler(Traveler t){
-        Logger.startFunctionLogComment(this, "entangle", "");
+        Logger.startFunctionLogComment(this, "addTraveler", "");
         Orbit ret_o;
-        if(myTwin.isPlaced()){
+        if(myTwin.getPlaced()){
             ret_o=myTwin.transport(t);
+
             Logger.endFunctionLog();
+
             return ret_o;
         }
+
         Logger.endFunctionLog();
+
         return this;
     }
 }
