@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import skeleton.Logger;
 
 public class Asteroid extends Orbit {
@@ -52,7 +55,8 @@ public class Asteroid extends Orbit {
     {
         Logger.startFunctionLogComment(this, "explosion", "");
 
-        for (Traveler t : travelers) {
+        List<Traveler> copy = new ArrayList<>(travelers);
+        for (Traveler t : copy) {
             t.explosion();
         }
 

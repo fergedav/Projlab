@@ -20,6 +20,8 @@ public class Uran extends Resource {
 
         a.explosion();
 
+        a.retrieveResource();
+
         Logger.endFunctionLog();
     }
 

@@ -11,11 +11,11 @@ public class Robot extends Traveler {
      */
     private int whereTo()
     {
+        Logger.startFunctionLogComment(this, "whereTo", "");
+
         int num = currentLocation.numOfNeighbor();
         Random r = new Random(num);
         int n = r.nextInt(num);
-        Logger.startFunctionLogComment(this, "whereTo", "" + n );
-        
         
         Logger.endFunctionLog();
         return n;
