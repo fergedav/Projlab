@@ -107,7 +107,9 @@ public class Settler extends Traveler {
     {
         /** Lekéri az összes utazót a tartózkodási helyéről és létrehoz egy inventory-t, amiben számolja, hogy elég nyersanyaga van-e összesen a lista tagjainak. */
         List<Traveler> travelers = currentLocation.getTravelers();
-        Inventory inventoryforbase = new Inventory(10);
+
+        Inventory inventoryforbase = new Inventory(10000);
+
 
         /** Hozzáadja a travelers tagjainak az inventoriait az inventoryforbase-hez. */
         for(int i = 0; i < travelers.size(); i++)
@@ -116,7 +118,7 @@ public class Settler extends Traveler {
         }
 
         /** Megkísérel egy bázist létrehozni, true-val tér vissza ha sikerült, false-al ha túl kevés volt a nyersanyag. */
-        boolean sikere_e = inventoryforbase.createBase();
+        inventoryforbase.createBase();
     }
 
     public void createStargate()
@@ -127,10 +129,7 @@ public class Settler extends Traveler {
         /** Ha sikerült létrehozni a teleportkapu-párt, akkor őket hozzáadjuk a kapuk listájához. */
         if (newgates.size() != 0)
         {
-            for(int i = 0; i < newgates.size(); i++)
-            {
-                stargates.add(newgates.get(i));
-            }
+           stargates = newgates;
         }
         /** Egyéb esetben null-ra állítja a listát. */
         else

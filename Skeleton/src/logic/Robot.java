@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 public class Robot extends Traveler {
     
     /**
@@ -9,7 +11,9 @@ public class Robot extends Traveler {
      */
     private int whereTo()
     {
-        return 0;
+        int num = currentLocation.numOfNeighbor();
+        Random r = new Random();
+        return r.nextInt(num);
     }
 
     /**
@@ -31,7 +35,9 @@ public class Robot extends Traveler {
     }
 
     /**
-     * A robot meghal. Az aszteroidára, amin jelenleg tartózkodik,
+     * A robot meghal.
+     * 
+     * Az aszteroidára, amin jelenleg tartózkodik,
      * önmagával meghívja a RemoveTraveler(Traveler t) metódust,
      * majd a controler-nek is jelzi önmagával meghívva Robot_die(Robot r) metódust, majd törli önmagát.
      */
