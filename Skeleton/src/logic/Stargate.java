@@ -9,6 +9,7 @@ public class Stargate extends Orbit {
 
     /**
      * Törli magát a myStop-ja szomszédsági listájából.
+     * //és megöli a rajtalévőket. (szöveg alapján nem definiált.)
      */
     private void dieAnother()
     {
@@ -16,6 +17,10 @@ public class Stargate extends Orbit {
 
         if(myStop!=null)
             myStop.removeNeighbour(this);
+        
+        /*
+        for(Traveler t : travelers){t.die();}
+        */
 
         Logger.endFunctionLog();
     }

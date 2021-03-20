@@ -483,6 +483,7 @@ public class SkeletonMain {
 
         Asteroid a = new Asteroid(1, 1, 0, null);
         Settler sett = new Settler(a);
+        Settler semmi  = new Settler(new Asteroid(0, 0, 1, null));// azért hogy az elsődleges settler halálával ne érjen véget a játék.
         Uran u = new Uran();
         Controler.getInstance().addSettler(sett);
         Space.getInstance().addOrbit(a);
