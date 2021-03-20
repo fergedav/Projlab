@@ -251,12 +251,12 @@ public class SkeletonMain {
         a2.addNeighbour(a1);
         a1.addNeighbour(a2);
 
-        Stargate s1 = new Stargate();
-        Stargate s2 = new Stargate();
-
-        s1.entagle(s2);
-        s2.entagle(s1);
-        s2.place(a2);
+        Inventory seged = s.getInventory();
+        seged.addUran(new Uran());
+        seged.addIron(new Iron());
+        seged.addIron(new Iron());
+        seged.addIce(new Ice());
+        s.stargate();
 
         Space space = Space.getNewSpace();
         space.addOrbit(a1);

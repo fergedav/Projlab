@@ -28,11 +28,12 @@ public class Asteroid extends Orbit {
         core = c;
         layers = l;
     }
-
+    /*
     private void setLayers(int l)
     {
         layers = l;
     }
+    */
 
     /**
      * Megvizsgálja, hogy az aszteroida napközelben van-e illetve, hogy teljesen át van e fúrva a kérge. 
@@ -42,7 +43,7 @@ public class Asteroid extends Orbit {
     {
         Logger.startFunctionLogComment(this, "reaction", "");
 
-        if(inLight && core != null && this.getLayers() == 0)
+        if(inLight && core != null && this.layers == 0)
             core.reaction(this);
 
         Logger.endFunctionLog();
