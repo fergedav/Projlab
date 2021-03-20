@@ -554,10 +554,8 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Asteroid a = new Asteroid(5, 1, 5, null);
+        Asteroid a = new Asteroid(5, 2, 5, null);
         Settler s1 = new Settler(a);
-        Controler c = Controler.getInstance();
-        c.addSettler(s1);
 
         Logger.formatPrint("_5_2_FailedRobotCreateMissingMaterial");
 
@@ -566,7 +564,8 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _5_3_SuccessfulBaseCreate()
-    {}
+    {
+    }
     public static void _5_4_FailedBaseCreateMissingMaterial()
     {}
 
