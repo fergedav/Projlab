@@ -14,10 +14,12 @@ public class Controler {
 
     public static Controler getInstance()
     {
+        /*
         if(instance == null)
             instance = new Controler();
         return instance;
-
+        */
+        return new Controler();
     }
 
     /// Singleton ends here
