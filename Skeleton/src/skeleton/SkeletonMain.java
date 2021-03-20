@@ -3,6 +3,7 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import skeleton.Logger;
 import logic.*;
 
 public class SkeletonMain {
@@ -141,7 +142,6 @@ public class SkeletonMain {
         Settler s = new Settler(a1);
 
         a1.addNeighbour(s1);
-        a1.addTraveler(s);
 
         s1.place(a1);
 
@@ -166,7 +166,6 @@ public class SkeletonMain {
         Settler s = new Settler(a1);
 
         a1.addNeighbour(s1);
-        a1.addTraveler(s);
 
         a2.addNeighbour(s2);
 
@@ -216,8 +215,6 @@ public class SkeletonMain {
         
         Asteroid a = new Asteroid(0, 0, 8, null);
         Settler s = new Settler(a);
-        
-        a.addTraveler(s);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
 
@@ -241,7 +238,36 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _2_3_DiggingBreakthroughtUran()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(1, 1, 1, new Uran());
+        Asteroid a2 = new Asteroid(0, 0, 1, null);
+        Settler s = new Settler(a1);
+
+        a2.addNeighbour(a1);
+        a1.addNeighbour(a2);
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+
+        s1.entagle(s2);
+        s2.entagle(s1);
+        s2.place(a2);
+
+        Space.getInstance().addOrbit(a1);
+        Space.getInstance().step();
+
+        Robot r = new Robot();
+        r.setLocation(a1);
+        a1.addTraveler(r);
+
+        Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _2_4_DiggingBreakthroughtIce()
     {}
     public static void _2_5_DiggingOnStargate()
@@ -274,13 +300,42 @@ public class SkeletonMain {
     }
 
     public static void _3_1_MiningOnNotFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(1,1,10,new Iron());
+        Settler s1 = new Settler(a1);
+
+        Logger.formatPrint("_3_1_MiningOnNotFullyDrilledAsteroid");
+
+        s1.digging();
+
+        Logger.formatPrint("Teszt Vege");
+    }
     public static void _3_2_MiningIronOnFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("_3_2_MiningIronOnFullyDrilledAsteroid");
+
+        Logger.formatPrint("Teszt Vege");
+    }
     public static void _3_3_MiningOnFullyDrilledButEmptyAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("_3_3_MiningOnFullyDrilledButEmptyAsteroid");
+
+        Logger.formatPrint("Teszt Vege");
+    }
     public static void _3_4_MiningOnStargate()
-    {}
+    {        
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("_3_4_MiningOnStargate");
+
+        Logger.formatPrint("Teszt Vege");
+    }
 
     public static void _4_ReplaceResource()
     {
@@ -372,7 +427,7 @@ public class SkeletonMain {
         Asteroid a = new Asteroid(1, 1, 0, null);
         Settler sett = new Settler(a);
         Uran u = new Uran();
-        Controler.getInstance();
+        Controler.getInstance().addSettler(sett);
         Space.getInstance().addOrbit(a);
         Space.getInstance().step();
 
@@ -385,7 +440,24 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _4_5_SettlerTriesToPutBackIronIntoAStargate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+        s1.entagle(s2);
+        s2.entagle(s1);
+        Settler sett = new Settler(s1);
+        Iron i = new Iron();
+
+        sett.getInventory().addIron(i);
+
+        Logger.formatPrint("_4_5_SettlerTriesToPutBackIronIntoAStargate");
+
+        sett.replaceResource("Iron");
+
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _5_Build()
     {

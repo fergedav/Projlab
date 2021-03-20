@@ -39,7 +39,7 @@ public class Asteroid extends Orbit {
     {
         Logger.startFunctionLogComment(this, "reaction", "");
 
-        if(inLight && core != null && layers == 0)
+        if(inLight && core != null && this.getLayers() == 0)
             core.reaction(this);
 
         Logger.endFunctionLog();
@@ -50,7 +50,7 @@ public class Asteroid extends Orbit {
      */
     public void explosion()
     {
-        Logger.startFunctionLogComment(this, "reaction", "");
+        Logger.startFunctionLogComment(this, "explosion", "");
 
         for (Traveler t : travelers) {
             t.explosion();
@@ -63,6 +63,7 @@ public class Asteroid extends Orbit {
      * Az aszteroidán végeznek ásást. Eggyel csökkenti a layers értékét. 
      * Ha a layers értéke eléri a 0-át, akkor meghívja az reaction() privát metódusát az aszteroidának.
      */
+    @Override
     public void drilled()
     {
         Logger.startFunctionLogComment(this, "drilled", "");
