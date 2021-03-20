@@ -259,8 +259,9 @@ public class SkeletonMain {
         s2.entagle(s1);
         s2.place(a2);
 
-        Space.getInstance().addOrbit(a1);
-        Space.getInstance().step();
+        Space space = Space.getNewSpace();
+        space.addOrbit(a1);
+        space.step();
 
         Robot r = new Robot();
         r.setLocation(a1);
@@ -689,7 +690,7 @@ public class SkeletonMain {
         s.stargate();
         Logger.formatPrint("Teszt vége");
     }
-
+    
     public static void _7_SunStorm()
     {
         System.out.println("Napvihar esetek:");
@@ -820,7 +821,7 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Space s = Space.getInstance();
+        Space s = Space.getNewSpace();
         s.setSunstorm_time(5);
         Asteroid a = new Asteroid(1,8,2,new Iron());
         s.addOrbit(a);
@@ -835,7 +836,7 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Space s = Space.getInstance();
+        Space s = Space.getNewSpace();
         s.setSunstorm_time(5);
         Asteroid a = new Asteroid(1,8,0,new Iron());
         s.addOrbit(a);
@@ -850,8 +851,8 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Controler c = Controler.getInstance();
-        Space s = Space.getInstance();
+        Controler c = Controler.getNewControler();
+        Space s = c.getSpace();
         s.setSunstorm_time(5);
 
         Asteroid a1 = new Asteroid(1,8,0,new Uran());
@@ -880,7 +881,7 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Space s = Space.getInstance();
+        Space s = Space.getNewSpace();
         s.setSunstorm_time(5);
         Asteroid a = new Asteroid(1,8,0,new Ice());
         s.addOrbit(a);
