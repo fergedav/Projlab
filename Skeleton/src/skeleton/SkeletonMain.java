@@ -523,12 +523,33 @@ public class SkeletonMain {
 
         Asteroid a = new Asteroid(5, 1, 5, null);
         Settler s1 = new Settler(a);
-        a.addTraveler(s1);
         s1.getInventory().addUran(new Uran());
+        s1.getInventory().addIron(new Iron());
+        s1.getInventory().addCarbon(new Carbon());
+        Controler c = Controler.getInstance();
+        c.addSettler(s1);
 
+        Logger.formatPrint("_5_1_SuccessfulRobotCreate");
+
+        s1.createRobot();
+
+        Logger.formatPrint("Teszt vége");
     }
     public static void _5_2_FailedRobotCreateMissingMaterial()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(5, 1, 5, null);
+        Settler s1 = new Settler(a);
+        Controler c = Controler.getInstance();
+        c.addSettler(s1);
+
+        Logger.formatPrint("_5_2_FailedRobotCreateMissingMaterial");
+
+        s1.createRobot();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _5_3_SuccessfulBaseCreate()
     {}
     public static void _5_4_FailedBaseCreateMissingMaterial()
