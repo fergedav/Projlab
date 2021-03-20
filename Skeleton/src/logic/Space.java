@@ -16,9 +16,13 @@ public class Space {
 
     public static Space getInstance()
     {
+        /*
         if(instance == null)
             instance = new Space();
         return instance;
+        */
+        
+        return new Space();
     }
 
     /// Singleton ends here

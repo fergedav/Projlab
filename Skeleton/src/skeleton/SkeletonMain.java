@@ -79,6 +79,8 @@ public class SkeletonMain {
                 break;
             case 10:
                 return false;
+            default:
+                break;
         }
         return true;
     }
@@ -101,6 +103,8 @@ public class SkeletonMain {
                 break;
             case 3:
             _1_3_MoveOnOnlineGate();
+                break;
+            default:
                 break;
         }
     }
@@ -444,7 +448,7 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
-    
+
     public static void _4_4_SettlerPutsBackUranAndItExplodes()
     {
         Logger.formatPrint("Init");
@@ -628,6 +632,7 @@ public class SkeletonMain {
         Logger.formatPrint("Init");
 
         Space s = Space.getInstance();
+        s.setSunstorm_time(5);
         Asteroid a = new Asteroid(1,8,2,new Iron());
         s.addOrbit(a);
 
@@ -642,6 +647,7 @@ public class SkeletonMain {
         Logger.formatPrint("Init");
 
         Space s = Space.getInstance();
+        s.setSunstorm_time(5);
         Asteroid a = new Asteroid(1,8,0,new Iron());
         s.addOrbit(a);
 
@@ -657,8 +663,9 @@ public class SkeletonMain {
 
         Controler c = Controler.getInstance();
         Space s = Space.getInstance();
-        Asteroid a1 = new Asteroid(1,8,2,new Iron());
-        Asteroid a2 = new Asteroid(2,8,3, null);
+        s.setSunstorm_time(5);
+        Asteroid a1 = new Asteroid(1,8,0,new Uran());
+        Asteroid a2 = new Asteroid(2,8,0, null);
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
         s.addOrbit(a1);
@@ -679,7 +686,8 @@ public class SkeletonMain {
         Logger.formatPrint("Init");
 
         Space s = Space.getInstance();
-        Asteroid a = new Asteroid(1,8,2,new Ice());
+        s.setSunstorm_time(5);
+        Asteroid a = new Asteroid(1,8,0,new Ice());
         s.addOrbit(a);
 
         Logger.formatPrint("_8_4_SunlightArrivesToFullyDrilledAsteroidWithIce");
