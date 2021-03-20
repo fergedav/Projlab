@@ -49,7 +49,7 @@ public abstract class Traveler {
     /** Visszaadja a saját inventory-ját */
     public Inventory getInventory()
     {
-        Logger.startFunctionLogComment(this, "public Inventory getInventory", "");
+        Logger.startFunctionLogComment(this, "getInventory", "");
 
         Inventory inv = inventory;
 

@@ -3,6 +3,7 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import jdk.javadoc.internal.doclets.formats.html.markup.ContentBuilder;
 import logic.*;
 
 public class SkeletonMain {
@@ -219,7 +220,7 @@ public class SkeletonMain {
 
         s.digging();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vége"); 
     }
     public static void _2_2_DiggingAndBreakthrought()
     {
@@ -237,7 +238,35 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _2_3_DiggingBreakthroughtUran()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(1, 1, 1, new Uran());
+        Asteroid a2 = new Asteroid(0, 0, 1, null);
+        Settler s = new Settler(a1);
+
+        a1.addTraveler(s);
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+
+        s1.entagle(s2);
+        s2.entagle(s1);
+        s2.place(a2);
+
+        Space.getInstance().addOrbit(a1);
+        Space.getInstance().step();
+
+        Robot r = new Robot();
+
+        a1.addTraveler(r);
+
+        Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _2_4_DiggingBreakthroughtIce()
     {}
     public static void _2_5_DiggingOnStargate()
@@ -360,7 +389,7 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
-
+    
     public static void _4_4_SettlerPutsBackUranAndItExplodes()
     {
         Logger.formatPrint("Init");
@@ -540,13 +569,70 @@ public class SkeletonMain {
     }
 
     public static void _8_1_SunlightArrivesToNotFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Space s = Space.getInstance();
+        Asteroid a = new Asteroid(1,8,2,new Iron());
+        s.addOrbit(a);
+
+        Logger.formatPrint("_8_1_SunlightArrivesToNotFullyDrilledAsteroid");
+        
+        s.step();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _8_2_SunlightArrivesToFullyDrilledAsteroidWithIron()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Space s = Space.getInstance();
+        Asteroid a = new Asteroid(1,8,0,new Iron());
+        s.addOrbit(a);
+
+        Logger.formatPrint("_8_2_SunlightArrivesToFullyDrilledAsteroidWithIron");
+
+        s.step();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _8_3_SunlightArrivesToFullyDrilledAsteroidWithUran()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Controler c = Controler.getInstance();
+        Space s = Space.getInstance();
+        Asteroid a1 = new Asteroid(1,8,2,new Iron());
+        Asteroid a2 = new Asteroid(2,8,3, null);
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+        s.addOrbit(a1);
+        Settler set = new Settler(a1);
+        Robot r = new Robot();
+        r.setLocation(a1);
+        c.addRobot(r);
+        c.addSettler(set);
+
+        Logger.formatPrint("_8_3_SunlightArrivesToFullyDrilledAsteroidWithUran");
+
+        s.step();
+        
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _8_4_SunlightArrivesToFullyDrilledAsteroidWithIce()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Space s = Space.getInstance();
+        Asteroid a = new Asteroid(1,8,2,new Ice());
+        s.addOrbit(a);
+
+        Logger.formatPrint("_8_4_SunlightArrivesToFullyDrilledAsteroidWithIce");
+
+        s.step();
+
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _9_Robot()
     {
@@ -568,7 +654,34 @@ public class SkeletonMain {
     }
 
     public static void _9_1_RobotIsOnNotFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("Init");
+        Asteroid a = new Asteroid(1,8,2,null);
+        Robot r = new Robot();
+        r.setLocation(a);
+
+        Logger.formatPrint("_9_1_RobotIsOnNotFullyDrilledAsteroid");
+
+        r.step();
+        
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _9_2_RobotIsOnFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+        Asteroid a1 = new Asteroid(1,8,0,null);
+        Asteroid a2 = new Asteroid(2,8,2,null);
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+        Robot r = new Robot();
+        r.setLocation(a1);
+
+        Logger.formatPrint("_9_2_RobotIsOnFullyDrilledAsteroid");
+
+        r.step();
+        
+        Logger.formatPrint("Teszt vége");
+    }
 }
