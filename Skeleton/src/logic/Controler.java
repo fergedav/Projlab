@@ -27,11 +27,10 @@ public class Controler {
      */
     private int settlersAlive = 0; // nem lenne több értelme egy List.Count()-t hívó függvénynek?
 
-
     /**
      * 
      */
-    private Space space= Space.getInstance();
+    private Space space = Space.getInstance();
 
     /**
      * a játékban  éppen aktuálisan létező összes Settler típusú objektumot tároló privát lista.
@@ -91,6 +90,7 @@ public class Controler {
     public void settlerDie(Settler s)
     {
         settlers.remove(s);
+
         settlersAlive--;
 
         if(settlers.size()==0)

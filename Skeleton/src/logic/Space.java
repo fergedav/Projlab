@@ -52,7 +52,7 @@ public class Space {
     private void sunLightCall()
     {
         for(Orbit o: orbits){
-            o.sunLightArrive(1000, 1000, 1000, 1000);
+            o.sunLightArrive(0, 0, 1000, 1000);
         }
     }
 

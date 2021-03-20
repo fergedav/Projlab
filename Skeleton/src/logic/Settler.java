@@ -1,6 +1,8 @@
 package logic;
 import java.util.*; 
 
+import java.util.List;
+
 public class Settler extends Traveler {
     
     private List<Stargate> stargates;
@@ -105,7 +107,9 @@ public class Settler extends Traveler {
     {
         /** Lekéri az összes utazót a tartózkodási helyéről és létrehoz egy inventory-t, amiben számolja, hogy elég nyersanyaga van-e összesen a lista tagjainak. */
         List<Traveler> travelers = currentLocation.getTravelers();
+
         Inventory inventoryforbase = new Inventory(10000);
+
 
         /** Hozzáadja a travelers tagjainak az inventoriait az inventoryforbase-hez. */
         for(int i = 0; i < travelers.size(); i++)
@@ -136,6 +140,6 @@ public class Settler extends Traveler {
 
     @Override
     public void explosion() {
-        this.die(); 
+        die();
     }
 }
