@@ -4,7 +4,7 @@ import skeleton.Logger;
 
 public abstract class Traveler {
 
-    protected Inventory inventory = new Inventory(10);
+    protected Inventory inventory;
 
     protected Orbit currentLocation;
     protected Controler controler;
