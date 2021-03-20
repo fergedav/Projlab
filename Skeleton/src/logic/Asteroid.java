@@ -39,7 +39,7 @@ public class Asteroid extends Orbit {
     {
         Logger.startFunctionLogComment(this, "reaction", "");
 
-        if(inLight && core != null && layers == 0)
+        if(inLight && core != null && this.getLayers() == 0)
             core.reaction(this);
 
         Logger.endFunctionLog();
