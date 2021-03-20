@@ -340,7 +340,7 @@ public class SkeletonMain {
 
         Logger.formatPrint("_3_1_MiningOnNotFullyDrilledAsteroid");
 
-        s1.digging();
+        s1.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
@@ -348,7 +348,12 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Logger.formatPrint("_3_2_MiningIronOnFullyDrilledAsteroid");
+        Asteroid a1 = new Asteroid(1,1,0,new Iron());
+        Settler s1 = new Settler(a1);
+
+        Logger.formatPrint("_3_2_MiningOnNotFullyDrilledAsteroid");
+
+        s1.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
@@ -356,7 +361,12 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Logger.formatPrint("_3_3_MiningOnFullyDrilledButEmptyAsteroid");
+        Asteroid a1 = new Asteroid(1,1,0,null);
+        Settler s1 = new Settler(a1);
+
+        Logger.formatPrint("_3_3_MiningOnNotFullyDrilledAsteroid");
+
+        s1.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
