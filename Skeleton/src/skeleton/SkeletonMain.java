@@ -734,6 +734,7 @@ public class SkeletonMain {
 
         Controler cont = Controler.getNewControler();
         Space space = cont.getSpace();
+        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //ő életben marad majd, nem lesz játék vége
 
         Asteroid asteroid = new Asteroid(1,1,0,new Iron());
         space.addOrbit(asteroid);
@@ -746,14 +747,38 @@ public class SkeletonMain {
         Settler settler = new Settler(asteroid);
         cont.addSettler(settler);
 
-        Logger.formatPrint("_7_1_SunstormOnNotFullyDrilledAsteroid");
+        Logger.formatPrint("_7_2_SunstormOnNotEmptyAsteroid");
 
         space.tempSunstormCall();
 
         Logger.formatPrint("Teszt Vege");
     }
     public static void _7_3_SunstormOnSafeAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Controler cont = Controler.getNewControler();
+        Space space = cont.getSpace();
+        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //ő életben marad majd, nem lesz játék vége
+
+        Asteroid asteroid = new Asteroid(1,1,0, null);
+        space.addOrbit(asteroid);
+
+        Robot robot = new Robot();
+        robot.setLocation(asteroid);
+        asteroid.addTraveler(robot);
+        cont.addRobot(robot);
+
+        Settler settler = new Settler(asteroid);
+        cont.addSettler(settler);
+
+        Logger.formatPrint("_7_3_SunstormOnSafeAsteroid");
+
+        space.tempSunstormCall();
+
+        Logger.formatPrint("Teszt Vege");
+
+    }
 
     public static void _8_SunLight()
     {
