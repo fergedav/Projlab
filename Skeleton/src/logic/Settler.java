@@ -140,7 +140,10 @@ public class Settler extends Traveler {
         }
 
         /** Megkísérel egy bázist létrehozni, true-val tér vissza ha sikerült, false-al ha túl kevés volt a nyersanyag. */
-        inventoryforbase.createBase();
+        if(inventoryforbase.createBase())
+        {
+            controler.endGame();
+        }
         Logger.endFunctionLog();
     }
 

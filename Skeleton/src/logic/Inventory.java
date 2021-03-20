@@ -235,25 +235,9 @@ public class Inventory {
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
 
         for(int i = 0; i < anyagok.length; i ++){
-            while(other.materials.get(anyagok[i]).size() > 0){
-                switch(anyagok[i]){
-                    
-                    case "Uran":
-                        materials.get(anyagok[i]).add(new Uran());
-                        break;
-                    case "Carbon":
-                        materials.get(anyagok[i]).add(new Carbon());
-                        break;
-                    case "Iron":
-                        materials.get(anyagok[i]).add(new Iron());
-                        break;
-                    case "Ice":
-                        materials.get(anyagok[i]).add(new Ice());
-                        break;
-                    default: break;
-                }
-            }
+            materials.get(anyagok[i]).addAll(other.materials.get(anyagok[i]));
         }
+        
         Logger.endFunctionLog();
         
     }

@@ -87,7 +87,10 @@ public class Controler {
      */
     public void endGame()
     {   
+        Logger.startFunctionLogComment(this, "endGame", "");
         gameIsOn = false;
+        Logger.endFunctionLog();
+
     }
 
     /**
