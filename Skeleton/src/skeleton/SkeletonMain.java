@@ -302,11 +302,60 @@ public class SkeletonMain {
 
     }
     public static void _4_2_SettlerReplaceIron()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(0, 0, 0, null);
+        Settler sett = new Settler(a);
+        Iron i = new Iron();
+
+        sett.getInventory().addIron(i);
+
+        Logger.formatPrint("_4_2_SettlerReplaceIron");
+
+        sett.replaceResource("Iron");
+
+        Logger.formatPrint("Teszt vége");
+    }
+
     public static void _4_3_SettlerPutsBackIceAndItMeltsInTheSunlight()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(1, 1, 0, null);
+        Settler sett = new Settler(a);
+        Ice i = new Ice();
+        Space.getInstance().addOrbit(a);
+        Space.getInstance().step();
+
+        sett.getInventory().addIce(i);
+
+        Logger.formatPrint("_4_3_SettlerPutsBackIceAndItMeltsInTheSunlight");
+
+        sett.replaceResource("Ice");
+
+        Logger.formatPrint("Teszt vége");
+    }
+
     public static void _4_4_SettlerPutsBackUranAndItExplodes()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(1, 1, 0, null);
+        Settler sett = new Settler(a);
+        Uran u = new Uran();
+        Controler.getInstance();
+        Space.getInstance().addOrbit(a);
+        Space.getInstance().step();
+
+        sett.getInventory().addUran(u);
+
+        Logger.formatPrint("_4_4_SettlerPutsBackUranAndItExplodes");
+
+        sett.replaceResource("Uran");
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _4_5_SettlerTriesToPutBackIronIntoAStargate()
     {}
 
