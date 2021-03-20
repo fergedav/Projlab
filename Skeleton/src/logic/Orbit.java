@@ -150,7 +150,6 @@ public abstract class Orbit {
      */
     public void sunLightArrive(int x1, int y1, int x2, int y2)
     {
-        Logger.startFunctionLogComment(this, "sunLightArrive", "");
 
         if(x >= x1 && y >= y1 &&
             x <= x2 && y <= y2)
@@ -162,7 +161,6 @@ public abstract class Orbit {
             inLight = false;
         }
 
-        Logger.endFunctionLog();
     }
 
     /**
