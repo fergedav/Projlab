@@ -604,7 +604,23 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _5_4_FailedBaseCreateMissingMaterial()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Controler c = Controler.getInstance();
+        Asteroid a1 = new Asteroid(5, 3, 4, null);
+        Settler s1 = new Settler(a1);
+        Settler s2 = new Settler(a1);
+
+        c.addSettler(s1);
+        c.addSettler(s2);
+
+        Logger.formatPrint("_5_4_FailedBaseCreateMissingMaterial");
+
+        s1.createBase();
+
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _6_Stargate()
     {
