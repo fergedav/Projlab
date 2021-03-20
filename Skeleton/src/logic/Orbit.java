@@ -15,7 +15,7 @@ public abstract class Orbit {
 
     protected Orbit() {
         neighbours = new ArrayList<Orbit>();
-        travelers = new ArrayList<>();
+        travelers = new ArrayList<Traveler>();
         
     }
 
@@ -40,6 +40,8 @@ public abstract class Orbit {
      */
     public List<Traveler> getTravelers()
     {
+        Logger.startFunctionLogComment(this, "getTravelers", "");
+        Logger.endFunctionLog();
         return travelers;
     }
 
@@ -60,7 +62,9 @@ public abstract class Orbit {
      */
     public void addNeighbour(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "addNeighbour", "");
         neighbours.add(o);
+        Logger.endFunctionLog();
     }
 
     /**
@@ -69,7 +73,9 @@ public abstract class Orbit {
      */
     public void removeNeighbour(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "removeNeighbour", "");
         neighbours.remove(o);
+        Logger.endFunctionLog();
     }
 
 
@@ -103,6 +109,8 @@ public abstract class Orbit {
      */
     public Resource retrieveResource()
     {
+        Logger.startFunctionLogComment(this, "retrieveResource", "");
+        Logger.endFunctionLog();
         return null;
     }
 
@@ -113,6 +121,8 @@ public abstract class Orbit {
      */
     public boolean putResource(Resource r)
     {
+        Logger.startFunctionLogComment(this, "putResource", "");
+        Logger.endFunctionLog();
         return false;
     }
 
@@ -121,9 +131,13 @@ public abstract class Orbit {
      */
     public void sunstormArrive()
     {
+        Logger.startFunctionLogComment(this, "sunstormArrive", "");
+        
         for (Traveler t : travelers) {
             t.die();
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -136,6 +150,8 @@ public abstract class Orbit {
      */
     public void sunLightArrive(int x1, int y1, int x2, int y2)
     {
+        Logger.startFunctionLogComment(this, "sunLightArrive", "");
+
         if(x >= x1 && y >= y1 &&
             x <= x2 && y <= y2)
         {
@@ -145,6 +161,8 @@ public abstract class Orbit {
         {
             inLight = false;
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -153,11 +171,15 @@ public abstract class Orbit {
      */
     public int getLayers()
     {
+        Logger.startFunctionLogComment(this, "getLayers", "");
+        Logger.endFunctionLog();
         return layers;
     }
 
     public int numOfNeighbor()
     {
+        Logger.startFunctionLogComment(this, "numOfNeighbor", "");
+        Logger.endFunctionLog();
         return neighbours.size();
     }
 
