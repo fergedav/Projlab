@@ -59,6 +59,7 @@ public class Asteroid extends Orbit {
         for (Traveler t : copy) {
             t.explosion();
         }
+        travelers = copy;
 
         Logger.endFunctionLog();
     }
@@ -146,9 +147,11 @@ public class Asteroid extends Orbit {
 
         if(!(layers == 0 && core == null))
         {
-            for (Traveler t : travelers) {
+            List<Traveler> copy = new ArrayList<>(travelers);
+            for (Traveler t : copy) {
                 t.die();
             }
+            travelers = copy;
         }
 
         Logger.endFunctionLog();

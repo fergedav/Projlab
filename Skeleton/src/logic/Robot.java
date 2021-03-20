@@ -56,10 +56,12 @@ public class Robot extends Traveler {
     {
         Logger.startFunctionLogComment(this, "die", "");
 
-        currentLocation.removeTraveler(this);
+        currentLocation.removeTraveler(this);        
+
         controler.robotDie(this);
 
         Logger.endFunctionLog();
+
     }
 
     /**
