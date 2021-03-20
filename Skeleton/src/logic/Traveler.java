@@ -20,7 +20,9 @@ public abstract class Traveler {
     public void digging()
     {
         Logger.startFunctionLogComment(this, "digging", "");
+
         currentLocation.drilled();
+
         Logger.endFunctionLog();
     }
 
@@ -48,8 +50,11 @@ public abstract class Traveler {
     public Inventory getInventory()
     {
         Logger.startFunctionLogComment(this, "public Inventory getInventory", "");
+
         Inventory inv = inventory;
+
         Logger.endFunctionLog();
+        
         return inv;
     }
 
