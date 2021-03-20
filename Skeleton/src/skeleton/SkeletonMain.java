@@ -674,12 +674,11 @@ public class SkeletonMain {
         a2.addNeighbour(a1);
 
         s.addOrbit(a1);
-
+        // felvesz egy settlert az aszteroidára és 
         Settler set = new Settler(a1);
+
         Robot rob = new Robot();
         rob.setLocation(a1);
-
-        a1.addTraveler(set);
         a1.addTraveler(rob);
 
         c.addRobot(rob);
