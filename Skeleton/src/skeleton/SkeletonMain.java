@@ -374,8 +374,17 @@ public class SkeletonMain {
     {        
         Logger.formatPrint("Init");
 
-        Stargate stargate = new Stargate();
-        Settler settler = new Settler(stargate);
+        Asteroid asteroid = new Asteroid(1, 1, 20, null);
+
+        Stargate stargate1 = new Stargate();
+        Stargate stargate2 = new Stargate();
+
+        stargate1.entagle(stargate2);
+        stargate2.entagle(stargate1);
+
+        stargate1.place(asteroid);
+
+        Settler settler = new Settler(stargate1);
 
         Logger.formatPrint("_3_4_MiningOnStargate");
 
