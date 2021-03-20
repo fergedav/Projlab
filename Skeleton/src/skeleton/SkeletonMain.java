@@ -3,6 +3,7 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import jdk.javadoc.internal.doclets.formats.html.markup.ContentBuilder;
 import logic.*;
 
 public class SkeletonMain {
@@ -237,7 +238,35 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _2_3_DiggingBreakthroughtUran()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(1, 1, 1, new Uran());
+        Asteroid a2 = new Asteroid(0, 0, 1, null);
+        Settler s = new Settler(a1);
+
+        a1.addTraveler(s);
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+
+        s1.entagle(s2);
+        s2.entagle(s1);
+        s2.place(a2);
+
+        Space.getInstance().addOrbit(a1);
+        Space.getInstance().step();
+
+        Robot r = new Robot();
+
+        a1.addTraveler(r);
+
+        Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _2_4_DiggingBreakthroughtIce()
     {}
     public static void _2_5_DiggingOnStargate()
@@ -397,7 +426,7 @@ public class SkeletonMain {
         Asteroid a = new Asteroid(1, 1, 0, null);
         Settler sett = new Settler(a);
         Uran u = new Uran();
-        Controler.getInstance();
+        Controler.getInstance().addSettler(sett);
         Space.getInstance().addOrbit(a);
         Space.getInstance().step();
 
@@ -410,7 +439,24 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _4_5_SettlerTriesToPutBackIronIntoAStargate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+        s1.entagle(s2);
+        s2.entagle(s1);
+        Settler sett = new Settler(s1);
+        Iron i = new Iron();
+
+        sett.getInventory().addIron(i);
+
+        Logger.formatPrint("_4_5_SettlerTriesToPutBackIronIntoAStargate");
+
+        sett.replaceResource("Iron");
+
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _5_Build()
     {

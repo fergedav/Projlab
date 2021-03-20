@@ -63,6 +63,7 @@ public class Asteroid extends Orbit {
      * Az aszteroidán végeznek ásást. Eggyel csökkenti a layers értékét. 
      * Ha a layers értéke eléri a 0-át, akkor meghívja az reaction() privát metódusát az aszteroidának.
      */
+    @Override
     public void drilled()
     {
         Logger.startFunctionLogComment(this, "drilled", "");
