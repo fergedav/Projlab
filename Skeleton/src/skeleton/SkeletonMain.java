@@ -270,13 +270,42 @@ public class SkeletonMain {
     }
 
     public static void _3_1_MiningOnNotFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(1,1,10,new Iron());
+        Settler s1 = new Settler(a1);
+
+        Logger.formatPrint("_3_1_MiningOnNotFullyDrilledAsteroid");
+
+        s1.digging();
+
+        Logger.formatPrint("Teszt Vege");
+    }
     public static void _3_2_MiningIronOnFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("_3_2_MiningIronOnFullyDrilledAsteroid");
+
+        Logger.formatPrint("Teszt Vege");
+    }
     public static void _3_3_MiningOnFullyDrilledButEmptyAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("_3_3_MiningOnFullyDrilledButEmptyAsteroid");
+
+        Logger.formatPrint("Teszt Vege");
+    }
     public static void _3_4_MiningOnStargate()
-    {}
+    {        
+        Logger.formatPrint("Init");
+
+        Logger.formatPrint("_3_4_MiningOnStargate");
+
+        Logger.formatPrint("Teszt Vege");
+    }
 
     public static void _4_ReplaceResource()
     {
