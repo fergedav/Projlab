@@ -149,7 +149,34 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _1_3_MoveOnOnlineGate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+
+        s1.entagle(s2);
+        s2.entagle(s1);
+
+        Asteroid a1 = new Asteroid(0, 0, 8, null);
+        Asteroid a2 = new Asteroid(0, 0, 8, null);
+
+        Settler s = new Settler(a1);
+
+        a1.addNeighbour(s1);
+        a1.addTraveler(s);
+
+        a2.addNeighbour(s2);
+
+        Logger.formatPrint("_1_3_MoveOnOnlineGate");
+
+        Orbit st = a1.getNeighbour(0);
+        a1.removeTraveler(s);
+        st.addTraveler(s);
+
+        Logger.formatPrint("Teszt vége");
+
+    }
 
     public static void _2_Digging()
     {
@@ -182,7 +209,9 @@ public class SkeletonMain {
     }
 
     public static void _2_1_SimpleDigging()
-    {}
+    {
+        
+    }
     public static void _2_2_DiggingAndBreakthrought()
     {}
     public static void _2_3_DiggingBreakthroughtUran()
