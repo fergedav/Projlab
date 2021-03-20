@@ -95,8 +95,11 @@ public class Asteroid extends Orbit {
     {
         Logger.startFunctionLogComment(this, "retrieveResource", "");
 
-        if(layers != 0)
-            return null;
+        if(layers != 0){
+            Logger.endFunctionLog();
+             return null;
+        }
+           
 
         Resource c = core;
         core = null;
