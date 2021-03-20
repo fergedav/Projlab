@@ -548,9 +548,10 @@ public class SkeletonMain {
 
         Asteroid a = new Asteroid(5, 1, 5, null);
         Settler s1 = new Settler(a);
-        s1.getInventory().addUran(new Uran());
-        s1.getInventory().addIron(new Iron());
-        s1.getInventory().addCarbon(new Carbon());
+        Inventory seged = s1.getInventory();
+        seged.addUran(new Uran());
+        seged.addIron(new Iron());
+        seged.addCarbon(new Carbon());
         Controler c = Controler.getInstance();
         c.addSettler(s1);
 
@@ -627,11 +628,9 @@ public class SkeletonMain {
         System.out.println("Teleportkapu esetek:");
         System.out.println("\t1. Successful Stargate Create");
         System.out.println("\t2. Failed Stargate Create Missing Material");
-        System.out.println("\t3. Failed Stargate Create Already Have One");
-        System.out.println("\t4. Successful Stargate Place");
-        System.out.println("\t5. Failed Stargate Place");
+        System.out.println("\t3. Successful Stargate Place");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-5)", 1,5);
+        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-3)", 1,3);
         switch(opt)
         {
             case 1:
@@ -641,26 +640,44 @@ public class SkeletonMain {
             _6_2_FailedStargateCreateMissingMaterial();
                 break;
             case 3:
-            _6_3_FailedStargateCreateAlreadyHaveOne();
-                break;
-            case 4:
-            _6_4_SuccessfulStargatePlace();
-                break;
-            case 5:
-            _6_5_FailedStargatePlace();
+            _6_3_SuccessfulStargatePlace();
                 break;
         }
     }
 
     public static void _6_1_SuccessfulStargateCreate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(6, 1, 4, null);
+        Settler s1 = new Settler(a1);
+
+        Inventory seged = s1.getInventory();
+        seged.addUran(new Uran());
+        seged.addIron(new Iron());
+        seged.addIron(new Iron());
+        seged.addIce(new Ice());
+        
+        Logger.formatPrint("_6_1_SuccessfulStargateCreate");
+
+        s1.stargate();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _6_2_FailedStargateCreateMissingMaterial()
-    {}
-    public static void _6_3_FailedStargateCreateAlreadyHaveOne()
-    {}
-    public static void _6_4_SuccessfulStargatePlace()
-    {}
-    public static void _6_5_FailedStargatePlace()
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(6, 2, 4, null);
+        Settler s1 = new Settler(a1);
+        
+        Logger.formatPrint("6_2_FailedStargateCreateMissingMaterial");
+
+        s1.stargate();
+
+        Logger.formatPrint("Teszt vége");
+    }
+    public static void _6_3_SuccessfulStargatePlace()
     {}
 
     public static void _7_SunStorm()

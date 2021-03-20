@@ -154,7 +154,7 @@ public class Settler extends Traveler {
         List<Stargate> newgates = inventory.createStargate();
 
         /** Ha sikerült létrehozni a teleportkapu-párt, akkor őket hozzáadjuk a kapuk listájához. */
-        if (newgates.size() != 0)
+        if (newgates != null)
         {
            stargates = newgates;
         }
