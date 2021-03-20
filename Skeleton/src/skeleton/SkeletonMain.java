@@ -83,11 +83,7 @@ public class SkeletonMain {
                 break;
         }
 
-        try {
-            new BufferedReader (new InputStreamReader (System.in)).readLine();
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
+        System.console().readLine();
 
         return true;
     }
