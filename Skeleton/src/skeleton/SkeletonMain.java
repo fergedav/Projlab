@@ -3,8 +3,7 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import logic.Asteroid;
-import logic.Settler;
+import logic.*;
 
 public class SkeletonMain {
     public static void main(String[] args) 
@@ -272,7 +271,15 @@ public class SkeletonMain {
     }
 
     public static void _5_1_SuccessfulRobotCreate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(5, 1, 5, null);
+        Settler s1 = new Settler(a);
+        a.addTraveler(s1);
+        s1.getInventory().addUran(new Uran());
+
+    }
     public static void _5_2_FailedRobotCreateMissingMaterial()
     {}
     public static void _5_3_SuccessfulBaseCreate()
