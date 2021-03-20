@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 import skeleton.Logger;
 
@@ -9,7 +10,8 @@ public class Space {
 
     private Space()
     {
-    setSunstorm_time(0);
+        orbits = new ArrayList<Orbit>();
+        setSunstorm_time(0);
     }
 
     public static Space getInstance()
