@@ -19,7 +19,9 @@ public abstract class Traveler {
      */
     public void digging()
     {
+        Logger.startFunctionLogComment(this, "digging", "");
         currentLocation.drilled();
+        Logger.endFunctionLog();
     }
 
     public void move(int index)
@@ -45,7 +47,10 @@ public abstract class Traveler {
     /** Visszaadja a saját inventory-ját */
     public Inventory getInventory()
     {
-        return inventory;
+        Logger.startFunctionLogComment(this, "public Inventory getInventory", "");
+        Inventory inv = inventory;
+        Logger.endFunctionLog();
+        return inv;
     }
 
     /** A Settler és a Robot magának implementálja. */

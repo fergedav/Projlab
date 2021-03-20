@@ -2,6 +2,7 @@ package logic;
 import java.util.*; 
 
 import java.util.List;
+import skeleton.Logger;
 
 public class Settler extends Traveler {
     
@@ -15,6 +16,7 @@ public class Settler extends Traveler {
     @Override
     public void die()
     {
+        Logger.startFunctionLogComment(this, "die", "");
         /** Ha van teleportkapuja a telepesnek a halálakor, akkor az összes elpusztul a telepessel együtt. */
         if(stargates != null)
         {
@@ -26,6 +28,7 @@ public class Settler extends Traveler {
         /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy ő meghalt és kéri, hogy húzza ki az élő telepesek listájából (a settlerDie függvénnyel) */
             controler.settlerDie(this);
         }
+        Logger.endFunctionLog();
     }
 
     @Override
@@ -34,6 +37,7 @@ public class Settler extends Traveler {
 
     public void mining()
     {
+        Logger.startFunctionLogComment(this, "mining", "");
         /** A retrieveResource null-al tér vissza, ha teleportkapun vagy üreges aszteroidán bányásznánk, egyéb esetben pedig a bányászott nyersanyaggal. */
         Resource res = currentLocation.retrieveResource();
 
@@ -42,10 +46,12 @@ public class Settler extends Traveler {
         {
             inventory.addResource(res);
         }
+        Logger.endFunctionLog();
     }
 
     public void createRobot()
     {
+        Logger.startFunctionLogComment(this, "createRobot", "");
         /** Megkísérel a createRobot egy új robotot létrehozni. Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. */
         Robot newrobot = inventory.createRobot(currentLocation);
         
@@ -56,11 +62,12 @@ public class Settler extends Traveler {
             currentLocation.addTraveler(newrobot);
             controler.addRobot(newrobot);
         }
-
+        Logger.endFunctionLog();
     }
 
     public void stargate()
     {
+        Logger.startFunctionLogComment(this, "stargate", "");
         /** Ha a stargate gomb megnyomásakor nincs teleportkapuja a telepesnek, akkor megpróbál létrehozni egy új teleportkapu-párt. */
         if(stargates == null)
         {
@@ -71,10 +78,12 @@ public class Settler extends Traveler {
         {
             placeStargate();
         }
+        Logger.endFunctionLog();
     }
 
     public void placeStargate()
     {
+        Logger.startFunctionLogComment(this, "placeStargate", "");
         /** Elhelyezi a lista 0. indexe alatt lévő teleportkaput a place függvénnyel, majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
         stargates.get(0).place(currentLocation);
 
@@ -89,12 +98,14 @@ public class Settler extends Traveler {
             
             stargates = null;
         }
+        Logger.endFunctionLog();
         
     }
 
     /** A what paraméter határozza meg, hogy milyen nyersanagot helyezne vissza a játékos. */
     public void replaceResource(String what)
     {
+        Logger.startFunctionLogComment(this, "replaceResource", "");
         /** Eltávolítja a removeResource a what paraméterben meghatározott nyersanyagot */
         Resource resource = inventory.removeResource(what);
 
@@ -106,10 +117,12 @@ public class Settler extends Traveler {
         {
             inventory.addResource(resource);
         }
+        Logger.endFunctionLog();
     }
 
     public void createBase()
     {
+        Logger.startFunctionLogComment(this, "createBase", "");
         /** Lekéri az összes utazót a tartózkodási helyéről és létrehoz egy inventory-t, amiben számolja, hogy elég nyersanyaga van-e összesen a lista tagjainak. */
         List<Traveler> travelers = currentLocation.getTravelers();
 
@@ -124,10 +137,12 @@ public class Settler extends Traveler {
 
         /** Megkísérel egy bázist létrehozni, true-val tér vissza ha sikerült, false-al ha túl kevés volt a nyersanyag. */
         inventoryforbase.createBase();
+        Logger.endFunctionLog();
     }
 
     public void createStargate()
     {
+        Logger.startFunctionLogComment(this, "createStargate", "");
         /** A createStargate null-al tér vissza nem volt elég nyersanyag a kapuk létrehozásához. */
         List<Stargate> newgates = inventory.createStargate();
 
@@ -141,10 +156,14 @@ public class Settler extends Traveler {
         {
             stargates = null;
         }
+        Logger.endFunctionLog();
     }
 
     @Override
-    public void explosion() {
+    public void explosion() 
+    {
+        Logger.startFunctionLogComment(this, "explosion", "");
         die();
+        Logger.endFunctionLog();
     }
 }
