@@ -202,4 +202,8 @@ public class Inventory {
     }
 
 
+    public void addInventory(Inventory i)
+    {
+
+    }
 }
