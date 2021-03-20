@@ -29,7 +29,7 @@ public class Space {
      * ez csak a teszteléshez kell
      * @return az új space obj.
      */
-    public Space getNewSpace()
+    public static Space getNewSpace()
     {
         return new Space();
     }
