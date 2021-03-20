@@ -918,7 +918,6 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Logger.formatPrint("Init");
         Asteroid a = new Asteroid(1,8,2,null);
         Robot r = new Robot();
         r.setLocation(a);
@@ -933,6 +932,7 @@ public class SkeletonMain {
     public static void _9_2_RobotIsOnFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
+        
         Asteroid a1 = new Asteroid(1,8,0,null);
         Asteroid a2 = new Asteroid(2,8,2,null);
         a1.addNeighbour(a2);
