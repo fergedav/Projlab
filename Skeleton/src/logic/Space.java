@@ -101,7 +101,9 @@ public class Space {
     public void addOrbit(Orbit o)
     {
         Logger.startFunctionLogComment(this, "addOrbit", "");
+
         orbits.add(o);
+        
         Logger.endFunctionLog();
     }
     /**
