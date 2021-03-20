@@ -184,18 +184,18 @@ public class Inventory {
 
         if(doIHave(1, 0, 2, 1)){
             List<Stargate> list = new ArrayList<Stargate>();
-                Stargate a = new Stargate();
-                Stargate b = new Stargate();
+            Stargate a = new Stargate();
+            Stargate b = new Stargate();
 
-                a.entagle(b);
-                b.entagle(a);
+            a.entagle(b);
+            b.entagle(a);
 
-                list.add(a);
-                list.add(b);
+            list.add(a);
+            list.add(b);
 
-                Logger.endFunctionLog();
+            Logger.endFunctionLog();
 
-                return list;
+            return list;
         }
         Logger.endFunctionLog();
         
@@ -213,7 +213,13 @@ public class Inventory {
      */
     public boolean createBase()
     {
-        return doIHave(3, 3, 3, 3);
+        Logger.startFunctionLogComment(this, "createBase", "");
+
+        Boolean b =  doIHave(3, 3, 3, 3);
+
+        Logger.endFunctionLog();
+
+        return b;
     }
     /**
      * Hozzáadja a kapott inventorit a sajátjához.
@@ -224,6 +230,8 @@ public class Inventory {
      */
     public void addInventory(Inventory other)
     {
+        Logger.startFunctionLogComment(this, "addInventory", "");
+
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
 
         for(int i = 0; i < anyagok.length; i ++){
@@ -246,7 +254,7 @@ public class Inventory {
                 }
             }
         }
-
+        Logger.endFunctionLog();
         
     }
 
