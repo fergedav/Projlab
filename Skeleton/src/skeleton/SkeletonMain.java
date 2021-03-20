@@ -384,6 +384,7 @@ public class SkeletonMain {
         stargate2.entagle(stargate1);
 
         stargate1.place(asteroid);
+        asteroid.addNeighbour(stargate1);
 
         Settler settler = new Settler(stargate1);
 
