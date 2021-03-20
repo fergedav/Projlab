@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import skeleton.Logger;
 
 public class Controler {
     ///Singleton stuff
@@ -52,6 +53,8 @@ public class Controler {
      */
     public void startGame()
     {
+        Logger.startFunctionLogComment(this, "startGame", "");
+
         gameIsOn = true;
         while(gameIsOn){
 
@@ -59,6 +62,8 @@ public class Controler {
             for(Robot r : robots){ r.step();}
             for(Settler s : settlers){s.step();}
         }
+
+        Logger.endFunctionLog();
     }
     /**
      * leállítja a játkot.
@@ -74,7 +79,11 @@ public class Controler {
      */
     public void addRobot(Robot r)
     {
+        Logger.startFunctionLogComment(this, "addRobot", "");
+
         robots.add(r);
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -89,12 +98,16 @@ public class Controler {
      */
     public void settlerDie(Settler s)
     {
+        Logger.startFunctionLogComment(this, "settlerDie", "");
+
         settlers.remove(s);
 
         settlersAlive--;
 
         if(settlers.size()==0)
             endGame();
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -104,6 +117,10 @@ public class Controler {
      */
     public void robotDie(Robot r)
     {
+        Logger.startFunctionLogComment(this, "robotDie", "");
+
         robots.remove(r);
+
+        Logger.endFunctionLog();
     }
 }
