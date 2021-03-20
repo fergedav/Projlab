@@ -66,6 +66,7 @@ public class Space {
         Logger.endFunctionLog();
     }
 
+    //csak a skeleton idejére, a tesztelést segíteni
     public void tempSunstormCall(){
         sunstormCall();
     }
