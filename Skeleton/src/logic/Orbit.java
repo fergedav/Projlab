@@ -100,8 +100,7 @@ public abstract class Orbit {
         
     }
 
-    public void drilled()
-    { }
+    public abstract void drilled();
 
     /**
      * visszadja a tartalmazott nyersanyagot

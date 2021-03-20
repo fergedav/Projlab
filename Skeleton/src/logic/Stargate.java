@@ -20,6 +20,12 @@ public class Stargate extends Orbit {
         Logger.endFunctionLog();
     }
 
+    @Override
+    public void drilled()
+    {
+        Logger.startFunctionLogComment(this, "drilled", "");
+        Logger.endFunctionLog();
+    }
     /**
      * Átküldi az utazót a sajat myStopjára.
      * @param t az érkezett utazó
