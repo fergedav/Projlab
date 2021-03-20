@@ -69,9 +69,9 @@ public class Stargate extends Orbit {
     {
         Logger.startFunctionLogComment(this, "getPlaced", "");
 
-        return isPlaced;
-
         Logger.endFunctionLog();
+
+        return isPlaced;
     }
 
     /**
