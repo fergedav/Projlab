@@ -1,5 +1,7 @@
 package logic;
 
+import skeleton.Logger;
+
 public class Asteroid extends Orbit {
 
     /**
@@ -35,9 +37,12 @@ public class Asteroid extends Orbit {
      */
     private void reaction()
     {
+        Logger.startFunctionLogComment(this, "reaction", "");
+
         if(inLight && core != null && layers == 0)
             core.reaction(this);
 
+        Logger.endFunctionLog();
     }
 
     /**
@@ -45,9 +50,13 @@ public class Asteroid extends Orbit {
      */
     public void explosion()
     {
+        Logger.startFunctionLogComment(this, "reaction", "");
+
         for (Traveler t : travelers) {
             t.explosion();
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -56,6 +65,8 @@ public class Asteroid extends Orbit {
      */
     public void drilled()
     {
+        Logger.startFunctionLogComment(this, "drilled", "");
+
         if(layers != 0)
         {
             layers--;
@@ -64,6 +75,8 @@ public class Asteroid extends Orbit {
                 reaction();
             }
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -75,12 +88,15 @@ public class Asteroid extends Orbit {
     @Override
     public Resource retrieveResource()
     {
+        Logger.startFunctionLogComment(this, "retrieveResource", "");
+
         if(layers != 0)
             return null;
 
         Resource c = core;
         core = null;
 
+        Logger.endFunctionLog();
         return c;
     }
 
@@ -95,6 +111,8 @@ public class Asteroid extends Orbit {
     @Override
     public boolean putResource(Resource r)
     {
+        Logger.startFunctionLogComment(this, "putResource", "");
+
         if(layers != 0)
             return false;
 
@@ -105,6 +123,8 @@ public class Asteroid extends Orbit {
 
         reaction();
         
+        Logger.endFunctionLog();
+
         return true;
     }
 
@@ -115,12 +135,16 @@ public class Asteroid extends Orbit {
     @Override
     public void sunstormArrive()
     {
+        Logger.startFunctionLogComment(this, "sunstormArrive", "");
+
         if(!(layers == 0 && core == null))
         {
             for (Traveler t : travelers) {
                 t.die();
             }
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -135,9 +159,12 @@ public class Asteroid extends Orbit {
     @Override
     public void sunLightArrive(int x1, int y1, int x2, int y2)
     {
+        Logger.startFunctionLogComment(this, "sunLightArrive", "");
+
         super.sunLightArrive(x1, y1, x2, y2);
         if(inLight)
             reaction();
 
+        Logger.endFunctionLog();
     }
 }
