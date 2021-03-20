@@ -123,4 +123,12 @@ public class Controler {
 
         Logger.endFunctionLog();
     }
+    /**
+     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmazó listájához
+     * @param s
+     */
+    public void addSettler(Settler s)
+    {
+        settlers.add(s);
+    }
 }

@@ -208,10 +208,34 @@ public class SkeletonMain {
 
     public static void _2_1_SimpleDigging()
     {
+        Logger.formatPrint("Init");
         
+        Asteroid a = new Asteroid(0, 0, 8, null);
+        Settler s = new Settler(a);
+        
+        a.addTraveler(s);
+
+        Logger.formatPrint("_1_3_MoveOnOnlineGate");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
     }
     public static void _2_2_DiggingAndBreakthrought()
-    {}
+    {
+        Logger.formatPrint("Init");
+        
+        Asteroid a = new Asteroid(0, 0, 1, null);
+        Settler s = new Settler(a);
+        
+        a.addTraveler(s);
+
+        Logger.formatPrint("_1_3_MoveOnOnlineGate");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _2_3_DiggingBreakthroughtUran()
     {}
     public static void _2_4_DiggingBreakthroughtIce()

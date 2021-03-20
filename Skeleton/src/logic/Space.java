@@ -102,11 +102,7 @@ public class Space {
      */
     public void addOrbit(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "addOrbit", "");
-
         orbits.add(o);
-        
-        Logger.endFunctionLog();
     }
     /**
      * Kiveszi a paraméterként kapott Orbitot az orbits listából.
@@ -114,11 +110,7 @@ public class Space {
      */
     public void removeOrbit(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "removeOrbit", "");
-
         orbits.remove(o);
-
-        Logger.endFunctionLog();
     }
 
     
