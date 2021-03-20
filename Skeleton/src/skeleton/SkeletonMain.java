@@ -553,7 +553,6 @@ public class SkeletonMain {
         seged.addIron(new Iron());
         seged.addCarbon(new Carbon());
         Controler c = Controler.getInstance();
-        c.addSettler(s1);
 
         Logger.formatPrint("_5_1_SuccessfulRobotCreate");
 
@@ -583,9 +582,6 @@ public class SkeletonMain {
         Settler s1 = new Settler(a1);
         Settler s2 = new Settler(a1);
 
-        c.addSettler(s1);
-        c.addSettler(s2);
-
         Inventory seged = s1.getInventory();
         for(int i =0; i<3;i++){
             seged.addCarbon(new Carbon());
@@ -612,9 +608,6 @@ public class SkeletonMain {
         Asteroid a1 = new Asteroid(5, 3, 4, null);
         Settler s1 = new Settler(a1);
         Settler s2 = new Settler(a1);
-
-        c.addSettler(s1);
-        c.addSettler(s2);
 
         Logger.formatPrint("_5_4_FailedBaseCreateMissingMaterial");
 
@@ -678,7 +671,23 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _6_3_SuccessfulStargatePlace()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(6, 3, 8, null);
+
+        Settler s = new Settler(a1);
+        Inventory seged = s.getInventory();
+        seged.addUran(new Uran());
+        seged.addIron(new Iron());
+        seged.addIron(new Iron());
+        seged.addIce(new Ice());
+        s.stargate();
+        Logger.formatPrint("_6_3_SuccessfulStargatePlace");
+
+        s.stargate();
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _7_SunStorm()
     {

@@ -85,7 +85,7 @@ public class Settler extends Traveler {
         Logger.endFunctionLog();
     }
 
-    public void placeStargate()
+    private void placeStargate()
     {
         Logger.startFunctionLogComment(this, "placeStargate", "");
         /** Elhelyezi a lista 0. indexe alatt lévő teleportkaput a place függvénnyel, majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
@@ -147,7 +147,7 @@ public class Settler extends Traveler {
         Logger.endFunctionLog();
     }
 
-    public void createStargate()
+    private void createStargate()
     {
         Logger.startFunctionLogComment(this, "createStargate", "");
         /** A createStargate null-al tér vissza nem volt elég nyersanyag a kapuk létrehozásához. */
