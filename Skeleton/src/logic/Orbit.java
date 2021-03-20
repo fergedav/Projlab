@@ -174,9 +174,10 @@ public abstract class Orbit {
     }
 
     public int numOfNeighbor()
-    {
-        Logger.startFunctionLogComment(this, "numOfNeighbor", "");
-        Logger.endFunctionLog();
+    {   
+        //ezt nem kell logolni.
+        //Logger.startFunctionLogComment(this, "numOfNeighbor", "");
+        //Logger.endFunctionLog();L
         return neighbours.size();
     }
 
