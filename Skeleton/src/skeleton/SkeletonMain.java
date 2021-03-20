@@ -731,6 +731,7 @@ public class SkeletonMain {
         Asteroid a = new Asteroid(1,8,2,null);
         Robot r = new Robot();
         r.setLocation(a);
+        a.addTraveler(r);
 
         Logger.formatPrint("_9_1_RobotIsOnNotFullyDrilledAsteroid");
 
@@ -747,6 +748,7 @@ public class SkeletonMain {
         a2.addNeighbour(a1);
         Robot r = new Robot();
         r.setLocation(a1);
+        a1.addTraveler(r);
 
         Logger.formatPrint("_9_2_RobotIsOnFullyDrilledAsteroid");
 
