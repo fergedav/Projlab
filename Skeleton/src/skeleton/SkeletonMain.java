@@ -83,7 +83,7 @@ public class SkeletonMain {
                 break;
         }
 
-        
+        System.console().readLine();
 
         return true;
     }
@@ -335,12 +335,12 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
-        Asteroid a1 = new Asteroid(1,1,10,new Iron());
-        Settler s1 = new Settler(a1);
+        Asteroid asteroid = new Asteroid(1,1,10,new Iron());
+        Settler settler = new Settler(asteroid);
 
         Logger.formatPrint("_3_1_MiningOnNotFullyDrilledAsteroid");
 
-        s1.digging();
+        settler.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
@@ -348,7 +348,12 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
+        Asteroid asteroid = new Asteroid(1,1,0,new Iron());
+        Settler settler = new Settler(asteroid);
+
         Logger.formatPrint("_3_2_MiningIronOnFullyDrilledAsteroid");
+
+        settler.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
@@ -356,7 +361,12 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
+        Asteroid asteroid = new Asteroid(1,1,0,null);
+        Settler settler = new Settler(asteroid);
+
         Logger.formatPrint("_3_3_MiningOnFullyDrilledButEmptyAsteroid");
+
+        settler.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
@@ -364,7 +374,12 @@ public class SkeletonMain {
     {        
         Logger.formatPrint("Init");
 
+        Stargate stargate = new Stargate();
+        Settler settler = new Settler(stargate);
+
         Logger.formatPrint("_3_4_MiningOnStargate");
+
+        settler.mining();
 
         Logger.formatPrint("Teszt Vege");
     }
