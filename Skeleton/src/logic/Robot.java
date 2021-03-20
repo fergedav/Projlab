@@ -77,4 +77,9 @@ public class Robot extends Traveler {
 
         Logger.endFunctionLog();
     }
+
+    //a skeleton erejéig segédfgv
+    public void setLocation(Orbit o){
+        currentLocation = o;
+    }
 }
