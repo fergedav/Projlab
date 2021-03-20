@@ -1,5 +1,5 @@
 package logic;
-
+import skeleton.Logger;
 import java.util.Random;
 
 public class Robot extends Traveler {
@@ -11,9 +11,14 @@ public class Robot extends Traveler {
      */
     private int whereTo()
     {
+        Logger.startFunctionLogComment(this, "whereTo", "");
+
         int num = currentLocation.numOfNeighbor();
-        Random r = new Random();
-        return r.nextInt(num);
+        Random r = new Random(num);
+        int n = r.nextInt(num);
+        
+        Logger.endFunctionLog();
+        return n;
     }
 
     /**
@@ -21,8 +26,10 @@ public class Robot extends Traveler {
      */
     private void robotMoves()
     {
+        Logger.startFunctionLogComment(this, "robotMoves", "");
         int next = whereTo();
         move(next);
+        Logger.endFunctionLog();
     }
 
     /**
@@ -31,7 +38,10 @@ public class Robot extends Traveler {
     @Override
     public void explosion()
     {
+        Logger.startFunctionLogComment(this, "explosion", "");
         robotMoves();
+        Logger.endFunctionLog();
+
     }
 
     /**
@@ -44,8 +54,14 @@ public class Robot extends Traveler {
     @Override
     public void die()
     {
-        currentLocation.removeTraveler(this);
+        Logger.startFunctionLogComment(this, "die", "");
+
+        currentLocation.removeTraveler(this);        
+
         controler.robotDie(this);
+
+        Logger.endFunctionLog();
+
     }
 
     /**
@@ -56,10 +72,19 @@ public class Robot extends Traveler {
     @Override
     public void step()
     {
+        Logger.startFunctionLogComment(this, "step", "");
+
         if(currentLocation.getLayers()!=0){
             digging();
         }
         else
             robotMoves();
+
+        Logger.endFunctionLog();
+    }
+
+    //a skeleton erejéig segédfgv
+    public void setLocation(Orbit o){
+        currentLocation = o;
     }
 }

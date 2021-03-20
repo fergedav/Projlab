@@ -3,34 +3,53 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import skeleton.Logger;
+
 public class Controler {
     ///Singleton stuff
     private static Controler instance;
     private boolean gameIsOn;
+    private Space space;
+
 
     private Controler()
-    {}
+    {
+        space = Space.getNewSpace();
+    }
 
+     /**
+     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az első létrehozott controllert.
+     * 
+     * @return a Controler objektum
+     */
     public static Controler getInstance()
     {
         if(instance == null)
-            instance = new Controler();
+        instance = new Controler();
         return instance;
-
+    }
+    /**
+     *  teszteléshez szükséges, új példányt ad vissza mindig.
+     */ 
+    public static Controler getNewControler()
+    {
+        instance = new Controler();
+        return instance;
     }
 
     /// Singleton ends here
 
-    /**
-     * ebben a privát változóban van számon tartva, hogy hány telepes van még életben, azaz, hány játékos van még játékban. 
-     * Értéke a settlers lista elemszáma.
-     */
-    private int settlersAlive = 0; // nem lenne több értelme egy List.Count()-t hívó függvénynek?
 
+    
     /**
-     * 
+     * Csak a tesztelés során kell.
+     * @return ha controller space ja.
      */
-    private Space space = Space.getInstance();
+    public Space getSpace()
+    {
+        return space;
+    }
 
     /**
      * a játékban  éppen aktuálisan létező összes Settler típusú objektumot tároló privát lista.
@@ -52,6 +71,8 @@ public class Controler {
      */
     public void startGame()
     {
+        Logger.startFunctionLogComment(this, "startGame", "");
+
         gameIsOn = true;
         while(gameIsOn){
 
@@ -59,13 +80,18 @@ public class Controler {
             for(Robot r : robots){ r.step();}
             for(Settler s : settlers){s.step();}
         }
+
+        Logger.endFunctionLog();
     }
     /**
      * leállítja a játkot.
      */
     public void endGame()
     {   
+        Logger.startFunctionLogComment(this, "endGame", "");
         gameIsOn = false;
+        Logger.endFunctionLog();
+
     }
 
     /**
@@ -74,7 +100,11 @@ public class Controler {
      */
     public void addRobot(Robot r)
     {
+        Logger.startFunctionLogComment(this, "addRobot", "");
+
         robots.add(r);
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -89,12 +119,14 @@ public class Controler {
      */
     public void settlerDie(Settler s)
     {
-        settlers.remove(s);
+        Logger.startFunctionLogComment(this, "settlerDie", "");
 
-        settlersAlive--;
+        settlers.remove(s);
 
         if(settlers.size()==0)
             endGame();
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -104,6 +136,18 @@ public class Controler {
      */
     public void robotDie(Robot r)
     {
+        Logger.startFunctionLogComment(this, "robotDie", "");
+
         robots.remove(r);
+
+        Logger.endFunctionLog();
+    }
+    /**
+     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmazó listájához
+     * @param s
+     */
+    public void addSettler(Settler s)
+    {
+        settlers.add(s);
     }
 }

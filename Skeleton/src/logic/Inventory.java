@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import skeleton.Logger;
+
 public class Inventory {
     private final int size;
 
@@ -40,10 +42,11 @@ public class Inventory {
      */
     public void addResource(Resource r)
     {
+        Logger.startFunctionLogComment(this, "addResource", "");
         if(inventorySize() < size){
             r.callBack(this);
         }
-
+        Logger.endFunctionLog();
     }
     /**
      * Visszaad egy adott nevű nyersanyagot.
@@ -53,10 +56,22 @@ public class Inventory {
      */
     public Resource removeResource(String rName)
     {
+        Logger.startFunctionLogComment(this, "removeResource", "");
+
        try{
             if(materials.get(rName).size() > 0)
-            return materials.get(rName).remove(0);
-       }catch(Exception e){}
+            {
+                Resource r = materials.get(rName).remove(0);
+
+                Logger.endFunctionLog();
+
+                return r;
+            }
+       }catch(Exception e){
+
+            Logger.endFunctionLog();
+
+       }
 
        return null;
         
@@ -69,7 +84,13 @@ public class Inventory {
      */
     public void addUran(Uran u)
     {
+
+        Logger.startFunctionLogComment(this, "addUran", "");
+
         materials.get("Uran").add(u);
+
+        Logger.endFunctionLog();
+
     }
     /**
      * Callback függvény az szén hozzáadásához.
@@ -78,7 +99,13 @@ public class Inventory {
      */
     public void addCarbon(Carbon c)
     {
+
+        Logger.startFunctionLogComment(this, "addCarbon", "");
+
         materials.get("Carbon").add(c);
+
+        Logger.endFunctionLog();
+
     }
     /**
      * Callback függvény az vas hozzáadásához.
@@ -87,7 +114,13 @@ public class Inventory {
      */
     public void addIron(Iron i)
     {
-        materials.get("Iron").add(i);
+
+        Logger.startFunctionLogComment(this, "addIron", "");
+
+        materials.get("Iron").add(i);      
+
+        Logger.endFunctionLog();
+        
     }
     /**
      * Callback függvény az jég hozzáadásához.
@@ -96,7 +129,11 @@ public class Inventory {
      */
     public void addIce(Ice i)
     {
-        materials.get("Ice").add(i);
+        Logger.startFunctionLogComment(this, "addIce", "");
+
+        materials.get("Ice").add(i);     
+
+        Logger.endFunctionLog();
     }
 
     private boolean doIHave(int Uran, int Carbon, int Iron, int Ice){
@@ -125,8 +162,14 @@ public class Inventory {
      */
     public Robot createRobot(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "createRobot", "");   
+
         if(doIHave(1, 1, 1, 0))
+        {
+            Logger.endFunctionLog();
             return new Robot();
+        }
+        Logger.endFunctionLog();
         return null;
     }
 
@@ -137,19 +180,25 @@ public class Inventory {
      */
     public List<Stargate> createStargate()
     {
+        Logger.startFunctionLogComment(this, "createStargate", "");
+
         if(doIHave(1, 0, 2, 1)){
             List<Stargate> list = new ArrayList<Stargate>();
-                Stargate a = new Stargate();
-                Stargate b = new Stargate();
+            Stargate a = new Stargate();
+            Stargate b = new Stargate();
 
-                a.entagle(b);
-                b.entagle(a);
+            a.entagle(b);
+            b.entagle(a);
 
-                list.add(a);
-                list.add(b);
-                return list;
+            list.add(a);
+            list.add(b);
+
+            Logger.endFunctionLog();
+
+            return list;
         }
-
+        Logger.endFunctionLog();
+        
         return null;
     }
 
@@ -164,7 +213,13 @@ public class Inventory {
      */
     public boolean createBase()
     {
-        return doIHave(3, 3, 3, 3);
+        Logger.startFunctionLogComment(this, "createBase", "");
+
+        Boolean b =  doIHave(3, 3, 3, 3);
+
+        Logger.endFunctionLog();
+
+        return b;
     }
     /**
      * Hozzáadja a kapott inventorit a sajátjához.
@@ -175,29 +230,15 @@ public class Inventory {
      */
     public void addInventory(Inventory other)
     {
+        Logger.startFunctionLogComment(this, "addInventory", "");
+
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
 
         for(int i = 0; i < anyagok.length; i ++){
-            while(other.materials.get(anyagok[i]).size() > 0){
-                switch(anyagok[i]){
-                    
-                    case "Uran":
-                        materials.get(anyagok[i]).add(new Uran());
-                        break;
-                    case "Carbon":
-                        materials.get(anyagok[i]).add(new Carbon());
-                        break;
-                    case "Iron":
-                        materials.get(anyagok[i]).add(new Iron());
-                        break;
-                    case "Ice":
-                        materials.get(anyagok[i]).add(new Ice());
-                        break;
-                    default: break;
-                }
-            }
+            materials.get(anyagok[i]).addAll(other.materials.get(anyagok[i]));
         }
-
+        
+        Logger.endFunctionLog();
         
     }
 

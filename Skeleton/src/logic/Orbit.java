@@ -1,14 +1,23 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import skeleton.Logger;
 
 public abstract class Orbit {
     protected List<Orbit> neighbours;
     protected List<Traveler> travelers;
     protected boolean inLight = false;
-    protected int layers;
+    protected int layers = 0;
     protected int x; //senki nem tárolja a koordinátákat tömbben xd
     protected int y;
+
+    protected Orbit() {
+        neighbours = new ArrayList<Orbit>();
+        travelers = new ArrayList<Traveler>();
+        
+    }
 
     /**
      * Virtuális függvény. 
@@ -18,7 +27,9 @@ public abstract class Orbit {
      */
     public Orbit addTraveler(Traveler t)
     {
+        Logger.startFunctionLogComment(this, "addTraveler", "");
         travelers.add(t);
+        Logger.endFunctionLog();
         return this;
     }
 
@@ -29,6 +40,8 @@ public abstract class Orbit {
      */
     public List<Traveler> getTravelers()
     {
+        Logger.startFunctionLogComment(this, "getTravelers", "");
+        Logger.endFunctionLog();
         return travelers;
     }
 
@@ -38,7 +51,9 @@ public abstract class Orbit {
      */
     public void removeTraveler(Traveler t)
     {
+        Logger.startFunctionLogComment(this, "removeTraveler", "");
         travelers.remove(t);
+        Logger.endFunctionLog();
     }
 
     /**
@@ -47,7 +62,9 @@ public abstract class Orbit {
      */
     public void addNeighbour(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "addNeighbour", "");
         neighbours.add(o);
+        Logger.endFunctionLog();
     }
 
     /**
@@ -56,7 +73,9 @@ public abstract class Orbit {
      */
     public void removeNeighbour(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "removeNeighbour", "");
         neighbours.remove(o);
+        Logger.endFunctionLog();
     }
 
 
@@ -67,15 +86,21 @@ public abstract class Orbit {
      */
     public Orbit getNeighbour(int i)
     {
+        Logger.startFunctionLogComment(this, "getNeighbour", "");
+
         try {
-            return neighbours.get(i);
+            Orbit o = neighbours.get(i);
+            Logger.endFunctionLog();
+            return o;
         } catch (Exception e) {
+            Logger.endFunctionLog();
             return null;
         }
+
+        
     }
 
-    public void drilled()
-    { }
+    public abstract void drilled();
 
     /**
      * visszadja a tartalmazott nyersanyagot
@@ -83,6 +108,8 @@ public abstract class Orbit {
      */
     public Resource retrieveResource()
     {
+        Logger.startFunctionLogComment(this, "retrieveResource", "");
+        Logger.endFunctionLog();
         return null;
     }
 
@@ -93,6 +120,8 @@ public abstract class Orbit {
      */
     public boolean putResource(Resource r)
     {
+        Logger.startFunctionLogComment(this, "putResource", "");
+        Logger.endFunctionLog();
         return false;
     }
 
@@ -101,9 +130,13 @@ public abstract class Orbit {
      */
     public void sunstormArrive()
     {
+        Logger.startFunctionLogComment(this, "sunstormArrive", "");
+        
         for (Traveler t : travelers) {
             t.die();
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -116,6 +149,7 @@ public abstract class Orbit {
      */
     public void sunLightArrive(int x1, int y1, int x2, int y2)
     {
+
         if(x >= x1 && y >= y1 &&
             x <= x2 && y <= y2)
         {
@@ -125,6 +159,7 @@ public abstract class Orbit {
         {
             inLight = false;
         }
+
     }
 
     /**
@@ -133,11 +168,16 @@ public abstract class Orbit {
      */
     public int getLayers()
     {
+        Logger.startFunctionLogComment(this, "getLayers", "");
+        Logger.endFunctionLog();
         return layers;
     }
 
     public int numOfNeighbor()
-    {
+    {   
+        //ezt nem kell logolni.
+        //Logger.startFunctionLogComment(this, "numOfNeighbor", "");
+        //Logger.endFunctionLog();L
         return neighbours.size();
     }
 

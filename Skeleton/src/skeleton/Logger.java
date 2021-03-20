@@ -3,11 +3,12 @@ package skeleton;
 import java.lang.System;
 import java.lang.reflect.Method;
 
+
 public class Logger {
     /**
      * tabulátorok száma a hívások során
      */
-    private static int stackDebth = 0;
+    private static int stackDebth = 1;
 
     
     /** 
@@ -28,15 +29,20 @@ public class Logger {
     }
 
     
+    public static void formatPrint(String str)
+    {
+        System.out.println("\n---" + str + "---\n");
+    }
+
     /** 
      * Formázó segédfüggvény a logoláshoz
      * @param obj objektum aminek a függvényét hívjuk
      * @param funcName függvény neve amit hívunk
      * @param comment komment a hívással kapcsolatban
      */
-    private static void startFunctionLogComment(Object obj, String funcName, String comment) {
+    public static void startFunctionLogComment(Object obj, String funcName, String comment) {
         for (int i = 0; i < stackDebth; i++)
-            System.out.print("\t");
+            System.out.print("|\t");
 
         //String str = obj.getClass().getSimpleName() + "." + funcName + "()";
         String str =  "(" + obj.getClass().getSimpleName() + ") "  + funcName + "()";
@@ -51,7 +57,7 @@ public class Logger {
     /** 
      * tabok csökkentése a hívás vége után
      */
-    private static void endFunctionLog() {
+    public static void endFunctionLog() {
         stackDebth--;
     }
 

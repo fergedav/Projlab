@@ -1,14 +1,28 @@
 package logic;
 
+import skeleton.Logger;
+
 public class Uran extends Resource {
 
     @Override
-    public void callBack(Inventory inv) {
+    public void callBack(Inventory inv)
+    {
+        Logger.startFunctionLogComment(this, "callBack", "");
+
         inv.addUran(this);
+
+        Logger.endFunctionLog();
     }
     @Override
-	public void reaction(Asteroid a) {
+	public void reaction(Asteroid a)
+    {
+        Logger.startFunctionLogComment(this, "reaction", "");
+
         a.explosion();
+
+        a.retrieveResource();
+
+        Logger.endFunctionLog();
     }
 
 }

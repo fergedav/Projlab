@@ -1,5 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import skeleton.Logger;
+
 public class Asteroid extends Orbit {
 
     /**
@@ -17,16 +22,18 @@ public class Asteroid extends Orbit {
      */
     public Asteroid(int _x, int _y, int l, Resource c)
     {
+        super();
         x = _x;
         y = _y;
         core = c;
         layers = l;
     }
-
+    /*
     private void setLayers(int l)
     {
         layers = l;
     }
+    */
 
     /**
      * Megvizsgálja, hogy az aszteroida napközelben van-e illetve, hogy teljesen át van e fúrva a kérge. 
@@ -34,9 +41,12 @@ public class Asteroid extends Orbit {
      */
     private void reaction()
     {
-        if(inLight && core != null && layers == 0)
+        Logger.startFunctionLogComment(this, "reaction", "");
+
+        if(inLight && core != null && this.layers == 0)
             core.reaction(this);
 
+        Logger.endFunctionLog();
     }
 
     /**
@@ -44,17 +54,26 @@ public class Asteroid extends Orbit {
      */
     public void explosion()
     {
-        for (Traveler t : travelers) {
+        Logger.startFunctionLogComment(this, "explosion", "");
+
+        List<Traveler> copy = new ArrayList<>(travelers);
+        for (Traveler t : copy) {
             t.explosion();
         }
+        travelers = copy;
+
+        Logger.endFunctionLog();
     }
 
     /**
      * Az aszteroidán végeznek ásást. Eggyel csökkenti a layers értékét. 
      * Ha a layers értéke eléri a 0-át, akkor meghívja az reaction() privát metódusát az aszteroidának.
      */
+    @Override
     public void drilled()
     {
+        Logger.startFunctionLogComment(this, "drilled", "");
+
         if(layers != 0)
         {
             layers--;
@@ -63,6 +82,8 @@ public class Asteroid extends Orbit {
                 reaction();
             }
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -74,12 +95,17 @@ public class Asteroid extends Orbit {
     @Override
     public Resource retrieveResource()
     {
-        if(layers != 0)
-            return null;
+        Logger.startFunctionLogComment(this, "retrieveResource", "");
 
+        if(layers != 0){
+            Logger.endFunctionLog();
+             return null;
+        }
+           
         Resource c = core;
         core = null;
 
+        Logger.endFunctionLog();
         return c;
     }
 
@@ -94,6 +120,8 @@ public class Asteroid extends Orbit {
     @Override
     public boolean putResource(Resource r)
     {
+        Logger.startFunctionLogComment(this, "putResource", "");
+
         if(layers != 0)
             return false;
 
@@ -104,6 +132,8 @@ public class Asteroid extends Orbit {
 
         reaction();
         
+        Logger.endFunctionLog();
+
         return true;
     }
 
@@ -114,12 +144,18 @@ public class Asteroid extends Orbit {
     @Override
     public void sunstormArrive()
     {
+        Logger.startFunctionLogComment(this, "sunstormArrive", "");
+
         if(!(layers == 0 && core == null))
         {
-            for (Traveler t : travelers) {
+            List<Traveler> copy = new ArrayList<>(travelers);
+            for (Traveler t : copy) {
                 t.die();
             }
+            travelers = copy;
         }
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -134,9 +170,12 @@ public class Asteroid extends Orbit {
     @Override
     public void sunLightArrive(int x1, int y1, int x2, int y2)
     {
+        Logger.startFunctionLogComment(this, "sunLightArrive", "");
+
         super.sunLightArrive(x1, y1, x2, y2);
         if(inLight)
             reaction();
 
+        Logger.endFunctionLog();
     }
 }

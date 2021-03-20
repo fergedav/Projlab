@@ -1,19 +1,36 @@
 package logic;
 
+import skeleton.Logger;
+
 public class Stargate extends Orbit {
     private Stargate myTwin;
     private boolean isPlaced;
-    private Asteroid myStop;
+    private Orbit myStop;
 
     /**
      * Törli magát a myStop-ja szomszédsági listájából.
+     * //és megöli a rajtalévőket. (szöveg alapján nem definiált.)
      */
     private void dieAnother()
     {
+        Logger.startFunctionLogComment(this, "dieAnother", "");
+
         if(myStop!=null)
             myStop.removeNeighbour(this);
+        
+        /*
+        for(Traveler t : travelers){t.die();}
+        */
+
+        Logger.endFunctionLog();
     }
 
+    @Override
+    public void drilled()
+    {
+        Logger.startFunctionLogComment(this, "drilled", "");
+        Logger.endFunctionLog();
+    }
     /**
      * Átküldi az utazót a sajat myStopjára.
      * @param t az érkezett utazó
@@ -21,15 +38,25 @@ public class Stargate extends Orbit {
      */
     private Orbit transport(Traveler t)
     {
-        return myStop.addTraveler(t);
+        Logger.startFunctionLogComment(this, "transport", "");
+
+        Orbit ret_o = myStop.addTraveler(t);
+
+        Logger.endFunctionLog();
+
+        return ret_o;
     }
 
     /**
      * Megöli a kapu párját.
      */
     public void die()
-    {
+    {  
+        Logger.startFunctionLogComment(this, "die", "");
+
         myTwin.dieAnother();
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -38,15 +65,23 @@ public class Stargate extends Orbit {
      */
     public void entagle(Stargate other)
     {
+        Logger.startFunctionLogComment(this, "entangle", "");
+
         myTwin = other;
+
+        Logger.endFunctionLog();
     }
 
     /**
      * Visszaadja, hogy le van-e helyezve a kapu.
      * @return true, ha le van helyezve.
      */
-    public boolean isPlaced()
+    public boolean getPlaced()
     {
+        Logger.startFunctionLogComment(this, "getPlaced", "");
+
+        Logger.endFunctionLog();
+
         return isPlaced;
     }
 
@@ -56,8 +91,12 @@ public class Stargate extends Orbit {
      */
     public void place(Orbit o)
     {
-        myStop = (Asteroid) o;
+        Logger.startFunctionLogComment(this, "place", "");
+
+        myStop =  o;
         isPlaced = true;
+        
+        Logger.endFunctionLog();
     }
     
     /**
@@ -67,8 +106,18 @@ public class Stargate extends Orbit {
      */
     @Override
     public Orbit addTraveler(Traveler t){
-        if(myTwin.isPlaced())
-            return myTwin.transport(t);
+        Logger.startFunctionLogComment(this, "addTraveler", "");
+        Orbit ret_o;
+        if(myTwin.getPlaced()){
+            ret_o=myTwin.transport(t);
+
+            Logger.endFunctionLog();
+
+            return ret_o;
+        }
+
+        Logger.endFunctionLog();
+
         return this;
     }
 }
