@@ -3,7 +3,7 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import jdk.javadoc.internal.doclets.formats.html.markup.ContentBuilder;
+import skeleton.Logger;
 import logic.*;
 
 public class SkeletonMain {
