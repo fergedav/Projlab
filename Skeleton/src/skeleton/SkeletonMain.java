@@ -635,7 +635,7 @@ public class SkeletonMain {
         Controler c = Controler.getInstance();
         Space s = Space.getInstance();
         s.setSunstorm_time(5);
-        Asteroid a1 = new Asteroid(1,8,2,new Iron());
+        Asteroid a1 = new Asteroid(1,8,2,new Uran());
         Asteroid a2 = new Asteroid(2,8,3, null);
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
