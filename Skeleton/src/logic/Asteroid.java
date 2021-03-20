@@ -100,7 +100,6 @@ public class Asteroid extends Orbit {
              return null;
         }
            
-
         Resource c = core;
         core = null;
 
