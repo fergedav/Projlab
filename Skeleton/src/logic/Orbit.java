@@ -1,14 +1,23 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import skeleton.Logger;
 
 public abstract class Orbit {
     protected List<Orbit> neighbours;
     protected List<Traveler> travelers;
     protected boolean inLight = false;
-    protected int layers;
+    protected int layers = 0;
     protected int x; //senki nem tárolja a koordinátákat tömbben xd
     protected int y;
+
+    protected Orbit() {
+        neighbours = new ArrayList<Orbit>();
+        travelers = new ArrayList<>();
+        
+    }
 
     /**
      * Virtuális függvény. 
@@ -18,7 +27,9 @@ public abstract class Orbit {
      */
     public Orbit addTraveler(Traveler t)
     {
+        Logger.startFunctionLogComment(this, "addTraveler", "");
         travelers.add(t);
+        Logger.endFunctionLog();
         return this;
     }
 
@@ -38,7 +49,9 @@ public abstract class Orbit {
      */
     public void removeTraveler(Traveler t)
     {
+        Logger.startFunctionLogComment(this, "removeTraveler", "");
         travelers.remove(t);
+        Logger.endFunctionLog();
     }
 
     /**
@@ -67,11 +80,18 @@ public abstract class Orbit {
      */
     public Orbit getNeighbour(int i)
     {
+        Logger.startFunctionLogComment(this, "getNeighbour", "");
+
         try {
-            return neighbours.get(i);
+            Orbit o = neighbours.get(i);
+            Logger.endFunctionLog();
+            return o;
         } catch (Exception e) {
+            Logger.endFunctionLog();
             return null;
         }
+
+        
     }
 
     public void drilled()

@@ -3,6 +3,9 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import logic.Asteroid;
+import logic.Settler;
+
 public class SkeletonMain {
     public static void main(String[] args) 
     {
@@ -103,7 +106,23 @@ public class SkeletonMain {
     }
 
     public static void _1_1_MoveOnAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(0, 0, 8, null);
+        Asteroid a2 = new Asteroid(1, 0, 8, null);
+        Settler s = new Settler(a1);
+        
+
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+
+        Logger.formatPrint("_1_1_MoveOnAsteroid");
+
+        s.move(0);
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _1_2_MoveOnOfflineGate()
     {}
     public static void _1_3_MoveOnOnlineGate()

@@ -7,6 +7,11 @@ public class Settler extends Traveler {
     
     private List<Stargate> stargates;
 
+    public Settler(Asteroid start) {
+        super();
+        currentLocation = start;
+    }
+
     @Override
     public void die()
     {

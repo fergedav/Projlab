@@ -1,5 +1,7 @@
 package logic;
 
+import skeleton.Logger;
+
 public abstract class Traveler {
 
     protected Inventory inventory = new Inventory(10);
@@ -22,12 +24,16 @@ public abstract class Traveler {
 
     public void move(int index)
     {
+        Logger.startFunctionLogComment(this, "move", "");
+
         /** Megkeresi az index paraméterben kapott szomszédját a tartózkodási helynek. */
         Orbit destination = currentLocation.getNeighbour(index);
         /** Eltávolítja magátz eddigi tartózkodási helyéről. */
         currentLocation.removeTraveler(this);
         /** Hozzáadja magát a célállomáshoz. */
         destination.addTraveler(this);
+
+        Logger.endFunctionLog();
     }
 
     /** A Settler és a Robot magának implementálja. */

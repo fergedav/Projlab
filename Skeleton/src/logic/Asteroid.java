@@ -17,6 +17,7 @@ public class Asteroid extends Orbit {
      */
     public Asteroid(int _x, int _y, int l, Resource c)
     {
+        super();
         x = _x;
         y = _y;
         core = c;
