@@ -265,9 +265,38 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _2_4_DiggingBreakthroughtIce()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(1, 1, 1, new Ice());
+        Settler s = new Settler(a);
+
+        Space.getInstance().addOrbit(a);
+        Space.getInstance().step();
+
+        Logger.formatPrint("_2_4_DiggingBreakthroughtIce");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _2_5_DiggingOnStargate()
-    {}
+    {
+        Logger.formatPrint("Init");
+        Stargate st1 = new Stargate();
+        Stargate st2 = new Stargate();
+        
+
+        st1.entagle(st2);
+        st2.entagle(st1);
+        Settler s = new Settler(st1);
+
+        Logger.formatPrint("_2_5_DiggingOnStargate");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _3_Mining()
     {
