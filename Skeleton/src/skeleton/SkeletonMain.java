@@ -132,17 +132,18 @@ public class SkeletonMain {
         s1.entagle(s2);
         s2.entagle(s1);
 
-        Asteroid a = new Asteroid(0, 0, 8, null);
-        Settler s = new Settler(a);
+        Asteroid a1 = new Asteroid(0, 0, 8, null);
 
-        a.addNeighbour(s1);
-        a.addTraveler(s);
+        Settler s = new Settler(a1);
+
+        a1.addNeighbour(s1);
+        a1.addTraveler(s);
+
+        s1.place(a1);
 
         Logger.formatPrint("_1_2_MoveOnOfflineGate");
 
-        Orbit st = a.getNeighbour(0);
-        a.removeTraveler(s);
-        st.addTraveler(s);
+        s.move(0);
         Logger.formatPrint("Teszt vége");
     }
     public static void _1_3_MoveOnOnlineGate()
@@ -165,12 +166,12 @@ public class SkeletonMain {
 
         a2.addNeighbour(s2);
 
+        s1.place(a1);
+        s2.place(a2);
+
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
 
-        Orbit st = a1.getNeighbour(0);
-        a1.removeTraveler(s);
-        st.addTraveler(s);
-
+        s.move(0);
         Logger.formatPrint("Teszt vége");
 
     }

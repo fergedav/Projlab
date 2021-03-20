@@ -55,7 +55,7 @@ public class Stargate extends Orbit {
      * Visszaadja, hogy le van-e helyezve a kapu.
      * @return true, ha le van helyezve.
      */
-    public boolean isPlaced()
+    public boolean getPlaced()
     {
         return isPlaced;
     }
@@ -79,9 +79,9 @@ public class Stargate extends Orbit {
      */
     @Override
     public Orbit addTraveler(Traveler t){
-        Logger.startFunctionLogComment(this, "entangle", "");
+        Logger.startFunctionLogComment(this, "addTraveler", "");
         Orbit ret_o;
-        if(myTwin.isPlaced()){
+        if(myTwin.getPlaced()){
             ret_o=myTwin.transport(t);
             Logger.endFunctionLog();
             return ret_o;
