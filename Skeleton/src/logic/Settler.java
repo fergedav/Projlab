@@ -11,6 +11,7 @@ public class Settler extends Traveler {
     public Settler(Asteroid start) {
         super();
         currentLocation = start;
+        inventory = new Inventory(10);
     }
 
     @Override
