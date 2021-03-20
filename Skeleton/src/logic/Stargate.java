@@ -5,7 +5,7 @@ import skeleton.Logger;
 public class Stargate extends Orbit {
     private Stargate myTwin;
     private boolean isPlaced;
-    private Asteroid myStop;
+    private Orbit myStop;
 
     /**
      * Törli magát a myStop-ja szomszédsági listájából.
@@ -88,7 +88,7 @@ public class Stargate extends Orbit {
     {
         Logger.startFunctionLogComment(this, "place", "");
 
-        myStop = (Asteroid) o;
+        myStop =  o;
         isPlaced = true;
         
         Logger.endFunctionLog();

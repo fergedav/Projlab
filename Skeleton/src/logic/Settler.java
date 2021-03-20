@@ -90,16 +90,16 @@ public class Settler extends Traveler {
         Logger.startFunctionLogComment(this, "placeStargate", "");
         /** Elhelyezi a lista 0. indexe alatt lévő teleportkaput a place függvénnyel, majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
         stargates.get(0).place(currentLocation);
+        currentLocation.addNeighbour(stargates.get(0));
+        stargates.remove(0);
 
         /** A teleportkapuk listájának a hossza a lerakott teleportkapu, a listából való eltávolítása előtt. */
-        int  sizebefore = stargates.size();
-        stargates.remove(0);
+        int  sizebefore = stargates.size();        
 
         /** Ha már az utolsó teleportkapu is le lett rakva (a sizebefore, azaz a teleportkapuk listája a lerakott teleportkapu eltávolítása előtti hossza, egyenlő 1-el),
          *  akkor null-ra állítja a listát. */
         if(sizebefore ==   1)
-        {
-            
+        {            
             stargates = null;
         }
         Logger.endFunctionLog();
