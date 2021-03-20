@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.List;
+import skeleton.Logger;
 
 public class Space {
     ///Singleton stuff
@@ -41,9 +42,11 @@ public class Space {
      */
     private void sunstormCall()
     {
+        Logger.startFunctionLogComment(this, "sunstormCall", "");
         for(Orbit o: orbits){
             o.sunstormArrive();
         }
+        Logger.endFunctionLog();
     }
 
     /**
@@ -51,9 +54,12 @@ public class Space {
      */
     private void sunLightCall()
     {
+        Logger.startFunctionLogComment(this, "sunLightCall", "");
+
         for(Orbit o: orbits){
             o.sunLightArrive(0, 0, 1000, 1000);
         }
+        Logger.endFunctionLog();
     }
 
     /**
@@ -61,7 +67,9 @@ public class Space {
      */
     private void sunstormDecrease()
     {
+        Logger.startFunctionLogComment(this, "sunstormDecrease", "");
         sunstorm_time--;
+        Logger.endFunctionLog();
     }
 
     /**
@@ -71,6 +79,8 @@ public class Space {
      */
     public void step()
     {
+        Logger.startFunctionLogComment(this, "step", "");
+
         if(sunstorm_time == 0)
         {
             sunstormCall();
@@ -80,6 +90,8 @@ public class Space {
             sunstormDecrease();
 
         sunLightCall();
+
+        Logger.endFunctionLog();
     }
 
     /**
@@ -88,7 +100,9 @@ public class Space {
      */
     public void addOrbit(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "addOrbit", "");
         orbits.add(o);
+        Logger.endFunctionLog();
     }
     /**
      * Kiveszi a paraméterként kapott Orbitot az orbits listából.
@@ -96,7 +110,11 @@ public class Space {
      */
     public void removeOrbit(Orbit o)
     {
+        Logger.startFunctionLogComment(this, "removeOrbit", "");
+
         orbits.remove(o);
+
+        Logger.endFunctionLog();
     }
 
     

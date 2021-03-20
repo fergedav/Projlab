@@ -123,7 +123,28 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _1_2_MoveOnOfflineGate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+
+        s1.entagle(s2);
+        s2.entagle(s1);
+
+        Asteroid a = new Asteroid(0, 0, 8, null);
+        Settler s = new Settler(a);
+
+        a.addNeighbour(s1);
+        a.addTraveler(s);
+
+        Logger.formatPrint("_1_2_MoveOnOfflineGate");
+
+        Orbit st = a.getNeighbour(0);
+        a.removeTraveler(s);
+        st.addTraveler(s);
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _1_3_MoveOnOnlineGate()
     {}
 
