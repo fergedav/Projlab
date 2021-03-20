@@ -2,7 +2,6 @@ package skeleton;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ResourceBundle.Control;
 
 import skeleton.Logger;
 import logic.*;
