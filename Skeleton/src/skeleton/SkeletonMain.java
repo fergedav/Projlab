@@ -691,7 +691,7 @@ public class SkeletonMain {
 
         Controler cont = Controler.getNewControler();
         Space space = cont.getSpace();
-        cont.addSettler(new Settler(new Asteroid(1,1,1,null))); //ő életben marad majd, nem lesz játék vége
+        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //ő életben marad majd, nem lesz játék vége
 
         Asteroid asteroid = new Asteroid(1,1,10,new Iron());
         space.addOrbit(asteroid);

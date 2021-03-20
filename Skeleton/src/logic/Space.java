@@ -31,7 +31,8 @@ public class Space {
      */
     public static Space getNewSpace()
     {
-        return new Space();
+        instance = new Space();
+        return instance;
     }
 
 

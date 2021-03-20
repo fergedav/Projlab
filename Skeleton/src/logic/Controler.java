@@ -34,7 +34,8 @@ public class Controler {
      */ 
     public static Controler getNewControler()
     {
-        return new Controler();
+        instance = new Controler();
+        return instance;
     }
 
     /// Singleton ends here
