@@ -635,15 +635,22 @@ public class SkeletonMain {
         Controler c = Controler.getInstance();
         Space s = Space.getInstance();
         s.setSunstorm_time(5);
+
         Asteroid a1 = new Asteroid(1,8,0,new Uran());
         Asteroid a2 = new Asteroid(2,8,0, null);
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
+
         s.addOrbit(a1);
+
         Settler set = new Settler(a1);
-        Robot r = new Robot();
-        r.setLocation(a1);
-        c.addRobot(r);
+        Robot rob = new Robot();
+        rob.setLocation(a1);
+
+        a1.addTraveler(set);
+        a1.addTraveler(rob);
+
+        c.addRobot(rob);
         c.addSettler(set);
 
         Logger.formatPrint("_8_3_SunlightArrivesToFullyDrilledAsteroidWithUran");
