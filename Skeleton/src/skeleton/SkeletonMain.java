@@ -2,6 +2,7 @@ package skeleton;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle.Control;
 
 import skeleton.Logger;
 import logic.*;
@@ -342,7 +343,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vege");
+        Logger.formatPrint("Teszt Vége");
     }
     public static void _3_2_MiningIronOnFullyDrilledAsteroid()
     {
@@ -355,7 +356,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vege");
+        Logger.formatPrint("Teszt Vége");
     }
     public static void _3_3_MiningOnFullyDrilledButEmptyAsteroid()
     {
@@ -368,7 +369,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vege");
+        Logger.formatPrint("Teszt Vége");
     }
     public static void _3_4_MiningOnStargate()
     {        
@@ -390,7 +391,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vege");
+        Logger.formatPrint("Teszt Vége");
     }
 
     public static void _4_ReplaceResource()
@@ -643,7 +644,30 @@ public class SkeletonMain {
     }
 
     public static void _7_1_SunstormOnNotFullyDrilledAsteroid()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Controler cont = Controler.getInstance();
+        Space space = cont.getSpace();
+
+        Asteroid asteroid = new Asteroid(1,1,10,new Iron());
+        space.addOrbit(asteroid);
+
+        Robot robot = new Robot();
+        robot.setLocation(asteroid);
+        asteroid.addTraveler(robot);
+        cont.addRobot(robot);
+
+        Settler settler = new Settler(asteroid);
+        cont.addSettler(settler);
+
+        Logger.formatPrint("_7_1_SunstormOnNotFullyDrilledAsteroid");
+
+        space.tempSunstormCall();
+
+        Logger.formatPrint("Teszt Vege");
+
+    }
     public static void _7_2_SunstormOnNotEmptyAsteroid()
     {}
     public static void _7_3_SunstormOnSafeAsteroid()
