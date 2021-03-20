@@ -19,13 +19,14 @@ public class Settler extends Traveler {
     public void die()
     {
         Logger.startFunctionLogComment(this, "die", "");
+
+        /** kitörli magát az aszteroidából. */
+        currentLocation.removeTraveler(this);
+
         /** Ha van teleportkapuja a telepesnek a halálakor, akkor az összes elpusztul a telepessel együtt. */
         if(stargates != null)
         {
-            for(int i = 0; i < stargates.size(); i++)
-            {
-                stargates.get(i).die();
-            }
+           stargates.get(0).die();
         }
 
         /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy ő meghalt és kéri, hogy húzza ki az élő telepesek listájából (a settlerDie függvénnyel) */
