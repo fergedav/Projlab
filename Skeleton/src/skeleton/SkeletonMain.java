@@ -309,7 +309,22 @@ public class SkeletonMain {
     }
 
     public static void _4_1_SettlerTriesToPutBackIronButHeCant()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a = new Asteroid(0, 0, 8, null);
+        Settler sett = new Settler(a);
+        Iron i = new Iron();
+
+        sett.getInventory().addIron(i);
+
+        Logger.formatPrint("_4_1_SettlerTriesToPutBackIronButHeCant");
+
+        sett.replaceResource("Iron");
+
+        Logger.formatPrint("Teszt vége");
+
+    }
     public static void _4_2_SettlerReplaceIron()
     {}
     public static void _4_3_SettlerPutsBackIceAndItMeltsInTheSunlight()
