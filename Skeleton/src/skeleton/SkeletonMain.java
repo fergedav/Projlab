@@ -864,6 +864,7 @@ public class SkeletonMain {
         s.addOrbit(a1);
         // felvesz egy settlert az aszteroidára és 
         Settler set = new Settler(a1);
+        Settler set2 = new Settler(a2);
 
         Robot rob = new Robot();
         rob.setLocation(a1);
