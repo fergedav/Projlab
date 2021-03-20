@@ -39,7 +39,7 @@ public class Controler {
     /**
      * 
      */
-    private Space space = Space.getInstance(true);
+    private Space space = Space.getInstance();
 
     /**
      * Csak a tesztelés során kell.
