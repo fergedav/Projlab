@@ -14,15 +14,25 @@ public class Space {
         setSunstorm_time(0);
     }
 
-    public static Space getInstance()
+    /**
+     * visszaaf egy space példányt
+     * 
+     * ha True-t kap, új példányt ad vissza, amit nem jegyez be (!!) statikus tagjába.
+     * ha false-t akkor, ha van már létező példány akkor azt adja vissza, ha nincs akkor újat.
+     * 
+     * @param NEEEEEW új példányt kérsz?
+     * @return a space objektum
+     */
+    public static Space getInstance(boolean NEEEEEW)
     {
-        /*
-        if(instance == null)
+        if(!NEEEEEW){
+            if(instance == null)
             instance = new Space();
-        return instance;
-        */
+            return instance;
+        }
         
         return new Space();
+        
     }
 
     /// Singleton ends here

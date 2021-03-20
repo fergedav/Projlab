@@ -2,6 +2,9 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sound.sampled.Control;
+
 import skeleton.Logger;
 
 public class Controler {
@@ -12,14 +15,25 @@ public class Controler {
     private Controler()
     {}
 
-    public static Controler getInstance()
+     /**
+     * visszaaf egy space példányt
+     * 
+     * ha True-t kap, új példányt ad vissza, amit nem jegyez be (!!) statikus tagjába.
+     * ha false-t akkor, ha van már létező példány akkor azt adja vissza, ha nincs akkor újat.
+     * 
+     * @param NEEEEEW új példányt kérsz?
+     * @return a space objektum
+     */
+    public static Controler getInstance(boolean NEEEEEW)
     {
-        /*
-        if(instance == null)
+        if(!NEEEEEW){
+            if(instance == null)
             instance = new Controler();
-        return instance;
-        */
+            return instance;
+        }
+        
         return new Controler();
+        
     }
 
     /// Singleton ends here
