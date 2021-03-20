@@ -1,8 +1,10 @@
 package logic;
 
+import java.util.List;
+
 public class Settler extends Traveler {
     
-    private Stargate[] stargates;
+    private List<Stargate> stargates;
 
     @Override
     public void die()
