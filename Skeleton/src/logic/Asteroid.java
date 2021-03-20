@@ -50,7 +50,7 @@ public class Asteroid extends Orbit {
      */
     public void explosion()
     {
-        Logger.startFunctionLogComment(this, "reaction", "");
+        Logger.startFunctionLogComment(this, "explosion", "");
 
         for (Traveler t : travelers) {
             t.explosion();

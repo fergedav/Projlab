@@ -138,7 +138,6 @@ public class SkeletonMain {
         Settler s = new Settler(a1);
 
         a1.addNeighbour(s1);
-        a1.addTraveler(s);
 
         s1.place(a1);
 
@@ -163,7 +162,6 @@ public class SkeletonMain {
         Settler s = new Settler(a1);
 
         a1.addNeighbour(s1);
-        a1.addTraveler(s);
 
         a2.addNeighbour(s2);
 
@@ -213,8 +211,6 @@ public class SkeletonMain {
         
         Asteroid a = new Asteroid(0, 0, 8, null);
         Settler s = new Settler(a);
-        
-        a.addTraveler(s);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
 
@@ -245,7 +241,8 @@ public class SkeletonMain {
         Asteroid a2 = new Asteroid(0, 0, 1, null);
         Settler s = new Settler(a1);
 
-        a1.addTraveler(s);
+        a2.addNeighbour(a1);
+        a1.addNeighbour(a2);
 
         Stargate s1 = new Stargate();
         Stargate s2 = new Stargate();
@@ -258,7 +255,7 @@ public class SkeletonMain {
         Space.getInstance().step();
 
         Robot r = new Robot();
-
+        r.setLocation(a1);
         a1.addTraveler(r);
 
         Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
