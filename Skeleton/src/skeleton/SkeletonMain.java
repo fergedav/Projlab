@@ -368,7 +368,7 @@ public class SkeletonMain {
         Asteroid a = new Asteroid(1, 1, 0, null);
         Settler sett = new Settler(a);
         Uran u = new Uran();
-        Controler.getInstance();
+        Controler.getInstance().addSettler(sett);
         Space.getInstance().addOrbit(a);
         Space.getInstance().step();
 
@@ -381,7 +381,24 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _4_5_SettlerTriesToPutBackIronIntoAStargate()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+        s1.entagle(s2);
+        s2.entagle(s1);
+        Settler sett = new Settler(s1);
+        Iron i = new Iron();
+
+        sett.getInventory().addIron(i);
+
+        Logger.formatPrint("_4_5_SettlerTriesToPutBackIronIntoAStargate");
+
+        sett.replaceResource("Iron");
+
+        Logger.formatPrint("Teszt vége");
+    }
 
     public static void _5_Build()
     {

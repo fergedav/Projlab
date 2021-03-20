@@ -8,7 +8,7 @@ public class Settler extends Traveler {
     
     private List<Stargate> stargates;
 
-    public Settler(Asteroid start) {
+    public Settler(Orbit start) {
         super();
         currentLocation = start;
         currentLocation.addTraveler(this);
@@ -26,10 +26,11 @@ public class Settler extends Traveler {
             {
                 stargates.get(i).die();
             }
+        }
 
         /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy ő meghalt és kéri, hogy húzza ki az élő telepesek listájából (a settlerDie függvénnyel) */
-            controler.settlerDie(this);
-        }
+        controler.settlerDie(this);
+
         Logger.endFunctionLog();
     }
 
