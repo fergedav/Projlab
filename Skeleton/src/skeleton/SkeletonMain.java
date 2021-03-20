@@ -3,6 +3,7 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import jdk.javadoc.internal.doclets.formats.html.markup.ContentBuilder;
 import logic.*;
 
 public class SkeletonMain {
@@ -237,7 +238,35 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
     public static void _2_3_DiggingBreakthroughtUran()
-    {}
+    {
+        Logger.formatPrint("Init");
+
+        Asteroid a1 = new Asteroid(1, 1, 1, new Uran());
+        Asteroid a2 = new Asteroid(0, 0, 1, null);
+        Settler s = new Settler(a1);
+
+        a1.addTraveler(s);
+
+        Stargate s1 = new Stargate();
+        Stargate s2 = new Stargate();
+
+        s1.entagle(s2);
+        s2.entagle(s1);
+        s2.place(a2);
+
+        Space.getInstance().addOrbit(a1);
+        Space.getInstance().step();
+
+        Robot r = new Robot();
+
+        a1.addTraveler(r);
+
+        Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
+
+        s.digging();
+
+        Logger.formatPrint("Teszt vége");
+    }
     public static void _2_4_DiggingBreakthroughtIce()
     {}
     public static void _2_5_DiggingOnStargate()
