@@ -165,30 +165,37 @@ public class SkeletonMain {
         s.move(0);
         Logger.formatPrint("Teszt vége");
     }
+    /**
+     * A telepes (játékos) olyan teleportkapura lép, aminek már le van rakva a párja.
+     * A program kiírja a konzolra az teleportkapura lépéshez és a teleportáláshoz kapcsolódó függvény hívásokat.
+     */
     public static void _1_3_MoveOnOnlineGate()
     {
         Logger.formatPrint("Init");
 
+         /** Létre hozzuk a csillagkapukat amiken keresztül teleportálni fogunk */
         Stargate s1 = new Stargate();
         Stargate s2 = new Stargate();
 
+        /** Összekötjük õket, hogy el tudják egymást érni. */
         s1.entagle(s2);
         s2.entagle(s1);
 
+        /** Létrehozzuk az aszteroidákat amikhez a csillagkapuk tartozni fognak. */
         Asteroid a1 = new Asteroid(0, 0, 8, null);
         Asteroid a2 = new Asteroid(0, 0, 8, null);
 
+        /** Létrehozzuk a telepest, aki majd teleportálni fog. */
         Settler s = new Settler(a1);
 
+        /** Elhelyezzük a csillagkapukat az aszteroidák szomszédságába. */
         a1.addNeighbour(s1);
-
         a2.addNeighbour(s2);
-
         s1.place(a1);
         s2.place(a2);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
-
+        /**A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.move(0);
         Logger.formatPrint("Teszt vége");
 
@@ -224,38 +231,63 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * A telepes (játékos) egy egységgel mélyebbre ás az aszteroida kérgében, de még nem ásta át teljesen.
+     * A program kiírja a konzolra az ásáshoz kapcsolódó függvény hívásokat.
+     */
     public static void _2_1_SimpleDigging()
     {
         Logger.formatPrint("Init");
         
+        /** Létrehozzuk a telepest aki ás és az aszteroidát amin ás. */
         Asteroid a = new Asteroid(0, 0, 8, null);
         Settler s = new Settler(a);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
-
+        /**A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.digging();
 
         Logger.formatPrint("Teszt vége"); 
     }
+
+
+    /**
+     * A telepes (játékos) egy egységgel mélyebbre ás az aszteroida kérgében, teljesen átásta (az aszteroida nincs napközelben).
+     * A program kiírja a konzolra az ásáshoz és az áttöréshez kapcsolódó függvény hívásokat.
+     */
     public static void _2_2_DiggingAndBreakthrought()
     {
         Logger.formatPrint("Init");
         
+        /** Létrehozzuk a telepest aki ás és az aszteroidát amin ás. Az aszteroida harmadik paramétere, ami a kéregvastagságot jelöli, kezdetnek 1, hogy egy ásással
+         * át lehessen törni a kérget és lefuthasson a teszteset többi függvényhívása is.
+         */
         Asteroid a = new Asteroid(0, 0, 1, null);
         Settler s = new Settler(a);
         
         a.addTraveler(s);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
-
+        /** A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.digging();
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) egy egységgel mélyebbre ás az aszteroida kérgében, 
+	 * teljesen átásta, a magja urán (az aszteroida napközelben van, így robban).
+     * A program kiírja a konzolra az ásáshoz, az áttöréshez és az urán robbanásához kapcsolódó függvény hívásokat.
+     */
     public static void _2_3_DiggingBreakthroughtUran()
     {
         Logger.formatPrint("Init");
 
+        /** Létrehozzuk a telepest aki ás és az aszteroidát amin ás. Az aszteroida harmadik paramétere, ami a kéregvastagságot jelöli, kezdetnek 1, hogy egy ásással
+         * át lehessen törni a kérget és lefuthasson a teszteset többi függvényhívása is. Az a2 aszteroida azért kell, hogy a késõbbiekben létrehozott robotnak
+         * a robbanás hatására, legyen olyan aszteroda, ahova mehet a robbanó aszteroidáról. Ezért állítjuk be a két aszteroidának, hogy szomszédok legyenek. Az a1 elsõ két paramétere
+         * most 1, mert ez jelenti azt, hogy napközelben van.
+         */
         Asteroid a1 = new Asteroid(1, 1, 1, new Uran());
         Asteroid a2 = new Asteroid(0, 0, 1, null);
         Settler s = new Settler(a1);
@@ -263,6 +295,7 @@ public class SkeletonMain {
         a2.addNeighbour(a1);
         a1.addNeighbour(a2);
 
+        //feltöltjük az Inventorit Uran-nal, Iron-nal és Ice-al
         Inventory seged = s.getInventory();
         seged.addUran(new Uran());
         seged.addIron(new Iron());
@@ -279,15 +312,23 @@ public class SkeletonMain {
         a1.addTraveler(r);
 
         Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
-
+        /** A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.digging();
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) egy egységgel mélyebbre ás az aszteroida kérgében, teljesen átásta,
+     *  a magja jég (az aszteroida nincs napközelben, így elpárolog).
+     * A program kiírja a konzolra az ásáshoz, az áttöréshez és a jég elpárolgásához kapcsolódó függvény hívásokat.
+     */
     public static void _2_4_DiggingBreakthroughtIce()
     {
         Logger.formatPrint("Init");
-
+        /**Létrehozzuk a telepest aki ás és az aszteroidát amin ás. Az aszteroida harmadik paramétere, ami a kéregvastagságot jelöli, kezdetnek 1, hogy egy ásással
+         * át lehessen törni a kérget és lefuthasson a teszteset többi függvényhívása is. Az aszteroida elsõ két paramétere most 1, mert ez jelenti azt, hogy napközelben van.
+         */
         Asteroid a = new Asteroid(1, 1, 1, new Ice());
         Settler s = new Settler(a);
 
@@ -295,14 +336,24 @@ public class SkeletonMain {
         Space.getInstance().step();
 
         Logger.formatPrint("_2_4_DiggingBreakthroughtIce");
-
+        /** A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.digging();
 
         Logger.formatPrint("Teszt vége");
     }
+    
+
+    /**
+     * A telepes (játékos) megkísérel egy teleportkapun ásni.
+     * A program kiírja az ásási kísérlethez kapcsolódó függvény hívásokat.
+     */
     public static void _2_5_DiggingOnStargate()
     {
         Logger.formatPrint("Init");
+
+        /** Két csillagkaput kell létrehozzunk, mert a lerakott csillagkapunak
+         *  mindenképp össze kell legyen kötve egy másikkal, még akkor is ha a párja még nincs lerakva 
+         * egy aszteroida szomszédságába. */
         Stargate st1 = new Stargate();
         Stargate st2 = new Stargate();
         
@@ -312,7 +363,7 @@ public class SkeletonMain {
         Settler s = new Settler(st1);
 
         Logger.formatPrint("_2_5_DiggingOnStargate");
-
+        /** A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.digging();
 
         Logger.formatPrint("Teszt vége");
@@ -556,6 +607,12 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * A telepes (játékos) létrehoz egy új robotot.
+     * A program kiírja a konzolra a sikeres robot készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehoztunk egy settlert, aki képes létrehozni egy robotot
+     * Feltöltjük az Inventoryt egy Uran, Iron, Carbon-nal.
+     */
     public static void _5_1_SuccessfulRobotCreate()
     {
         Logger.formatPrint("Init");
@@ -574,6 +631,12 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) létre próbál hozni egy új robotot, de nincs elég nyersanyagja.
+     * A program kiírja a konzolra a sikertelen robot készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehoztunk egy settlert, aki nem képes létrehozni robotot, mert nincs elegend˜ nyersanyagja
+     */
     public static void _5_2_FailedRobotCreateMissingMaterial()
     {
         Logger.formatPrint("Init");
@@ -587,6 +650,14 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) felépít az aszteroidán egy bázist a rajta lévõ többi telepessel és ezzel megnyerik a játékot. 
+     * A telepeseknek van elég nyersanyaga a bázis megépítéséhez, 
+     *      ekkor a program a képernyõre írja a bázis építésével és a játék befejezésével járó függvényhívásokat.
+     * Init: Egy aszteroidán létrehoztunk két settlert, akik képesek felépíteni a bázist
+     * Feltöltjük s1 Settler Inventory-jába 3 Carbon, 3 Iron, 3 Uran, s2 Settler Inventory-jába 3 Ice nyersanyagot.
+     */
     public static void _5_3_SuccessfulBaseCreate()
     {
         Logger.formatPrint("Init");
@@ -614,6 +685,13 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) megpróbál felépíteni az aszteroidán egy bázist a rajta lévõ többi telepessel, de nincs elég nyersanyagjuk.  
+     * A telepeseknek nincs elég nyersanyaga a bázis megépítéséhez,
+     *      ekkor a program a képernyõre írja a bázis építésével való próbálkozáshoz kapcsolódó függvényhívásokat.
+     * Init: Egy aszteroidán létrehoztunk két settlert, akik nem képesek felépíteni a bázist, mert nincs meg a szükséges nyersanyag mennyis˜g˜k
+     */
     public static void _5_4_FailedBaseCreateMissingMaterial()
     {
         Logger.formatPrint("Init");
@@ -652,6 +730,12 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * A telepes (játékos) létrehoz egy új teleportkapi-párt és elraktározza a tárolójában õket.
+     * A program kiírja a konzolra a teleportkapi-pár készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehoztunk egy settlert, aki képes létrehozni egy teleportkapi-párt.
+     * Feltöltjük az Inventoryt 1 Uran, 2 Iron, és 1 Ice-cal.
+     */
     public static void _6_1_SuccessfulStargateCreate()
     {
         Logger.formatPrint("Init");
@@ -671,6 +755,12 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) megpróbál létrehozni egy új teleportkapi-párt, de nincs elég nyersanyagja.
+     * A program kiírja a konzolra a sikertelen teleportkapi-pár készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehoztunk egy settlert, aki nem képes létrehozni egy teleportkapi-párt, mert nincs elegend˜ nyersanyagja.
+     */
     public static void _6_2_FailedStargateCreateMissingMaterial()
     {
         Logger.formatPrint("Init");
@@ -684,6 +774,13 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes egy aszteroida szomszédságában lehelyez egy teleport kaput.
+     * A program kiírja a konzolra az teleportkapu elhelyezésének mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehoztunk egy settlert, aki létrehoz egy teleportkapi-párt magához (elsõ stargate() hívás).
+     *      urána ebbõl a két akapub˜l helyez el egyet a teszt során.
+     */
     public static void _6_3_SuccessfulStargatePlace()
     {
         Logger.formatPrint("Init");
