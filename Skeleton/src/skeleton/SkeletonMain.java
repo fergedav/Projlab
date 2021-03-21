@@ -18,7 +18,7 @@ public class SkeletonMain {
         while(true)
         {
             try {
-                System.out.println(msg);                
+                System.out.println("***"+msg+"***");                
                 n = Integer.parseInt(r.readLine());
 
                 if(n >= min && n <=max)

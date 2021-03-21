@@ -6,7 +6,7 @@ public class Logger {
     /**
      * tabulátorok száma a hívások során
      */
-    private static int stackDebth = 1;
+    private static int stackDebth = 0;
 
     /** 
      * Formázó függvény a logoláshoz
@@ -16,9 +16,9 @@ public class Logger {
      */
     public static void startFunctionLogComment(Object obj, String funcName, String comment) {
         for (int i = 0; i < stackDebth; i++)
-            System.out.print("|\t");
+            System.out.print("\t");
 
-        String str =  "(" + obj.getClass().getSimpleName() + ") "  + funcName + "()";
+        String str =  "" + obj.getClass().getSimpleName() + "."  + funcName + "()";
 
         if (!comment.equals(""))
             str += (" -- " + comment);
