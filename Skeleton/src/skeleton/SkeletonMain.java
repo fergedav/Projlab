@@ -77,6 +77,7 @@ public class SkeletonMain {
                 _9_Robot();
                 break;
             case 10:
+                System.out.println("A program leáll.");
                 return false;
             default:
                 break;

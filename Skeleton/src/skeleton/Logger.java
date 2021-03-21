@@ -1,8 +1,6 @@
 package skeleton;
 
 import java.lang.System;
-import java.lang.reflect.Method;
-
 
 public class Logger {
     /**
@@ -10,32 +8,8 @@ public class Logger {
      */
     private static int stackDebth = 1;
 
-    
     /** 
-     * függvény object keresõ függvény a logoláshoz
-     * @param o objektum aminek a függvényét hívjuk
-     * @param name függvény neve amit hívunk
-     * @return Method függvény ha van ilyen nevû
-     * @throws Exception  kivétel ha nincs ilyen nevû függvény
-     */
-    private static Method findMethod(Object o, String name) throws Exception {
-        Method[] allMethods = o.getClass().getMethods();
-        for (Method method : allMethods) {
-            if (method.getName().equals(name))
-                return method;
-        }
-
-        throw new Exception("Nincs ilyen függvény: " + name);
-    }
-
-    
-    public static void formatPrint(String str)
-    {
-        System.out.println("\n---" + str + "---\n");
-    }
-
-    /** 
-     * Formázó segédfüggvény a logoláshoz
+     * Formázó függvény a logoláshoz
      * @param obj objektum aminek a függvényét hívjuk
      * @param funcName függvény neve amit hívunk
      * @param comment komment a hívással kapcsolatban
@@ -44,7 +18,6 @@ public class Logger {
         for (int i = 0; i < stackDebth; i++)
             System.out.print("|\t");
 
-        //String str = obj.getClass().getSimpleName() + "." + funcName + "()";
         String str =  "(" + obj.getClass().getSimpleName() + ") "  + funcName + "()";
 
         if (!comment.equals(""))
@@ -61,25 +34,12 @@ public class Logger {
         stackDebth--;
     }
 
-    
-    /** 
-     * Függvény meghívása és logolása
-     * @param obj objektum aminek a függvényét hívjuk
-     * @param funcName függvény neve amit hívunk
-     * @param comment komment a hívással kapcsolatba. "" a komment elhagyásához
-     * @param args argumentumok amivel hívjuk a függvényt
-     * @return T hívott függvény visszatérési értéke ha érdekes
+    /**
+     * Másik formázó függvény
+     * @param str szöveg amit formáz
      */
-    public static <T> T log(Object obj, String objName, String funcName, String comment, Object... args) {
-        T res = null;
-        try {
-            Method m = findMethod(obj, funcName);
-            startFunctionLogComment(obj, objName + "." + m.getName(), comment);
-            res = (T) m.invoke(obj, args);
-            endFunctionLog();
-        } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
-        }
-        return res;
+    public static void formatPrint(String str)
+    {
+        System.out.println("\n---" + str + "---\n");
     }
 }
