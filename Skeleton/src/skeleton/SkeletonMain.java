@@ -905,7 +905,20 @@ public class SkeletonMain {
                 break;
         }
     }
-
+    /**
+     * Napvihar érkezik egy NEM TELJESEN ÁTFÚRT aszteroidára, amin telepes, és robot van éppen.
+     * A napvihar megöli mind kettõt, mert az aszteroida nem nyújt védelmet.
+     * 
+     * Init: Létrehozunk egy Controler osztályt, mert a settler és a robot értesítést küld annak a halálakor.
+     * (A controlerbe beteszünk egy a teszt további részétõl független settlert, hogy amikor a másik settler,
+     * akit elér a napvihar meghal, ne érjen a játék véget! 0-db élõ játékosnál a controler leállítaná a játékot).
+     * 
+     * Létrehozuk egy Space objektumot, bele egy aszteroidát helyezünk, arra pedig egy settlert és egy robotot.
+     * mindkettõt regisztráljuk a controlerbe.
+     * 
+     * A space objektumon napvihart indítunk!
+     * 
+     */
     public static void _7_1_SunstormOnNotFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
@@ -914,7 +927,7 @@ public class SkeletonMain {
         Space space = cont.getSpace();
         cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //õ életben marad majd, nem lesz játék vége
 
-        Asteroid asteroid = new Asteroid(1,1,10,new Iron());
+        Asteroid asteroid = new Asteroid(1,1,10,new Iron()); // az aszteroida amin a napvihar van
         space.addOrbit(asteroid);
 
         Robot robot = new Robot();
@@ -932,6 +945,21 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt Vege");
 
     }
+
+    /**
+     * Napvihar érkezik egy TELJESEN ÁTFÚRT, DE NEM ÜRES aszteroidára, amin telepes, és robot van éppen.
+     * A napvihar megöli mind kettõt, mert a magban van valami más, így az azteroida nem nyújt védelmet.
+     * 
+     * Init: Létrehozunk egy Controler osztályt, mert a settler és a robot értesítést küld annak a halálakor.
+     * (A controlerbe beteszünk egy a teszt további részétõl független settlert, hogy amikor a másik settler,
+     * akit elér a napvihar meghal, ne érjen a játék véget! 0-db élõ játékosnál a controler leállítaná a játékot).
+     * 
+     * Létrehozuk egy Space objektumot, bele egy aszteroidát helyezünk, arra pedig egy settlert és egy robotot.
+     * mindkettõt regisztráljuk a controlerbe.
+     * 
+     * A space objektumon napvihart indítunk!
+     * 
+     */
     public static void _7_2_SunstormOnNotEmptyAsteroid()
     {
         Logger.formatPrint("Init");
@@ -940,7 +968,7 @@ public class SkeletonMain {
         Space space = cont.getSpace();
         cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //õ életben marad majd, nem lesz játék vége
 
-        Asteroid asteroid = new Asteroid(1,1,0,new Iron());
+        Asteroid asteroid = new Asteroid(1,1,0,new Iron()); // az aszteroida amin a napvihar van
         space.addOrbit(asteroid);
 
         Robot robot = new Robot();
@@ -957,6 +985,21 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt Vege");
     }
+
+    /**
+     * Napvihar érkezik egy TELJESEN ÁTFÚRT, ÉS ÜRES aszteroidára, amin telepes, és robot van éppen.
+     * A napvihar nincs rájuk hatással, az aszteroida "védelmet" ad a napvihartól.
+     * 
+     * Init: Létrehozunk egy Controler osztályt, mert a settler és a robot értesítést küld annak a halálakor.
+     * (A controlerbe beteszünk egy a teszt további részétõl független settlert, hogy amikor a másik settler,
+     * akit elér a napvihar meghal, ne érjen a játék véget! 0-db élõ játékosnál a controler leállítaná a játékot).
+     * 
+     * Létrehozuk egy Space objektumot, bele egy aszteroidát helyezünk, arra pedig egy settlert és egy robotot.
+     * mindkettõt regisztráljuk a controlerbe.
+     * 
+     * A space objektumon napvihart indítunk!
+     * 
+     */
     public static void _7_3_SunstormOnSafeAsteroid()
     {
         Logger.formatPrint("Init");
@@ -965,7 +1008,7 @@ public class SkeletonMain {
         Space space = cont.getSpace();
         cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //õ életben marad majd, nem lesz játék vége
 
-        Asteroid asteroid = new Asteroid(1,1,0, null);
+        Asteroid asteroid = new Asteroid(1,1,0, null); // az aszteroida amin a napvihar van
         space.addOrbit(asteroid);
 
         Robot robot = new Robot();
