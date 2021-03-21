@@ -72,9 +72,9 @@ public class Inventory {
             }
        }catch(Exception e){
 
-            Logger.endFunctionLog();
-
        }
+
+       Logger.endFunctionLog();
 
        return null;
         

@@ -127,11 +127,18 @@ public class Asteroid extends Orbit {
         Logger.startFunctionLogComment(this, "putResource", "");
 
         if(layers != 0)
+        {
+            Logger.endFunctionLog();
             return false;
+        }
+            
 
         if(core != null)
+        {
+            Logger.endFunctionLog();
             return false;
-
+        }
+        
         core = r;
 
         reaction();
