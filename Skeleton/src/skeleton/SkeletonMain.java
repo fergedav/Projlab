@@ -564,6 +564,12 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * A telepes (játékos) létrehoz egy új robotot.
+     * A program kiírja a konzolra a sikeres robot készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki képes létrehozni egy robotot
+     * Feltöltjük az Inventoryt egy Uran, Iron, Carbon-nal.
+     */
     public static void _5_1_SuccessfulRobotCreate()
     {
         Logger.formatPrint("Init");
@@ -582,6 +588,11 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
+    /**
+     * A telepes (játékos) létre próbál hozni egy új robotot, de nincs elég nyersanyagja.
+     * A program kiírja a konzolra a sikertelen robot készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki nem képes létrehozni robotot, mert nincs elegendõ nyersanyagja
+     */
     public static void _5_2_FailedRobotCreateMissingMaterial()
     {
         Logger.formatPrint("Init");
@@ -595,6 +606,13 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
+    /**
+     * A telepes (játékos) felépít az aszteroidán egy bázist a rajta lévõ többi telepessel és ezzel megnyerik a játékot. 
+     * A telepeseknek van elég nyersanyaga a bázis megépítéséhez, 
+     *      ekkor a program a képernyõre írja a bázis építésével és a játék befejezésével járó függvényhívásokat.
+     * Init: Egy aszteroidán létrehozunk két settlert, akik képesek felépíteni a bázist
+     * Feltöltjük s1 Settler Inventory-jába 3 Carbon, 3 Iron, 3 Uran, s2 Settler Inventory-jába 3 Ice nyersanyagot.
+     */
     public static void _5_3_SuccessfulBaseCreate()
     {
         Logger.formatPrint("Init");
@@ -622,6 +640,12 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
+     /**
+     * A telepes (játékos) megpróbál felépíteni az aszteroidán egy bázist a rajta lévõ többi telepessel, de nincs elég nyersanyagjuk.  
+     * A telepeseknek nincs elég nyersanyaga a bázis megépítéséhez,
+     *      ekkor a program a képernyõre írja a bázis építésével való próbálkozáshoz kapcsolódó függvényhívásokat.
+     * Init: Egy aszteroidán létrehozunk két settlert, akik nem képesek felépíteni a bázist, mert nincs meg a szükséges nyersanyag mennyiségük
+     */
     public static void _5_4_FailedBaseCreateMissingMaterial()
     {
         Logger.formatPrint("Init");
@@ -659,7 +683,12 @@ public class SkeletonMain {
                 break;
         }
     }
-
+    /**
+     * A telepes (játékos) létrehoz egy új teleportkapu-párt és elraktározza a tárolójában õket.
+     * A program kiírja a konzolra az teleportkapu-pár készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki képes létrehozni egy teleportkapu-párt.
+     * Feltöltjük az Inventoryt 1 Uran, 2 Iron, és 1 Ice-cal.
+     */
     public static void _6_1_SuccessfulStargateCreate()
     {
         Logger.formatPrint("Init");
@@ -679,6 +708,11 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
+    /**
+     * A telepes (játékos) megpróbál létrehozni egy új teleportkapu-párt, de nincs elég nyersanyagja.
+     * A program kiírja a konzolra a sikertelen teleportkapu-pár készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki nem képes létrehozni egy teleportkapu-párt, mert nincs elegendõ nyersanyagja.
+     */
     public static void _6_2_FailedStargateCreateMissingMaterial()
     {
         Logger.formatPrint("Init");
@@ -692,6 +726,12 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
+    /**
+     * A telepes egy aszteroida szomszédságában lehelyez egy teleport kaput.
+     * A program kiírja a konzolra az teleportkapu elhelyezésének mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki létrehoz egy teleportkapu-párt magához (elsõ stargate() hívás).
+     *      Utána ebbõl a két akapuból helyez el egyet a teszt során.
+     */
     public static void _6_3_SuccessfulStargatePlace()
     {
         Logger.formatPrint("Init");
