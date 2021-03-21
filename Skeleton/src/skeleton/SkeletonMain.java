@@ -917,6 +917,18 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * A napfény elér egy aszteroidát, amelynek nincs teljesen átfúrva a kérge.
+     * 
+     * Az aszteroidában lévő nyersanyag nem tud reakcióba lépni a napfénnyel.
+     * A program a konzolra írja a napfény érkezésével kapcsolatos függvényhívásokat.
+     * 
+     * Init: létrehozunk egy Space objektumot, ebbe felveszünk egy aszteroidát, amelynek
+     * nincs átfúrva a kérge, és Iron a magja.
+     * (a sunstorm_time értékét ötre állítjuk, hogy ne legyen most napvihar)
+     * 
+     * A Space step() metódusa fogja indítani a függvényhívásokat.
+     */
     public static void _8_1_SunlightArrivesToNotFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
@@ -932,6 +944,19 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt v�ge");
     }
+
+    /**
+     * A napfény elér egy aszteroidát, amelynek át van fúrva a kérge, és vas van benne.
+     * 
+     * A napfény reakcióba lép a benne lévő vassal. A program a konzolra írja a napfény
+     * érkezésével és a reakcióval kapcsolatos függvényhívásokat.
+     * 
+     * Init: létrehozunk egy Space objektumot, ebbe felveszünk egy aszteroidát, amelynek át van fúrva
+     * a kérge és Iron a magja.
+     * (a sunstorm_time értékét ötre állítjuk, hogy ne legyen most napvihar)
+     * 
+     * A Space step() metódusa fogja indítani a függvényhívásokat.
+     */
     public static void _8_2_SunlightArrivesToFullyDrilledAsteroidWithIron()
     {
         Logger.formatPrint("Init");
@@ -947,6 +972,21 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt v�ge");
     }
+    /**
+     * A napfény elér egy aszteroidát, amelynek át van fúrva a kérge, és urán van benne.
+     * 
+     * A napfény reakcióba lép a benne lévő uránnal. Ekkor az aszteroida felrobban, 
+     * megsemmisítve a benne lévő nyersanyagot. Az aszteroidán lévő Robotok átrepülnek
+     * más aszteroidára, míg a Telepesek meghalnak. A program a konzolra írja a napfény 
+     * érkezésével, a reakcióval, robbanással és meghalással kapcsolatos függvényhívásokat.
+     * 
+     * Init: létrehozunk egy Controller objektumot, ami létrehoz egy space objektumot is.
+     * Felveszünk két aszteroidát, az egyiket a spacebe (ez át van fúrva és urán a magja),
+     * hogy csak azt érje el a napfény. Erre az aszteroidára felveszünk egy telepest és egy robotot.
+     * (a sunstorm_time értékét ötre állítjuk, hogy ne legyen most napvihar)
+     * 
+     * A space step() metódusa indítja a függvényhívásokat.
+     */
     public static void _8_3_SunlightArrivesToFullyDrilledAsteroidWithUran()
     {
         Logger.formatPrint("Init");
@@ -978,6 +1018,18 @@ public class SkeletonMain {
         
         Logger.formatPrint("Teszt v�ge");
     }
+    /**
+     * A napfény elér egy aszteroidát, amelynek át van fúrva a kérge, és jég van benne.
+     * 
+     * A napfény reakcióba lép a benne lévő jéggel, ami így elpárolog. 
+     * A program a konzolra írja a napfény érkezésével és a reakcióval kapcsolatos függvényhívásokat.
+     * 
+     * Init: létrehozunk egy Space objektumot, ebbe felveszünk egy aszteroidát, amelynek át van fúrva
+     * a kérge és Ice a magja.
+     * (a sunstorm_time értékét ötre állítjuk, hogy ne legyen most napvihar)
+     * 
+     * A Space step() metódusa fogja indítani a függvényhívásokat.
+     */
     public static void _8_4_SunlightArrivesToFullyDrilledAsteroidWithIce()
     {
         Logger.formatPrint("Init");
@@ -1013,6 +1065,15 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     *  A robot egy nem teljesen kifúrt aszteroidán áll, ekkor fúrni kezdi azt. 
+     * 
+     * A program kiírja a robot fúrásával járó függvényhívásokat.
+     * 
+     * Init: létrehozunk egy nem átfúrt aszteroidát. Erre tesszük rá a robotot.
+     * 
+     * A robot step() metódusa indítja a függvényhívásokat.
+     */
     public static void _9_1_RobotIsOnNotFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
@@ -1028,6 +1089,17 @@ public class SkeletonMain {
         
         Logger.formatPrint("Teszt v�ge");
     }
+
+    /**
+     * A robot egy teljesen kifúrt aszteroidán van, ezért választ egy szomszédot, és oda mozog.
+     * 
+     * A program kiírja a konzolra a robot mozgásával járó függvényhívásokat.
+     * 
+     * Init: létrehozunk két szomszédos aszteroidát, az egyik teljesen át van fúrva. Erre
+     * az átfúrt aszteroidára tesszük rá a robotot.
+     * 
+     * A robot step() metódusa indítja a függvényhívásokat.
+     */
     public static void _9_2_RobotIsOnFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
