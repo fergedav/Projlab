@@ -27,9 +27,9 @@ public class Inventory {
         
     }
     /** 
-     * Visszaadja a tÃ¡rolt nyersanyagok szÃ¡mÃ¡t
+     * Visszaadja a tárolt nyersanyagok számát
      * 
-     * @return az Ã¶sszes tÃ¡rolt nyersanyagok szÃ¡ma
+     * @return az összes tárolt nyersanyagok száma
      */
     private int inventorySize()
     {
@@ -41,7 +41,7 @@ public class Inventory {
     }
     
     /** 
-     * HozzÃ¡ad egy nyersanyagot a tÃ¡rolÃ³hoz ha van benne mÃ©g hely.
+     * Hozzáad egy nyersanyagot a tárolóhoz ha van benne még hely.
      */
     public void addResource(Resource r)
     {
@@ -52,10 +52,10 @@ public class Inventory {
         Logger.endFunctionLog();
     }
     /**
-     * Visszaad egy adott nevÅ± nyersanyagot.
+     * Visszaad egy adott nevû nyersanyagot.
      * 
-     * Visszaad egy adott nevÅ± nyersanyagot, ha nincs olyan nevÅ± 
-     * vagy nincs tÃ¶bb belÅ‘le akkor null-al tÃ©r vissza.
+     * Visszaad egy adott nevû nyersanyagot, ha nincs olyan nevû 
+     * vagy nincs több belõle akkor null-al tér vissza.
      */
     public Resource removeResource(String rName)
     {
@@ -81,9 +81,9 @@ public class Inventory {
     }
 
     /**
-     * Callback fÃ¼ggvÃ©ny az urÃ¡n hozzÃ¡adÃ¡sÃ¡hoz.
+     * Callback függvény az urán hozzáadásához.
      * 
-     * @param u a hozzÃ¡adni kÃ­vÃ¡nt nyersanyag.
+     * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addUran(Uran u)
     {
@@ -96,9 +96,9 @@ public class Inventory {
 
     }
     /**
-     * Callback fÃ¼ggvÃ©ny az szÃ©n hozzÃ¡adÃ¡sÃ¡hoz.
+     * Callback függvény az szén hozzáadásához.
      * 
-     * @param u a hozzÃ¡adni kÃ­vÃ¡nt nyersanyag.
+     * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addCarbon(Carbon c)
     {
@@ -111,9 +111,9 @@ public class Inventory {
 
     }
     /**
-     * Callback fÃ¼ggvÃ©ny az vas hozzÃ¡adÃ¡sÃ¡hoz.
+     * Callback függvény az vas hozzáadásához.
      * 
-     * @param u a hozzÃ¡adni kÃ­vÃ¡nt nyersanyag.
+     * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addIron(Iron i)
     {
@@ -126,9 +126,9 @@ public class Inventory {
         
     }
     /**
-     * Callback fÃ¼ggvÃ©ny az jÃ©g hozzÃ¡adÃ¡sÃ¡hoz.
+     * Callback függvény az jég hozzáadásához.
      * 
-     * @param u a hozzÃ¡adni kÃ­vÃ¡nt nyersanyag.
+     * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addIce(Ice i)
     {
@@ -143,12 +143,12 @@ public class Inventory {
         int[] nums = {Uran, Carbon, Iron, Ice};
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
 
-        //Ã¶sszeszÃ¡molja hogy megvannak-e a kellÅ‘ anyagok a megfelelÅ‘ listÃ¡kban.
+        //összeszámolja hogy megvannak-e a kellõ anyagok a megfelelõ listákban.
         for(int i = 0; i < anyagok.length; i ++){
             if(!(materials.get(anyagok[i]).size() >= nums[i])) 
             return false;
         }
-        //kiveszi a megfelelÅ‘ szÃ¡mÃº anyagokat a megfelelÅ‘ listÃ¡bÃ³l.
+        //kiveszi a megfelelõ számú anyagokat a megfelelõ listából.
         for(int i = 0; i < anyagok.length; i ++){
             for(int j = 0; j < nums[i]; j++){
                 materials.get(anyagok[i]).remove(0);
@@ -158,10 +158,10 @@ public class Inventory {
     }
 
     /**
-     * LÃ©terehoz egy robotot, ha van elÃ©g nyersanyag.
+     * Léterehoz egy robotot, ha van elég nyersanyag.
      * 
-     * @param o -nem hasznÃ¡lt.
-     * @return vagy a Ã©trehozott robot, vagy null.
+     * @param o -nem használt.
+     * @return vagy a étrehozott robot, vagy null.
      */
     public Robot createRobot(Orbit o)
     {
@@ -177,9 +177,9 @@ public class Inventory {
     }
 
     /**
-     * LÃ©trehoz kÃ©t stargate-t ha van rÃ¡ elÃ©g nyersanyag.
+     * Létrehoz két stargate-t ha van rá elég nyersanyag.
      * 
-     * @return a kreÃ¡lt kÃ©t stargate vagy null.
+     * @return a kreált két stargate vagy null.
      */
     public List<Stargate> createStargate()
     {
@@ -207,12 +207,12 @@ public class Inventory {
 
 
     /**
-     * MegprÃ³bÃ¡l bÃ¡zist Ã©pÃ­teni.
+     * Megpróbál bázist építeni.
      *
-     * EllenÅ‘rzi hogy van e az adott aszteroidÃ¡n elÃ©g 
-     * nyersanyag a telepeseknÃ©l, hogy megÃ©pÃ­tsÃ©k az Å±rbÃ¡zist.
+     * Ellenõrzi hogy van e az adott aszteroidán elég 
+     * nyersanyag a telepeseknél, hogy megépítsék az ûrbázist.
      * 
-     * @return igaz ha sikerÃ¼lt hamis ha nem sikerÃ¼lt bÃ¡zist felÃ©pÃ­teni.
+     * @return igaz ha sikerült hamis ha nem sikerült bázist felépíteni.
      */
     public boolean createBase()
     {
@@ -225,11 +225,11 @@ public class Inventory {
         return b;
     }
     /**
-     * HozzÃ¡adja a kapott inventorit a sajÃ¡tjÃ¡hoz.
+     * Hozzáadja a kapott inventorit a sajátjához.
      * 
-     * VÃ©gig iterÃ¡l a mÃ¡sik Inventory tÃ¡rolÃ³jÃ¡n, Ã©s hozzÃ¡adja elemcsoportonkÃ©nt a sajÃ¡tjÃ¡hoz.
+     * Végig iterál a másik Inventory tárolóján, és hozzáadja elemcsoportonként a sajátjához.
      * 
-     * @param other a mÃ¡sik inventory.
+     * @param other a másik inventory.
      */
     public void addInventory(Inventory other)
     {

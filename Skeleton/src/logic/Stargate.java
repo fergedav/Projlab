@@ -16,8 +16,8 @@ public class Stargate extends Orbit {
 
 
     /**
-     * TÃ¶rli magÃ¡t a myStop-ja szomszÃ©dsÃ¡gi listÃ¡jÃ¡bÃ³l.
-     * //Ã©s megÃ¶li a rajtalÃ©vÅ‘ket. (szÃ¶veg alapjÃ¡n nem definiÃ¡lt.)
+     * Törli magát a myStop-ja szomszédsági listájából.
+     * //és megöli a rajtalévõket. (szöveg alapján nem definiált.)
      */
     private void dieAnother()
     {
@@ -47,9 +47,9 @@ public class Stargate extends Orbit {
         Logger.endFunctionLog();
     }
     /**
-     * ÃtkÃ¼ldi az utazÃ³t a sajat myStopjÃ¡ra.
-     * @param t az Ã©rkezett utazÃ³
-     * @return A teleportkapuhoz tartozÃ³ aszteroida.
+     * Átküldi az utazót a sajat myStopjára.
+     * @param t az érkezett utazó
+     * @return A teleportkapuhoz tartozó aszteroida.
      */
     private Orbit transport(Traveler t)
     {
@@ -63,7 +63,7 @@ public class Stargate extends Orbit {
     }
 
     /**
-     * MegÃ¶li a kapu pÃ¡rjÃ¡t.
+     * Megöli a kapu párját.
      */
     public void die()
     {  
@@ -77,8 +77,8 @@ public class Stargate extends Orbit {
     }
 
     /**
-     * Ã–sszekapcsolja a kaput a paramÃ©terkÃ©nt kapuval.
-     * @param other a kapcsolÃ³dÃ³ kapu
+     * Összekapcsolja a kaput a paraméterként kapuval.
+     * @param other a kapcsolódó kapu
      */
     public void entagle(Stargate other)
     {
@@ -103,7 +103,7 @@ public class Stargate extends Orbit {
     }
 
     /**
-     * Elhelyezi a kaput a paramÃ©terkÃ©nt kapott Orbit kÃ¶rÃ¼l.
+     * Elhelyezi a kaput a paraméterként kapott Orbit körül.
      * @param o az orbit, ahova leteszik
      */
     public void place(Orbit o)
@@ -118,9 +118,9 @@ public class Stargate extends Orbit {
     }
     
     /**
-     * UtazÃ³ Ã©rekzik a kapura.
-     * @param t az Ã©rkezett utazÃ³
-     * @return Orbit az utazÃ³ Ã©rkezik. 
+     * Utazó érekzik a kapura.
+     * @param t az érkezett utazó
+     * @return Orbit az utazó érkezik. 
      */
     @Override
     public Orbit addTraveler(Traveler t){

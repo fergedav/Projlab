@@ -11,8 +11,8 @@ public class Robot extends Traveler {
         Logger.endFunctionLog();
     }
     /**
-     * VisszatÃ©r egy vÃ©letlen vÃ¡lasztott szÃ¡mmal. A robot
-     * erre az idexÅ± aszteroidÃ¡ra lÃ©p majd Ã¡t.
+     * Visszatér egy véletlen választott számmal. A robot
+     * erre az idexû aszteroidára lép majd át.
      * @return
      */
     private int whereTo()
@@ -28,7 +28,7 @@ public class Robot extends Traveler {
     }
 
     /**
-     * LÃ©pÃ©st indÃ­t a pillanatnyi tartÃ³zkodÃ¡si helyÃ©nek vÃ©letlen szomszÃ©djÃ¡ra.
+     * Lépést indít a pillanatnyi tartózkodási helyének véletlen szomszédjára.
      */
     private void robotMoves()
     {
@@ -39,7 +39,7 @@ public class Robot extends Traveler {
     }
 
     /**
-     * ha meghÃ­vÃ³dik, akkor a robot egy mÃ¡sik, az aktuÃ¡lis aszteroidÃ¡jÃ¡nak egy szomszÃ©djÃ¡ra kerÃ¼l Ã¡t.
+     * ha meghívódik, akkor a robot egy másik, az aktuális aszteroidájának egy szomszédjára kerül át.
      */
     @Override
     public void explosion()
@@ -53,9 +53,9 @@ public class Robot extends Traveler {
     /**
      * A robot meghal.
      * 
-     * Az aszteroidÃ¡ra, amin jelenleg tartÃ³zkodik,
-     * Ã¶nmagÃ¡val meghÃ­vja a RemoveTraveler(Traveler t) metÃ³dust,
-     * majd a controler-nek is jelzi Ã¶nmagÃ¡val meghÃ­vva Robot_die(Robot r) metÃ³dust, majd tÃ¶rli Ã¶nmagÃ¡t.
+     * Az aszteroidára, amin jelenleg tartózkodik,
+     * önmagával meghívja a RemoveTraveler(Traveler t) metódust,
+     * majd a controler-nek is jelzi önmagával meghívva Robot_die(Robot r) metódust, majd törli önmagát.
      */
     @Override
     public void die()
@@ -71,9 +71,9 @@ public class Robot extends Traveler {
     }
 
     /**
-     * A robot megnÃ©zi, hogy az aktuÃ¡lis aszteroidÃ¡jÃ¡n lehet-e mÃ©g fÃºrni. Ha igen fÃºr,
-     * ha nem, akkor a RobotMoves() metÃ³dusÃ¡val vÃ©letlen lÃ©p. A WhereTo() metÃ³dusÃ¡val eldÃ¶nti,
-     * hogy melyik szomszÃ©dos aszteroidÃ¡ra lÃ©pjen tovÃ¡bb, majd Ã¡tlÃ©p oda.
+     * A robot megnézi, hogy az aktuális aszteroidáján lehet-e még fúrni. Ha igen fúr,
+     * ha nem, akkor a RobotMoves() metódusával véletlen lép. A WhereTo() metódusával eldönti,
+     * hogy melyik szomszédos aszteroidára lépjen tovább, majd átlép oda.
      */
     @Override
     public void step()
@@ -89,7 +89,7 @@ public class Robot extends Traveler {
         Logger.endFunctionLog();
     }
 
-    //a skeleton erejÃ©ig segÃ©dfgv
+    //a skeleton erejéig segédfgv
     public void setLocation(Orbit o){
         currentLocation = o;
     }

@@ -10,7 +10,7 @@ public abstract class Orbit {
     protected List<Traveler> travelers;
     protected boolean inLight = false;
     protected int layers = 0;
-    protected int x; //senki nem tÃ¡rolja a koordinÃ¡tÃ¡kat tÃ¶mbben xd
+    protected int x; //senki nem tárolja a koordinátákat tömbben xd
     protected int y;
 
     protected Orbit() {
@@ -20,10 +20,10 @@ public abstract class Orbit {
     }
 
     /**
-     * VirtuÃ¡lis fÃ¼ggvÃ©ny. 
-     * HozzÃ¡adja a paramÃ©terkÃ©nt kapott Traveler-t az Orbit travelers listÃ¡jÃ¡hoz Ã©s visszatÃ©r Ã¶nmagÃ¡val.
-     * @param t Ã©rkezett traveler
-     * @return sajÃ¡t maga
+     * Virtuális függvény. 
+     * Hozzáadja a paraméterként kapott Traveler-t az Orbit travelers listájához és visszatér önmagával.
+     * @param t érkezett traveler
+     * @return saját maga
      */
     public Orbit addTraveler(Traveler t)
     {
@@ -35,8 +35,8 @@ public abstract class Orbit {
 
 
     /**
-     * VisszatÃ©r az Orbiton jelenleg tartÃ³zkodÃ³ utazÃ³k listÃ¡jÃ¡val
-     * @return Orbiton jelenleg tartÃ³zkodÃ³ utazÃ³k
+     * Visszatér az Orbiton jelenleg tartózkodó utazók listájával
+     * @return Orbiton jelenleg tartózkodó utazók
      */
     public List<Traveler> getTravelers()
     {
@@ -46,7 +46,7 @@ public abstract class Orbit {
     }
 
     /**
-     * EltÃ¡volÃ­tja a paramÃ©terkÃ©nt kapott Traveler-t az Orbit travelers listÃ¡jÃ¡bÃ³l.
+     * Eltávolítja a paraméterként kapott Traveler-t az Orbit travelers listájából.
      * @param t Traveler
      */
     public void removeTraveler(Traveler t)
@@ -57,7 +57,7 @@ public abstract class Orbit {
     }
 
     /**
-     * A paramÃ©terkÃ©nt kapott Orbit-ot hozzÃ¡adja a szomszÃ©dsÃ¡gi listÃ¡jÃ¡hoz.
+     * A paraméterként kapott Orbit-ot hozzáadja a szomszédsági listájához.
      * @param o Orbit
      */
     public void addNeighbour(Orbit o)
@@ -68,7 +68,7 @@ public abstract class Orbit {
     }
 
     /**
-     * KitÃ¶rli a paramÃ©terkÃ©nt kapott Orbitot az objektum szomszÃ©dsÃ¡gi listÃ¡jÃ¡bÃ³l.
+     * Kitörli a paraméterként kapott Orbitot az objektum szomszédsági listájából.
      * @param o Orbit
      */
     public void removeNeighbour(Orbit o)
@@ -80,9 +80,9 @@ public abstract class Orbit {
 
 
     /**
-     * VisszatÃ©r az orbit i-edik szomszÃ©djÃ¡val. Ha i-edik szomszÃ©d nem lÃ©tezik null-t ad vissza.
-     * @param i szomszÃ©d sorszÃ¡ma
-     * @return szomszÃ©dos Orbit
+     * Visszatér az orbit i-edik szomszédjával. Ha i-edik szomszéd nem létezik null-t ad vissza.
+     * @param i szomszéd sorszáma
+     * @return szomszédos Orbit
      */
     public Orbit getNeighbour(int i)
     {
@@ -114,7 +114,7 @@ public abstract class Orbit {
     }
 
     /**
-     * VirtuÃ¡lis fÃ¼ggvÃ©ny. AlapÃ©rtelmezÃ©sben false-t ad vissza.
+     * Virtuális függvény. Alapértelmezésben false-t ad vissza.
      * @param r
      * @return
      */
@@ -126,7 +126,7 @@ public abstract class Orbit {
     }
 
     /**
-     * AlapÃ©rtelmezÃ©sben meghÃ­vja a travelers listÃ¡ja Ã¶sszes elemÃ©re a Die() fÃ¼ggvÃ©nyt.
+     * Alapértelmezésben meghívja a travelers listája összes elemére a Die() függvényt.
      */
     public void sunstormArrive()
     {
@@ -140,8 +140,8 @@ public abstract class Orbit {
     }
 
     /**
-     * EldÃ¶nti, hogy a koordinÃ¡tÃ¡i alapjÃ¡n beleesik-e a jelzett nÃ©gyzetbe. 
-     * Ha igen, akkor beÃ¡llÃ­tja true-ra a inLight attribÃºtumot, ha nem beÃ¡llÃ­tja false-ra.
+     * Eldönti, hogy a koordinátái alapján beleesik-e a jelzett négyzetbe. 
+     * Ha igen, akkor beállítja true-ra a inLight attribútumot, ha nem beállítja false-ra.
      * @param x1 left
      * @param y1 top
      * @param x2 right
@@ -163,8 +163,8 @@ public abstract class Orbit {
     }
 
     /**
-     * MÃ©g nem Ã¡tfurt rÃ©tegek szÃ¡ma
-     * @return rÃ©tegek
+     * Még nem átfurt rétegek száma
+     * @return rétegek
      */
     public int getLayers()
     {

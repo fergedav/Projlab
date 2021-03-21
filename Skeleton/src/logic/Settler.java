@@ -23,16 +23,16 @@ public class Settler extends Traveler {
     {
         Logger.startFunctionLogComment(this, "die", "");
 
-        /** kitÃ¶rli magÃ¡t az aszteroidÃ¡bÃ³l. */
+        /** kitörli magát az aszteroidából. */
         currentLocation.removeTraveler(this);
 
-        /** Ha van teleportkapuja a telepesnek a halÃ¡lakor, akkor az Ã¶sszes elpusztul a telepessel egyÃ¼tt. */
+        /** Ha van teleportkapuja a telepesnek a halálakor, akkor az összes elpusztul a telepessel együtt. */
         if(stargates != null)
         {
            stargates.get(0).die();
         }
 
-        /** MiutÃ¡n elpusztÃ­totta a kapuit, azutÃ¡n jelzi a controllernek, hogy Å‘ meghalt Ã©s kÃ©ri, hogy hÃºzza ki az Ã©lÅ‘ telepesek listÃ¡jÃ¡bÃ³l (a settlerDie fÃ¼ggvÃ©nnyel) */
+        /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy õ meghalt és kéri, hogy húzza ki az élõ telepesek listájából (a settlerDie függvénnyel) */
         controler.settlerDie(this);
 
         Logger.endFunctionLog();
@@ -45,10 +45,10 @@ public class Settler extends Traveler {
     public void mining()
     {
         Logger.startFunctionLogComment(this, "mining", "");
-        /** A retrieveResource null-al tÃ©r vissza, ha teleportkapun vagy Ã¼reges aszteroidÃ¡n bÃ¡nyÃ¡sznÃ¡nk, egyÃ©b esetben pedig a bÃ¡nyÃ¡szott nyersanyaggal. */
+        /** A retrieveResource null-al tér vissza, ha teleportkapun vagy üreges aszteroidán bányásznánk, egyéb esetben pedig a bányászott nyersanyaggal. */
         Resource res = currentLocation.retrieveResource();
 
-        /** Ha nem Ã¼res aszteroidÃ¡t prÃ³bÃ¡lt bÃ¡nyÃ¡szni a telepes, akkor hozzÃ¡adja a res tartalmÃ¡t az inventory-hoz. */
+        /** Ha nem üres aszteroidát próbált bányászni a telepes, akkor hozzáadja a res tartalmát az inventory-hoz. */
         if(res != null)
         {
             inventory.addResource(res);
@@ -59,11 +59,11 @@ public class Settler extends Traveler {
     public void createRobot()
     {
         Logger.startFunctionLogComment(this, "createRobot", "");
-        /** MegkÃ­sÃ©rel a createRobot egy Ãºj robotot lÃ©trehozni. Ha nincs elÃ©g nyersanyag az inventory-ban, akkor null-al tÃ©r vissza. */
+        /** Megkísérel a createRobot egy új robotot létrehozni. Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. */
         Robot newrobot = inventory.createRobot(currentLocation);
         
-        /** Ha sikeresen lÃ©trehozta az Ãºj robotot, akkor felveszi az aktuÃ¡lis objektumon lÃ©vÅ‘ utazÃ³k kÃ¶zÃ© az Ãºj robotot az addTraveler-el, 
-         * majd pedig az addRobot-al szÃ³l a controler-nek, hogy adja hozzÃ¡ az Ãºj robotot az aktÃ­v robotok listÃ¡jÃ¡hoz. */
+        /** Ha sikeresen létrehozta az új robotot, akkor felveszi az aktuális objektumon lévõ utazók közé az új robotot az addTraveler-el, 
+         * majd pedig az addRobot-al szól a controler-nek, hogy adja hozzá az új robotot az aktív robotok listájához. */
         if(newrobot != null)
         {
             currentLocation.addTraveler(newrobot);
@@ -75,12 +75,12 @@ public class Settler extends Traveler {
     public void stargate()
     {
         Logger.startFunctionLogComment(this, "stargate", "");
-        /** Ha a stargate gomb megnyomÃ¡sakor nincs teleportkapuja a telepesnek, akkor megprÃ³bÃ¡l lÃ©trehozni egy Ãºj teleportkapu-pÃ¡rt. */
+        /** Ha a stargate gomb megnyomásakor nincs teleportkapuja a telepesnek, akkor megpróbál létrehozni egy új teleportkapu-párt. */
         if(stargates == null)
         {
             createStargate();
         }
-        /** Ha pedig a stargate gomb megnyomÃ¡sakor van teleportkapuja, akkor lerak egyet, a tartÃ³zkodÃ¡si helyÃ©re. */
+        /** Ha pedig a stargate gomb megnyomásakor van teleportkapuja, akkor lerak egyet, a tartózkodási helyére. */
         else
         {
             placeStargate();
@@ -91,16 +91,16 @@ public class Settler extends Traveler {
     private void placeStargate()
     {
         Logger.startFunctionLogComment(this, "placeStargate", "");
-        /** Elhelyezi a lista 0. indexe alatt lÃ©vÅ‘ teleportkaput a place fÃ¼ggvÃ©nnyel, majd a lehelyezett teleportkaput a remove-al eltÃ¡volÃ­tja a teleportkapuk listÃ¡jÃ¡bÃ³l */
+        /** Elhelyezi a lista 0. indexe alatt lévõ teleportkaput a place függvénnyel, majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
         stargates.get(0).place(currentLocation);
         currentLocation.addNeighbour(stargates.get(0));
         stargates.remove(0);
 
-        /** A teleportkapuk listÃ¡jÃ¡nak a hossza a lerakott teleportkapu, a listÃ¡bÃ³l valÃ³ eltÃ¡volÃ­tÃ¡sa elÅ‘tt. */
+        /** A teleportkapuk listájának a hossza a lerakott teleportkapu, a listából való eltávolítása elõtt. */
         int  sizebefore = stargates.size();        
 
-        /** Ha mÃ¡r az utolsÃ³ teleportkapu is le lett rakva (a sizebefore, azaz a teleportkapuk listÃ¡ja a lerakott teleportkapu eltÃ¡volÃ­tÃ¡sa elÅ‘tti hossza, egyenlÅ‘ 1-el),
-         *  akkor null-ra Ã¡llÃ­tja a listÃ¡t. */
+        /** Ha már az utolsó teleportkapu is le lett rakva (a sizebefore, azaz a teleportkapuk listája a lerakott teleportkapu eltávolítása elõtti hossza, egyenlõ 1-el),
+         *  akkor null-ra állítja a listát. */
         if(sizebefore ==   1)
         {            
             stargates = null;
@@ -109,17 +109,17 @@ public class Settler extends Traveler {
         
     }
 
-    /** A what paramÃ©ter hatÃ¡rozza meg, hogy milyen nyersanagot helyezne vissza a jÃ¡tÃ©kos. */
+    /** A what paraméter határozza meg, hogy milyen nyersanagot helyezne vissza a játékos. */
     public void replaceResource(String what)
     {
         Logger.startFunctionLogComment(this, "replaceResource", "");
-        /** EltÃ¡volÃ­tja a removeResource a what paramÃ©terben meghatÃ¡rozott nyersanyagot */
+        /** Eltávolítja a removeResource a what paraméterben meghatározott nyersanyagot */
         Resource resource = inventory.removeResource(what);
 
-        /** Jelzi, hogy sikeres volt-e a resource nyersanyag lehelyezÃ©se. */
+        /** Jelzi, hogy sikeres volt-e a resource nyersanyag lehelyezése. */
         boolean replecement = currentLocation.putResource(resource);
 
-        /** Ha sikertelen volt a lehelyezÃ©s, akkor  a kivett nyersanyagot visszateszi az inventory-ba. */
+        /** Ha sikertelen volt a lehelyezés, akkor  a kivett nyersanyagot visszateszi az inventory-ba. */
         if(replecement == false)
         {
             inventory.addResource(resource);
@@ -130,19 +130,19 @@ public class Settler extends Traveler {
     public void createBase()
     {
         Logger.startFunctionLogComment(this, "createBase", "");
-        /** LekÃ©ri az Ã¶sszes utazÃ³t a tartÃ³zkodÃ¡si helyÃ©rÅ‘l Ã©s lÃ©trehoz egy inventory-t, amiben szÃ¡molja, hogy elÃ©g nyersanyaga van-e Ã¶sszesen a lista tagjainak. */
+        /** Lekéri az összes utazót a tartózkodási helyérõl és létrehoz egy inventory-t, amiben számolja, hogy elég nyersanyaga van-e összesen a lista tagjainak. */
         List<Traveler> travelers = currentLocation.getTravelers();
 
         Inventory inventoryforbase = new Inventory(10000);
 
 
-        /** HozzÃ¡adja a travelers tagjainak az inventoriait az inventoryforbase-hez. */
+        /** Hozzáadja a travelers tagjainak az inventoriait az inventoryforbase-hez. */
         for(int i = 0; i < travelers.size(); i++)
         {
             inventoryforbase.addInventory(travelers.get(i).getInventory());
         }
 
-        /** MegkÃ­sÃ©rel egy bÃ¡zist lÃ©trehozni, true-val tÃ©r vissza ha sikerÃ¼lt, false-al ha tÃºl kevÃ©s volt a nyersanyag. */
+        /** Megkísérel egy bázist létrehozni, true-val tér vissza ha sikerült, false-al ha túl kevés volt a nyersanyag. */
         if(inventoryforbase.createBase())
         {
             controler.endGame();
@@ -153,15 +153,15 @@ public class Settler extends Traveler {
     private void createStargate()
     {
         Logger.startFunctionLogComment(this, "createStargate", "");
-        /** A createStargate null-al tÃ©r vissza nem volt elÃ©g nyersanyag a kapuk lÃ©trehozÃ¡sÃ¡hoz. */
+        /** A createStargate null-al tér vissza nem volt elég nyersanyag a kapuk létrehozásához. */
         List<Stargate> newgates = inventory.createStargate();
 
-        /** Ha sikerÃ¼lt lÃ©trehozni a teleportkapu-pÃ¡rt, akkor Å‘ket hozzÃ¡adjuk a kapuk listÃ¡jÃ¡hoz. */
+        /** Ha sikerült létrehozni a teleportkapu-párt, akkor õket hozzáadjuk a kapuk listájához. */
         if (newgates != null)
         {
            stargates = newgates;
         }
-        /** EgyÃ©b esetben null-ra Ã¡llÃ­tja a listÃ¡t. */
+        /** Egyéb esetben null-ra állítja a listát. */
         else
         {
             stargates = null;

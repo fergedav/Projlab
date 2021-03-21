@@ -14,11 +14,11 @@ public class Asteroid extends Orbit {
     //private boolean inSunlight = false;
 
     /**
-     * Ãšj Aszteroida
-     * @param _x kezdÅ‘ x hely
-     * @param _y kezdÅ‘ y hely
-     * @param l rÃ©tegek szÃ¡ma
-     * @param c Nyers anyag ami tartalmaz, lehet null ha Ã¼res
+     * Új Aszteroida
+     * @param _x kezdõ x hely
+     * @param _y kezdõ y hely
+     * @param l rétegek száma
+     * @param c Nyers anyag ami tartalmaz, lehet null ha üres
      */
     public Asteroid(int _x, int _y, int l, Resource c)
     {
@@ -40,8 +40,8 @@ public class Asteroid extends Orbit {
     */
 
     /**
-     * MegvizsgÃ¡lja, hogy az aszteroida napkÃ¶zelben van-e illetve, hogy teljesen Ã¡t van e fÃºrva a kÃ©rge. 
-     * Ha mind a kettÅ‘ igaz, meghÃ­vja a magja (a tÃ¡rolt resource objektumÃ¡ra) reaction() fÃ¼ggvÃ©nyÃ©t.
+     * Megvizsgálja, hogy az aszteroida napközelben van-e illetve, hogy teljesen át van e fúrva a kérge. 
+     * Ha mind a kettõ igaz, meghívja a magja (a tárolt resource objektumára) reaction() függvényét.
      */
     private void reaction()
     {
@@ -54,7 +54,7 @@ public class Asteroid extends Orbit {
     }
 
     /**
-     * RobbanÃ¡s esetÃ©n meghÃ­vja az Ã¶sszes jelenleg rajta tartÃ³zkodÃ³ utazÃ³ra a Explosion() metÃ³dust.
+     * Robbanás esetén meghívja az összes jelenleg rajta tartózkodó utazóra a Explosion() metódust.
      */
     public void explosion()
     {
@@ -70,8 +70,8 @@ public class Asteroid extends Orbit {
     }
 
     /**
-     * Az aszteroidÃ¡n vÃ©geznek Ã¡sÃ¡st. Eggyel csÃ¶kkenti a layers Ã©rtÃ©kÃ©t. 
-     * Ha a layers Ã©rtÃ©ke elÃ©ri a 0-Ã¡t, akkor meghÃ­vja az reaction() privÃ¡t metÃ³dusÃ¡t az aszteroidÃ¡nak.
+     * Az aszteroidán végeznek ásást. Eggyel csökkenti a layers értékét. 
+     * Ha a layers értéke eléri a 0-át, akkor meghívja az reaction() privát metódusát az aszteroidának.
      */
     @Override
     public void drilled()
@@ -91,9 +91,9 @@ public class Asteroid extends Orbit {
     }
 
     /**
-     * A hÃ­vÃ³ visszakapja az aszteroida magjÃ¡t. 
-     * Ha a layers Ã©rtÃ©ke 0, akkor visszatÃ©r a magjÃ¡ban talÃ¡lhatÃ³ nyersanyaggal, az Ãºj core Ã©rtÃ©k null. 
-     * Ha a layers Ã©rtÃ©ke 0-tÃ³l kÃ¼lÃ¶nbÃ¶zÅ‘ akkor null-lal tÃ©r vissza.
+     * A hívó visszakapja az aszteroida magját. 
+     * Ha a layers értéke 0, akkor visszatér a magjában található nyersanyaggal, az új core érték null. 
+     * Ha a layers értéke 0-tól különbözõ akkor null-lal tér vissza.
      * @return Resource 
      */
     @Override
@@ -114,12 +114,12 @@ public class Asteroid extends Orbit {
     }
 
     /**
-     * Visszateszik az Ã¼res aszteroidÃ¡ba a nyersanyagot. 
-     * A paramÃ©terkÃ©nt kapott Resource-t elhelyezi a core-ba, ha az null. 
-     * VisszatÃ©rÃ©si Ã©rtÃ©ke true, ha eredetileg null volt a core, amÃºgy false. 
-     * Ha az aszteroida Ã©ppen napfÃ©nyben van, ellenÅ‘rzi, hogy az Ãºjonnan betett anyagnak van e bÃ¡rmilyen reakciÃ³ja.
+     * Visszateszik az üres aszteroidába a nyersanyagot. 
+     * A paraméterként kapott Resource-t elhelyezi a core-ba, ha az null. 
+     * Visszatérési értéke true, ha eredetileg null volt a core, amúgy false. 
+     * Ha az aszteroida éppen napfényben van, ellenõrzi, hogy az újonnan betett anyagnak van e bármilyen reakciója.
      * @param r nyersanyag amit leraknak
-     * @return sikeres volt a nyersanyag lerakÃ¡sa
+     * @return sikeres volt a nyersanyag lerakása
      */
     @Override
     public boolean putResource(Resource r)
@@ -142,8 +142,8 @@ public class Asteroid extends Orbit {
     }
 
     /**
-     * Napvihar esetÃ©n megvizsgÃ¡lja, hogy a layers Ã©rtÃ©ke 0-e Ã©s hogy a core Ã©rtÃ©ke null. 
-     * Ha nem akkor az Ã¶sszes jelenleg rajta tartÃ³zkodÃ³ utazÃ³ra a Die() metÃ³dust hÃ­vja.
+     * Napvihar esetén megvizsgálja, hogy a layers értéke 0-e és hogy a core értéke null. 
+     * Ha nem akkor az összes jelenleg rajta tartózkodó utazóra a Die() metódust hívja.
      */
     @Override
     public void sunstormArrive()
@@ -163,9 +163,9 @@ public class Asteroid extends Orbit {
     }
 
     /**
-     * EldÃ¶nti, hogy a koordinÃ¡tÃ¡i alapjÃ¡n beleesik-e a jelzett nÃ©gyzetbe. 
-     * Ha igen, akkor beÃ¡llÃ­tja true-ra a inLight attribÃºtumot Ã©s meghÃ­vja a magÃ¡ra a privÃ¡t Reaction() metÃ³dust. 
-     * Ha nem esik bele, akkor beÃ¡llÃ­tja false-ra a inLight attribÃºtumot.
+     * Eldönti, hogy a koordinátái alapján beleesik-e a jelzett négyzetbe. 
+     * Ha igen, akkor beállítja true-ra a inLight attribútumot és meghívja a magára a privát Reaction() metódust. 
+     * Ha nem esik bele, akkor beállítja false-ra a inLight attribútumot.
      * @param x1 left
      * @param y1 top
      * @param x2 right

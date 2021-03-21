@@ -21,7 +21,7 @@ public class Controler {
     }
 
      /**
-     * LÃ©trhoz Ã©s visszaadja, vagy ha mÃ¡r volt lÃ©trehozva akkor visszaadja az elsÅ‘ lÃ©trehozott controllert.
+     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az elsõ létrehozott controllert.
      * 
      * @return a Controler objektum
      */
@@ -32,7 +32,7 @@ public class Controler {
         return instance;
     }
     /**
-     *  tesztelÃ©shez szÃ¼ksÃ©ges, Ãºj pÃ©ldÃ¡nyt ad vissza mindig.
+     *  teszteléshez szükséges, új példányt ad vissza mindig.
      */ 
     public static Controler getNewControler()
     {
@@ -45,7 +45,7 @@ public class Controler {
 
     
     /**
-     * Csak a tesztelÃ©s sorÃ¡n kell.
+     * Csak a tesztelés során kell.
      * @return ha controller space ja.
      */
     public Space getSpace()
@@ -54,13 +54,13 @@ public class Controler {
     }
 
     /**
-     * a jÃ¡tÃ©kban  Ã©ppen aktuÃ¡lisan lÃ©tezÅ‘ Ã¶sszes Settler tÃ­pusÃº objektumot tÃ¡rolÃ³ privÃ¡t lista.
+     * a játékban  éppen aktuálisan létezõ összes Settler típusú objektumot tároló privát lista.
      */
 
     private List<Settler> settlers = new ArrayList<>();
     
     /**
-     * a jÃ¡tÃ©kban Ã©ppen aktuÃ¡lisan lÃ©vÅ‘ Ã¶sszes Robot tÃ­pusÃº objektumot tÃ¡rolÃ³ privÃ¡t lista.
+     * a játékban éppen aktuálisan lévõ összes Robot típusú objektumot tároló privát lista.
      */
     private List<Robot> robots = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class Controler {
     {}
 
     /**
-     * ElindÃ­tja Ã©s futtatja a jÃ¡tÃ©kot.
+     * Elindítja és futtatja a játékot.
      * 
      */
     public void startGame()
@@ -86,7 +86,7 @@ public class Controler {
         Logger.endFunctionLog();
     }
     /**
-     * leÃ¡llÃ­tja a jÃ¡tkot.
+     * leállítja a játkot.
      */
     public void endGame()
     {   
@@ -97,7 +97,7 @@ public class Controler {
     }
 
     /**
-     * a paramÃ©terkÃ©nt megkapott robotot hozzÃ¡adja a robots listÃ¡jÃ¡hoz
+     * a paraméterként megkapott robotot hozzáadja a robots listájához
      * @param r
      */
     public void addRobot(Robot r)
@@ -110,12 +110,12 @@ public class Controler {
     }
 
     /**
-     * Jegyzi egy telepes halÃ¡lÃ¡t
+     * Jegyzi egy telepes halálát
      * 
-     * Ha egy telepes meghal, akkor meghÃ­vja  ezt a Settler_die() fÃ¼ggvÃ©nyt, 
-     * ami eltÃ¡volÃ­tja a settlers listÃ¡bÃ³l a paramÃ©terkÃ©nt kapott Settler objektumot
-     * Ã©s Ã¡tÃ­rja a Settler_alive vÃ¡ltozÃ³ Ã©rtÃ©kÃ©t.
-     * Ha nem marad tÃ¶bb settler, jÃ¡tÃ©k vÃ©gÃ©t hÃ­v.
+     * Ha egy telepes meghal, akkor meghívja  ezt a Settler_die() függvényt, 
+     * ami eltávolítja a settlers listából a paraméterként kapott Settler objektumot
+     * és átírja a Settler_alive változó értékét.
+     * Ha nem marad több settler, játék végét hív.
      * 
      * @param s
      */
@@ -132,7 +132,7 @@ public class Controler {
     }
 
     /**
-     * ha egy robot meghal, akkor meghÃ­vja ezt a Robot_die() fÃ¼ggvÃ©nyt, ami eltÃ¡volÃ­tja a robots listÃ¡bÃ³l az paramÃ©terkÃ©nt kapott
+     * ha egy robot meghal, akkor meghívja ezt a Robot_die() függvényt, ami eltávolítja a robots listából az paraméterként kapott
      * Robot objektumot.
      * @param r
      */
@@ -145,7 +145,7 @@ public class Controler {
         Logger.endFunctionLog();
     }
     /**
-     * HozzÃ¡adja a paramÃ©terkÃ©nt kapott telepest a controller telepeseket tartalmazÃ³ listÃ¡jÃ¡hoz
+     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmazó listájához
      * @param s
      */
     public void addSettler(Settler s)

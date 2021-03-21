@@ -19,7 +19,7 @@ public class Space {
     }
 
     /**
-     * LÃ©trhoz Ã©s visszaadja, vagy ha mÃ¡r volt lÃ©trehozva akkor visszaadja az elsÅ‘ lÃ©trehozott Space.
+     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az elsõ létrehozott Space.
      * 
      * @return a Space objektum
      */
@@ -30,8 +30,8 @@ public class Space {
         return instance;
     }
     /**
-     * ez csak a tesztelÃ©shez kell
-     * @return az Ãºj space obj.
+     * ez csak a teszteléshez kell
+     * @return az új space obj.
      */
     public static Space getNewSpace()
     {
@@ -43,23 +43,23 @@ public class Space {
     /// Singleton ends here
 
     /**
-     * Megszabja, hogy hÃ¡ny kÃ¶rÃ¶nkÃ©nt legyen napvihar.
+     * Megszabja, hogy hány körönként legyen napvihar.
      */
     private int sunstorm_time;
 
     /**
-     * A jÃ¡tÃ©kban talÃ¡lhatÃ³ Ã¶sszes Orbit egy listÃ¡ban tÃ¡rolva.
+     * A játékban található összes Orbit egy listában tárolva.
      */
     private List<Orbit> orbits;
 
-    //csak a skeleton idejÃ©re, a tesztelÃ©st segÃ­teni
+    //csak a skeleton idejére, a tesztelést segíteni
     public void setSunstorm_time(int t)
     {
         sunstorm_time = t;
     }
 
     /**
-     * MeghÃ­vja minden aszteroidÃ¡n a sunstormArrive metÃ³dust.
+     * Meghívja minden aszteroidán a sunstormArrive metódust.
      */
     private void sunstormCall()
     {
@@ -70,13 +70,13 @@ public class Space {
         Logger.endFunctionLog();
     }
 
-    //csak a skeleton idejÃ©re, a tesztelÃ©st segÃ­teni
+    //csak a skeleton idejére, a tesztelést segíteni
     public void tempSunstormCall(){
         sunstormCall();
     }
 
     /**
-     * MeghÃ­vja minden aszteroidÃ¡n a sunLightArrive metÃ³dust.
+     * Meghívja minden aszteroidán a sunLightArrive metódust.
      */
     private void sunLightCall()
     {
@@ -89,7 +89,7 @@ public class Space {
     }
 
     /**
-     * Eggyel csÃ¶kkenti a sunstorm_time Ã©rtÃ©kÃ©t.
+     * Eggyel csökkenti a sunstorm_time értékét.
      */
     private void sunstormDecrease()
     {
@@ -99,9 +99,9 @@ public class Space {
     }
 
     /**
-     * LÃ©pteti a Space-t. Ha Ã©ppen napvihar kÃ¶r van, meghÃ­vja a SunstormCall() metÃ³dust,
-     * ami szÃ³l minden aszteroidÃ¡nak, hogy napvihar van. Emellett minden kÃ¶rben meghÃ­vja
-     * a SunLightCall() metÃ³dust, amely kijelÃ¶l egy terÃ¼lelet, ahol napfÃ©ny lesz.
+     * Lépteti a Space-t. Ha éppen napvihar kör van, meghívja a SunstormCall() metódust,
+     * ami szól minden aszteroidának, hogy napvihar van. Emellett minden körben meghívja
+     * a SunLightCall() metódust, amely kijelöl egy terülelet, ahol napfény lesz.
      */
     public void step()
     {
@@ -121,7 +121,7 @@ public class Space {
     }
 
     /**
-     * HozzÃ¡adadja a paramÃ©terkÃ©nt kapott Orbitot az orbits listÃ¡hoz.
+     * Hozzáadadja a paraméterként kapott Orbitot az orbits listához.
      * @param o
      */
     public void addOrbit(Orbit o)
@@ -129,7 +129,7 @@ public class Space {
         orbits.add(o);
     }
     /**
-     * Kiveszi a paramÃ©terkÃ©nt kapott Orbitot az orbits listÃ¡bÃ³l.
+     * Kiveszi a paraméterként kapott Orbitot az orbits listából.
      * @param o
      */
     public void removeOrbit(Orbit o)

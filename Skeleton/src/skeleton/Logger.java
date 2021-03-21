@@ -6,17 +6,17 @@ import java.lang.reflect.Method;
 
 public class Logger {
     /**
-     * tabulÃ¡torok szÃ¡ma a hÃ­vÃ¡sok sorÃ¡n
+     * tabulátorok száma a hívások során
      */
     private static int stackDebth = 1;
 
     
     /** 
-     * fÃ¼ggvÃ©ny object keresÅ‘ fÃ¼ggvÃ©ny a logolÃ¡shoz
-     * @param o objektum aminek a fÃ¼ggvÃ©nyÃ©t hÃ­vjuk
-     * @param name fÃ¼ggvÃ©ny neve amit hÃ­vunk
-     * @return Method fÃ¼ggvÃ©ny ha van ilyen nevÅ±
-     * @throws Exception  kivÃ©tel ha nincs ilyen nevÅ± fÃ¼ggvÃ©ny
+     * függvény object keresõ függvény a logoláshoz
+     * @param o objektum aminek a függvényét hívjuk
+     * @param name függvény neve amit hívunk
+     * @return Method függvény ha van ilyen nevû
+     * @throws Exception  kivétel ha nincs ilyen nevû függvény
      */
     private static Method findMethod(Object o, String name) throws Exception {
         Method[] allMethods = o.getClass().getMethods();
@@ -25,7 +25,7 @@ public class Logger {
                 return method;
         }
 
-        throw new Exception("Nincs ilyen fÃ¼ggvÃ©ny: " + name);
+        throw new Exception("Nincs ilyen függvény: " + name);
     }
 
     
@@ -35,10 +35,10 @@ public class Logger {
     }
 
     /** 
-     * FormÃ¡zÃ³ segÃ©dfÃ¼ggvÃ©ny a logolÃ¡shoz
-     * @param obj objektum aminek a fÃ¼ggvÃ©nyÃ©t hÃ­vjuk
-     * @param funcName fÃ¼ggvÃ©ny neve amit hÃ­vunk
-     * @param comment komment a hÃ­vÃ¡ssal kapcsolatban
+     * Formázó segédfüggvény a logoláshoz
+     * @param obj objektum aminek a függvényét hívjuk
+     * @param funcName függvény neve amit hívunk
+     * @param comment komment a hívással kapcsolatban
      */
     public static void startFunctionLogComment(Object obj, String funcName, String comment) {
         for (int i = 0; i < stackDebth; i++)
@@ -55,7 +55,7 @@ public class Logger {
     }
 
     /** 
-     * tabok csÃ¶kkentÃ©se a hÃ­vÃ¡s vÃ©ge utÃ¡n
+     * tabok csökkentése a hívás vége után
      */
     public static void endFunctionLog() {
         stackDebth--;
@@ -63,12 +63,12 @@ public class Logger {
 
     
     /** 
-     * FÃ¼ggvÃ©ny meghÃ­vÃ¡sa Ã©s logolÃ¡sa
-     * @param obj objektum aminek a fÃ¼ggvÃ©nyÃ©t hÃ­vjuk
-     * @param funcName fÃ¼ggvÃ©ny neve amit hÃ­vunk
-     * @param comment komment a hÃ­vÃ¡ssal kapcsolatba. "" a komment elhagyÃ¡sÃ¡hoz
-     * @param args argumentumok amivel hÃ­vjuk a fÃ¼ggvÃ©nyt
-     * @return T hÃ­vott fÃ¼ggvÃ©ny visszatÃ©rÃ©si Ã©rtÃ©ke ha Ã©rdekes
+     * Függvény meghívása és logolása
+     * @param obj objektum aminek a függvényét hívjuk
+     * @param funcName függvény neve amit hívunk
+     * @param comment komment a hívással kapcsolatba. "" a komment elhagyásához
+     * @param args argumentumok amivel hívjuk a függvényt
+     * @return T hívott függvény visszatérési értéke ha érdekes
      */
     public static <T> T log(Object obj, String objName, String funcName, String comment, Object... args) {
         T res = null;
