@@ -109,45 +109,59 @@ public class SkeletonMain {
                 break;
         }
     }
-
+    /**
+     * A telepes (játékos) az aktuális aszteroidáról egy szomszédos aszteroidára lép.
+     * A program kiírja a konzolra az aszteroidára lépéshez kapcsolódó függvény hívásokat.
+     */
     public static void _1_1_MoveOnAsteroid()
     {
         Logger.formatPrint("Init");
 
+        /** A teszt lefutásához szükséges objektumok inicializálása. */
         Asteroid a1 = new Asteroid(0, 0, 8, null);
         Asteroid a2 = new Asteroid(1, 0, 8, null);
         Settler s = new Settler(a1);
         
-
+        /** Így az s telepesnek van hová lépnie, a két elõbb létrehozott aszteroida ezáltal egymás szomszédai lesznek. */
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
 
         Logger.formatPrint("_1_1_MoveOnAsteroid");
 
+        /**A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.move(0);
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes (játékos) olyan teleportkapura lép, aminek még nincs lerakva a párja.
+     * A program kiírja a konzolra a teleportkapura lépéshez kapcsolódó függvény hívásokat.
+     */
     public static void _1_2_MoveOnOfflineGate()
     {
         Logger.formatPrint("Init");
 
+        /** A teszt lefutásához szükséges objektumok inicializálása. Két csillagkaput kell létrehozzunk, 
+		 * mert a lerakott csillagkapunak mindenképp össze kell legyen kötve
+         * egy másikkal, még akkor is ha a párja még nincs lerakva egy aszteroida szomszédságába.
+         */
         Stargate s1 = new Stargate();
         Stargate s2 = new Stargate();
 
+        /** A lét teleportkapu ezáltal össze lesz kötve. */
         s1.entagle(s2);
         s2.entagle(s1);
-
         Asteroid a1 = new Asteroid(0, 0, 8, null);
-
         Settler s = new Settler(a1);
 
+        /** Az s1 kapu  le van helyezve az a1 aszteroida szomszédságába.*/
         a1.addNeighbour(s1);
-
         s1.place(a1);
 
         Logger.formatPrint("_1_2_MoveOnOfflineGate");
 
+        /**A hívási lánc elsõ eleme, amibõl elindul az egész eset. */
         s.move(0);
         Logger.formatPrint("Teszt vége");
     }
