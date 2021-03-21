@@ -9,13 +9,15 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
+            
         },
         {
             "type": "java",
             "name": "Launch SkeletonMain",
             "request": "launch",
             "mainClass": "skeleton.SkeletonMain",
-            "projectName": "Asteroids Game"
+            "projectName": "Asteroids Game",
+            "encoding": "Cp1250"
         }
     ]
 }
