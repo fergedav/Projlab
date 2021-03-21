@@ -7,6 +7,14 @@ public class Stargate extends Orbit {
     private boolean isPlaced;
     private Orbit myStop;
 
+
+    public Stargate()
+    {
+        Logger.startFunctionLogComment(this, "Stargate", "<create>");
+        Logger.endFunctionLog();
+    }
+
+
     /**
      * Törli magát a myStop-ja szomszédsági listájából.
      * //és megöli a rajtalévőket. (szöveg alapján nem definiált.)

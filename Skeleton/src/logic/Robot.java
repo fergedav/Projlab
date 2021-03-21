@@ -4,6 +4,12 @@ import java.util.Random;
 
 public class Robot extends Traveler {
     
+    public Robot()
+    {
+        super();
+        Logger.startFunctionLogComment(this, "Robot", "<<create>>");
+        Logger.endFunctionLog();
+    }
     /**
      * Visszatér egy véletlen választott számmal. A robot
      * erre az idexű aszteroidára lép majd át.

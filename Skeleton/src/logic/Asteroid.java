@@ -23,10 +23,14 @@ public class Asteroid extends Orbit {
     public Asteroid(int _x, int _y, int l, Resource c)
     {
         super();
+        Logger.startFunctionLogComment(this, "Asteroid", "<<create>>");
+
         x = _x;
         y = _y;
         core = c;
         layers = l;
+        
+        Logger.endFunctionLog();
     }
     /*
     private void setLayers(int l)

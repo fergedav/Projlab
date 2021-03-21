@@ -13,6 +13,7 @@ public class Inventory {
     private HashMap<String, ArrayList<Resource>> materials;
 
     public Inventory(int meret){
+        Logger.startFunctionLogComment(this, "Inventory", "<<create>>");
         size = meret;
 
         materials = new HashMap<String, ArrayList<Resource>>();
@@ -21,6 +22,8 @@ public class Inventory {
         materials.put("Carbon", new ArrayList<Resource>());
         materials.put("Iron", new ArrayList<Resource>());
         materials.put("Ice", new ArrayList<Resource>());
+
+        Logger.endFunctionLog();
         
     }
     /** 

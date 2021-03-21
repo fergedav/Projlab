@@ -15,7 +15,9 @@ public class Controler {
 
     private Controler()
     {
+        Logger.startFunctionLogComment(this, "Controler", "<<create>>");
         space = Space.getNewSpace();
+        Logger.endFunctionLog();
     }
 
      /**

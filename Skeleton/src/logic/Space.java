@@ -10,8 +10,12 @@ public class Space {
 
     private Space()
     {
+        Logger.startFunctionLogComment(this, "Space", "<<create>>");
+
         orbits = new ArrayList<Orbit>();
         setSunstorm_time(0);
+
+        Logger.endFunctionLog();
     }
 
     /**

@@ -8,11 +8,14 @@ public class Settler extends Traveler {
     
     private List<Stargate> stargates;
 
-    public Settler(Orbit start) {
+    public Settler(Orbit start)
+    {
         super();
+        Logger.startFunctionLogComment(this, "Settler", "<<create>>");
         currentLocation = start;
         currentLocation.addTraveler(this);
         inventory = new Inventory(10);
+        Logger.endFunctionLog();
     }
 
     @Override
