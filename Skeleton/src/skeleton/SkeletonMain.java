@@ -395,6 +395,13 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * Bányászási próbálkozás nem teljesen átfúrt kérgû aszteroidán.
+     * eredméyntelen lesz. Még nem lehet bányászni.
+     * 
+     * Init: létrehozunk egy aszteroidát aminek VAN kérge és vas magja, és rá egy telepest.
+     * A futtatáshoz a telepesnek kiadjuk a parancsot hogy bányásszon. 
+     */
     public static void _3_1_MiningOnNotFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
@@ -408,6 +415,14 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt Vége");
     }
+
+    /**
+     * Vas bányászás teljesen átfúrt kérgû aszteroidán.
+     * A bányászás sikeres lesz, a telepes elteszi a fémet az inventorijába.
+     * 
+     * Init: létrehozunk egy aszteroidát aminek NINCS kérge és vas magja, és rá egy telepest.
+     * A futtatáshoz a telepesnek kiadjuk a parancsot hogy bányásszon. 
+     */
     public static void _3_2_MiningIronOnFullyDrilledAsteroid()
     {
         Logger.formatPrint("Init");
@@ -421,6 +436,14 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt Vége");
     }
+
+    /**
+     * Bányászás teljesen átfúrt kérgû aszteroidán.
+     * A bányászás sikertelen lesz, nincs mit kibányászni.
+     * 
+     * Init: létrehozunk egy aszteroidát aminek NINCS kérge, NINCS magja, és rá egy telepest.
+     * A futtatáshoz a telepesnek kiadjuk a parancsot hogy bányásszon. 
+     */
     public static void _3_3_MiningOnFullyDrilledButEmptyAsteroid()
     {
         Logger.formatPrint("Init");
@@ -434,6 +457,14 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt Vége");
     }
+
+    /**
+     * Bányászás Ûrkapun.
+     * A bányászás sikertelen lesz, a kapun nem lehet bányászni.
+     * 
+     * Init: létrehozunk egy ûrkaput és rá egy telepest.
+     * A futtatáshoz a telepesnek kiadjuk a parancsot hogy bányásszon. 
+     */
     public static void _3_4_MiningOnStargate()
     {        
         Logger.formatPrint("Init");
@@ -488,6 +519,14 @@ public class SkeletonMain {
         }
     }
 
+    /**
+     * A telepes megpróbál még át nem fúrt aszteroidába nyersanyagot visszatenni
+     * A próbálkozás sikertelen lesz, az aszteroidának még van kérge.
+     * 
+     * Init: Létrehozunk egy aszteroidát aminek VAN kérge, és rá egy telepest.
+     * A telepes inventorijába teszünk egy fémet.
+     * Az indításhoz kiadjuk a parancsot hogy próbáljon letenni egy fémet.
+     */
     public static void _4_1_SettlerTriesToPutBackIronButHeCant()
     {
         Logger.formatPrint("Init");
@@ -505,6 +544,15 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
 
     }
+
+    /**
+     * A telepes megpróbál egy ÁTFÚRT, ÜRES aszteroidába  fémet visszatenni
+     * A próbálkozás sikeres lesz.
+     * 
+     * Init: Létrehozunk egy aszteroidát aminek NINCS kérge, NINCS a magjában semmi, és rá egy telepest.
+     * A telepes inventorijába teszünk egy fémet.
+     * Az indításhoz kiadjuk a parancsot hogy próbáljon letenni egy fémet.
+     */
     public static void _4_2_SettlerReplaceIron()
     {
         Logger.formatPrint("Init");
@@ -522,6 +570,18 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
 
+     /**
+     * A telepes megpróbál egy ÁTFÚRT, ÜRES, NAPFÉNYBEN LÉVÕ aszteroidába JEGET visszatenni.
+     * A próbálkozás sikeres lesz, de a jég a napfénytõl elolvad.
+     * 
+     * Init: Létrehozunk egy aszteroidát aminek NINCS kérge, NINCS a magjában semmi, és rá egy telepest.
+     * A telepes inventorijába teszünk egy Jeget.
+     * 
+     * Létrehozunk továbbá egy Space objektumot, mert az hívja a napfényt az aszteroidán, 
+     * beregisztráljuk az aszteroidát, és léptetjük hogy értesítse az aszteroidát, hogy fényben van.
+     * 
+     * Az indításhoz kiadjuk a parancsot hogy próbáljon letenni egy Jeget.
+     */
     public static void _4_3_SettlerPutsBackIceAndItMeltsInTheSunlight()
     {
         Logger.formatPrint("Init");
@@ -541,6 +601,18 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vége");
     }
 
+    /**
+     * A telepes megpróbál egy ÁTFÚRT, ÜRES, NAPFÉNYBEN LÉVÕ aszteroidába URÁNT visszatenni.
+     * A próbálkozás sikeres lesz, de az Urán a napfénytõl felrobban.
+     * 
+     * Init: Létrehozunk egy aszteroidát aminek NINCS kérge, NINCS a magjában semmi, és rá egy telepest.
+     * A telepes inventorijába teszünk egy Uránt.
+     * 
+     * Létrehozunk továbbá egy Space objektumot, mert az hívja a napfényt az aszteroidán, 
+     * beregisztráljuk az aszteroidát, és léptetjük hogy értesítse az aszteroidát, hogy fényben van.
+     * 
+     * Az indításhoz kiadjuk a parancsot hogy próbáljon letenni egy Uránt.
+     */
     public static void _4_4_SettlerPutsBackUranAndItExplodes()
     {
         Logger.formatPrint("Init");
@@ -561,6 +633,17 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
+
+    /**
+     * A telepes megpróbál egy Ûrkapuba (Stargate)  vasat  visszatenni.
+     * A próbálkozás sikertelen lesz, az ûrkapuba nem lehet anyagokat tenni.
+     * 
+     * Init: Létrehozunk két ûrkaput, összekötjük õket, mert párban mûködnek, és létrehozunk az egyikre egy telepest.
+     * A telepes inventorijába teszünk egy vasat.
+     * 
+     * 
+     * Az indításhoz kiadjuk a parancsot hogy próbáljon letenni egy fémet.
+     */
     public static void _4_5_SettlerTriesToPutBackIronIntoAStargate()
     {
         Logger.formatPrint("Init");
