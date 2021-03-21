@@ -23,7 +23,7 @@ public class SkeletonMain {
 
                 if(n >= min && n <=max)
                     return n;
-                    System.out.println("Hibás sorszám!");   
+                    System.out.println("Hibï¿½s sorszï¿½m!");   
                 
                 
             } catch (Exception e) {
@@ -35,18 +35,18 @@ public class SkeletonMain {
 
     public static boolean SelectCategory()
     {
-        System.out.println("1. Mozgás");
-        System.out.println("2. Fúrás");
-        System.out.println("3. Bányászat");
-        System.out.println("4. Anyag visszarakása");
-        System.out.println("5. Építés");
+        System.out.println("1. Mozgï¿½s");
+        System.out.println("2. Fï¿½rï¿½s");
+        System.out.println("3. Bï¿½nyï¿½szat");
+        System.out.println("4. Anyag visszarakï¿½sa");
+        System.out.println("5. ï¿½pï¿½tï¿½s");
         System.out.println("6. Csillagkapu dolgok");
         System.out.println("7. Napvihar");
-        System.out.println("8. Napfény érkezése");
+        System.out.println("8. Napfï¿½ny ï¿½rkezï¿½se");
         System.out.println("9. Robot Step\n");
-        System.out.println("10. Kilépés");
+        System.out.println("10. Kilï¿½pï¿½s");
         
-        int category = SelectOption("Válaszd ki a kategória sorszámát: (1-10)", 1,10);
+        int category = SelectOption("Vï¿½laszd ki a kategï¿½ria sorszï¿½mï¿½t: (1-10)", 1,10);
 
         switch (category) {
             case 1:
@@ -77,7 +77,7 @@ public class SkeletonMain {
                 _9_Robot();
                 break;
             case 10:
-                System.out.println("A program leáll.");
+                System.out.println("A program leï¿½ll.");
                 return false;
             default:
                 break;
@@ -88,12 +88,12 @@ public class SkeletonMain {
 
     public static void _1_Movement()
     {
-        System.out.println("Mozgás esetek:");
+        System.out.println("Mozgï¿½s esetek:");
         System.out.println("\t1. Move On Asteroid");
         System.out.println("\t2. Move On Offline Gate");
         System.out.println("\t3. Move On Online Gate");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-3)", 1,3);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-3)", 1,3);
         switch(opt)
         {
             case 1:
@@ -114,82 +114,90 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
 
+        /** A teszt lefutÃ¡sÃ¡hoz szÃ¼ksÃ©ges objektumok inicializÃ¡lÃ¡sa. */
         Asteroid a1 = new Asteroid(0, 0, 8, null);
         Asteroid a2 = new Asteroid(1, 0, 8, null);
         Settler s = new Settler(a1);
         
-
+        /** Ãgy az s telepesnek van hovÃ¡ lÃ©pnie, a kÃ©t elÅ‘bb lÃ©trehozott aszteroida ezÃ¡ltal egymÃ¡s szomszÃ©dai lesznek. */
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
 
         Logger.formatPrint("_1_1_MoveOnAsteroid");
 
+        /**A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.move(0);
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _1_2_MoveOnOfflineGate()
     {
         Logger.formatPrint("Init");
 
+        /** A teszt lefutÃ¡sÃ¡hoz szÃ¼ksÃ©ges objektumok inicializÃ¡lÃ¡sa. KÃ©t csillagkaput kell lÃ©trehozzunk, mert a lerakott csillagkapunak mindenkÃ©pp Ã¶ssze kell legyen kÃ¶tve
+         * egy mÃ¡sikkal, mÃ©g akkor is ha a pÃ¡rja mÃ©g nincs lerakva egy aszteroida szomszÃ©dsÃ¡gÃ¡ba.
+        */
         Stargate s1 = new Stargate();
         Stargate s2 = new Stargate();
+        Asteroid a1 = new Asteroid(0, 0, 8, null);
+        Settler s = new Settler(a1);
 
+        /** A lÃ©t teleportkapu ezÃ¡ltal Ã¶ssze lesz kÃ¶tve. */
         s1.entagle(s2);
         s2.entagle(s1);
 
-        Asteroid a1 = new Asteroid(0, 0, 8, null);
-
-        Settler s = new Settler(a1);
-
+        /** Az s1 kapu  le van helyezve az a1 aszteroida szomszÃ©dsÃ¡gÃ¡ba.*/
         a1.addNeighbour(s1);
-
         s1.place(a1);
 
         Logger.formatPrint("_1_2_MoveOnOfflineGate");
 
+        /**A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.move(0);
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _1_3_MoveOnOnlineGate()
     {
         Logger.formatPrint("Init");
 
+        /** LÃ©tre hozzuk a csillagkapukat amiken keresztÃ¼l teleportÃ¡lni fogunk */
         Stargate s1 = new Stargate();
         Stargate s2 = new Stargate();
 
+        /** Ã–sszekÃ¶tjÃ¼k Å‘ket, hogy el tudjÃ¡k egymÃ¡st Ã©rni. */
         s1.entagle(s2);
         s2.entagle(s1);
 
+        /** LÃ©trehozzuk az aszteroidÃ¡kat amikhez a csillagkapuk tartozni fognak. */
         Asteroid a1 = new Asteroid(0, 0, 8, null);
         Asteroid a2 = new Asteroid(0, 0, 8, null);
 
+        /** LÃ©trehozzuk a telepest, aki majd teleportÃ¡lni fog. */
         Settler s = new Settler(a1);
 
+        /** ElhelyezzÃ¼k a csillagkapukat az aszteroidÃ¡k szomszÃ©dsÃ¡gÃ¡ba. */
         a1.addNeighbour(s1);
-
         a2.addNeighbour(s2);
-
         s1.place(a1);
         s2.place(a2);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
-
+        /**A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.move(0);
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
 
     }
 
     public static void _2_Digging()
     {
-        System.out.println("Fúrás esetek:");
+        System.out.println("Fï¿½rï¿½s esetek:");
         System.out.println("\t1. Simple Digging");
         System.out.println("\t2. Digging And Breakthrought");
         System.out.println("\t3. Digging Breakthrought Uran");
         System.out.println("\t4. Digging Breakthrought Ice");
         System.out.println("\t5. Digging On Stargate");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-5)", 1,5);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-5)", 1,5);
         switch(opt)
         {
             case 1:
@@ -214,34 +222,43 @@ public class SkeletonMain {
     {
         Logger.formatPrint("Init");
         
+        /** LÃ©trehozzuk a telepest aki Ã¡s Ã©s az aszteroidÃ¡t amin Ã¡s. */
         Asteroid a = new Asteroid(0, 0, 8, null);
         Settler s = new Settler(a);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
-
+        /**A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.digging();
 
-        Logger.formatPrint("Teszt vége"); 
+        Logger.formatPrint("Teszt vï¿½ge"); 
     }
     public static void _2_2_DiggingAndBreakthrought()
     {
         Logger.formatPrint("Init");
         
+        /** LÃ©trehozzuk a telepest aki Ã¡s Ã©s az aszteroidÃ¡t amin Ã¡s. Az aszteroida harmadik paramÃ©tere, ami a kÃ©regvastagsÃ¡got jelÃ¶li, kezdetnek 1, hogy egy Ã¡sÃ¡ssal
+         * Ã¡t lehessen tÃ¶rni a kÃ©rget Ã©s lefuthasson a teszteset tÃ¶bbi fÃ¼ggvÃ©nyhÃ­vÃ¡sa is.
+         */
         Asteroid a = new Asteroid(0, 0, 1, null);
         Settler s = new Settler(a);
         
         a.addTraveler(s);
 
         Logger.formatPrint("_1_3_MoveOnOnlineGate");
-
+        /** A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.digging();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _2_3_DiggingBreakthroughtUran()
     {
         Logger.formatPrint("Init");
 
+        /** LÃ©trehozzuk a telepest aki Ã¡s Ã©s az aszteroidÃ¡t amin Ã¡s. Az aszteroida harmadik paramÃ©tere, ami a kÃ©regvastagsÃ¡got jelÃ¶li, kezdetnek 1, hogy egy Ã¡sÃ¡ssal
+         * Ã¡t lehessen tÃ¶rni a kÃ©rget Ã©s lefuthasson a teszteset tÃ¶bbi fÃ¼ggvÃ©nyhÃ­vÃ¡sa is. Az a2 aszteroida azÃ©rt kell, hogy a kÃ©sÅ‘bbiekben lÃ©trehozott robotnak
+         * a robbanÃ¡s hatÃ¡sÃ¡ra, legyen olyan aszteroda, ahova mehet a robbanÃ³ aszteroidÃ¡rÃ³l. EzÃ©rt Ã¡llÃ­tjuk be a kÃ©t aszteroidÃ¡nak, hogy szomszÃ©dok legyenek. Az a1 elsÅ‘ kÃ©t paramÃ©tere
+         * most 1, mert ez jelenti azt, hogy napkÃ¶zelben van.
+         */
         Asteroid a1 = new Asteroid(1, 1, 1, new Uran());
         Asteroid a2 = new Asteroid(0, 0, 1, null);
         Settler s = new Settler(a1);
@@ -265,15 +282,17 @@ public class SkeletonMain {
         a1.addTraveler(r);
 
         Logger.formatPrint("_2_3_DiggingBreakthroughtUran");
-
+        /** A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.digging();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _2_4_DiggingBreakthroughtIce()
     {
         Logger.formatPrint("Init");
-
+        /**LÃ©trehozzuk a telepest aki Ã¡s Ã©s az aszteroidÃ¡t amin Ã¡s. Az aszteroida harmadik paramÃ©tere, ami a kÃ©regvastagsÃ¡got jelÃ¶li, kezdetnek 1, hogy egy Ã¡sÃ¡ssal
+         * Ã¡t lehessen tÃ¶rni a kÃ©rget Ã©s lefuthasson a teszteset tÃ¶bbi fÃ¼ggvÃ©nyhÃ­vÃ¡sa is. Az aszteroida elsÅ‘ kÃ©t paramÃ©tere most 1, mert ez jelenti azt, hogy napkÃ¶zelben van.
+         */
         Asteroid a = new Asteroid(1, 1, 1, new Ice());
         Settler s = new Settler(a);
 
@@ -281,14 +300,17 @@ public class SkeletonMain {
         Space.getInstance().step();
 
         Logger.formatPrint("_2_4_DiggingBreakthroughtIce");
-
+        /** A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.digging();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _2_5_DiggingOnStargate()
     {
         Logger.formatPrint("Init");
+
+        /** KÃ©t csillagkaput kell lÃ©trehozzunk, mert a lerakott csillagkapunak mindenkÃ©pp Ã¶ssze kell legyen kÃ¶tve egy mÃ¡sikkal, mÃ©g akkor is ha a pÃ¡rja mÃ©g nincs lerakva 
+         * egy aszteroida szomszÃ©dsÃ¡gÃ¡ba. */
         Stargate st1 = new Stargate();
         Stargate st2 = new Stargate();
         
@@ -298,21 +320,21 @@ public class SkeletonMain {
         Settler s = new Settler(st1);
 
         Logger.formatPrint("_2_5_DiggingOnStargate");
-
+        /** A hÃ­vÃ¡si lÃ¡nc elsÅ‘ eleme, amibÅ‘l elindul az egÃ©sz eset. */
         s.digging();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 
     public static void _3_Mining()
     {
-        System.out.println("Bányászat esetek:");
+        System.out.println("Bï¿½nyï¿½szat esetek:");
         System.out.println("\t1. Mining On Not Fully Drilled Asteroid");
         System.out.println("\t2. Mining Iron On Fully Drilled Asteroid");
         System.out.println("\t3. Mining On Fully Drilled But Empty Asteroid");
         System.out.println("\t4. Mining On Stargate");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-4)", 1,4);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-4)", 1,4);
         switch(opt)
         {
             case 1:
@@ -341,7 +363,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vége");
+        Logger.formatPrint("Teszt Vï¿½ge");
     }
     public static void _3_2_MiningIronOnFullyDrilledAsteroid()
     {
@@ -354,7 +376,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vége");
+        Logger.formatPrint("Teszt Vï¿½ge");
     }
     public static void _3_3_MiningOnFullyDrilledButEmptyAsteroid()
     {
@@ -367,7 +389,7 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vége");
+        Logger.formatPrint("Teszt Vï¿½ge");
     }
     public static void _3_4_MiningOnStargate()
     {        
@@ -390,19 +412,19 @@ public class SkeletonMain {
 
         settler.mining();
 
-        Logger.formatPrint("Teszt Vége");
+        Logger.formatPrint("Teszt Vï¿½ge");
     }
 
     public static void _4_ReplaceResource()
     {
-        System.out.println("Bányászat esetek:");
-        System.out.println("\t1. Settler Tries To Put Back Iron But He Can’t");
+        System.out.println("Bï¿½nyï¿½szat esetek:");
+        System.out.println("\t1. Settler Tries To Put Back Iron But He Canï¿½t");
         System.out.println("\t2. Settler Replace Iron");
         System.out.println("\t3. Settler Puts Back Ice And It Melts In The Sunlight");
         System.out.println("\t4. Settler Puts Back Uran And It Explodes");
         System.out.println("\t5. Settler Tries To Put Back Iron Into A Stargate");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-5)", 1,5);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-5)", 1,5);
         switch(opt)
         {
             case 1:
@@ -437,7 +459,7 @@ public class SkeletonMain {
 
         sett.replaceResource("Iron");
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
 
     }
     public static void _4_2_SettlerReplaceIron()
@@ -454,7 +476,7 @@ public class SkeletonMain {
 
         sett.replaceResource("Iron");
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 
     public static void _4_3_SettlerPutsBackIceAndItMeltsInTheSunlight()
@@ -473,7 +495,7 @@ public class SkeletonMain {
 
         sett.replaceResource("Ice");
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 
     public static void _4_4_SettlerPutsBackUranAndItExplodes()
@@ -482,7 +504,7 @@ public class SkeletonMain {
         Controler cont = Controler.getNewControler();
         Asteroid a = new Asteroid(1, 1, 0, null);
         Settler sett = new Settler(a);
-        cont.addSettler (new Settler(new Asteroid(0, 0, 1, null))) ;// azért hogy az elsõdleges settler halálával ne érjen véget a játék.
+        cont.addSettler (new Settler(new Asteroid(0, 0, 1, null))) ;// azï¿½rt hogy az elsï¿½dleges settler halï¿½lï¿½val ne ï¿½rjen vï¿½get a jï¿½tï¿½k.
         Uran u = new Uran();
         Controler.getInstance().addSettler(sett);
         Space.getInstance().addOrbit(a);
@@ -494,7 +516,7 @@ public class SkeletonMain {
 
         sett.replaceResource("Uran");
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _4_5_SettlerTriesToPutBackIronIntoAStargate()
     {
@@ -513,18 +535,18 @@ public class SkeletonMain {
 
         sett.replaceResource("Iron");
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 
     public static void _5_Build()
     {
-        System.out.println("Építés esetek:");
+        System.out.println("ï¿½pï¿½tï¿½s esetek:");
         System.out.println("\t1. Successful Robot Create");
         System.out.println("\t2. Failed Robot Create Missing Material");
         System.out.println("\t3. Successful Base Create");
         System.out.println("\t4. Failed Base Create Missing Material");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-4)", 1,4);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-4)", 1,4);
         switch(opt)
         {
             case 1:
@@ -558,7 +580,7 @@ public class SkeletonMain {
 
         s1.createRobot();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _5_2_FailedRobotCreateMissingMaterial()
     {
@@ -571,7 +593,7 @@ public class SkeletonMain {
 
         s1.createRobot();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _5_3_SuccessfulBaseCreate()
     {
@@ -598,7 +620,7 @@ public class SkeletonMain {
 
         s1.createBase();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _5_4_FailedBaseCreateMissingMaterial()
     {
@@ -613,7 +635,7 @@ public class SkeletonMain {
 
         s1.createBase();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 
     public static void _6_Stargate()
@@ -623,7 +645,7 @@ public class SkeletonMain {
         System.out.println("\t2. Failed Stargate Create Missing Material");
         System.out.println("\t3. Successful Stargate Place");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-3)", 1,3);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-3)", 1,3);
         switch(opt)
         {
             case 1:
@@ -655,7 +677,7 @@ public class SkeletonMain {
 
         s1.stargate();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _6_2_FailedStargateCreateMissingMaterial()
     {
@@ -668,7 +690,7 @@ public class SkeletonMain {
 
         s1.stargate();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _6_3_SuccessfulStargatePlace()
     {
@@ -687,7 +709,7 @@ public class SkeletonMain {
         Logger.formatPrint("_6_3_SuccessfulStargatePlace");
 
         s.stargate();
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     
     public static void _7_SunStorm()
@@ -697,7 +719,7 @@ public class SkeletonMain {
         System.out.println("\t2. Sunstorm On Not Empty Asteroid");
         System.out.println("\t3. Sunstorm On Safe Asteroid");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-3)", 1,3);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-3)", 1,3);
         switch(opt)
         {
             case 1:
@@ -718,7 +740,7 @@ public class SkeletonMain {
 
         Controler cont = Controler.getNewControler();
         Space space = cont.getSpace();
-        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //õ életben marad majd, nem lesz játék vége
+        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //ï¿½ ï¿½letben marad majd, nem lesz jï¿½tï¿½k vï¿½ge
 
         Asteroid asteroid = new Asteroid(1,1,10,new Iron());
         space.addOrbit(asteroid);
@@ -744,7 +766,7 @@ public class SkeletonMain {
 
         Controler cont = Controler.getNewControler();
         Space space = cont.getSpace();
-        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //õ életben marad majd, nem lesz játék vége
+        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //ï¿½ ï¿½letben marad majd, nem lesz jï¿½tï¿½k vï¿½ge
 
         Asteroid asteroid = new Asteroid(1,1,0,new Iron());
         space.addOrbit(asteroid);
@@ -769,7 +791,7 @@ public class SkeletonMain {
 
         Controler cont = Controler.getNewControler();
         Space space = cont.getSpace();
-        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //õ életben marad majd, nem lesz játék vége
+        cont.addSettler(new Settler(new Asteroid(20,20,1,null))); //ï¿½ ï¿½letben marad majd, nem lesz jï¿½tï¿½k vï¿½ge
 
         Asteroid asteroid = new Asteroid(1,1,0, null);
         space.addOrbit(asteroid);
@@ -792,13 +814,13 @@ public class SkeletonMain {
 
     public static void _8_SunLight()
     {
-        System.out.println("Napfény érkezése esetek:");
+        System.out.println("Napfï¿½ny ï¿½rkezï¿½se esetek:");
         System.out.println("\t1. Sunlight Arrives To Not Fully Drilled Asteroid");
         System.out.println("\t2. Sunlight Arrives To Fully Drilled Asteroid With Iron");
         System.out.println("\t3. Sunlight Arrives To Fully Drilled Asteroid With Uran");
         System.out.println("\t4. Sunlight Arrives To Fully Drilled Asteroid With Ice");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-4)", 1,4);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-4)", 1,4);
         switch(opt)
         {
             case 1:
@@ -829,7 +851,7 @@ public class SkeletonMain {
         
         s.step();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _8_2_SunlightArrivesToFullyDrilledAsteroidWithIron()
     {
@@ -844,7 +866,7 @@ public class SkeletonMain {
 
         s.step();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _8_3_SunlightArrivesToFullyDrilledAsteroidWithUran()
     {
@@ -860,7 +882,7 @@ public class SkeletonMain {
         a2.addNeighbour(a1);
 
         s.addOrbit(a1);
-        // felvesz egy settlert az aszteroidára és 
+        // felvesz egy settlert az aszteroidï¿½ra ï¿½s 
         Settler set = new Settler(a1);
         Settler set2 = new Settler(a2);
 
@@ -875,7 +897,7 @@ public class SkeletonMain {
 
         s.step();
         
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _8_4_SunlightArrivesToFullyDrilledAsteroidWithIce()
     {
@@ -890,7 +912,7 @@ public class SkeletonMain {
 
         s.step();
 
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 
     public static void _9_Robot()
@@ -899,7 +921,7 @@ public class SkeletonMain {
         System.out.println("\t1. Robot Is On Not Fully Drilled Asteroid");
         System.out.println("\t2. Robot Is On Fully Drilled Asteroid");
 
-        int opt = SelectOption("Válaszd ki a use-case sorszámát: (1-2)", 1,2);
+        int opt = SelectOption("Vï¿½laszd ki a use-case sorszï¿½mï¿½t: (1-2)", 1,2);
         switch(opt)
         {
             case 1:
@@ -925,7 +947,7 @@ public class SkeletonMain {
 
         r.step();
         
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
     public static void _9_2_RobotIsOnFullyDrilledAsteroid()
     {
@@ -943,6 +965,6 @@ public class SkeletonMain {
 
         r.step();
         
-        Logger.formatPrint("Teszt vége");
+        Logger.formatPrint("Teszt vï¿½ge");
     }
 }
