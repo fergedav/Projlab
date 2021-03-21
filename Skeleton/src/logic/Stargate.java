@@ -15,10 +15,17 @@ public class Stargate extends Orbit {
     {
         Logger.startFunctionLogComment(this, "dieAnother", "");
 
-        if(myStop!=null)
-            myStop.removeNeighbour(this);
-        
+        if(myStop!=null){
+            myStop.removeNeighbour(this); 
+        }
         /*
+        if(myStop!=null){
+            for(Orbit orb : neighbours){
+                orb.removeNeighbour(this);
+            }           
+            myStop = null;
+        }        
+        
         for(Traveler t : travelers){t.die();}
         */
 
@@ -54,6 +61,8 @@ public class Stargate extends Orbit {
     {  
         Logger.startFunctionLogComment(this, "die", "");
 
+        
+        //myStop = null;
         myTwin.dieAnother();
 
         Logger.endFunctionLog();
@@ -95,7 +104,8 @@ public class Stargate extends Orbit {
 
         myStop =  o;
         isPlaced = true;
-        
+        neighbours.add(o);
+
         Logger.endFunctionLog();
     }
     
@@ -120,4 +130,18 @@ public class Stargate extends Orbit {
 
         return this;
     }
+/*
+    @Override
+    public void removeNeighbour(Orbit o)
+    {
+        Logger.startFunctionLogComment(this, "removeNeighbour", "");
+                 
+        if(o == myStop){
+            this.die();
+        }
+        else
+            neighbours.remove(o);
+        
+        Logger.endFunctionLog();
+    }*/
 }
