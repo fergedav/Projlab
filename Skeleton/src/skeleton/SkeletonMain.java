@@ -110,10 +110,6 @@ public class SkeletonMain {
         }
     }
 
-    /**
-     * A telepes (jÃ¡tÃ©kos) az aktuÃ¡lis aszteroidÃ¡rÃ³l egy szomszÃ©dos aszteroidÃ¡ra lÃ©p.
-     * A program kiÃ­rja a konzolra az aszteroidÃ¡ra lÃ©pÃ©shez kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _1_1_MoveOnAsteroid()
     {
         Logger.formatPrint("Init");
@@ -134,11 +130,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
-
-    /**
-     * A telepes (jÃ¡tÃ©kos) olyan teleportkapura lÃ©p, aminek mÃ©g nincs lerakva a pÃ¡rja.
-     * A program kiÃ­rja a konzolra a teleportkapura lÃ©pÃ©shez kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _1_2_MoveOnOfflineGate()
     {
         Logger.formatPrint("Init");
@@ -165,11 +156,6 @@ public class SkeletonMain {
         s.move(0);
         Logger.formatPrint("Teszt vï¿½ge");
     }
-
-    /**
-     * A telepes (jÃ¡tÃ©kos) olyan teleportkapura lÃ©p, aminek mÃ¡r le van rakva a pÃ¡rja.
-     * A program kiÃ­rja a konzolra az teleportkapura lÃ©pÃ©shez Ã©s a teleportÃ¡lÃ¡shoz kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _1_3_MoveOnOnlineGate()
     {
         Logger.formatPrint("Init");
@@ -232,10 +218,6 @@ public class SkeletonMain {
         }
     }
 
-    /**
-     * A telepes (jÃ¡tÃ©kos) egy egysÃ©ggel mÃ©lyebbre Ã¡s az aszteroida kÃ©rgÃ©ben, de mÃ©g nem Ã¡sta Ã¡t teljesen.
-     * A program kiÃ­rja a konzolra az Ã¡sÃ¡shoz kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _2_1_SimpleDigging()
     {
         Logger.formatPrint("Init");
@@ -250,11 +232,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge"); 
     }
-
-    /**
-     * A telepes (jÃ¡tÃ©kos) egy egysÃ©ggel mÃ©lyebbre Ã¡s az aszteroida kÃ©rgÃ©ben, teljesen Ã¡tÃ¡sta (az aszteroida nincs napkÃ¶zelben).
-     * A program kiÃ­rja a konzolra az Ã¡sÃ¡shoz Ã©s az Ã¡ttÃ¶rÃ©shez kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _2_2_DiggingAndBreakthrought()
     {
         Logger.formatPrint("Init");
@@ -273,11 +250,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
-
-    /**
-     * A telepes (jÃ¡tÃ©kos) egy egysÃ©ggel mÃ©lyebbre Ã¡s az aszteroida kÃ©rgÃ©ben, teljesen Ã¡tÃ¡sta, a magja urÃ¡n (az aszteroida napkÃ¶zelben van, Ã­gy robban).
-     * A program kiÃ­rja a konzolra az Ã¡sÃ¡shoz, az Ã¡ttÃ¶rÃ©shez Ã©s az urÃ¡n robbanÃ¡sÃ¡hoz kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _2_3_DiggingBreakthroughtUran()
     {
         Logger.formatPrint("Init");
@@ -294,7 +266,6 @@ public class SkeletonMain {
         a2.addNeighbour(a1);
         a1.addNeighbour(a2);
 
-        //feltÃ¶ltjÃ¼k az Inventorit Uran-nal, Iron-nal Ã©s Ice-al
         Inventory seged = s.getInventory();
         seged.addUran(new Uran());
         seged.addIron(new Iron());
@@ -316,11 +287,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
-
-    /**
-     * A telepes (jÃ¡tÃ©kos) egy egysÃ©ggel mÃ©lyebbre Ã¡s az aszteroida kÃ©rgÃ©ben, teljesen Ã¡tÃ¡sta, a magja jÃ©g (az aszteroida nincs napkÃ¶zelben, Ã­gy elpÃ¡rolog).
-     * A program kiÃ­rja a konzolra az Ã¡sÃ¡shoz, az Ã¡ttÃ¶rÃ©shez Ã©s a jÃ©g elpÃ¡rolgÃ¡sÃ¡hoz kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _2_4_DiggingBreakthroughtIce()
     {
         Logger.formatPrint("Init");
@@ -339,11 +305,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vï¿½ge");
     }
-
-    /**
-     * A telepes (jÃ¡tÃ©kos) megkÃ­sÃ©rel egy teleportkapun Ã¡sni.
-     * A program kiÃ­rja az Ã¡sÃ¡si kÃ­sÃ©rlethez kapcsolÃ³dÃ³ fÃ¼ggvÃ©ny hÃ­vÃ¡sokat.
-     */
     public static void _2_5_DiggingOnStargate()
     {
         Logger.formatPrint("Init");
@@ -604,10 +565,10 @@ public class SkeletonMain {
     }
 
     /**
-     * A telepes (jï¿½tï¿½kos) lï¿½trehoz egy ï¿½j robotot.
-     * A program kiï¿½rja a konzolra a sikeres robot kï¿½szï¿½tï¿½s mï¿½veletï¿½hez kapcsolï¿½dï¿½ fï¿½ggvï¿½ny hï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk egy settlert, aki kï¿½pes lï¿½trehozni egy robotot
-     * Feltï¿½ltjï¿½k az Inventoryt egy Uran, Iron, Carbon-nal.
+     * A telepes (játékos) létrehoz egy új robotot.
+     * A program kiírja a konzolra a sikeres robot készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki képes létrehozni egy robotot
+     * Feltöltjük az Inventoryt egy Uran, Iron, Carbon-nal.
      */
     public static void _5_1_SuccessfulRobotCreate()
     {
@@ -628,9 +589,9 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vï¿½ge");
     }
     /**
-     * A telepes (jï¿½tï¿½kos) lï¿½tre prï¿½bï¿½l hozni egy ï¿½j robotot, de nincs elï¿½g nyersanyagja.
-     * A program kiï¿½rja a konzolra a sikertelen robot kï¿½szï¿½tï¿½s mï¿½veletï¿½hez kapcsolï¿½dï¿½ fï¿½ggvï¿½ny hï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk egy settlert, aki nem kï¿½pes lï¿½trehozni robotot, mert nincs elegendï¿½ nyersanyagja
+     * A telepes (játékos) létre próbál hozni egy új robotot, de nincs elég nyersanyagja.
+     * A program kiírja a konzolra a sikertelen robot készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki nem képes létrehozni robotot, mert nincs elegendõ nyersanyagja
      */
     public static void _5_2_FailedRobotCreateMissingMaterial()
     {
@@ -646,11 +607,11 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vï¿½ge");
     }
     /**
-     * A telepes (jï¿½tï¿½kos) felï¿½pï¿½t az aszteroidï¿½n egy bï¿½zist a rajta lï¿½vï¿½ tï¿½bbi telepessel ï¿½s ezzel megnyerik a jï¿½tï¿½kot. 
-     * A telepeseknek van elï¿½g nyersanyaga a bï¿½zis megï¿½pï¿½tï¿½sï¿½hez, 
-     *      ekkor a program a kï¿½pernyï¿½re ï¿½rja a bï¿½zis ï¿½pï¿½tï¿½sï¿½vel ï¿½s a jï¿½tï¿½k befejezï¿½sï¿½vel jï¿½rï¿½ fï¿½ggvï¿½nyhï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk kï¿½t settlert, akik kï¿½pesek felï¿½pï¿½teni a bï¿½zist
-     * Feltï¿½ltjï¿½k s1 Settler Inventory-jï¿½ba 3 Carbon, 3 Iron, 3 Uran, s2 Settler Inventory-jï¿½ba 3 Ice nyersanyagot.
+     * A telepes (játékos) felépít az aszteroidán egy bázist a rajta lévõ többi telepessel és ezzel megnyerik a játékot. 
+     * A telepeseknek van elég nyersanyaga a bázis megépítéséhez, 
+     *      ekkor a program a képernyõre írja a bázis építésével és a játék befejezésével járó függvényhívásokat.
+     * Init: Egy aszteroidán létrehozunk két settlert, akik képesek felépíteni a bázist
+     * Feltöltjük s1 Settler Inventory-jába 3 Carbon, 3 Iron, 3 Uran, s2 Settler Inventory-jába 3 Ice nyersanyagot.
      */
     public static void _5_3_SuccessfulBaseCreate()
     {
@@ -680,10 +641,10 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vï¿½ge");
     }
      /**
-     * A telepes (jï¿½tï¿½kos) megprï¿½bï¿½l felï¿½pï¿½teni az aszteroidï¿½n egy bï¿½zist a rajta lï¿½vï¿½ tï¿½bbi telepessel, de nincs elï¿½g nyersanyagjuk.  
-     * A telepeseknek nincs elï¿½g nyersanyaga a bï¿½zis megï¿½pï¿½tï¿½sï¿½hez,
-     *      ekkor a program a kï¿½pernyï¿½re ï¿½rja a bï¿½zis ï¿½pï¿½tï¿½sï¿½vel valï¿½ prï¿½bï¿½lkozï¿½shoz kapcsolï¿½dï¿½ fï¿½ggvï¿½nyhï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk kï¿½t settlert, akik nem kï¿½pesek felï¿½pï¿½teni a bï¿½zist, mert nincs meg a szï¿½ksï¿½ges nyersanyag mennyisï¿½gï¿½k
+     * A telepes (játékos) megpróbál felépíteni az aszteroidán egy bázist a rajta lévõ többi telepessel, de nincs elég nyersanyagjuk.  
+     * A telepeseknek nincs elég nyersanyaga a bázis megépítéséhez,
+     *      ekkor a program a képernyõre írja a bázis építésével való próbálkozáshoz kapcsolódó függvényhívásokat.
+     * Init: Egy aszteroidán létrehozunk két settlert, akik nem képesek felépíteni a bázist, mert nincs meg a szükséges nyersanyag mennyiségük
      */
     public static void _5_4_FailedBaseCreateMissingMaterial()
     {
@@ -723,10 +684,10 @@ public class SkeletonMain {
         }
     }
     /**
-     * A telepes (jï¿½tï¿½kos) lï¿½trehoz egy ï¿½j teleportkapu-pï¿½rt ï¿½s elraktï¿½rozza a tï¿½rolï¿½jï¿½ban ï¿½ket.
-     * A program kiï¿½rja a konzolra az teleportkapu-pï¿½r kï¿½szï¿½tï¿½s mï¿½veletï¿½hez kapcsolï¿½dï¿½ fï¿½ggvï¿½ny hï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk egy settlert, aki kï¿½pes lï¿½trehozni egy teleportkapu-pï¿½rt.
-     * Feltï¿½ltjï¿½k az Inventoryt 1 Uran, 2 Iron, ï¿½s 1 Ice-cal.
+     * A telepes (játékos) létrehoz egy új teleportkapu-párt és elraktározza a tárolójában õket.
+     * A program kiírja a konzolra az teleportkapu-pár készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki képes létrehozni egy teleportkapu-párt.
+     * Feltöltjük az Inventoryt 1 Uran, 2 Iron, és 1 Ice-cal.
      */
     public static void _6_1_SuccessfulStargateCreate()
     {
@@ -748,9 +709,9 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vï¿½ge");
     }
     /**
-     * A telepes (jï¿½tï¿½kos) megprï¿½bï¿½l lï¿½trehozni egy ï¿½j teleportkapu-pï¿½rt, de nincs elï¿½g nyersanyagja.
-     * A program kiï¿½rja a konzolra a sikertelen teleportkapu-pï¿½r kï¿½szï¿½tï¿½s mï¿½veletï¿½hez kapcsolï¿½dï¿½ fï¿½ggvï¿½ny hï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk egy settlert, aki nem kï¿½pes lï¿½trehozni egy teleportkapu-pï¿½rt, mert nincs elegendï¿½ nyersanyagja.
+     * A telepes (játékos) megpróbál létrehozni egy új teleportkapu-párt, de nincs elég nyersanyagja.
+     * A program kiírja a konzolra a sikertelen teleportkapu-pár készítés mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki nem képes létrehozni egy teleportkapu-párt, mert nincs elegendõ nyersanyagja.
      */
     public static void _6_2_FailedStargateCreateMissingMaterial()
     {
@@ -766,10 +727,10 @@ public class SkeletonMain {
         Logger.formatPrint("Teszt vï¿½ge");
     }
     /**
-     * A telepes egy aszteroida szomszï¿½dsï¿½gï¿½ban lehelyez egy teleport kaput.
-     * A program kiï¿½rja a konzolra az teleportkapu elhelyezï¿½sï¿½nek mï¿½veletï¿½hez kapcsolï¿½dï¿½ fï¿½ggvï¿½ny hï¿½vï¿½sokat.
-     * Init: Egy aszteroidï¿½n lï¿½trehozunk egy settlert, aki lï¿½trehoz egy teleportkapu-pï¿½rt magï¿½hoz (elsï¿½ stargate() hï¿½vï¿½s).
-     *      Utï¿½na ebbï¿½l a kï¿½t akapubï¿½l helyez el egyet a teszt sorï¿½n.
+     * A telepes egy aszteroida szomszédságában lehelyez egy teleport kaput.
+     * A program kiírja a konzolra az teleportkapu elhelyezésének mûveletéhez kapcsolódó függvény hívásokat.
+     * Init: Egy aszteroidán létrehozunk egy settlert, aki létrehoz egy teleportkapu-párt magához (elsõ stargate() hívás).
+     *      Utána ebbõl a két akapuból helyez el egyet a teszt során.
      */
     public static void _6_3_SuccessfulStargatePlace()
     {
