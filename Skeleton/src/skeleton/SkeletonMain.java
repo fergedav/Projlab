@@ -3,7 +3,6 @@ package skeleton;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import skeleton.Logger;
 import logic.*;
 
 public class SkeletonMain {
@@ -82,8 +81,6 @@ public class SkeletonMain {
             default:
                 break;
         }
-
-        System.console().readLine();
 
         return true;
     }
