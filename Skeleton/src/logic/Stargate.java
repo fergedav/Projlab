@@ -10,7 +10,7 @@ public class Stargate extends Orbit {
 
     public Stargate()
     {
-        Logger.startFunctionLogComment(this, "Stargate", "<create>");
+        Logger.startFunctionLogComment(this, "Stargate", "<<create>>");
         Logger.endFunctionLog();
     }
 
