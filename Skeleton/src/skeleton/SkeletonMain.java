@@ -133,7 +133,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
-
     /**
      * A telepes (játékos) olyan teleportkapura lép, aminek még nincs lerakva a párja.
      * A program kiírja a konzolra a teleportkapura lépéshez kapcsolódó függvény hívásokat.
@@ -230,7 +229,6 @@ public class SkeletonMain {
                  break;
         }
     }
-
     /**
      * A telepes (játékos) egy egységgel mélyebbre ás az aszteroida kérgében, de még nem ásta át teljesen.
      * A program kiírja a konzolra az ásáshoz kapcsolódó függvény hívásokat.
@@ -249,7 +247,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége"); 
     }
-
 
     /**
      * A telepes (játékos) egy egységgel mélyebbre ás az aszteroida kérgében, teljesen átásta (az aszteroida nincs napközelben).
@@ -985,7 +982,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt Vege");
     }
-
     /**
      * Napvihar érkezik egy TELJESEN ÁTFÚRT, ÉS ÜRES aszteroidára, amin telepes, és robot van éppen.
      * A napvihar nincs rájuk hatással, az aszteroida "védelmet" ad a napvihartól.
@@ -1079,7 +1075,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
-
     /**
      * A napfény elér egy aszteroidát, amelynek át van fúrva a kérge, és vas van benne.
      * 
@@ -1107,7 +1102,6 @@ public class SkeletonMain {
 
         Logger.formatPrint("Teszt vége");
     }
-
     /**
      * A napfény elér egy aszteroidát, amelynek át van fúrva a kérge, és urán van benne.
      * 
@@ -1154,7 +1148,6 @@ public class SkeletonMain {
         
         Logger.formatPrint("Teszt vége");
     }
-
     /**
      * A napfény elér egy aszteroidát, amelynek át van fúrva a kérge, és jég van benne.
      * 
@@ -1201,7 +1194,6 @@ public class SkeletonMain {
             case 3:
         }
     }
-
     /**
      *  A robot egy nem teljesen kifúrt aszteroidán áll, ekkor fúrni kezdi azt. 
      * 
@@ -1226,7 +1218,7 @@ public class SkeletonMain {
         
         Logger.formatPrint("Teszt vége");
     }
-
+    
     /**
      * A robot egy teljesen kifúrt aszteroidán van, ezért választ egy szomszédot, és oda mozog.
      * 
