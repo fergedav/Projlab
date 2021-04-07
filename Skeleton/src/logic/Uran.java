@@ -4,6 +4,11 @@ import skeleton.Logger;
 
 public class Uran extends Resource {
 
+    /**
+     * hanyszor erte az urant eddig napfeny
+     */
+    private int exposure = 0;
+
     @Override
     public void callBack(Inventory inv)
     {
@@ -18,9 +23,13 @@ public class Uran extends Resource {
     {
         Logger.startFunctionLogComment(this, "reaction", "");
 
-        a.explosion();
+        exposure++;
 
-        a.retrieveResource();
+        if(exposure >= 3)
+        {
+            a.explosion();
+            a.retrieveResource();
+        }
 
         Logger.endFunctionLog();
     }

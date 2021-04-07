@@ -6,6 +6,7 @@ import skeleton.Logger;
 
 public class Settler extends Traveler {
     
+    //0-3 stargetes
     private List<Stargate> stargates;
 
     public Settler(Orbit start)
@@ -72,39 +73,22 @@ public class Settler extends Traveler {
         Logger.endFunctionLog();
     }
 
-    public void stargate()
-    {
-        Logger.startFunctionLogComment(this, "stargate", "");
-        /** Ha a stargate gomb megnyomásakor nincs teleportkapuja a telepesnek, akkor megpróbál létrehozni egy új teleportkapu-párt. */
-        if(stargates == null)
-        {
-            createStargate();
-        }
-        /** Ha pedig a stargate gomb megnyomásakor van teleportkapuja, akkor lerak egyet, a tartózkodási helyére. */
-        else
-        {
-            placeStargate();
-        }
-        Logger.endFunctionLog();
-    }
-
-    private void placeStargate()
+    public void placeStargate()
     {
         Logger.startFunctionLogComment(this, "placeStargate", "");
-        /** Elhelyezi a lista 0. indexe alatt lévõ teleportkaput a place függvénnyel, majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
-        stargates.get(0).place(currentLocation);
-        currentLocation.addNeighbour(stargates.get(0));
-        stargates.remove(0);
 
-        /** A teleportkapuk listájának a hossza a lerakott teleportkapu, a listából való eltávolítása elõtt. */
-        int  sizebefore = stargates.size();        
-
-        /** Ha már az utolsó teleportkapu is le lett rakva (a sizebefore, azaz a teleportkapuk listája a lerakott teleportkapu eltávolítása elõtti hossza, egyenlõ 1-el),
-         *  akkor null-ra állítja a listát. */
-        if(sizebefore ==   1)
-        {            
-            stargates = null;
+        if(stargates.size() > 0)
+        {
+            /** Elhelyezi a lista 0. indexe alatt lévõ teleportkaput a place függvénnyel, 
+            * majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
+            Stargate s = stargates.get(0);
+            s.place(currentLocation);
+            currentLocation.addNeighbour(s);
+            //most mar neki is tudnia kell a szomszedsagrol
+            s.addNeighbour(currentLocation);
+            stargates.remove(s);
         }
+        
         Logger.endFunctionLog();
         
     }
@@ -150,22 +134,23 @@ public class Settler extends Traveler {
         Logger.endFunctionLog();
     }
 
-    private void createStargate()
+    public void createStargate()
     {
         Logger.startFunctionLogComment(this, "createStargate", "");
-        /** A createStargate null-al tér vissza nem volt elég nyersanyag a kapuk létrehozásához. */
-        List<Stargate> newgates = inventory.createStargate();
 
-        /** Ha sikerült létrehozni a teleportkapu-párt, akkor õket hozzáadjuk a kapuk listájához. */
-        if (newgates != null)
+        if(stargates.size() <= 1)
         {
-           stargates = newgates;
+            List<Stargate> newgates = inventory.createStargate();
+
+            if (newgates != null)
+            {
+                stargates.addAll(newgates);
+                
+                controler.addStargate(newgates.get(0));
+                controler.addStargate(newgates.get(1));
+            } 
         }
-        /** Egyéb esetben null-ra állítja a listát. */
-        else
-        {
-            stargates = null;
-        }
+
         Logger.endFunctionLog();
     }
 

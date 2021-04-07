@@ -7,10 +7,12 @@ public class Stargate extends Orbit {
     private boolean isPlaced;
     private Orbit myStop;
     private boolean beCrazy = false;
+    public static Controller stargeteController;
 
     public Stargate()
     {
         Logger.startFunctionLogComment(this, "Stargate", "<<create>>");
+        stargeteController = Controller.getInstance();
         Logger.endFunctionLog();
     }
 
@@ -110,9 +112,9 @@ public class Stargate extends Orbit {
     {
         Logger.startFunctionLogComment(this, "place", "");
 
-        myStop =  o;
+        myStop = o.addNeighbour(this);
+
         isPlaced = true;
-        neighbours.add(o);
 
         Logger.endFunctionLog();
     }
@@ -138,7 +140,8 @@ public class Stargate extends Orbit {
 
         return this;
     }
-/*
+    
+    /*
     @Override
     public void removeNeighbour(Orbit o)
     {
@@ -153,19 +156,59 @@ public class Stargate extends Orbit {
         Logger.endFunctionLog();
     }*/
 
+    /**
+     * megnézi, hogy a teleportkapu meg van-e kergülve. 
+     * Ha igen, akkor a StargateMoves() metódusával véletlen átlép a jelenlegi myStop-jának egy szomszédjára. 
+     * A WhereTo() metódusával eldönti, hogy melyik szomszédos orbitra lépjen tovább, majd átlép oda.
+     */
     public void step()
     {
-
+        if(beCrazy)
+            stargateMoves();
     }
 
+    /**
+     * Lépést indít a jelenlegi myStop-jának egy véletlen szomszédjára.
+     */
     private void stargateMoves()
     {
+        //uj szomszed keresese
+        Orbit newLoc = myStop.getNeighbour(whereTo());
+
+        // nincs szomszed nem tud hova menni, marad itt
+        if(newLoc == null)
+            return;
+
+        myStop.removeNeighbour(this);
+
+        place(newLoc);
 
     }
 
+    /**
+     * Eldönti, hogy myStop-jának melyik szomszédos aszteroidára lépjen tovább.
+     * Véletlen generál egy értéket az aszteroidája szomszédsági listájának nagysága alapján.
+     * @return
+     */
     private int whereTo()
     {
-        return -1;
+        //TODO det nem det megcsinalni
+        return 0;
     }
 
+    @Override
+    public void sunstormArrive(int[] coords )
+    {
+        // TODO sorrend nem biztos, figyelni kene hogy egy kor soran hogy jonnek a dolgok
+        super.sunstormArrive(coords);//ez hív traveler die-t
+
+        if(inLight)
+            beCrazy = true;
+    }
+
+    @Override
+    public Orbit addNeighbour(Orbit o)
+    {
+        return myStop.addNeighbour(o);
+    }
 }

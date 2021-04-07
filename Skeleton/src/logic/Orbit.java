@@ -10,7 +10,7 @@ public abstract class Orbit {
     protected List<Traveler> travelers;
     protected boolean inLight = false;
     protected int layers = 0;
-    protected int x; //senki nem tárolja a koordinátákat tömbben xd
+    protected int x; 
     protected int y;
 
     protected Orbit() {
@@ -60,11 +60,12 @@ public abstract class Orbit {
      * A paraméterként kapott Orbit-ot hozzáadja a szomszédsági listájához.
      * @param o Orbit
      */
-    public void addNeighbour(Orbit o)
+    public Orbit addNeighbour(Orbit o)
     {
         Logger.startFunctionLogComment(this, "addNeighbour", "");
         neighbours.add(o);
         Logger.endFunctionLog();
+        return this;
     }
 
     /**
@@ -149,10 +150,7 @@ public abstract class Orbit {
     /**
      * Eldönti, hogy a koordinátái alapján beleesik-e a jelzett négyzetbe. 
      * Ha igen, akkor beállítja true-ra a inLight attribútumot, ha nem beállítja false-ra.
-     * @param x1 left
-     * @param y1 top
-     * @param x2 right
-     * @param y2 bottom
+     * @param int[] coords 
      */
     public void sunLightArrive(int[] coords )
     {
@@ -188,6 +186,17 @@ public abstract class Orbit {
         //Logger.startFunctionLogComment(this, "numOfNeighbor", "");
         //Logger.endFunctionLog();L
         return neighbours.size();
+    }
+
+    /**
+     * megmutatja mi van "benne" (nem veszi ki), csak az aszteroidanal lehet lenyeges, 
+     * de kell mivel mindenki Orbit tipusra lepked ra, meg az UFO is,
+     * SZIGORUAN TILOS ELTAROLNI A RETURN-T, CSAK OSSZEHASONLITASRA VAN!!! (nincs meglesem és ellopom, csak meglesem majd ellopom)
+     * @return belso
+     */
+    public Resource peekCore()
+    {
+        return null;
     }
 
 }

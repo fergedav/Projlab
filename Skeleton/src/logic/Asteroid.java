@@ -31,13 +31,7 @@ public class Asteroid extends Orbit {
         layers = l;
         
         Logger.endFunctionLog();
-    }
-    
-    private void setLayers(int l)
-    {
-        layers = l;
-    }
-    
+    }    
 
     /**
      * Megvizsgálja, hogy az aszteroida napközelben van-e illetve, hogy teljesen át van e fúrva a kérge. 
@@ -181,10 +175,7 @@ public class Asteroid extends Orbit {
      * Eldönti, hogy a koordinátái alapján beleesik-e a jelzett négyzetbe. 
      * Ha igen, akkor beállítja true-ra a inLight attribútumot és meghívja a magára a privát Reaction() metódust. 
      * Ha nem esik bele, akkor beállítja false-ra a inLight attribútumot.
-     * @param x1 left
-     * @param y1 top
-     * @param x2 right
-     * @param y2 bottom
+     * @param int[] coords 
      */
     @Override
     public void sunLightArrive(int[] coords )
@@ -196,5 +187,11 @@ public class Asteroid extends Orbit {
             reaction();
 
         Logger.endFunctionLog();
+    }
+
+    @Override
+    public Resource peekCore()
+    {
+        return core;
     }
 }

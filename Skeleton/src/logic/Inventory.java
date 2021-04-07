@@ -46,6 +46,7 @@ public class Inventory {
     public void addResource(Resource r)
     {
         Logger.startFunctionLogComment(this, "addResource", "");
+        // TODO ez itt nem <= kene legyen?
         if(inventorySize() < size){
             r.callBack(this);
         }
