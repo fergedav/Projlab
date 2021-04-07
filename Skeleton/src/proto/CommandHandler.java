@@ -1,6 +1,11 @@
 package proto;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import logic.*;
 
 public class CommandHandler {
 
@@ -12,36 +17,126 @@ public class CommandHandler {
     public static void processCommand(String line)
     {
         try {
-            String[] splits = line.split(" ");
+            String[] splits = line.toLowerCase().split(" ");
             getMethod(splits[0]).invoke(null, (Object[])splits);
         } catch (Exception e) {
             System.out.println("Hiba: " + e.getMessage());
         }
     }
 
-    public static void loadmap(Object[] args) {}
+    public static void loadmap(Object[] args) throws IOException 
+    {
+        BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
+        String line;
+        while((line = rd.readLine()) != null)
+        {
+            processCommand(line);
+        }
+        rd.close();
+    }
 
-    public static void savemap(Object[] args) {}
+    public static void savemap(Object[] args) 
+    {
+        //TODO sztem ez nem kell
+    }
 
-    public static void loadtest(Object[] args) {}
+    public static void loadtest(Object[] args) throws IOException 
+    {
+        loadmap(args);
+    }
 
-    public static void createmap(Object[] args) {}
+    public static void createmap(Object[] args) 
+    {
+        Controller.getNewControler();
+    }
 
-    public static void robotstep(Object[] args) {}
+    public static void robotstep(Object[] args) throws Exception 
+    {
+        int robotId = Integer.parseInt((String)args[1]);
+        Controller.getInstance().getRobot(robotId).step();
+    }
 
-    public static void ufostep(Object[] args) {}
+    public static void ufostep(Object[] args) throws Exception 
+    {
+        int ufoId = Integer.parseInt((String)args[1]);
+        Controller.getInstance().getUfo(ufoId).step();
+    }
 
-    public static void stargatestep(Object[] args) {}
+    public static void stargatestep(Object[] args) throws Exception
+    {
+        int stargateId = Integer.parseInt((String)args[1]);
+        Controller.getInstance().getStargate(stargateId).step();
+    }
 
-    public static void sunstormcall(Object[] args) {}
+    public static void sunstormcall(Object[] args) 
+    {
+        Controller.getInstance().explicitSunstorm(
+            Integer.parseInt((String)args[1]),
+            Integer.parseInt((String)args[2]),
+            Integer.parseInt((String)args[3]),
+            Integer.parseInt((String)args[4])
+            );
+    }
 
-    public static void sunlightcall(Object[] args) {}
+    public static void sunlightcall(Object[] args) 
+    {
+        Controller.getInstance().explicitSunlight(
+            Integer.parseInt((String)args[1]),
+            Integer.parseInt((String)args[2]),
+            Integer.parseInt((String)args[3]),
+            Integer.parseInt((String)args[4])
+            );
+    }
 
-    public static void setneighbour(Object[] args) {}
+    public static void setneighbour(Object[] args) throws NumberFormatException, Exception 
+    {
+        Controller c = Controller.getInstance();
+        Asteroid a1 = c.getAsteroid(Integer.parseInt((String)args[1]));
+        Asteroid a2 = c.getAsteroid(Integer.parseInt((String)args[2]));
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+    }
 
-    public static void addasteroid(Object[] args) {}
+    public static void addasteroid(Object[] args) throws Exception 
+    {
+        Controller c = Controller.getInstance();
+        Resource r;
+        
+        switch ((String)args[1]) {
+            case "carbon":
+                r = new Carbon();
+                break;
+        
+            case "iron":
+                r = new Iron();
+                break;
 
-    public static void addpairedstargate(Object[] args) {}
+            case "ice":
+                r = new Ice();
+                break;
+        
+            case "uran":
+                r = new Uran();
+                break;
+
+            case "null":
+                r = null;
+                break;
+
+            default:
+            throw new Exception("Ismeretlen nyersanyag: " + (String)args[1]);
+        }
+        c.addOrbit(new Asteroid(Integer.parseInt((String)args[2]), 
+                                Integer.parseInt((String)args[3]), 
+                                Integer.parseInt((String)args[4]), 
+                                r, //arg1
+                                Boolean.parseBoolean((String)args[5])));;
+    }
+
+    public static void addpairedstargate(Object[] args) 
+    {
+        
+    }
 
     public static void addhalfstargate(Object[] args) {}
 

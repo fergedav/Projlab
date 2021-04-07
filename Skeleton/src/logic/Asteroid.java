@@ -20,7 +20,7 @@ public class Asteroid extends Orbit {
      * @param l rétegek száma
      * @param c Nyers anyag ami tartalmaz, lehet null ha üres
      */
-    public Asteroid(int _x, int _y, int l, Resource c)
+    public Asteroid(int _x, int _y, int l, Resource c, boolean light)
     {
         super();
         Logger.startFunctionLogComment(this, "Asteroid", "<<create>>");
@@ -29,7 +29,8 @@ public class Asteroid extends Orbit {
         y = _y;
         core = c;
         layers = l;
-        
+        inLight = light;
+
         Logger.endFunctionLog();
     }    
 

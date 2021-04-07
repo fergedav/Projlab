@@ -198,6 +198,10 @@ public class Controller {
     public void addOrbit(Orbit o)
     {
         orbits.add(o);
+
+        //ideiglenes a prto idejere, konnyebb eleres erdekeben
+        if(o.getClass() == Asteroid.class)
+            asteroids.add((Asteroid)o);
     }
     /**
      * Kiveszi a paraméterként kapott Orbitot az orbits listából.
@@ -206,6 +210,10 @@ public class Controller {
     public void removeOrbit(Orbit o)
     {
         orbits.remove(o);
+        
+        //ideiglenes a prto idejere, konnyebb eleres erdekeben
+        if(o.getClass() == Asteroid.class)
+            asteroids.remove(o);
     }
 
     /**
@@ -249,6 +257,62 @@ public class Controller {
         sunstormTimmer--;
         Logger.endFunctionLog();
     }
+
+    //Proto fuggvenyek
+
+    private List<Asteroid> asteroids = new ArrayList<>();
+
+    public Robot getRobot(int index) throws Exception
+    {
+        if(index < 0 || index >= robots.size())
+            throw new Exception("Nincs ilyen robot: " + index);
+
+        return robots.get(index);
+    }
+
+    public Ufo getUfo(int index) throws Exception
+    {
+        if(index < 0 || index >= ufos.size())
+            throw new Exception("Nincs ilyen ufo: " + index);
+
+        return ufos.get(index);
+    }
+
+    public Stargate getStargate(int index) throws Exception
+    {
+        if(index < 0 || index >= stargates.size())
+            throw new Exception("Nincs ilyen kapu: " + index);
+
+        return stargates.get(index);
+    }
+
+    public Asteroid getAsteroid(int index) throws Exception
+    {
+        if(index < 0 || index >= stargates.size())
+            throw new Exception("Nincs ilyen aszteroida: " + index);
+
+        return asteroids.get(index);
+    }
+
+    public void explicitSunstorm(int x1, int y1, int x2, int y2)
+    {
+        int coords[] = {x1,y1,x2,y2};
+
+        for(Orbit o: orbits){
+            o.sunstormArrive(coords);
+        }
+    }
+
+    public void explicitSunlight(int x1, int y1, int x2, int y2)
+    {
+        int coords[] = {x1,y1,x2,y2};
+
+        for(Orbit o : orbits){
+            o.sunLightArrive(coords);
+        }
+    }
+
+    //end of Proto fuggvenyek
 
     ///Singleton stuff
     private static Controller instance;
