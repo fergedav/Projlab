@@ -95,7 +95,7 @@ public abstract class Orbit {
             return o;
         } catch (Exception e) {
             Logger.endFunctionLog();
-            return null;
+            return this;
         }
 
         
@@ -187,16 +187,4 @@ public abstract class Orbit {
         //Logger.endFunctionLog();L
         return neighbours.size();
     }
-
-    /**
-     * megmutatja mi van "benne" (nem veszi ki), csak az aszteroidanal lehet lenyeges, 
-     * de kell mivel mindenki Orbit tipusra lepked ra, meg az UFO is,
-     * SZIGORUAN TILOS ELTAROLNI A RETURN-T, CSAK OSSZEHASONLITASRA VAN!!! (nincs meglesem és ellopom, csak meglesem majd ellopom)
-     * @return belso
-     */
-    public Resource peekCore()
-    {
-        return null;
-    }
-
 }
