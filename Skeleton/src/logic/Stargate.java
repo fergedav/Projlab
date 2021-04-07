@@ -6,7 +6,7 @@ public class Stargate extends Orbit {
     private Stargate myTwin;
     private boolean isPlaced;
     private Orbit myStop;
-
+    private boolean beCrazy = false;
 
     public Stargate()
     {
@@ -152,4 +152,20 @@ public class Stargate extends Orbit {
         
         Logger.endFunctionLog();
     }*/
+
+    public void step()
+    {
+
+    }
+
+    private void stargateMoves()
+    {
+
+    }
+
+    private int whereTo()
+    {
+        return -1;
+    }
+
 }

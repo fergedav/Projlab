@@ -7,11 +7,11 @@ public abstract class Traveler {
     protected Inventory inventory;
 
     protected Orbit currentLocation;
-    protected Controler controler;
+    protected Controller controler;
 
     protected Traveler()
     {
-        controler = Controler.getInstance();
+        controler = Controller.getInstance();
     }
 
     /** 

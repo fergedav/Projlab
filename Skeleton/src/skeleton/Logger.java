@@ -3,10 +3,22 @@ package skeleton;
 import java.lang.System;
 
 public class Logger {
+
+    /**
+     * Logolas be es kikapcsolasa
+     */
+    private static boolean isLogging = false;
+
     /**
      * tabulátorok száma a hívások során
      */
     private static int stackDebth = 0;
+
+
+    public static void setLogState(boolean logging)
+    {
+        isLogging = logging;
+    }
 
     /** 
      * Formázó függvény a logoláshoz
@@ -15,6 +27,9 @@ public class Logger {
      * @param comment komment a hívással kapcsolatban
      */
     public static void startFunctionLogComment(Object obj, String funcName, String comment) {
+
+        if(!isLogging) return;
+
         for (int i = 0; i < stackDebth; i++)
             System.out.print("\t");
 
@@ -31,6 +46,7 @@ public class Logger {
      * tabok csökkentése a hívás vége után
      */
     public static void endFunctionLog() {
+        if(!isLogging) return;
         stackDebth--;
     }
 
@@ -40,6 +56,7 @@ public class Logger {
      */
     public static void formatPrint(String str)
     {
+        if(!isLogging) return;
         System.out.println("\n---" + str + "---\n");
     }
 }

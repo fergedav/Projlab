@@ -128,10 +128,17 @@ public abstract class Orbit {
     /**
      * Alapértelmezésben meghívja a travelers listája összes elemére a Die() függvényt.
      */
-    public void sunstormArrive()
+    public void sunstormArrive(int[] coords )
     {
         Logger.startFunctionLogComment(this, "sunstormArrive", "");
         
+        if(!(
+            coords[0] <= x &&
+            coords[1] <= y &&
+            coords[2] >= x &&
+            coords[3] >= y
+        )) return;
+
         for (Traveler t : travelers) {
             t.die();
         }
@@ -147,11 +154,13 @@ public abstract class Orbit {
      * @param x2 right
      * @param y2 bottom
      */
-    public void sunLightArrive(int x1, int y1, int x2, int y2)
+    public void sunLightArrive(int[] coords )
     {
 
-        if(x >= x1 && y >= y1 &&
-            x <= x2 && y <= y2)
+        if( coords[0] <= x &&
+            coords[1] <= y &&
+            coords[2] >= x &&
+            coords[3] >= y)
         {
             inLight = true;
         }

@@ -32,12 +32,12 @@ public class Asteroid extends Orbit {
         
         Logger.endFunctionLog();
     }
-    /*
+    
     private void setLayers(int l)
     {
         layers = l;
     }
-    */
+    
 
     /**
      * Megvizsgálja, hogy az aszteroida napközelben van-e illetve, hogy teljesen át van e fúrva a kérge. 
@@ -153,9 +153,17 @@ public class Asteroid extends Orbit {
      * Ha nem akkor az összes jelenleg rajta tartózkodó utazóra a Die() metódust hívja.
      */
     @Override
-    public void sunstormArrive()
+    public void sunstormArrive(int[] coords)
     {
         Logger.startFunctionLogComment(this, "sunstormArrive", "");
+
+        //napfényben vagyok e
+        if(!(
+            coords[0] <= x &&
+            coords[1] <= y &&
+            coords[2] >= x &&
+            coords[3] >= y
+        )) return;
 
         if(!(layers == 0 && core == null))
         {
@@ -179,11 +187,11 @@ public class Asteroid extends Orbit {
      * @param y2 bottom
      */
     @Override
-    public void sunLightArrive(int x1, int y1, int x2, int y2)
+    public void sunLightArrive(int[] coords )
     {
         Logger.startFunctionLogComment(this, "sunLightArrive", "");
 
-        super.sunLightArrive(x1, y1, x2, y2);
+        super.sunLightArrive(coords);
         if(inLight)
             reaction();
 
