@@ -35,7 +35,6 @@ public class Ufo extends Traveler {
 
     @Override
     public void step() {
-        // TODO Auto-generated method stub
         int l = currentLocation.getLayers();
 
         if(l == 0 && currentLocation.peekCore() != null)
