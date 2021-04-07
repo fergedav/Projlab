@@ -189,10 +189,4 @@ public class Asteroid extends Orbit {
 
         Logger.endFunctionLog();
     }
-
-    @Override
-    public Resource peekCore()
-    {
-        return core;
-    }
 }

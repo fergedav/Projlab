@@ -178,6 +178,7 @@ public class Controller {
      */
     public void addStargate(Stargate s)
     {
+        orbits.add(s);
         stargates.add(s);
     }
 
@@ -188,6 +189,7 @@ public class Controller {
      */
     public void stargateDie(Stargate s)
     {
+        orbits.remove(s);
         stargates.remove(s);
     }
 

@@ -1,13 +1,14 @@
 package logic;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import skeleton.Logger;
 
 public class Settler extends Traveler {
     
     //0-3 stargetes
-    private List<Stargate> stargates;
+    private List<Stargate> stargates = new ArrayList<>();
 
     public Settler(Orbit start)
     {
@@ -28,9 +29,14 @@ public class Settler extends Traveler {
         currentLocation.removeTraveler(this);
 
         /** Ha van teleportkapuja a telepesnek a halálakor, akkor az összes elpusztul a telepessel együtt. */
-        if(stargates != null)
+        if(stargates.size() != 0)
         {
+            if(stargates.size() == 3)
+            {
+                stargates.get(2).die();
+            }
            stargates.get(0).die();
+           
         }
 
         /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy õ meghalt és kéri, hogy húzza ki az élõ telepesek listájából (a settlerDie függvénnyel) */
@@ -83,9 +89,7 @@ public class Settler extends Traveler {
             * majd a lehelyezett teleportkaput a remove-al eltávolítja a teleportkapuk listájából */
             Stargate s = stargates.get(0);
             s.place(currentLocation);
-            currentLocation.addNeighbour(s);
-            //most mar neki is tudnia kell a szomszedsagrol
-            s.addNeighbour(currentLocation);
+            
             stargates.remove(s);
         }
         

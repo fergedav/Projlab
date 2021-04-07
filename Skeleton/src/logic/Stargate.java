@@ -27,18 +27,10 @@ public class Stargate extends Orbit {
 
         if(myStop!=null){
             myStop.removeNeighbour(this); 
+            for(Traveler t : travelers) {t.die();}
         }
-        /*
-        if(myStop!=null){
-            for(Orbit orb : neighbours){
-                orb.removeNeighbour(this);
-            }           
-            myStop = null;
-        }        
-        
-        for(Traveler t : travelers){t.die();}
-        */
 
+        stargeteController.stargateDie(this);
         Logger.endFunctionLog();
     }
 
@@ -71,9 +63,8 @@ public class Stargate extends Orbit {
     {  
         Logger.startFunctionLogComment(this, "die", "");
 
-        
-        //myStop = null;
         myTwin.dieAnother();
+        dieAnother();
 
         Logger.endFunctionLog();
     }
@@ -141,21 +132,6 @@ public class Stargate extends Orbit {
         return this;
     }
     
-    /*
-    @Override
-    public void removeNeighbour(Orbit o)
-    {
-        Logger.startFunctionLogComment(this, "removeNeighbour", "");
-                 
-        if(o == myStop){
-            this.die();
-        }
-        else
-            neighbours.remove(o);
-        
-        Logger.endFunctionLog();
-    }*/
-
     /**
      * megnézi, hogy a teleportkapu meg van-e kergülve. 
      * Ha igen, akkor a StargateMoves() metódusával véletlen átlép a jelenlegi myStop-jának egy szomszédjára. 
@@ -174,10 +150,6 @@ public class Stargate extends Orbit {
     {
         //uj szomszed keresese
         Orbit newLoc = myStop.getNeighbour(whereTo());
-
-        // nincs szomszed nem tud hova menni, marad itt
-        if(newLoc == null)
-            return;
 
         myStop.removeNeighbour(this);
 
@@ -199,11 +171,19 @@ public class Stargate extends Orbit {
     @Override
     public void sunstormArrive(int[] coords )
     {
-        // TODO sorrend nem biztos, figyelni kene hogy egy kor soran hogy jonnek a dolgok
-        super.sunstormArrive(coords);//ez hív traveler die-t
-
-        if(inLight)
+        if(
+            coords[0] <= x &&
+            coords[1] <= y &&
+            coords[2] >= x &&
+            coords[3] >= y
+        ) {
+            for (Traveler t : travelers) {
+                t.die();
+            }
             beCrazy = true;
+        };
+
+        
     }
 
     @Override

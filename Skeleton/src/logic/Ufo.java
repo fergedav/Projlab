@@ -7,7 +7,7 @@ public class Ufo extends Traveler {
     public Ufo()
     {
         //remelhetoleg kelloen nagy
-        inv = new Inventory(100);
+        inv = new Inventory(10000);
     }
 
     private int whereTo()
@@ -35,11 +35,7 @@ public class Ufo extends Traveler {
 
     @Override
     public void step() {
-        int l = currentLocation.getLayers();
-
-        if(l == 0 && currentLocation.peekCore() != null)
-            mining();
-        else
+        if(!mining())
             ufoMoves();
         
     }
@@ -50,14 +46,13 @@ public class Ufo extends Traveler {
         //Ufo nem fur :(
     }
 
-    private void mining()
+    private boolean mining()
     {
         //nem kene null check mert az van a step-ben, mining csak nem null core eseten hivodik, 
         //de explicit hivasok miatt inkabb rakok
         Resource r = currentLocation.retrieveResource();
         if(r != null) inv.addResource(r);
+
+        return r != null;
     }
-
-
-
 }
