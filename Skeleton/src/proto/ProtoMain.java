@@ -46,6 +46,6 @@ public class ProtoMain {
             System.out.println("Employee class not found");
             e.printStackTrace();
             return;
-         }
+         }//бых
     }
 }
