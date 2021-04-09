@@ -1,9 +1,13 @@
 package proto;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import logic.*;
 
@@ -18,13 +22,46 @@ public class CommandHandler {
     {
         try {
             String[] splits = line.toLowerCase().split(" ");
-            getMethod(splits[0]).invoke(null, (Object[])splits);
+            getMethod(splits[0]).invoke(null, (Object[]) splits);
         } catch (Exception e) {
             System.out.println("Hiba: " + e.getMessage());
         }
     }
 
     public static void loadmap(Object[] args) throws IOException 
+    {
+        try {
+            FileInputStream fileIn = new FileInputStream("test.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Controller.LoadController((Controller) in.readObject());
+            in.close();
+            fileIn.close();
+         } catch (IOException i) {
+            i.printStackTrace();
+            return;
+         } catch (ClassNotFoundException e) {
+            System.out.println("Employee class not found");
+            e.printStackTrace();
+            return;
+         }
+    }
+
+    public static void savemap(Object[] args) 
+    {
+        try {
+            FileOutputStream fileOut =
+            new FileOutputStream((String)args[1]);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Controller.getInstance());
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in test.ser");
+         } catch (IOException i) {
+            i.printStackTrace();
+         }
+    }
+
+    public static void loadtest(Object[] args) throws IOException 
     {
         BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
         String line;
@@ -33,16 +70,6 @@ public class CommandHandler {
             processCommand(line);
         }
         rd.close();
-    }
-
-    public static void savemap(Object[] args) 
-    {
-        //TODO sztem ez nem kell
-    }
-
-    public static void loadtest(Object[] args) throws IOException 
-    {
-        loadmap(args);
     }
 
     public static void createmap(Object[] args) 

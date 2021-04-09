@@ -7,7 +7,8 @@ import java.util.Map;
 
 import skeleton.Logger;
 
-public class Inventory {
+public class Inventory implements java.io.Serializable {
+
     private final int size;
 
     private HashMap<String, ArrayList<Resource>> materials;

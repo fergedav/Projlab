@@ -3,10 +3,9 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import skeleton.Logger;
 
-public class Controller {
+public class Controller implements java.io.Serializable {
     /**
      * folyamatban van e a jatek
      */
@@ -260,7 +259,7 @@ public class Controller {
         Logger.endFunctionLog();
     }
 
-    //Proto fuggvenyek
+    //Proto fuggvenyek ------------------------------------------------------------------------------
 
     private List<Asteroid> asteroids = new ArrayList<>();
 
@@ -314,7 +313,7 @@ public class Controller {
         }
     }
 
-    //end of Proto fuggvenyek
+    //end of Proto fuggvenyek ---------------------------------------------------------------------------
 
     ///Singleton stuff
     private static Controller instance;
@@ -333,7 +332,7 @@ public class Controller {
     public static Controller getInstance()
     {
         if(instance == null)
-        instance = new Controller();
+            instance = new Controller();
         return instance;
     }
     /**
@@ -343,6 +342,11 @@ public class Controller {
     {
         instance = new Controller();
         return instance;
+    }
+
+    public static void LoadController(Controller c)
+    {
+        instance = c;
     }
 
     /// Singleton ends here

@@ -2,7 +2,7 @@ package logic;
 
 import skeleton.Logger;
 
-public abstract class Traveler {
+public abstract class Traveler implements java.io.Serializable {
 
     protected Inventory inventory;
 

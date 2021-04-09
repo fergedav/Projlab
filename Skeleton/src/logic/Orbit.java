@@ -5,7 +5,7 @@ import java.util.List;
 
 import skeleton.Logger;
 
-public abstract class Orbit {
+public abstract class Orbit implements java.io.Serializable {
     protected List<Orbit> neighbours;
     protected List<Traveler> travelers;
     protected boolean inLight = false;
