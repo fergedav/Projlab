@@ -4,6 +4,11 @@ import java.util.Random;
 
 public class Robot extends Traveler {
     
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3138426053591207283L;
+
     public Robot()
     {
         super();
@@ -93,4 +98,10 @@ public class Robot extends Traveler {
     public void setLocation(Orbit o){
         currentLocation = o;
     }
+    
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

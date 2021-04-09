@@ -3,6 +3,10 @@ package logic;
 import skeleton.Logger;
 
 public class Stargate extends Orbit {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6397383425201864620L;
     private Stargate myTwin;
     private boolean isPlaced;
     private Orbit myStop;
@@ -191,4 +195,10 @@ public class Stargate extends Orbit {
     {
         return myStop.addNeighbour(o);
     }
+    
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

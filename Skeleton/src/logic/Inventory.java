@@ -9,6 +9,11 @@ import skeleton.Logger;
 
 public class Inventory implements java.io.Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5282074853486280495L;
+
     private final int size;
 
     private HashMap<String, ArrayList<Resource>> materials;
@@ -246,5 +251,10 @@ public class Inventory implements java.io.Serializable {
         Logger.endFunctionLog();
         
     }
+
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 }

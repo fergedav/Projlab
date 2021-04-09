@@ -7,7 +7,11 @@ import skeleton.Logger;
 
 public class Settler extends Traveler {
     
-    //0-3 stargetes
+    /**
+	 *
+	 */
+	private static final long serialVersionUID = 1002966729770761380L;
+	//0-3 stargetes
     private List<Stargate> stargates = new ArrayList<>();
 
     public Settler(Orbit start)
@@ -165,4 +169,10 @@ public class Settler extends Traveler {
         die();
         Logger.endFunctionLog();
     }
+    
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

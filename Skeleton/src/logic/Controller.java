@@ -7,6 +7,11 @@ import skeleton.Logger;
 
 public class Controller implements java.io.Serializable {
     /**
+	 *
+	 */
+	private static final long serialVersionUID = -425692066249723082L;
+
+	/**
      * folyamatban van e a jatek
      */
     private boolean gameIsOn = false;
@@ -350,4 +355,11 @@ public class Controller implements java.io.Serializable {
     }
 
     /// Singleton ends here
+    
+//PROTO FÜGGVÉNYEK INNENTÕL///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 }

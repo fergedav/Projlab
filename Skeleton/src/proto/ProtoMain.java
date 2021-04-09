@@ -19,7 +19,7 @@ public class ProtoMain {
         Settler s = new Settler(a);
         c.addSettler(s);
         s.mining();
-        int x = 0;
+        //int x = 0;
 
         try {
             FileOutputStream fileOut =
@@ -39,6 +39,7 @@ public class ProtoMain {
             Controller c2 = (Controller) in.readObject();
             in.close();
             fileIn.close();
+            c2.endGame();
          } catch (IOException i) {
             i.printStackTrace();
             return;
@@ -47,5 +48,6 @@ public class ProtoMain {
             e.printStackTrace();
             return;
          }//бых
+         
     }
 }

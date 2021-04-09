@@ -5,6 +5,10 @@ import skeleton.Logger;
 public class Uran extends Resource {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = -786906863582651807L;
+    /**
      * hanyszor erte az urant eddig napfeny
      */
     private int exposure = 0;
@@ -33,5 +37,10 @@ public class Uran extends Resource {
 
         Logger.endFunctionLog();
     }
+
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 }

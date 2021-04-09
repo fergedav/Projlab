@@ -2,6 +2,10 @@ package logic;
 
 public class Ufo extends Traveler {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6867257992338262330L;
     private Inventory inv;
 
     public Ufo()
@@ -55,4 +59,10 @@ public class Ufo extends Traveler {
 
         return r != null;
     }
+    
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

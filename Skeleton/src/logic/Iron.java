@@ -4,6 +4,11 @@ import skeleton.Logger;
 
 public class Iron extends Resource {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4027146222680543561L;
+
     @Override
     public void callBack(Inventory inv)
     {
@@ -13,5 +18,10 @@ public class Iron extends Resource {
     
         Logger.endFunctionLog();
     }
+
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 }

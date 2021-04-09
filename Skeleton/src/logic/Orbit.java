@@ -6,6 +6,10 @@ import java.util.List;
 import skeleton.Logger;
 
 public abstract class Orbit implements java.io.Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8842665086008545927L;
     protected List<Orbit> neighbours;
     protected List<Traveler> travelers;
     protected boolean inLight = false;
@@ -187,4 +191,10 @@ public abstract class Orbit implements java.io.Serializable {
         //Logger.endFunctionLog();L
         return neighbours.size();
     }
+    
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

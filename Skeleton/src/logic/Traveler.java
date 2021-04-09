@@ -4,6 +4,11 @@ import skeleton.Logger;
 
 public abstract class Traveler implements java.io.Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1409581797041834036L;
+
     protected Inventory inventory;
 
     protected Orbit currentLocation;
@@ -60,4 +65,11 @@ public abstract class Traveler implements java.io.Serializable {
 
     /** A Settler és a Robot magának implementálja. */
     public abstract void step();
+
+    
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

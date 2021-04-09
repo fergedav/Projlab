@@ -8,6 +8,10 @@ import skeleton.Logger;
 public class Asteroid extends Orbit {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = -2021672783921175891L;
+    /**
      * Az aszteroida magja
      */
     private Resource core;
@@ -189,4 +193,10 @@ public class Asteroid extends Orbit {
 
         Logger.endFunctionLog();
     }
+
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 }

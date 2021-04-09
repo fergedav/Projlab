@@ -4,7 +4,11 @@ import skeleton.Logger;
 
 public class Ice extends Resource {
 
-    @Override
+    /**
+	 *
+	 */
+	private static final long serialVersionUID = -6702522056977305777L;
+	@Override
     public void callBack(Inventory inv) 
     {
         Logger.startFunctionLogComment(this, "callBack", "");
@@ -22,5 +26,10 @@ public class Ice extends Resource {
 
         Logger.endFunctionLog();
     }
+
+    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 }
