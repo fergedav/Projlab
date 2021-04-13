@@ -69,7 +69,23 @@ public abstract class Traveler implements java.io.Serializable {
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+    // perfix
+    String prefix;
+    /**
+     * Visszater az adott Orbithoz tartozo prefixxel
+     * @return String prefix
+     */
+    public String getPrefix()
+    {
+        return prefix;
+    }
+    /**
+     * Módosítja a prefixet a parameterben kapott stringgel.
+     * @param s prefix uj erteke
+     */
+    public void setPrefix(String s)
+    {
+        prefix = s;
+    }
 
 }
