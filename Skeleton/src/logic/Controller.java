@@ -357,7 +357,12 @@ public class Controller implements java.io.Serializable {
     /// Singleton ends here
     
 //PROTO FÜGGVÉNYEK INNENTÕL///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * Index alapján visszatér a settlers lista adott elemével
+     * @param index
+     * @return az adott indexu Settler a settlers listaban
+     * @throws Exception  nincs ilyen indexu telepes
+     */
     public Settler getSettler(int index) throws Exception
     {
         if(index < 0 || index >= settlers.size())
@@ -365,7 +370,12 @@ public class Controller implements java.io.Serializable {
 
         return settlers.get(index);
     }
-
+    /**
+     * Index alapján visszatér az orbits lista adott elemével
+     * @param index
+     * @return az adott indexu Orbit az orbits listaban
+     * @throws Exception  nincs ilyen indexu orbit
+     */
     public Orbit getOrbit(int index) throws Exception
     {
         if(index < 0 || index >= orbits.size())
@@ -373,34 +383,77 @@ public class Controller implements java.io.Serializable {
 
         return orbits.get(index);
     }
-
+    /**
+     * Megadja egy Orbit sorszamat az orbits listaban
+     * @param o keresett orbit
+     * @return a listaban levo sorszama
+     * @throws ClassCastException rossz parameteru 
+     */
     public int indexOrbit(Orbit o) throws ClassCastException
     {
         return orbits.indexOf(o);
     }
-
+    /**
+     * Megadja egy Asteroid sorszamat az asteroids listaban
+     * @param a keresett aszteroida
+     * @return a listaban levo sorszama
+     * @throws ClassCastException rossz parameteru 
+     */
     public int indexAsteroid(Asteroid a) throws ClassCastException
     {
         return asteroids.indexOf(a);
     }
-
-    public int indexStargate(Stargate s)
+    /**
+     * Megadja egy Stargate sorszamat a stargates listaban
+     * @param s keresett stargate
+     * @return a listaban levo sorszama
+     * @throws ClassCastException rossz parameteru 
+     */
+    public int indexStargate(Stargate s) throws ClassCastException
     {
         return stargates.indexOf(s);
     }
-
-    public int indexRobot(Robot r)
+    /**
+     * Megadja egy Robot sorszamat a robots listaban
+     * @param r keresett robot
+     * @return a listaban levo sorszama
+     * @throws ClassCastException rossz parameteru 
+     */
+    public int indexRobot(Robot r) throws ClassCastException
     {
         return robots.indexOf(r);
     }
-
-    public int indexUfo(Ufo u)
+    /**
+     * Megadja egy Ufo sorszamat az ufos listaban
+     * @param u keresett ufo
+     * @return a listaban levo sorszama
+     * @throws ClassCastException rossz parameteru 
+     */
+    public int indexUfo(Ufo u) throws ClassCastException
     {
         return ufos.indexOf(u);
     }
-
-    public int indexSettler(Settler s)
+    /**
+     * Megadja egy Settler sorszamat az settlers listaban
+     * @param s keresett telepes
+     * @return a listaban levo sorszama
+     * @throws ClassCastException rossz parameteru 
+     */
+    public int indexSettler(Settler s) throws ClassCastException
     {
         return settlers.indexOf(s);
+    }
+    /**
+     * Kiirja a kimenetre a stargatek tartalmat
+     */
+    public void liststargates()
+    {
+        for (Stargate futo : stargates) {
+            System.out.println(
+                "StargateId: "+futo.getPrefix()+"_"+stargates.indexOf(futo)+
+                " MyTwin: "+futo.getMyTwin().getPrefix()+"_"+stargates.indexOf(futo.getMyTwin())+
+                " MyStop: "+futo.getMyStop().getPrefix()+"_"+asteroids.indexOf((Asteroid)futo.getMyStop())+
+                " Crazy: "+futo.getCrazy());
+        }
     }
 }

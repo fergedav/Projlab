@@ -176,6 +176,12 @@ public class Settler extends Traveler {
     {
         return stargates;
     }
-
+    public void addOneStargate (Stargate s)
+    {
+        if(stargates.size()>0)
+            stargates.add(0, s);
+        else
+            stargates.add(s);
+    }
 
 }

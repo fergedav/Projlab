@@ -167,7 +167,7 @@ public class Stargate extends Orbit {
      */
     private int whereTo()
     {
-        //TODO det nem det megcsinalni
+        //TODO det nem det megcsinalni, behavior ertekenek alapjan
         return 0;
     }
 
