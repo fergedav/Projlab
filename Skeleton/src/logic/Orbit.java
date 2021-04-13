@@ -194,7 +194,12 @@ public abstract class Orbit implements java.io.Serializable {
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+    public int[] getCoords(){
+        int i[]= {x,y};
+        return i;
+    }
+    public boolean getLight(){
+        return inLight;
+    }
 
 }

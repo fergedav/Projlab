@@ -358,8 +358,49 @@ public class Controller implements java.io.Serializable {
     
 //PROTO FÜGGVÉNYEK INNENTÕL///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public Settler getSettler(int index) throws Exception
+    {
+        if(index < 0 || index >= settlers.size())
+            throw new Exception("Nincs ilyen telepes: " + index);
 
+        return settlers.get(index);
+    }
 
+    public Orbit getOrbit(int index) throws Exception
+    {
+        if(index < 0 || index >= orbits.size())
+            throw new Exception("Nincs ilyen orbit: " + index);
 
+        return orbits.get(index);
+    }
 
+    public int indexOrbit(Orbit o)
+    {
+        return orbits.indexOf(o);
+    }
+
+    public int indexAsteroid(Asteroid a)
+    {
+        return asteroids.indexOf(a);
+    }
+
+    public int indexStargate(Stargate s)
+    {
+        return stargates.indexOf(s);
+    }
+
+    public int indexRobot(Robot r)
+    {
+        return robots.indexOf(r);
+    }
+
+    public int indexUfo(Ufo u)
+    {
+        return ufos.indexOf(u);
+    }
+
+    public int indexSettler(Settler s)
+    {
+        return settlers.indexOf(s);
+    }
 }
