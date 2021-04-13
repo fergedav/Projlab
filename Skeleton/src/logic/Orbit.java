@@ -229,5 +229,6 @@ public abstract class Orbit implements java.io.Serializable {
     public void setPrefix(String s)
     {
         prefix = s;
+        //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz stargate/asteroid
     }
 }

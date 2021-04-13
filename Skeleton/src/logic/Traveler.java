@@ -86,6 +86,7 @@ public abstract class Traveler implements java.io.Serializable {
     public void setPrefix(String s)
     {
         prefix = s;
+        //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz robot/ufo/settler
     }
 
 }
