@@ -158,13 +158,42 @@ public class CommandHandler {
                                 r, //arg1
                                 Boolean.parseBoolean((String)args[5])));;
     }
+    /**
+     * Ket stargatet helyez el egy adott controllerben tarolt palyan
+     * @param args [parancsnev, orbit szam1, orbit szama2, random/det mukodes]
+     */
+    public static void addpairedstargate(Object[] args)  throws Exception
+    {
+        Controller c = Controller.getInstance();
+        boolean b;
+        switch ((String)args[3]) {
+            case "rand":
+                b = true;
+                break;        
+            case "det":
+                b=false;
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[3]);
+        }
+        Stargate s1 = new Stargate();
+        s1.setBehavior(b);
+        Stargate s2 = new Stargate();
+        s2.setBehavior(b);
+        s1.entagle(s2);
+        s2.entagle(s1);
+        c.addStargate(s1);
+        c.addStargate(s2);
+        int orbitId1 = Integer.parseInt((String)args[1]);
+        int orbitId2 = Integer.parseInt((String)args[2]);
+        s1.place(c.getOrbit(orbitId1));
+        s2.place(c.getOrbit(orbitId2));
+    }
 
-    public static void addpairedstargate(Object[] args) 
+    public static void addhalfstargate(Object[] args) 
     {
         
     }
-
-    public static void addhalfstargate(Object[] args) {}
 
     public static void addrobot(Object[] args) {}
 

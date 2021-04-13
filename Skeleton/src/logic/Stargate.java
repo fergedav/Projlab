@@ -197,7 +197,12 @@ public class Stargate extends Orbit {
     }
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    private boolean behavior;
+    
+    public void setBehavior(boolean det_rand)
+    {
+        behavior = det_rand;
+    }
 
 
 
