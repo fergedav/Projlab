@@ -196,21 +196,36 @@ public class Stargate extends Orbit {
     }
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Determinisztikus - random viselkedes
+     */
     private boolean behavior;
-    
+    /**
+     * Determinisztikus - random viselkedeshez
+     * setter
+     */
     public void setBehavior(boolean det_rand)
     {
         behavior = det_rand;
     }
-    
+    /**
+     * Visszater az aktualis helyevel (orbit)
+     * @return Orbit myStop
+     */
     public Orbit getMyStop(){
         return myStop;
     }
-
+    /**
+     * Visszater a kapu parjaval
+     * @return Stargate myTwin
+     */
     public Stargate getMyTwin(){
         return myTwin;
     }
-
+    /**
+     * Visszater hogy a kapu megorult-e?
+     * @return boolean beCrazy
+     */
     public boolean getCrazy(){
         return beCrazy;
     }

@@ -207,7 +207,13 @@ public class CommandHandler {
 
     public static void miningsettler(Object[] args) {}
 
-    public static void createrobot(Object[] args) {}
+    public static void createrobot(Object[] args) throws Exception
+    {
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler seged = Controller.getInstance().getSettler(settlerId);
+        seged.createRobot();
+        System.out.println();
+    }
 
     public static void createstargate(Object[] args) throws Exception
     {
@@ -222,14 +228,18 @@ public class CommandHandler {
         Controller c = Controller.getInstance();
         int settlerId = Integer.parseInt((String)args[1]);
         Settler seged = c.getSettler(settlerId);
-        Stargate lehelyezett = seged.getStargates().get(0); //kiiratashoz eltaroljuk segedkent
+        Stargate lehelyezett = seged.getStargates().get(0); 
         seged.placeStargate();
-        //TODO itt orbot vagy aszteroida legyen?, mindeképp orbitban keres
         System.out.println(
-            "StargateId: stargate_" + c.indexStargate(lehelyezett) +
+            "StargateId: " + lehelyezett.getPrefix() +"_"+
+                c.indexStargate(lehelyezett) +
             " Coords: " + lehelyezett.getCoords()[0] + " " + lehelyezett.getCoords()[1] +            
-            " MyStop: orbit_" + (lehelyezett.getPlaced() ? c.indexOrbit(lehelyezett.getMyStop()) : "-") +
-            " TwinId: stargate_" + c.indexStargate(lehelyezett.getMyTwin()) +
+            " MyStop: " + 
+                (lehelyezett.getPlaced() ? 
+                (lehelyezett.getMyStop().getPrefix() +"_"+c.indexAsteroid((Asteroid)lehelyezett.getMyStop())) 
+                : "-") +
+            " TwinId: " + lehelyezett.getPrefix() +"_"+
+                c.indexStargate(lehelyezett.getMyTwin()) +
             " InLight: " + lehelyezett.getLight()+
             " Crazy: " + lehelyezett.getCrazy());
     }
@@ -258,7 +268,39 @@ public class CommandHandler {
 
     public static void liststargates(Object[] args) {}
 
-    public static void listneighborasteroids (Object[] args) {}
+    public static void listneighborasteroids (Object[] args) throws Exception
+    {
+        int asteroidId = Integer.parseInt((String)args[1]);
+        Asteroid seged = Controller.getInstance().getAsteroid(asteroidId);
+        for(int i = 0; i < seged.numOfNeighbor(); i++){
+            System.out.println(
+                "OrbitId: " + seged.getPrefix() +"_"+ Controller.getInstance().indexOrbit(seged.getNeighbour(i)) +
+                "  Coords: " + seged.getCoords()[0] + " " + seged.getCoords()[1]);
+        }
+    }
 
-    public static void listasteroidcontent(Object[] args) {}
+    public static void listasteroidcontent(Object[] args) throws Exception
+    {
+        int asteroidId = Integer.parseInt((String)args[1]);
+        Asteroid aktualis = Controller.getInstance().getAsteroid(asteroidId);
+        System.out.print("Travelers: ");
+        String seged;
+        for (Traveler t : aktualis.getTravelers()) {
+            switch (t.getPrefix()) {
+                case "robot":
+                    seged = String.valueOf(Controller.getInstance().indexRobot((Robot)t));
+                    break;        
+                case "ufo":
+                    seged = String.valueOf(Controller.getInstance().indexUfo((Ufo)t));
+                    break;
+                case "settler":
+                    seged = String.valueOf(Controller.getInstance().indexSettler((Settler)t));
+                    break;
+                default:
+                    throw new Exception("Ismeretlen traveler: " + t.getPrefix());
+            }
+            System.out.print(t.getPrefix()+"_"+seged+", ");
+        }
+        System.out.println(); //ugorjon sort es ujba folytassa
+    }
 }

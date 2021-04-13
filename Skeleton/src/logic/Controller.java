@@ -374,12 +374,12 @@ public class Controller implements java.io.Serializable {
         return orbits.get(index);
     }
 
-    public int indexOrbit(Orbit o)
+    public int indexOrbit(Orbit o) throws ClassCastException
     {
         return orbits.indexOf(o);
     }
 
-    public int indexAsteroid(Asteroid a)
+    public int indexAsteroid(Asteroid a) throws ClassCastException
     {
         return asteroids.indexOf(a);
     }

@@ -194,12 +194,40 @@ public abstract class Orbit implements java.io.Serializable {
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public int[] getCoords(){
+    /**
+     * Visszadja az orbit koordinantatit 
+     * x,y kooridnata
+     * @return [x,y]
+     */
+    public int[] getCoords()
+    {
         int i[]= {x,y};
         return i;
     }
-    public boolean getLight(){
+    /**
+     * Visszadja az orbit aktualis napfeny allapotata 
+     * @return boolean true, ha napfeny van
+     */
+    public boolean getLight()
+    {
         return inLight;
     }
-
+    // perfix
+    String prefix;
+    /**
+     * Visszater az adott Orbithoz tartozo prefixxel
+     * @return String prefix
+     */
+    public String getPrefix()
+    {
+        return prefix;
+    }
+    /**
+     * Módosítja a prefixet a parameterben kapott stringgel.
+     * @param s prefix uj erteke
+     */
+    public void setPrefix(String s)
+    {
+        prefix = s;
+    }
 }
