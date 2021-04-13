@@ -190,9 +190,32 @@ public class CommandHandler {
         s2.place(c.getOrbit(orbitId2));
     }
 
-    public static void addhalfstargate(Object[] args) 
+    public static void addhalfstargate(Object[] args)  throws Exception
     {
-        
+        Controller c = Controller.getInstance();
+        boolean b;
+        switch ((String)args[3]) {
+            case "rand":
+                b = true;
+                break;        
+            case "det":
+                b=false;
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[3]);
+        }
+        Stargate s1 = new Stargate();
+        s1.setBehavior(b);
+        Stargate s2 = new Stargate();
+        s2.setBehavior(b);
+        s1.entagle(s2);
+        s2.entagle(s1);
+        c.addStargate(s1);
+        c.addStargate(s2);
+        int orbitId = Integer.parseInt((String)args[1]);
+        int settlerId = Integer.parseInt((String)args[2]);
+        s1.place(c.getOrbit(orbitId));
+        c.getSettler(settlerId).addOneStargate(s2);
     }
 
     public static void addrobot(Object[] args) {}
@@ -207,13 +230,7 @@ public class CommandHandler {
 
     public static void miningsettler(Object[] args) {}
 
-    public static void createrobot(Object[] args) throws Exception
-    {
-        int settlerId = Integer.parseInt((String)args[1]);
-        Settler seged = Controller.getInstance().getSettler(settlerId);
-        seged.createRobot();
-        System.out.println();
-    }
+    public static void createrobot(Object[] args) {}
 
     public static void createstargate(Object[] args) throws Exception
     {
@@ -238,10 +255,11 @@ public class CommandHandler {
                 (lehelyezett.getPlaced() ? 
                 (lehelyezett.getMyStop().getPrefix() +"_"+c.indexAsteroid((Asteroid)lehelyezett.getMyStop())) 
                 : "-") +
-            " TwinId: " + lehelyezett.getPrefix() +"_"+
+            " TwinId: " + lehelyezett.getMyTwin().getPrefix() +"_"+
                 c.indexStargate(lehelyezett.getMyTwin()) +
             " InLight: " + lehelyezett.getLight()+
-            " Crazy: " + lehelyezett.getCrazy());
+            " Crazy: " + lehelyezett.getCrazy()
+        );
     }
 
     public static void createbase(Object[] args) {}
@@ -256,7 +274,24 @@ public class CommandHandler {
 
     public static void asteroidinfo(Object[] args) {}
 
-    public static void stargateinfo(Object[] args) {}
+    public static void stargateinfo(Object[] args) throws Exception
+    {
+        int stargateId = Integer.parseInt((String)args[1]);
+        Stargate vizsgalt = Controller.getInstance().getStargate(stargateId);
+        System.out.println(
+            "StargateId: " + vizsgalt.getPrefix() +"_"+
+                Controller.getInstance().indexStargate(vizsgalt) +
+            " Coords: " + vizsgalt.getCoords()[0] + " " + vizsgalt.getCoords()[1] +            
+            " MyStop: " + 
+                (vizsgalt.getPlaced() ? 
+                (vizsgalt.getMyStop().getPrefix() +"_"+Controller.getInstance().indexAsteroid((Asteroid)vizsgalt.getMyStop())) 
+                : "-") +
+            " TwinId: " + vizsgalt.getMyTwin().getPrefix() +"_"+
+                Controller.getInstance().indexStargate(vizsgalt.getMyTwin()) +
+            " InLight: " + vizsgalt.getLight()+
+            " Crazy: " + vizsgalt.getCrazy()
+        );
+    }
 
     public static void listsettlers(Object[] args) {}
 
@@ -266,7 +301,10 @@ public class CommandHandler {
 
     public static void listasteroids(Object[] args) {}
 
-    public static void liststargates(Object[] args) {}
+    public static void liststargates(Object[] args) 
+    {
+        Controller.getInstance().liststargates();
+    }
 
     public static void listneighborasteroids (Object[] args) throws Exception
     {
