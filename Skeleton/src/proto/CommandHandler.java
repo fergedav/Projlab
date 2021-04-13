@@ -207,7 +207,13 @@ public class CommandHandler {
 
     public static void miningsettler(Object[] args) {}
 
-    public static void createrobot(Object[] args) {}
+    public static void createrobot(Object[] args) throws Exception
+    {
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler seged = Controller.getInstance().getSettler(settlerId);
+        seged.createRobot();
+        System.out.println();
+    }
 
     public static void createstargate(Object[] args) throws Exception
     {
@@ -258,7 +264,16 @@ public class CommandHandler {
 
     public static void liststargates(Object[] args) {}
 
-    public static void listneighborasteroids (Object[] args) {}
+    public static void listneighborasteroids (Object[] args) throws Exception
+    {
+        int asteroidId = Integer.parseInt((String)args[1]);
+        Asteroid seged = Controller.getInstance().getAsteroid(asteroidId);
+        for(int i = 0; i < seged.numOfNeighbor(); i++){
+            System.out.println(
+                "OrbitId: orbit_" + Controller.getInstance().indexOrbit(seged.getNeighbour(i)) +
+                "  Coords: " + seged.getCoords()[0] + " " + seged.getCoords()[1]);
+        }
+    }
 
     public static void listasteroidcontent(Object[] args) {}
 }
