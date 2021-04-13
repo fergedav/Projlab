@@ -172,7 +172,10 @@ public class Settler extends Traveler {
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    public List<Stargate> getStargates()
+    {
+        return stargates;
+    }
 
 
 }

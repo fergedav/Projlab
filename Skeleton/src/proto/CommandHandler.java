@@ -209,9 +209,30 @@ public class CommandHandler {
 
     public static void createrobot(Object[] args) {}
 
-    public static void createstargate(Object[] args) {}
+    public static void createstargate(Object[] args) throws Exception
+    {
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler seged = Controller.getInstance().getSettler(settlerId);
+        seged.createStargate();
+        System.out.println("numOfGates: "+ seged.getStargates().size());
+    }
 
-    public static void placestargate (Object[] args) {}
+    public static void placestargate (Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler seged = c.getSettler(settlerId);
+        Stargate lehelyezett = seged.getStargates().get(0); //kiiratashoz eltaroljuk segedkent
+        seged.placeStargate();
+        //TODO itt orbot vagy aszteroida legyen?, mindeképp orbitban keres
+        System.out.println(
+            "StargateId: stargate_" + c.indexStargate(lehelyezett) +
+            " Coords: " + lehelyezett.getCoords()[0] + " " + lehelyezett.getCoords()[1] +            
+            " MyStop: orbit_" + (lehelyezett.getPlaced() ? c.indexOrbit(lehelyezett.getMyStop()) : "-") +
+            " TwinId: stargate_" + c.indexStargate(lehelyezett.getMyTwin()) +
+            " InLight: " + lehelyezett.getLight()+
+            " Crazy: " + lehelyezett.getCrazy());
+    }
 
     public static void createbase(Object[] args) {}
 

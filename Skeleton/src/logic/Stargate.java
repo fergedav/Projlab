@@ -20,7 +20,6 @@ public class Stargate extends Orbit {
         Logger.endFunctionLog();
     }
 
-
     /**
      * Törli magát a myStop-ja szomszédsági listájából.
      * //és megöli a rajtalévõket. (szöveg alapján nem definiált.)
@@ -203,7 +202,16 @@ public class Stargate extends Orbit {
     {
         behavior = det_rand;
     }
+    
+    public Orbit getMyStop(){
+        return myStop;
+    }
 
+    public Stargate getMyTwin(){
+        return myTwin;
+    }
 
-
+    public boolean getCrazy(){
+        return beCrazy;
+    }
 }

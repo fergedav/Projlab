@@ -374,7 +374,33 @@ public class Controller implements java.io.Serializable {
         return orbits.get(index);
     }
 
+    public int indexOrbit(Orbit o)
+    {
+        return orbits.indexOf(o);
+    }
 
+    public int indexAsteroid(Asteroid a)
+    {
+        return asteroids.indexOf(a);
+    }
 
+    public int indexStargate(Stargate s)
+    {
+        return stargates.indexOf(s);
+    }
 
+    public int indexRobot(Robot r)
+    {
+        return robots.indexOf(r);
+    }
+
+    public int indexUfo(Ufo u)
+    {
+        return ufos.indexOf(u);
+    }
+
+    public int indexSettler(Settler s)
+    {
+        return settlers.indexOf(s);
+    }
 }
