@@ -274,8 +274,8 @@ public class CommandHandler {
         Asteroid seged = Controller.getInstance().getAsteroid(asteroidId);
         for(int i = 0; i < seged.numOfNeighbor(); i++){
             System.out.println(
-                "OrbitId: " + seged.getPrefix() +"_"+ Controller.getInstance().indexOrbit(seged.getNeighbour(i)) +
-                "  Coords: " + seged.getCoords()[0] + " " + seged.getCoords()[1]);
+                "OrbitId: " + seged.getNeighbour(i).getPrefix() +"_"+ Controller.getInstance().indexOrbit(seged.getNeighbour(i)) +
+                "  Coords: " + seged.getNeighbour(i).getCoords()[0] + " " + seged.getNeighbour(i).getCoords()[1]);
         }
     }
 
