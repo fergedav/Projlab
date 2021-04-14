@@ -14,6 +14,9 @@ public class Carbon extends Resource {
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public String toString(){
+        return "Carbon";
+    }
 
 
 

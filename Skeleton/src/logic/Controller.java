@@ -318,6 +318,13 @@ public class Controller implements java.io.Serializable {
         }
     }
 
+    public List<Robot> getRobots(){
+        return robots;
+    }
+    public List<Ufo> getUfos(){
+        return ufos;
+    }
+
     //end of Proto fuggvenyek ---------------------------------------------------------------------------
 
     ///Singleton stuff

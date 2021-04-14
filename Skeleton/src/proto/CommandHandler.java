@@ -1,6 +1,8 @@
 package proto;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -257,11 +259,72 @@ public class CommandHandler {
         c.getSettler(settlerId).addOneStargate(s2);
     }
 
-    public static void addrobot(Object[] args) {}
+    public static void addrobot(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        Robot r = new Robot();
+        int orbitId = Integer.parseInt((String)args[0]);
+        r.setLocation(c.getOrbit(orbitId));
+        boolean b;
+        switch ((String)args[1]) {
+            case "rand":
+                b = true;
+                break;        
+            case "det":
+                b=false;
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[1]);
+        }
+        r.setBehavior(b);
+    }
 
-    public static void addufo(Object[] args) {}
+    public static void addufo(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        Ufo u = new Ufo();
+        u.setLocation(c.getOrbit(Integer.parseInt((String)args[0])));
+        boolean b;
+        switch ((String)args[1]) {
+            case "rand":
+                b = true;
+                break;        
+            case "det":
+                b=false;
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[1]);
+        }
+        u.setBehavior(b);
+    }
 
-    public static void addsettler(Object[] args) {}
+    public static void addsettler(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[0])));
+        Inventory si = s.getInventory();
+        for(int i=0; i<Integer.parseInt((String)args[1]); i++){
+            si.addResource(new Uran());
+        }
+        for(int i=0; i<Integer.parseInt((String)args[2]); i++){
+            si.addResource(new Ice());
+        }
+        for(int i=0; i<Integer.parseInt((String)args[3]); i++){
+            si.addResource(new Iron());
+        }
+        for(int i=0; i<Integer.parseInt((String)args[4]); i++){
+            si.addResource(new Carbon());
+        }
+        switch (Integer.parseInt((String)args[5])) {
+            case 0:
+                break;        
+            case 2:
+                s.createStargate();
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[5]);
+        }
+    }
 
     public static void movesettler(Object[] args) {}
 
@@ -307,11 +370,38 @@ public class CommandHandler {
 
     public static void settlerinfo(Object[] args) {}
 
-    public static void robotinfo (Object[] args) {}
+    public static void robotinfo (Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int robotId = Integer.parseInt((String)args[0]);
+        Robot r = c.getRobot(robotId);
+        r.robotInfo();
+    }
 
-    public static void ufoinfo(Object[] args) {}
+    public static void ufoinfo(Object[] args) throws Exception 
+    {
+        Controller c = Controller.getInstance();
+        int ufoId = Integer.parseInt((String)args[0]);
+        Ufo u = c.getUfo(ufoId);
+        u.ufoInfo();
+    }
 
-    public static void asteroidinfo(Object[] args) {}
+    public static void asteroidinfo(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int asteroidId = Integer.parseInt((String)args[0]);
+        Asteroid a = c.getAsteroid(asteroidId);
+        String inLight;
+        if(a.getLight()){
+            inLight = "true";
+        }
+        else inLight = "false";
+
+        System.out.println(
+            "AsteroidId: asteroid_"+c.indexAsteroid(a)+ " Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
+            " Core: " + a.getCore().toString()+ " inLight: "+ inLight+" Layers: "+ a.getLayers()
+        );
+    }
 
     public static void stargateinfo(Object[] args) throws Exception
     {
@@ -334,9 +424,23 @@ public class CommandHandler {
 
     public static void listsettlers(Object[] args) {}
 
-    public static void listrobots (Object[] args) {}
+    public static void listRobots (Object[] args) 
+    {
+        Controller c = Controller.getInstance();
+        List<Robot> robots= c.getRobots();
+        for(Robot r: robots){
+            r.robotInfo();
+        }
+    }
 
-    public static void listufos(Object[] args) {}
+    public static void listUfos(Object[] args) 
+    {
+        Controller c = Controller.getInstance();
+        List<Ufo> ufos= c.getUfos();
+        for(Ufo u: ufos){
+            u.ufoInfo();
+        }
+    }
 
     public static void listasteroids(Object[] args) {}
 

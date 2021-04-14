@@ -29,7 +29,9 @@ public class Ice extends Resource {
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    public String toString(){
+        return "Ice";
+    }
 
 
 }

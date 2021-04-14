@@ -254,7 +254,17 @@ public class Inventory implements java.io.Serializable {
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+    public int getNumOfUran(){
+        return materials.get("Uran").size();
+    }
+    public int getNumOfIce(){
+        return materials.get("Ice").size();
+    }
+    public int getNumOfIron(){
+        return materials.get("Iron").size();
+    }
+    public int getNumOfCarbon(){
+        return materials.get("Carbon").size();
+    }
 
 }

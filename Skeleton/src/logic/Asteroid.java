@@ -196,6 +196,8 @@ public class Asteroid extends Orbit {
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    public Resource getCore(){
+        return core;
+    }
 
 }
