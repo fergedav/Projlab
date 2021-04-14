@@ -456,4 +456,20 @@ public class Controller implements java.io.Serializable {
                 " Crazy: "+futo.getCrazy());
         }
     }
+    /**
+     * Visszadja az aktuálisan aktiv robotok darabszamat
+     * @return int robotok szama
+     */
+    public int numOfRobots()
+    {
+        return robots.size();
+    }
+    /**
+     * Visszadja az aktuálisan aktív robotok darabszámát
+     * @return az utolso robot a robots listaban
+     */
+    public Robot lastRobot()
+    {
+        return robots.get(robots.size()-1);
+    }
 }
