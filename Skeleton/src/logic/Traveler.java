@@ -88,5 +88,13 @@ public abstract class Traveler implements java.io.Serializable {
         prefix = s;
         //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz robot/ufo/settler
     }
+    /**
+     * Megadja  traveler aktuális tartozkodási helyét
+     * @return aktualis obrit, tartozkodasi hely
+     */
+    public Orbit getcurrentLocation()
+    {
+        return currentLocation;
+    }
 
 }
