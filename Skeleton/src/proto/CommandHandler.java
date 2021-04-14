@@ -268,7 +268,26 @@ public class CommandHandler {
 
     public static void miningsettler(Object[] args) {}
 
-    public static void createrobot(Object[] args) {}
+    public static void createrobot(Object[] args) throws Exception 
+    {
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler seged = Controller.getInstance().getSettler(settlerId);
+        int dbRobot = Controller.getInstance().numOfRobots();
+        seged.createRobot();
+        if(Controller.getInstance().numOfRobots()>dbRobot){
+            Robot uj = Controller.getInstance().lastRobot();
+            System.out.println(
+                "RobotId: "+uj.getPrefix()+"_"+Controller.getInstance().indexRobot(uj)+
+                " OrbitId: "+uj.getcurrentLocation().getPrefix()+"_"+
+                (uj.getcurrentLocation().getPrefix().equals("asteroid") ? 
+                Controller.getInstance().indexAsteroid((Asteroid)uj.getcurrentLocation())
+                   : (uj.getcurrentLocation().getPrefix().equals("stargate") ?
+                        Controller.getInstance().indexStargate((Stargate)uj.getcurrentLocation()) : "-")
+                )
+            );
+        }
+        
+    }
 
     public static void createstargate(Object[] args) throws Exception
     {
@@ -404,7 +423,12 @@ public class CommandHandler {
         Asteroid seged = Controller.getInstance().getAsteroid(asteroidId);
         for(int i = 0; i < seged.numOfNeighbor(); i++){
             System.out.println(
-                "OrbitId: " + seged.getNeighbour(i).getPrefix() +"_"+ Controller.getInstance().indexOrbit(seged.getNeighbour(i)) +
+                "OrbitId: " + seged.getNeighbour(i).getPrefix() +"_"+ 
+                (seged.getNeighbour(i).getPrefix().equals("asteroid") ? 
+                Controller.getInstance().indexAsteroid((Asteroid)seged.getNeighbour(i))
+                   : (seged.getNeighbour(i).getPrefix().equals("stargate") ?
+                        Controller.getInstance().indexStargate((Stargate)seged.getNeighbour(i)) : "-")
+                ) +
                 "  Coords: " + seged.getNeighbour(i).getCoords()[0] + " " + seged.getNeighbour(i).getCoords()[1]);
         }
     }
