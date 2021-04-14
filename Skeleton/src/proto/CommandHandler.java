@@ -1,23 +1,27 @@
 package proto;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import logic.*;
 
 public class CommandHandler {
+
+    // Erre a printStream-re írja ki a toCurrentStream(String s) a kapott stringet. ez kell a filebairányíthatósághoz.
+    static PrintStream currentOut = System.out;
 
     private static Method getMethod(String name) throws NoSuchMethodException, SecurityException
     {
         return CommandHandler.class.getMethod(name);
     }
 
-    // Berci:  szerintem átadja a hívott method nevet is az object[]-ben. ez lehet baj nem tudom.
     public static void processCommand(String line)
     {
         try {
@@ -27,6 +31,8 @@ public class CommandHandler {
             System.out.println("Hiba: " + e.getMessage());
         }
     }
+
+    
 
     public static void loadmap(Object[] args) throws IOException 
     {
@@ -41,18 +47,18 @@ public class CommandHandler {
             fileIn.close();
             loadFlag = true;
         } catch (IOException i) {
-            System.out.println("Betöltés sikertelen: IOException");
+            System.out.println("Betoltés sikertelen: IOException");
             i.printStackTrace();
             return;
         } catch (ClassNotFoundException e) {
-            System.out.println("Betöltés sikertelen: ClassNotFoundException");
+            System.out.println("Betoltés sikertelen: ClassNotFoundException");
             e.printStackTrace();
             return;
         }
         if(loadFlag)
         {
              Controller.LoadController(load);
-             System.out.println("A pálya betöltése sikeres volt: " + filename);
+             System.out.println("A palya betoltese sikeres volt: " + filename);
         }
 
     }
@@ -66,24 +72,40 @@ public class CommandHandler {
             out.writeObject(Controller.getInstance());
             out.close();
             fileOut.close();
-            System.out.printf("A pálya mentése sikeres volt ide: " + filename);
+            System.out.printf("A palya mentése sikeres volt ide: " + filename);
          } catch (IOException i) {
-            System.out.printf("A pálya mentése sikertelen volt");
+            System.out.printf("A palya mentése sikertelen volt");
             i.printStackTrace();
          }
     }
 
+    //nincs kész
     public static void loadtest(Object[] args) throws IOException 
     {
-        BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
-        String line;
-        int line_counter = 0;
-        while((line = rd.readLine()) != null)
+        try
         {
-            line_counter++;
-            processCommand(line);
+            BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
+
+            FileOutputStream fileOut = new FileOutputStream((String)args[2]); //célfilera irányítja a current out-ot
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            currentOut = new PrintStream(out);
+
+            String line;
+            int line_counter = 0;
+            while((line = rd.readLine()) != null)
+            {
+                line_counter++;
+                processCommand(line);
+            }
+            rd.close();
+            currentOut.close();
+
+            currentOut = System.out; // visszaállítja
         }
-        rd.close();
+        catch(Exception e)
+        {
+            System.out.println("loadTest: exception (rossz argumentumok?)");
+        }
     }
 
     public static void createmap(Object[] args) 
