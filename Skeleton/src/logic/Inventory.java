@@ -70,8 +70,11 @@ public class Inventory implements java.io.Serializable {
 
        try{
             if(materials.get(rName).size() > 0)
-            {
-                Resource r = materials.get(rName).remove(0);
+            {   
+                Resource r = null;
+
+                if (materials.get(rName).size()>0)
+                    r = materials.get(rName).remove(0);
 
                 Logger.endFunctionLog();
 
@@ -266,5 +269,7 @@ public class Inventory implements java.io.Serializable {
     public int getNumOfCarbon(){
         return materials.get("Carbon").size();
     }
+    public HashMap<String, ArrayList<Resource>> getFullList() {return materials;}
+
 
 }
