@@ -1,16 +1,23 @@
 package proto;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import logic.*;
 
 public class CommandHandler {
+
+    // Erre a printStream-re írja ki a toCurrentStream(String s) a kapott stringet. ez kell a filebairányíthatósághoz.
+    static PrintStream currentOut = System.out;
+
+    public static void toCurrentStream(String s){ currentOut.println(s); }
 
     private static Method getMethod(String name) throws NoSuchMethodException, SecurityException
     {
@@ -27,48 +34,80 @@ public class CommandHandler {
         }
     }
 
+    
+
     public static void loadmap(Object[] args) throws IOException 
     {
+        Controller load;
+        boolean loadFlag = false;
+        String filename = (String)args[1];
         try {
-            FileInputStream fileIn = new FileInputStream("test.ser");
+            FileInputStream fileIn = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            Controller.LoadController((Controller) in.readObject());
+            load = (Controller) in.readObject();
             in.close();
             fileIn.close();
-         } catch (IOException i) {
+            loadFlag = true;
+        } catch (IOException i) {
+            System.out.println("Betoltés sikertelen: IOException");
             i.printStackTrace();
             return;
-         } catch (ClassNotFoundException e) {
-            System.out.println("Employee class not found");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Betoltés sikertelen: ClassNotFoundException");
             e.printStackTrace();
             return;
-         }//áûõ
+        }
+        if(loadFlag)
+        {
+             Controller.LoadController(load);
+             System.out.println("A palya betoltese sikeres volt: " + filename);
+        }
+
     }
 
     public static void savemap(Object[] args) 
     {
+        String filename = (String)args[1];
         try {
-            FileOutputStream fileOut =
-            new FileOutputStream((String)args[1]);
+            FileOutputStream fileOut = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(Controller.getInstance());
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in test.ser");
+            System.out.printf("A palya mentése sikeres volt ide: " + filename);
          } catch (IOException i) {
+            System.out.printf("A palya mentése sikertelen volt");
             i.printStackTrace();
          }
     }
 
+    //nincs kész, nem biztos hogy mûködik.
     public static void loadtest(Object[] args) throws IOException 
     {
-        BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
-        String line;
-        while((line = rd.readLine()) != null)
+        try
         {
-            processCommand(line);
+            BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
+
+            FileOutputStream fileOut = new FileOutputStream((String)args[2]); //célfilera irányítja a current out-ot
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            currentOut = new PrintStream(out);
+
+            String line;
+            int line_counter = 0;
+            while((line = rd.readLine()) != null)
+            {
+                line_counter++;
+                processCommand(line);
+            }
+            rd.close();
+            currentOut.close();
+
+            currentOut = System.out; // visszaállítja
         }
-        rd.close();
+        catch(Exception e)
+        {
+            System.out.println("loadTest: exception (rossz argumentumok?)");
+        }
     }
 
     public static void createmap(Object[] args) 
