@@ -17,6 +17,7 @@ public class CommandHandler {
         return CommandHandler.class.getMethod(name);
     }
 
+    // Berci:  szerintem átadja a hívott method nevet is az object[]-ben. ez lehet baj nem tudom.
     public static void processCommand(String line)
     {
         try {
@@ -29,33 +30,45 @@ public class CommandHandler {
 
     public static void loadmap(Object[] args) throws IOException 
     {
+        Controller load;
+        boolean loadFlag = false;
+        String filename = (String)args[1];
         try {
-            FileInputStream fileIn = new FileInputStream("test.ser");
+            FileInputStream fileIn = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            Controller.LoadController((Controller) in.readObject());
+            load = (Controller) in.readObject();
             in.close();
             fileIn.close();
-         } catch (IOException i) {
+            loadFlag = true;
+        } catch (IOException i) {
+            System.out.println("Betöltés sikertelen: IOException");
             i.printStackTrace();
             return;
-         } catch (ClassNotFoundException e) {
-            System.out.println("Employee class not found");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Betöltés sikertelen: ClassNotFoundException");
             e.printStackTrace();
             return;
-         }//áûõ
+        }
+        if(loadFlag)
+        {
+             Controller.LoadController(load);
+             System.out.println("A pálya betöltése sikeres volt: " + filename);
+        }
+
     }
 
     public static void savemap(Object[] args) 
     {
+        String filename = (String)args[1];
         try {
-            FileOutputStream fileOut =
-            new FileOutputStream((String)args[1]);
+            FileOutputStream fileOut = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(Controller.getInstance());
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in test.ser");
+            System.out.printf("A pálya mentése sikeres volt ide: " + filename);
          } catch (IOException i) {
+            System.out.printf("A pálya mentése sikertelen volt");
             i.printStackTrace();
          }
     }
@@ -64,8 +77,10 @@ public class CommandHandler {
     {
         BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
         String line;
+        int line_counter = 0;
         while((line = rd.readLine()) != null)
         {
+            line_counter++;
             processCommand(line);
         }
         rd.close();
