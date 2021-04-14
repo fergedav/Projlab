@@ -206,7 +206,7 @@ public class Controller implements java.io.Serializable {
         orbits.add(o);
 
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
-        if(o.getClass() == Asteroid.class)
+        if(o.getClass() == Asteroid.class){}
             asteroids.add((Asteroid)o);
     }
     /**
@@ -264,9 +264,54 @@ public class Controller implements java.io.Serializable {
         Logger.endFunctionLog();
     }
 
+
+    ///Singleton stuff
+    private static Controller instance;
+
+    private Controller()
+    {
+        Logger.startFunctionLogComment(this, "Controler", "<<create>>");
+        Logger.endFunctionLog();
+    }
+
+     /**
+     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az elsõ létrehozott controllert.
+     * 
+     * @return a Controler objektum
+     */
+    public static Controller getInstance()
+    {
+        if(instance == null)
+            instance = new Controller();
+        return instance;
+    }
+    /**
+     *  teszteléshez szükséges, új példányt ad vissza mindig.
+     */ 
+    public static Controller getNewControler()
+    {
+        instance = new Controller();
+        return instance;
+    }
+
+    public static void LoadController(Controller c)
+    {
+        instance = c;
+    }
+
+    /// Singleton ends here
+    
+//PROTO FÜGGVÉNYEK INNENTÕL///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     //Proto fuggvenyek ------------------------------------------------------------------------------
 
-    private List<Asteroid> asteroids = new ArrayList<>();
+    public List<Asteroid> asteroids = new ArrayList<>();
+
+    public void addAsteroid(Asteroid a) 
+    { 
+        a.setPrefix("asteroid");
+        asteroids.add(a);
+    }
 
     public Robot getRobot(int index) throws Exception
     {
@@ -320,43 +365,6 @@ public class Controller implements java.io.Serializable {
 
     //end of Proto fuggvenyek ---------------------------------------------------------------------------
 
-    ///Singleton stuff
-    private static Controller instance;
-
-    private Controller()
-    {
-        Logger.startFunctionLogComment(this, "Controler", "<<create>>");
-        Logger.endFunctionLog();
-    }
-
-     /**
-     * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az elsõ létrehozott controllert.
-     * 
-     * @return a Controler objektum
-     */
-    public static Controller getInstance()
-    {
-        if(instance == null)
-            instance = new Controller();
-        return instance;
-    }
-    /**
-     *  teszteléshez szükséges, új példányt ad vissza mindig.
-     */ 
-    public static Controller getNewControler()
-    {
-        instance = new Controller();
-        return instance;
-    }
-
-    public static void LoadController(Controller c)
-    {
-        instance = c;
-    }
-
-    /// Singleton ends here
-    
-//PROTO FÜGGVÉNYEK INNENTÕL///////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Index alapján visszatér a settlers lista adott elemével
      * @param index
@@ -456,4 +464,30 @@ public class Controller implements java.io.Serializable {
                 " Crazy: "+futo.getCrazy());
         }
     }
+
+    /**
+     * beállítja a game is on váltó értékét
+     */
+    public void setGameIsOn(boolean a) { gameIsOn = a;}
+
+    /**
+     * visszaadja a game is on váltó értékét
+     */
+    public boolean getGameIsOn() {return gameIsOn;}
+
+    /**
+     * kiírja az összes aszteroidát
+     */
+    public void listAsteroids()
+    {
+        for (Asteroid futo : asteroids) {
+            System.out.println(
+                "AsteroidId: "+ futo.getPrefix() + "_" + asteroids.indexOf(futo) +
+                " Coords: " + futo.getCoords()[0] + "_"+ futo.getCoords()[1] +
+                " Core: " + futo.getCore().getClass().getName() + 
+                " inLight: " + futo.inLight + 
+                " Layers: " + futo.getLayers());
+        }
+    }
 }
+

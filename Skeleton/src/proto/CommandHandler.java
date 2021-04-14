@@ -10,14 +10,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import logic.*;
 
 public class CommandHandler {
 
     // Erre a printStream-re írja ki a toCurrentStream(String s) a kapott stringet. ez kell a filebairányíthatósághoz.
-    static PrintStream currentOut = System.out;
-
-    public static void toCurrentStream(String s){ currentOut.println(s); }
+    static final PrintStream OriginalSystemOut = System.out;
 
     private static Method getMethod(String name) throws NoSuchMethodException, SecurityException
     {
@@ -88,9 +89,8 @@ public class CommandHandler {
         {
             BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
 
-            FileOutputStream fileOut = new FileOutputStream((String)args[2]); //célfilera irányítja a current out-ot
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            currentOut = new PrintStream(out);
+            //célfilera irányítja a current out-ot
+            System.setOut(new PrintStream((String)args[2]));
 
             String line;
             int line_counter = 0;
@@ -100,9 +100,8 @@ public class CommandHandler {
                 processCommand(line);
             }
             rd.close();
-            currentOut.close();
-
-            currentOut = System.out; // visszaállítja
+            System.out.close();
+            System.setOut(OriginalSystemOut);
         }
         catch(Exception e)
         {
@@ -301,9 +300,60 @@ public class CommandHandler {
         );
     }
 
-    public static void createbase(Object[] args) {}
+    public static void createbase(Object[] args) 
+    {
+        try
+        {
+            Settler s = Controller.getInstance().getSettler((int)args[1]);
 
-    public static void replaceresourcesettler(Object[] args) {}
+            boolean original = Controller.getInstance().getGameIsOn(); //elmentjük az eredeti értéket
+            Controller.getInstance().setGameIsOn(true); //beállítjuk igazra
+
+            s.createBase();
+
+            if(Controller.getInstance().getGameIsOn() == false) // ha a bázis megépült a játék megállna (már ha eredetileg menne), ezt vizsgáljuk.
+            {
+                System.out.println("BaseCreation: Successful");
+            }
+            else
+            {
+                System.out.println("BaseCreation: Failed");
+            }
+            Controller.getInstance().setGameIsOn(original); //visszaállítjuk ahogy eredetileg volt
+
+        }
+        catch(Exception e)
+        {
+            
+        }
+
+    }
+
+    public static void replaceresourcesettler(Object[] args) 
+    {
+        try {
+            Settler s = Controller.getInstance().getSettler((int)args[1]); // kikeres settler
+            HashMap<String, ArrayList<Resource>> materials = s.getInventory().getFullList();
+            int before = materials.get((String)args[2]).size();
+
+            s.replaceResource((String)args[2]);
+
+            int after = materials.get((String)args[2]).size();
+
+            if (before > after)
+            {
+                System.out.println("Replace: Success");
+            }
+            else
+            {
+                System.out.println("Replace: Failed");
+            }
+        } catch (Exception e) {
+            System.out.println("Replace Resource Exception");
+            e.printStackTrace();
+        }
+
+    }
 
     public static void settlerinfo(Object[] args) {}
 
@@ -338,7 +388,10 @@ public class CommandHandler {
 
     public static void listufos(Object[] args) {}
 
-    public static void listasteroids(Object[] args) {}
+    public static void listasteroids(Object[] args) 
+    {
+        Controller.getInstance().liststargates();
+    }
 
     public static void liststargates(Object[] args) 
     {
