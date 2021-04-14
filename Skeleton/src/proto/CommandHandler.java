@@ -17,6 +17,8 @@ public class CommandHandler {
     // Erre a printStream-re írja ki a toCurrentStream(String s) a kapott stringet. ez kell a filebairányíthatósághoz.
     static PrintStream currentOut = System.out;
 
+    public static void toCurrentStream(String s){ currentOut.println(s); }
+
     private static Method getMethod(String name) throws NoSuchMethodException, SecurityException
     {
         return CommandHandler.class.getMethod(name);
@@ -79,7 +81,7 @@ public class CommandHandler {
          }
     }
 
-    //nincs kész
+    //nincs kész, nem biztos hogy mûködik.
     public static void loadtest(Object[] args) throws IOException 
     {
         try
