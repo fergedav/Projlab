@@ -325,11 +325,75 @@ public class CommandHandler {
         }
     }
 
-    public static void movesettler(Object[] args) {}
+    public static void movesettler(Object[] args)  throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        int orbitid = Integer.parseInt((String)args[2]);
+        Settler movingSettler = c.getSettler(settlerId);
+        Orbit pastLocation = movingSettler.getcurrentLocation();
+        movingSettler.move(orbitid);
+        Orbit newLocation = movingSettler.getcurrentLocation();
+        System.out.println(
+        "Inulas: OrbitId: "+ pastLocation.getPrefix()+"_"+
+                (pastLocation.getPrefix().equals("asteroid") ? 
+                c.indexAsteroid((Asteroid)pastLocation)
+                   : (pastLocation.getPrefix().equals("stargate") ?
+                        c.indexStargate((Stargate)pastLocation) : "-")
+                ) +
+                " Coords: " + pastLocation.getCoords()[0] + " " + pastLocation.getCoords()[1]
+                +
+                " InLight: " + pastLocation.getLight()
+                +
+        "\nErkezes: OrbitId: "+ newLocation.getPrefix()+"_"+
+                (newLocation.getPrefix().equals("asteroid") ? 
+                c.indexAsteroid((Asteroid)newLocation)
+                   : (newLocation.getPrefix().equals("stargate") ?
+                        c.indexStargate((Stargate)newLocation) : "-")
+                )
+                +
+                "Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
+                +
+                " InLight: " + newLocation.getLight()
+        );
+    }
 
-    public static void diggingsettler(Object[] args) {}
+    public static void diggingsettler(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler diggingSettler = c.getSettler(settlerId);
+        diggingSettler.digging();
 
-    public static void miningsettler(Object[] args) {}
+        System.out.println(
+            "OrbitId: " + diggingSettler.getcurrentLocation().getPrefix()+"_"+
+            (diggingSettler.getcurrentLocation().getPrefix().equals("asteroid") ? 
+            c.indexAsteroid((Asteroid)diggingSettler.getcurrentLocation())
+               : (diggingSettler.getcurrentLocation().getPrefix().equals("stargate") ?
+                    c.indexStargate((Stargate)diggingSettler.getcurrentLocation()) : "-")
+            ) +
+            " Coords: " + diggingSettler.getcurrentLocation().getCoords()[0] + " " + diggingSettler.getcurrentLocation().getCoords()[1]
+            +
+            " RemainingLayers: " + diggingSettler.getcurrentLocation().getLayers());
+
+    }
+
+    public static void miningsettler(Object[] args)  throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler miningSettler = c.getSettler(settlerId);
+
+        Resource core = miningSettler.getcurrentLocation().getCore();
+
+        miningSettler.mining();
+        if(core == null)
+            System.out.println("Resource: nothing");
+        else if(miningSettler.getcurrentLocation().getCore() == null)
+            System.out.println("Resource: " + core.toString());
+        else
+            System.out.println("Resource: nothing");
+    }
 
     public static void createrobot(Object[] args) throws Exception 
     {
@@ -437,7 +501,13 @@ public class CommandHandler {
 
     }
 
-    public static void settlerinfo(Object[] args) {}
+    public static void settlerinfo(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlertId = Integer.parseInt((String)args[0]);
+        Settler s = c.getSettler(settlertId);
+        s.SettlerInfo();
+    }
 
     public static void robotinfo (Object[] args) throws Exception
     {
@@ -491,7 +561,10 @@ public class CommandHandler {
         );
     }
 
-    public static void listsettlers(Object[] args) {}
+    public static void listsettlers(Object[] args)
+    {
+        Controller.getInstance().listsettlers();
+    }
 
     public static void listRobots (Object[] args) 
     {
@@ -513,7 +586,7 @@ public class CommandHandler {
 
     public static void listasteroids(Object[] args) 
     {
-        Controller.getInstance().liststargates();
+        Controller.getInstance().listAsteroids();
     }
 
     public static void liststargates(Object[] args) 

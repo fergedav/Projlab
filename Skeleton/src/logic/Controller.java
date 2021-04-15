@@ -472,6 +472,23 @@ public class Controller implements java.io.Serializable {
         }
     }
 
+    public void listsettlers()
+    {
+        for (Settler futo : settlers) {
+            System.out.println(
+                "SettlerId: "+ futo.getPrefix()+"_"+stargates.indexOf(futo)+
+                " Location: "+ futo.getcurrentLocation().getPrefix() + "_" +
+                (futo.getcurrentLocation().getPrefix().equals("asteroid") ? 
+                asteroids.indexOf(futo.getcurrentLocation())
+                   : (futo.getcurrentLocation().getPrefix().equals("stargate") ?
+                        stargates.indexOf(futo.getcurrentLocation()) : "-")
+                ) +
+                " Coords: " + futo.getcurrentLocation().getCoords()[0]+futo.getcurrentLocation().getCoords()[1]+
+                " Resources: Uran: "+ futo.getInventory().getNumOfUran() + " Ice: " + futo.getInventory().getNumOfIce() + " Iron: "+ futo.getInventory().getNumOfIron() + "Carbon: "  + futo.getInventory().getNumOfCarbon() + " Gates: " + futo.getStargates().size()
+                );
+        }
+    }
+
     /**
      * beállítja a game is on váltó értékét
      */
