@@ -11,7 +11,7 @@ public abstract class Resource implements java.io.Serializable {
 	
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+	public abstract String toString();
 
 
 }

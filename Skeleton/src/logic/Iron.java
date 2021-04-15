@@ -21,6 +21,9 @@ public class Iron extends Resource {
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public String toString(){
+        return "Iron";
+    }
 
 
 

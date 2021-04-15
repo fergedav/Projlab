@@ -105,16 +105,19 @@ public class Settler extends Traveler {
     public void replaceResource(String what)
     {
         Logger.startFunctionLogComment(this, "replaceResource", "");
+
         /** Eltávolítja a removeResource a what paraméterben meghatározott nyersanyagot */
         Resource resource = inventory.removeResource(what);
+        boolean replecement = false;
+        if(resource != null){
+             /** Jelzi, hogy sikeres volt-e a resource nyersanyag lehelyezése. */
+            replecement = currentLocation.putResource(resource);
 
-        /** Jelzi, hogy sikeres volt-e a resource nyersanyag lehelyezése. */
-        boolean replecement = currentLocation.putResource(resource);
-
-        /** Ha sikertelen volt a lehelyezés, akkor  a kivett nyersanyagot visszateszi az inventory-ba. */
-        if(replecement == false)
-        {
-            inventory.addResource(resource);
+            /** Ha sikertelen volt a lehelyezés, akkor  a kivett nyersanyagot visszateszi az inventory-ba. */
+            if(replecement == false)
+            {
+             inventory.addResource(resource);
+            }
         }
         Logger.endFunctionLog();
     }

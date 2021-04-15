@@ -70,8 +70,11 @@ public class Inventory implements java.io.Serializable {
 
        try{
             if(materials.get(rName).size() > 0)
-            {
-                Resource r = materials.get(rName).remove(0);
+            {   
+                Resource r = null;
+
+                if (materials.get(rName).size()>0)
+                    r = materials.get(rName).remove(0);
 
                 Logger.endFunctionLog();
 
@@ -254,7 +257,19 @@ public class Inventory implements java.io.Serializable {
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    public int getNumOfUran(){
+        return materials.get("Uran").size();
+    }
+    public int getNumOfIce(){
+        return materials.get("Ice").size();
+    }
+    public int getNumOfIron(){
+        return materials.get("Iron").size();
+    }
+    public int getNumOfCarbon(){
+        return materials.get("Carbon").size();
+    }
+    public HashMap<String, ArrayList<Resource>> getFullList() {return materials;}
 
 
 }

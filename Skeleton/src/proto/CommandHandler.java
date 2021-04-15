@@ -1,6 +1,8 @@
 package proto;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,14 +12,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import logic.*;
 
 public class CommandHandler {
 
     // Erre a printStream-re írja ki a toCurrentStream(String s) a kapott stringet. ez kell a filebairányíthatósághoz.
-    static PrintStream currentOut = System.out;
-
-    public static void toCurrentStream(String s){ currentOut.println(s); }
+    static final PrintStream OriginalSystemOut = System.out;
 
     private static Method getMethod(String name) throws NoSuchMethodException, SecurityException
     {
@@ -88,9 +91,8 @@ public class CommandHandler {
         {
             BufferedReader rd = new BufferedReader(new FileReader((String)args[1]));
 
-            FileOutputStream fileOut = new FileOutputStream((String)args[2]); //célfilera irányítja a current out-ot
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            currentOut = new PrintStream(out);
+            //célfilera irányítja a current out-ot
+            System.setOut(new PrintStream((String)args[2]));
 
             String line;
             int line_counter = 0;
@@ -100,9 +102,8 @@ public class CommandHandler {
                 processCommand(line);
             }
             rd.close();
-            currentOut.close();
-
-            currentOut = System.out; // visszaállítja
+            System.out.close();
+            System.setOut(OriginalSystemOut);
         }
         catch(Exception e)
         {
@@ -257,11 +258,72 @@ public class CommandHandler {
         c.getSettler(settlerId).addOneStargate(s2);
     }
 
-    public static void addrobot(Object[] args) {}
+    public static void addrobot(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        Robot r = new Robot();
+        int orbitId = Integer.parseInt((String)args[0]);
+        r.setLocation(c.getOrbit(orbitId));
+        boolean b;
+        switch ((String)args[1]) {
+            case "rand":
+                b = true;
+                break;        
+            case "det":
+                b=false;
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[1]);
+        }
+        r.setBehavior(b);
+    }
 
-    public static void addufo(Object[] args) {}
+    public static void addufo(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        Ufo u = new Ufo();
+        u.setLocation(c.getOrbit(Integer.parseInt((String)args[0])));
+        boolean b;
+        switch ((String)args[1]) {
+            case "rand":
+                b = true;
+                break;        
+            case "det":
+                b=false;
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[1]);
+        }
+        u.setBehavior(b);
+    }
 
-    public static void addsettler(Object[] args) {}
+    public static void addsettler(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[0])));
+        Inventory si = s.getInventory();
+        for(int i=0; i<Integer.parseInt((String)args[1]); i++){
+            si.addResource(new Uran());
+        }
+        for(int i=0; i<Integer.parseInt((String)args[2]); i++){
+            si.addResource(new Ice());
+        }
+        for(int i=0; i<Integer.parseInt((String)args[3]); i++){
+            si.addResource(new Iron());
+        }
+        for(int i=0; i<Integer.parseInt((String)args[4]); i++){
+            si.addResource(new Carbon());
+        }
+        switch (Integer.parseInt((String)args[5])) {
+            case 0:
+                break;        
+            case 2:
+                s.createStargate();
+                break;
+            default:
+                throw new Exception("Ismeretlen mukodes: " + (String)args[5]);
+        }
+    }
 
     public static void movesettler(Object[] args) {}
 
@@ -320,17 +382,95 @@ public class CommandHandler {
         );
     }
 
-    public static void createbase(Object[] args) {}
+    public static void createbase(Object[] args) 
+    {
+        try
+        {
+            Settler s = Controller.getInstance().getSettler((int)args[1]);
 
-    public static void replaceresourcesettler(Object[] args) {}
+            boolean original = Controller.getInstance().getGameIsOn(); //elmentjük az eredeti értéket
+            Controller.getInstance().setGameIsOn(true); //beállítjuk igazra
+
+            s.createBase();
+
+            if(Controller.getInstance().getGameIsOn() == false) // ha a bázis megépült a játék megállna (már ha eredetileg menne), ezt vizsgáljuk.
+            {
+                System.out.println("BaseCreation: Successful");
+            }
+            else
+            {
+                System.out.println("BaseCreation: Failed");
+            }
+            Controller.getInstance().setGameIsOn(original); //visszaállítjuk ahogy eredetileg volt
+
+        }
+        catch(Exception e)
+        {
+            
+        }
+
+    }
+
+    public static void replaceresourcesettler(Object[] args) 
+    {
+        try {
+            Settler s = Controller.getInstance().getSettler((int)args[1]); // kikeres settler
+            HashMap<String, ArrayList<Resource>> materials = s.getInventory().getFullList();
+            int before = materials.get((String)args[2]).size();
+
+            s.replaceResource((String)args[2]);
+
+            int after = materials.get((String)args[2]).size();
+
+            if (before > after)
+            {
+                System.out.println("Replace: Success");
+            }
+            else
+            {
+                System.out.println("Replace: Failed");
+            }
+        } catch (Exception e) {
+            System.out.println("Replace Resource Exception");
+            e.printStackTrace();
+        }
+
+    }
 
     public static void settlerinfo(Object[] args) {}
 
-    public static void robotinfo (Object[] args) {}
+    public static void robotinfo (Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int robotId = Integer.parseInt((String)args[0]);
+        Robot r = c.getRobot(robotId);
+        r.robotInfo();
+    }
 
-    public static void ufoinfo(Object[] args) {}
+    public static void ufoinfo(Object[] args) throws Exception 
+    {
+        Controller c = Controller.getInstance();
+        int ufoId = Integer.parseInt((String)args[0]);
+        Ufo u = c.getUfo(ufoId);
+        u.ufoInfo();
+    }
 
-    public static void asteroidinfo(Object[] args) {}
+    public static void asteroidinfo(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int asteroidId = Integer.parseInt((String)args[0]);
+        Asteroid a = c.getAsteroid(asteroidId);
+        String inLight;
+        if(a.getLight()){
+            inLight = "true";
+        }
+        else inLight = "false";
+
+        System.out.println(
+            "AsteroidId: asteroid_"+c.indexAsteroid(a)+ " Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
+            " Core: " + a.getCore().toString()+ " inLight: "+ inLight+" Layers: "+ a.getLayers()
+        );
+    }
 
     public static void stargateinfo(Object[] args) throws Exception
     {
@@ -353,11 +493,28 @@ public class CommandHandler {
 
     public static void listsettlers(Object[] args) {}
 
-    public static void listrobots (Object[] args) {}
+    public static void listRobots (Object[] args) 
+    {
+        Controller c = Controller.getInstance();
+        List<Robot> robots= c.getRobots();
+        for(Robot r: robots){
+            r.robotInfo();
+        }
+    }
 
-    public static void listufos(Object[] args) {}
+    public static void listUfos(Object[] args) 
+    {
+        Controller c = Controller.getInstance();
+        List<Ufo> ufos= c.getUfos();
+        for(Ufo u: ufos){
+            u.ufoInfo();
+        }
+    }
 
-    public static void listasteroids(Object[] args) {}
+    public static void listasteroids(Object[] args) 
+    {
+        Controller.getInstance().liststargates();
+    }
 
     public static void liststargates(Object[] args) 
     {

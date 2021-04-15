@@ -101,7 +101,24 @@ public class Robot extends Traveler {
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
+ /**
+     * Determinisztikus - random viselkedes
+     */
+    private boolean behavior;
+    /**
+     * Determinisztikus - random viselkedeshez
+     * 
+     */
+    public void setBehavior(boolean det_rand)
+    {
+        behavior = det_rand;
+    }
 
-
+    public void robotInfo(){
+        Controller c = Controller.getInstance();
+        int robotId = c.indexRobot(this);
+        System.out.println(
+            "RobotId: robot_"+ robotId+" Location: "+ c.indexOrbit(currentLocation)
+        );
 
 }
