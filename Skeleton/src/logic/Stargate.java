@@ -110,7 +110,8 @@ public class Stargate extends Orbit {
         Logger.startFunctionLogComment(this, "place", "");
 
         myStop = o.addNeighbour(this);
-
+        this.x = o.getCoords()[0];
+        this.y = o.getCoords()[1];
         isPlaced = true;
 
         Logger.endFunctionLog();
