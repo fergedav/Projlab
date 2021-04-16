@@ -1,0 +1,6 @@
+Hiba: Index 3 out of bounds for length 3
+--- AddPairedStargate 0 0
+Hiba: Nincs ilyen orbit: 1
+--- AddSettler 1 2 2 2 2 2
+Hiba: Nincs ilyen telepes: 0
+--- diggingSettler 0

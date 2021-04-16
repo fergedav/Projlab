@@ -379,14 +379,9 @@ public class CommandHandler {
         diggingSettler.digging();
 
         System.out.println(
-            "OrbitId: " + diggingSettler.getcurrentLocation().getPrefix()+"_"+
-            (diggingSettler.getcurrentLocation().getPrefix().equals("asteroid") ? 
-            c.indexAsteroid((Asteroid)diggingSettler.getcurrentLocation())
-               : (diggingSettler.getcurrentLocation().getPrefix().equals("stargate") ?
-                    c.indexStargate((Stargate)diggingSettler.getcurrentLocation()) : "-")
-            ) +
-            " Coords: " + diggingSettler.getcurrentLocation().getCoords()[0] + " " + diggingSettler.getcurrentLocation().getCoords()[1]
-            +
+            "OrbitId: " + diggingSettler.getcurrentLocation().getPrefix()+" "+
+            " Coords: " + diggingSettler.getcurrentLocation().getCoords()[0] + " " +
+            + diggingSettler.getcurrentLocation().getCoords()[1] +
             " RemainingLayers: " + diggingSettler.getcurrentLocation().getLayers());
 
     }
@@ -548,9 +543,14 @@ public class CommandHandler {
         }
         else inLight = "false";
 
+        //Core vizsgálat nullpointer miatt
+        String core = " - ";
+            if(a.getCore() != null)
+                core = a.getCore().getClass().getSimpleName();
+
         System.out.println(
             "AsteroidId: "+a.getPrefix()+ "Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
-            " Core: " + a.getCore().toString()+ " inLight: "+ inLight+" Layers: "+ a.getLayers()
+            " Core: " + core + " inLight: "+ inLight+" Layers: "+ a.getLayers()
         );
     }
 
