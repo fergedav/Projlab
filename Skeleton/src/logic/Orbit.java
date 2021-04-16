@@ -144,11 +144,13 @@ public abstract class Orbit implements java.io.Serializable {
             coords[3] >= y
         )) return;
 
-        for (Traveler t : travelers) {
+        ArrayList<Traveler> copy = new ArrayList<>();
+        copy.addAll(travelers);
+        for (Traveler t : copy) {
             t.die();
         }
+        travelers = copy;
 
-        Logger.endFunctionLog();
     }
 
     /**

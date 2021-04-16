@@ -193,11 +193,13 @@ public class Stargate extends Orbit {
             coords[1] <= y &&
             coords[2] >= x &&
             coords[3] >= y
-        ) {
-            for (Traveler t : travelers) {
-                t.die();
-            }
-            beCrazy = true;
+        ) 
+        ArrayList<Traveler> copy = new ArrayList<>();
+        copy.addAll(travelers);
+        for (Traveler t : copy) {
+            t.die();
+        }
+        travelers = copy;
         };
 
         

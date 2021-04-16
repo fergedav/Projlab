@@ -1,3 +1,1 @@
-SettlerId: settler_0 Location: asteroid_0 Coords: 3 6 Resources: Uran: 1 Ice: 2 Iron: 2 Carbon: 1 Gates: 0
-Hiba: java.lang.NoSuchMethodException: proto.CommandHandler.liststargate([Ljava.lang.Object;)
-Kivalto parancs: listStargate
+Travelers: settler_0, robot_0, 

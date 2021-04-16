@@ -156,7 +156,7 @@ public class Asteroid extends Orbit {
     {
         Logger.startFunctionLogComment(this, "sunstormArrive", "");
 
-        //napfényben vagyok e
+        //napfényben vagyok e //napviharban inkább talán...
         if(!(
             coords[0] <= x &&
             coords[1] <= y &&
@@ -166,7 +166,8 @@ public class Asteroid extends Orbit {
 
         if(!(layers == 0 && core == null))
         {
-            List<Traveler> copy = new ArrayList<>(travelers);
+            ArrayList<Traveler> copy = new ArrayList<>();
+            copy.addAll(travelers);
             for (Traveler t : copy) {
                 t.die();
             }
