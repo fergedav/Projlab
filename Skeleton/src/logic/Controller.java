@@ -482,10 +482,10 @@ public class Controller implements java.io.Serializable {
         if(stargates.size()>0){
             for (Stargate futo : stargates) {
                 System.out.println(
-                    "StargateId: "+futo.getPrefix()+"_"+stargates.indexOf(futo)+
-                    " MyTwin: "+futo.getMyTwin().getPrefix()+"_"+stargates.indexOf(futo.getMyTwin())+
-                    " MyStop: "+futo.getMyStop().getPrefix()+"_"+asteroids.indexOf((Asteroid)futo.getMyStop())+
-                    " Crazy: "+futo.getCrazy());
+                "StargateId: "+futo.getPrefix()+
+                " MyTwin: "+futo.getMyTwin().getPrefix()+
+                " MyStop: "+futo.getMyStop().getPrefix()+
+                " Crazy: "+futo.getCrazy());
             }
         }
         else

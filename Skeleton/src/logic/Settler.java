@@ -193,7 +193,7 @@ public class Settler extends Traveler {
         Controller c = Controller.getInstance();
         int settlerId = c.indexSettler(this);
         System.out.println(
-            "SettlerId: robot_"+ settlerId+" Location: "+ c.indexOrbit(currentLocation) + " Coords: " + this.currentLocation.getCoords()[0] + " " + this.currentLocation.getCoords()[1] 
+            "SettlerId: "+ this.prefix+" Location: "+ c.indexOrbit(currentLocation) + " Coords: " + this.currentLocation.getCoords()[0] + " " + this.currentLocation.getCoords()[1] 
             + " Resources: Uran: " +  this.inventory.getNumOfUran() + " Ice: " + this.inventory.getNumOfIce() + " Iron: " + this.inventory.getNumOfIron()
             + " Carbon: " + this.inventory.getNumOfCarbon() + " Gates: " + this.stargates.size());
     }

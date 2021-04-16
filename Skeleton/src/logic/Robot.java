@@ -123,9 +123,8 @@ public class Robot extends Traveler {
 
     public void robotInfo(){
         Controller c = Controller.getInstance();
-        int robotId = c.indexRobot(this);
         System.out.println(
-            "RobotId: robot_"+ robotId+" Location: "+ c.indexOrbit(currentLocation)
+            "RobotId: "+ this.prefix+" Location: "+ c.indexOrbit(currentLocation)
         );
     }
 
