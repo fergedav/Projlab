@@ -264,7 +264,7 @@ public class CommandHandler {
     {
         Controller c = Controller.getInstance();
         Robot r = new Robot();
-        int orbitId = Integer.parseInt((String)args[0]);
+        int orbitId = Integer.parseInt((String)args[1]);
         r.setLocation(c.getOrbit(orbitId));
         boolean b;
         switch ((String)args[1]) {
@@ -284,7 +284,7 @@ public class CommandHandler {
     {
         Controller c = Controller.getInstance();
         Ufo u = new Ufo();
-        u.setLocation(c.getOrbit(Integer.parseInt((String)args[0])));
+        u.setLocation(c.getOrbit(Integer.parseInt((String)args[1])));
         boolean b;
         switch ((String)args[1]) {
             case "rand":
@@ -302,7 +302,7 @@ public class CommandHandler {
     public static void addsettler(Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[0])));
+        Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[1])));
         Inventory si = s.getInventory();
         for(int i=0; i<Integer.parseInt((String)args[1]); i++){
             si.addResource(new Uran());
@@ -506,7 +506,7 @@ public class CommandHandler {
     public static void settlerinfo(Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        int settlertId = Integer.parseInt((String)args[0]);
+        int settlertId = Integer.parseInt((String)args[1]);
         Settler s = c.getSettler(settlertId);
         s.SettlerInfo();
     }
@@ -514,7 +514,7 @@ public class CommandHandler {
     public static void robotinfo (Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        int robotId = Integer.parseInt((String)args[0]);
+        int robotId = Integer.parseInt((String)args[1]);
         Robot r = c.getRobot(robotId);
         r.robotInfo();
     }
@@ -522,7 +522,7 @@ public class CommandHandler {
     public static void ufoinfo(Object[] args) throws Exception 
     {
         Controller c = Controller.getInstance();
-        int ufoId = Integer.parseInt((String)args[0]);
+        int ufoId = Integer.parseInt((String)args[1]);
         Ufo u = c.getUfo(ufoId);
         u.ufoInfo();
     }
@@ -530,7 +530,7 @@ public class CommandHandler {
     public static void asteroidinfo(Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        int asteroidId = Integer.parseInt((String)args[0]);
+        int asteroidId = Integer.parseInt((String)args[1]);
         Asteroid a = c.getAsteroid(asteroidId);
         String inLight;
         if(a.getLight()){
