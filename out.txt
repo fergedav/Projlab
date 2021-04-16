@@ -1,1 +1,1 @@
-Resource: nothing
+AsteroidId: asteroid_0 Coords: 1 2 Core: Uran inLight: true Layers: 0

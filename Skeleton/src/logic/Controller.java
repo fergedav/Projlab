@@ -536,7 +536,7 @@ public class Controller implements java.io.Serializable {
                 core = futo.getCore().getClass().getSimpleName();
             System.out.println(
                 "AsteroidId: "+ futo.getPrefix() +
-                " Coords: " + futo.getCoords()[0] + "_"+ futo.getCoords()[1] +
+                " Coords: " + futo.getCoords()[0] + " "+ futo.getCoords()[1] +
                 " Core: " + core +
                 " inLight: " + futo.inLight +
                 " Layers: " + futo.getLayers()
