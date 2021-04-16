@@ -275,7 +275,10 @@ public class CommandHandler {
         Controller c = Controller.getInstance();
         Robot r = new Robot();
         int orbitId = Integer.parseInt((String)args[1]);
-        r.setLocation(c.getOrbit(orbitId));
+        Orbit destination = c.getOrbit(orbitId);
+        r.setLocation(destination);
+        destination.addTraveler(r);
+
         boolean b;
         switch ((String)args[2]) {
             case "rand":

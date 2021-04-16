@@ -1,1 +1,3 @@
-AsteroidId: asteroid_0 Coords: 1 2 Core: Uran inLight: true Layers: 0
+Hiba: bound must be positive
+--- RobotStep 0
+RobotId: robot_0 Location: stargate_0

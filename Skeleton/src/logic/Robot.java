@@ -31,7 +31,7 @@ public class Robot extends Traveler {
         if(behavior)
         {
             int num = currentLocation.numOfNeighbor();
-            Random r = new Random(num);
+            Random r = new Random();
             n = r.nextInt(num);
         }
         
@@ -123,9 +123,8 @@ public class Robot extends Traveler {
     }
 
     public void robotInfo(){
-        Controller c = Controller.getInstance();
         System.out.println(
-            "RobotId: "+ this.prefix+" Location: "+ c.indexOrbit(currentLocation)
+            "RobotId: "+ this.prefix+" Location: "+ currentLocation.getPrefix()
         );
     }
 

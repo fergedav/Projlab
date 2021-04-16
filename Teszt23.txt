@@ -9,4 +9,4 @@ sunlightCall 0 0 3 3
 sunlightCall 0 0 3 3
 AsteroidInfo 0
 RobotInfo 0
-listSettler
+listSettlers

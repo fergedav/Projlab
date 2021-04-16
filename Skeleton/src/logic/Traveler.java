@@ -40,7 +40,7 @@ public abstract class Traveler implements java.io.Serializable {
         /** Eltávolítja magátz eddigi tartózkodási helyérõl. */
         currentLocation.removeTraveler(this);
         /** Hozzáadja magát a célállomáshoz. */
-        destination.addTraveler(this);
+        currentLocation = destination.addTraveler(this);
 
         Logger.endFunctionLog();
     }
