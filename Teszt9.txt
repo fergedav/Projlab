@@ -1,5 +1,5 @@
 createMap
 AddAsteroid Ice 3 6 1 false
-AddPairedStargate 0 0
+AddPairedStargate 0 0 det
 AddSettler 1 2 2 2 2 2
 diggingSettler 0
