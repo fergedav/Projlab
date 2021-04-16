@@ -486,11 +486,17 @@ public class CommandHandler {
             int settlertId = Integer.parseInt((String)args[1]);
             Settler s = Controller.getInstance().getSettler(settlertId); // kikeres settler
             HashMap<String, ArrayList<Resource>> materials = s.getInventory().getFullList();
-            int before = materials.get((String)args[2]).size();
 
-            s.replaceResource((String)args[2]);
+            //nagy kezdõbetû visszaállítása a kulcs szóhoz.
+            String badKey = (String)args[2];
+            String[] split = badKey.split("");
+            String Goodkey = split[0].toUpperCase()+badKey.substring(1);
 
-            int after = materials.get((String)args[2]).size();
+            int before = materials.get(Goodkey).size();
+
+            s.replaceResource(Goodkey);
+
+            int after = materials.get(Goodkey).size();
 
             if (before > after)
             {

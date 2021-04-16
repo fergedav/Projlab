@@ -269,7 +269,7 @@ public class Inventory implements java.io.Serializable {
     public int getNumOfCarbon(){
         return materials.get("Carbon").size();
     }
-    public HashMap<String, ArrayList<Resource>> getFullList() {return materials;}
+    public HashMap<String, ArrayList<Resource>> getFullList() { return materials; }
     
     public List<Stargate> giveFreeStargates()
     {
