@@ -120,6 +120,8 @@ public class Controller implements java.io.Serializable {
 
         robots.add(r);
 
+        //TODO beírni robotnak a prefixet;
+
         Logger.endFunctionLog();
     }
 
@@ -165,6 +167,8 @@ public class Controller implements java.io.Serializable {
     public void addSettler(Settler s)
     {
         settlers.add(s);
+
+        //TODO beírni prefixet
     }
 
     /**
@@ -182,8 +186,11 @@ public class Controller implements java.io.Serializable {
      */
     public void addStargate(Stargate s)
     {
+        //TODO PREFIXET FELVENNI
+
         orbits.add(s);
         stargates.add(s);
+
     }
 
     /**
@@ -203,7 +210,12 @@ public class Controller implements java.io.Serializable {
      */
     public void addOrbit(Orbit o)
     {
+
+
         orbits.add(o);
+
+        //TODO beírni a prefixét.
+        //TODO ez alul furcsa... nekem nem tetszik. mert add orbitot hív stargate, vagy asteroid beírás is följebb
 
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
         if(o.getClass() == Asteroid.class){}
@@ -309,6 +321,8 @@ public class Controller implements java.io.Serializable {
 
     public void addAsteroid(Asteroid a) 
     { 
+
+        //TODO prefix?
         a.setPrefix("asteroid");
         asteroids.add(a);
     }
