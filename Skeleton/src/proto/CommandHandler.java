@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +32,17 @@ public class CommandHandler {
     {
         try {
             String[] splits = line.toLowerCase().split(" ");
-            getMethod(splits[0]).invoke(null, (Object[]) splits);
-        } catch (Exception e) {
+            Method m = CommandHandler.class.getDeclaredMethod(splits[0], Object[].class);
+            m.setAccessible(true);
+            m.invoke(null, new Object[] {splits}); 
+            
+        } 
+        catch (InvocationTargetException ex)
+        {
+            System.out.println("Hiba: " + ex.getTargetException().getMessage());
+            System.out.println("Paramter lista hiba: "+ line);
+        }
+        catch (Exception e) {
             System.out.println("Hiba: " + e.toString());
             System.out.println("Kivalto parancs: " + line);
         }
@@ -530,7 +540,7 @@ public class CommandHandler {
     public static void asteroidinfo(Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        int asteroidId = Integer.parseInt((String)args[0]);
+        int asteroidId = Integer.parseInt((String)args[1]);
         Asteroid a = c.getAsteroid(asteroidId);
         String inLight;
         if(a.getLight()){
