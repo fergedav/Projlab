@@ -435,8 +435,11 @@ public class CommandHandler {
         Controller c = Controller.getInstance();
         int settlerId = Integer.parseInt((String)args[1]);
         Settler seged = c.getSettler(settlerId);
-        Stargate lehelyezett = seged.getStargates().get(0); 
+        List<Stargate> canBeEmpty = seged.getStargates();
+        if(canBeEmpty.size() <= 0){return;}
+        Stargate lehelyezett = canBeEmpty.get(0);
         seged.placeStargate();
+
         System.out.println(
             "StargateId: " + lehelyezett.getPrefix() +
             " Coords: " + lehelyezett.getCoords()[0] + " " + lehelyezett.getCoords()[1] +            
