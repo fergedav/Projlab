@@ -575,7 +575,7 @@ public class CommandHandler {
         Controller.getInstance().listsettlers();
     }
 
-    public static void listRobots (Object[] args) 
+    public static void listrobots (Object[] args) 
     {
         Controller c = Controller.getInstance();
         List<Robot> robots= c.getRobots();

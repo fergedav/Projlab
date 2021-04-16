@@ -1,3 +1,11 @@
 Resource: Uran
 Inulas: OrbitId: asteroid_0_- Coords: 1 1 InLight: true
 Erkezes: OrbitId: asteroid_0_-Coords: 1 1 InLight: true
+Replace: Success
+SettlerId: settler_0_-1 Location: asteroid_0_- Coords: 11 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 1
+RobotId: robot_0 Location: 2
+Hiba: null
+--- listAsteroids
+StargateId: stargate_0 MyTwin: stargate_1 MyStop: asteroid_1 Crazy: false
+Hiba: null
+--- listStargates
