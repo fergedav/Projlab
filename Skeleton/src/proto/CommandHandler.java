@@ -417,13 +417,8 @@ public class CommandHandler {
         if(Controller.getInstance().numOfRobots()>dbRobot){
             Robot uj = Controller.getInstance().lastRobot();
             System.out.println(
-                "RobotId: "+uj.getPrefix()+"_"+Controller.getInstance().indexRobot(uj)+
-                " OrbitId: "+uj.getcurrentLocation().getPrefix()+"_"+
-                (uj.getcurrentLocation().getPrefix().equals("asteroid") ? 
-                Controller.getInstance().indexAsteroid((Asteroid)uj.getcurrentLocation())
-                   : (uj.getcurrentLocation().getPrefix().equals("stargate") ?
-                        Controller.getInstance().indexStargate((Stargate)uj.getcurrentLocation()) : "-")
-                )
+                "RobotId: "+uj.getPrefix()+
+                " OrbitId: "+uj.getcurrentLocation().getPrefix()
             );
         }
         
@@ -445,15 +440,12 @@ public class CommandHandler {
         Stargate lehelyezett = seged.getStargates().get(0); 
         seged.placeStargate();
         System.out.println(
-            "StargateId: " + lehelyezett.getPrefix() +"_"+
-                c.indexStargate(lehelyezett) +
+            "StargateId: " + lehelyezett.getPrefix() +
             " Coords: " + lehelyezett.getCoords()[0] + " " + lehelyezett.getCoords()[1] +            
             " MyStop: " + 
                 (lehelyezett.getPlaced() ? 
-                (lehelyezett.getMyStop().getPrefix() +"_"+c.indexAsteroid((Asteroid)lehelyezett.getMyStop())) 
-                : "-") +
-            " TwinId: " + lehelyezett.getMyTwin().getPrefix() +"_"+
-                c.indexStargate(lehelyezett.getMyTwin()) +
+                lehelyezett.getMyStop().getPrefix() : "-") +
+            " TwinId: " + lehelyezett.getMyTwin().getPrefix() +
             " InLight: " + lehelyezett.getLight()+
             " Crazy: " + lehelyezett.getCrazy()
         );
@@ -560,15 +552,12 @@ public class CommandHandler {
         int stargateId = Integer.parseInt((String)args[1]);
         Stargate vizsgalt = Controller.getInstance().getStargate(stargateId);
         System.out.println(
-            "StargateId: " + vizsgalt.getPrefix() +"_"+
-                Controller.getInstance().indexStargate(vizsgalt) +
+            "StargateId: " + vizsgalt.getPrefix() +
             " Coords: " + vizsgalt.getCoords()[0] + " " + vizsgalt.getCoords()[1] +            
             " MyStop: " + 
                 (vizsgalt.getPlaced() ? 
-                (vizsgalt.getMyStop().getPrefix() +"_"+Controller.getInstance().indexAsteroid((Asteroid)vizsgalt.getMyStop())) 
-                : "-") +
-            " TwinId: " + vizsgalt.getMyTwin().getPrefix() +"_"+
-                Controller.getInstance().indexStargate(vizsgalt.getMyTwin()) +
+                vizsgalt.getMyStop().getPrefix(): "-") +
+            " TwinId: " + vizsgalt.getMyTwin().getPrefix() +
             " InLight: " + vizsgalt.getLight()+
             " Crazy: " + vizsgalt.getCrazy()
         );
@@ -613,12 +602,7 @@ public class CommandHandler {
         Asteroid seged = Controller.getInstance().getAsteroid(asteroidId);
         for(int i = 0; i < seged.numOfNeighbor(); i++){
             System.out.println(
-                "OrbitId: " + seged.getNeighbour(i).getPrefix() +"_"+ 
-                (seged.getNeighbour(i).getPrefix().equals("asteroid") ? 
-                Controller.getInstance().indexAsteroid((Asteroid)seged.getNeighbour(i))
-                   : (seged.getNeighbour(i).getPrefix().equals("stargate") ?
-                        Controller.getInstance().indexStargate((Stargate)seged.getNeighbour(i)) : "-")
-                ) +
+                "OrbitId: " + seged.getNeighbour(i).getPrefix()+
                 "  Coords: " + seged.getNeighbour(i).getCoords()[0] + " " + seged.getNeighbour(i).getCoords()[1]);
         }
     }
@@ -630,20 +614,7 @@ public class CommandHandler {
         System.out.print("Travelers: ");
         String seged;
         for (Traveler t : aktualis.getTravelers()) {
-            switch (t.getPrefix()) {
-                case "robot":
-                    seged = String.valueOf(Controller.getInstance().indexRobot((Robot)t));
-                    break;        
-                case "ufo":
-                    seged = String.valueOf(Controller.getInstance().indexUfo((Ufo)t));
-                    break;
-                case "settler":
-                    seged = String.valueOf(Controller.getInstance().indexSettler((Settler)t));
-                    break;
-                default:
-                    throw new Exception("Ismeretlen traveler: " + t.getPrefix());
-            }
-            System.out.print(t.getPrefix()+"_"+seged+", ");
+            System.out.print(t.getPrefix()+", ");
         }
         System.out.println(); //ugorjon sort es ujba folytassa
     }
