@@ -11,6 +11,6 @@ AsteroidId: asteroid_0_0 Coords: 1_1 Core: logic.Uran inLight: false Layers: 0
 AsteroidId: asteroid_1_1 Coords: 2_2 Core: logic.Iron inLight: true Layers: 5
 Hiba: null
 --- listAsteroids
-StargateId: stargate_0_0 MyTwin: stargate_1_1 MyStop: asteroid_1_1 Crazy: false
+StargateId: stargate_0 MyTwin: stargate_1 MyStop: asteroid_1 Crazy: false
 Hiba: null
 --- listStargates

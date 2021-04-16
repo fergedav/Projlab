@@ -199,4 +199,10 @@ public class Settler extends Traveler {
     }
 
     public static int id_counter = 0;
+
+    public void addFreeStargatePair()
+    {
+        List<Stargate> newgates = inventory.giveFreeStargates();
+        stargates.addAll(newgates);
+    }
 }

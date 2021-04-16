@@ -331,7 +331,7 @@ public class CommandHandler {
             case 0:
                 break;        
             case 2:
-                s.createStargate();
+                s.addFreeStargatePair();
                 break;
             default:
                 throw new Exception("Ismeretlen mukodes: " + (String)args[6]);
