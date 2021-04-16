@@ -1,0 +1,7 @@
+createMap
+AddAsteroid iron 0 0 10 false
+AddSettler 0 3 0 0 0 0
+listAsteroidContent 0
+createRobot 0
+listAsteroidContent 0
+settlerInfo 0

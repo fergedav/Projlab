@@ -1,0 +1,13 @@
+createMap
+AddAsteroid iron 1 1 0 false
+AddAsteroid iron 8 8 0 false
+AddPairedStargate 0 1 det
+AddSettler 2 0 0 0 0 0
+AddRobot 2 det
+stargateInfo 0
+listSettlers
+listRobots
+sunstormCall 0 0 2 2
+stargateInfo 0   
+listSettlers
+listRobots

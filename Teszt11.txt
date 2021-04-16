@@ -1,0 +1,5 @@
+createMap
+AddAsteroid Iron 3 6 0 false
+AddSettler 0 2 2 2 2 2
+miningSettler 0
+asteroidInfo 0

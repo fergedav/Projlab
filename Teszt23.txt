@@ -1,0 +1,12 @@
+CreateMap
+AddAsteroid Uran 1 2 0 false
+AddAsteroid Iron 4 4 3 false
+setNeighbor 0 1
+AddSettler 0 0 0 0 0 0
+AddRobot 0 rand
+sunlightCall 0 0 3 3
+sunlightCall 0 0 3 3
+sunlightCall 0 0 3 3
+AsteroidInfo 0
+RobotInfo 0
+listSettler

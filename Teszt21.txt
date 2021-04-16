@@ -1,0 +1,4 @@
+CreateMap
+AddAsteroid Iron 1 2 0 false
+sunlightCall 0 0 3 3
+AsteroidInfo 0

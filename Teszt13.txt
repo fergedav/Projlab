@@ -1,0 +1,6 @@
+createMap
+AddAsteroid Iron 3 6 0 false
+AddAsteroid Iron 3 8 3 false
+AddPairedStargate 0 1 det
+AddSettler 0 2 2 2 2 2
+miningSettler 0

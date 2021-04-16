@@ -1,0 +1,7 @@
+CreateMap
+AddAsteroid Iron 2 2 3 false
+AddSettler 0 0 0 0 0 0
+AddHalfStargate 0 0 rand
+AddUfo 1 rand
+UfoStep 0
+UfoInfo 0

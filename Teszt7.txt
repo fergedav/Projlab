@@ -1,0 +1,6 @@
+createMap
+AddAsteroid Uran 3 6 1 true
+AddSettler 0 2 2 2 2 0
+diggingSettler 0
+asteroidInfo 0
+listSettlers
