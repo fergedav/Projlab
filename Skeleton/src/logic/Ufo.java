@@ -12,6 +12,7 @@ public class Ufo extends Traveler {
     {
         //remelhetoleg kelloen nagy
         inv = new Inventory(10000);
+        setPrefix("ufo_"+id_counter++);
     }
 
     private int whereTo()
@@ -90,4 +91,5 @@ public class Ufo extends Traveler {
         );
     }
 
+    static int id_counter = 0;
 }
