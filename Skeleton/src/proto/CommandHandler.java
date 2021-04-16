@@ -549,7 +549,7 @@ public class CommandHandler {
                 core = a.getCore().getClass().getSimpleName();
 
         System.out.println(
-            "AsteroidId: "+a.getPrefix()+ "Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
+            "AsteroidId: "+a.getPrefix()+ " Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
             " Core: " + core + " inLight: "+ inLight+" Layers: "+ a.getLayers()
         );
     }
