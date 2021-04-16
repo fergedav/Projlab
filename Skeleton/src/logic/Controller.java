@@ -506,14 +506,9 @@ public class Controller implements java.io.Serializable {
     {
         for (Settler futo : settlers) {
             System.out.println(
-                "SettlerId: "+ futo.getPrefix()+"_"+stargates.indexOf(futo)+
-                " Location: "+ futo.getcurrentLocation().getPrefix() + "_" +
-                (futo.getcurrentLocation().getPrefix().equals("asteroid") ? 
-                asteroids.indexOf(futo.getcurrentLocation())
-                   : (futo.getcurrentLocation().getPrefix().equals("stargate") ?
-                        stargates.indexOf(futo.getcurrentLocation()) : "-")
-                ) +
-                " Coords: " + futo.getcurrentLocation().getCoords()[0]+futo.getcurrentLocation().getCoords()[1]+
+                "SettlerId: "+ futo.getPrefix() +
+                " Location: "+ futo.getcurrentLocation().getPrefix() +
+                " Coords: " + futo.getcurrentLocation().getCoords()[0] + " " +futo.getcurrentLocation().getCoords()[1] +
                 " Resources: Uran: "+ futo.getInventory().getNumOfUran() + " Ice: " + futo.getInventory().getNumOfIce() + " Iron: "+ futo.getInventory().getNumOfIron() + "Carbon: "  + futo.getInventory().getNumOfCarbon() + " Gates: " + futo.getStargates().size()
                 );
         }
@@ -540,7 +535,7 @@ public class Controller implements java.io.Serializable {
             if(futo.getCore() != null)
                 core = futo.getCore().getClass().getSimpleName();
             System.out.println(
-                "AsteroidId: "+ futo.getPrefix() + "_" + asteroids.indexOf(futo) +
+                "AsteroidId: "+ futo.getPrefix() +
                 " Coords: " + futo.getCoords()[0] + "_"+ futo.getCoords()[1] +
                 " Core: " + core +
                 " inLight: " + futo.inLight +

@@ -126,7 +126,6 @@ public class CommandHandler {
     public static void createmap(Object[] args) 
     {
         Controller.getNewControler();
-
     }
 
     public static void robotstep(Object[] args) throws Exception 
