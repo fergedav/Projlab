@@ -33,7 +33,8 @@ public class CommandHandler {
             String[] splits = line.toLowerCase().split(" ");
             getMethod(splits[0]).invoke(null, (Object[]) splits);
         } catch (Exception e) {
-            System.out.println("Hiba: " + e.getMessage());
+            System.out.println("Hiba: " + e.toString());
+            System.out.println("Kivalto parancs: " + line);
         }
     }
 
