@@ -117,10 +117,9 @@ public class Controller implements java.io.Serializable {
     public void addRobot(Robot r)
     {
         Logger.startFunctionLogComment(this, "addRobot", "");
-
         robots.add(r);
 
-        //TODO beírni robotnak a prefixet;
+        //TODO beírni robotnak a prefixet; törölni majd
 
         Logger.endFunctionLog();
     }
@@ -167,8 +166,6 @@ public class Controller implements java.io.Serializable {
     public void addSettler(Settler s)
     {
         settlers.add(s);
-
-        //TODO beírni prefixet
     }
 
     /**
@@ -220,6 +217,9 @@ public class Controller implements java.io.Serializable {
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
         if(o.getClass() == Asteroid.class){}
             asteroids.add((Asteroid)o);
+        
+        if(o.getClass() == Stargate.class){}
+            stargates.add((Stargate)o);
     }
     /**
      * Kiveszi a paraméterként kapott Orbitot az orbits listából.
@@ -321,10 +321,8 @@ public class Controller implements java.io.Serializable {
 
     public void addAsteroid(Asteroid a) 
     { 
-
-        //TODO prefix?
-        a.setPrefix("asteroid");
         asteroids.add(a);
+        orbits.add(a);
     }
 
     public Robot getRobot(int index) throws Exception
