@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 public class Ufo extends Traveler {
 
     /**
@@ -16,8 +18,14 @@ public class Ufo extends Traveler {
 
     private int whereTo()
     {
-        // TODO det nem det
-        return 0;
+        int n = 0;
+        if(behavior)
+        {
+            int num = currentLocation.numOfNeighbor();
+            Random r = new Random(num);
+            n = r.nextInt(num);
+        }
+        return n;
     }
 
 
