@@ -22,6 +22,7 @@ public class Settler extends Traveler {
         currentLocation.addTraveler(this);
         inventory = new Inventory(10);
         setPrefix("settler_"+id_counter++);
+        Controller.getInstance().addSettler(this);
         Logger.endFunctionLog();
     }
 
