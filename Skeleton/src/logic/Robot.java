@@ -14,6 +14,7 @@ public class Robot extends Traveler {
         super();
         Logger.startFunctionLogComment(this, "Robot", "<<create>>");
         setPrefix("robot_"+id_counter++);
+        Controller.getInstance().addRobot(this);
         Logger.endFunctionLog();
     }
     /**
