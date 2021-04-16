@@ -1,0 +1,6 @@
+StargateId: stargate_3 Coords: 0 0 MyStop: asteroid_0 TwinId: stargate_2 InLight: false Crazy: false
+SettlerId: settler_0 Location: asteroid_0 Coords: 3 6 Resources: Uran: 2 Ice: 2 Iron: 2 Carbon: 2 Gates: 2
+StargateId: stargate_0 MyTwin: stargate_1 MyStop:  -  Crazy: false
+StargateId: stargate_1 MyTwin: stargate_0 MyStop:  -  Crazy: false
+StargateId: stargate_2 MyTwin: stargate_3 MyStop: asteroid_2 Crazy: false
+StargateId: stargate_3 MyTwin: stargate_2 MyStop: asteroid_0 Crazy: false

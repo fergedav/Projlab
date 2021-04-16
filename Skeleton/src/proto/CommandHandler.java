@@ -449,32 +449,25 @@ public class CommandHandler {
         );
     }
 
-    public static void createbase(Object[] args) 
+    public static void createbase(Object[] args) throws Exception 
     {
-        try
+       
+        Settler s = Controller.getInstance().getSettler(Integer.parseInt((String)args[1]));
+
+        boolean original = Controller.getInstance().getGameIsOn(); //elmentjük az eredeti értéket
+        Controller.getInstance().setGameIsOn(true); //beállítjuk igazra
+
+        s.createBase();
+
+        if(Controller.getInstance().getGameIsOn() == false) // ha a bázis megépült a játék megállna (már ha eredetileg menne), ezt vizsgáljuk.
         {
-            Settler s = Controller.getInstance().getSettler((int)args[1]);
-
-            boolean original = Controller.getInstance().getGameIsOn(); //elmentjük az eredeti értéket
-            Controller.getInstance().setGameIsOn(true); //beállítjuk igazra
-
-            s.createBase();
-
-            if(Controller.getInstance().getGameIsOn() == false) // ha a bázis megépült a játék megállna (már ha eredetileg menne), ezt vizsgáljuk.
-            {
-                System.out.println("BaseCreation: Successful");
-            }
-            else
-            {
-                System.out.println("BaseCreation: Failed");
-            }
-            Controller.getInstance().setGameIsOn(original); //visszaállítjuk ahogy eredetileg volt
-
+            System.out.println("BaseCreation: Successful");
         }
-        catch(Exception e)
+        else
         {
-            
+            System.out.println("BaseCreation: Failed");
         }
+        Controller.getInstance().setGameIsOn(original); //visszaállítjuk ahogy eredetileg volt
 
     }
 

@@ -81,6 +81,7 @@ public class Settler extends Traveler {
         {
             currentLocation.addTraveler(newrobot);
             controler.addRobot(newrobot);
+            newrobot.currentLocation = this.currentLocation;
         }
         Logger.endFunctionLog();
     }
@@ -205,5 +206,7 @@ public class Settler extends Traveler {
     {
         List<Stargate> newgates = inventory.giveFreeStargates();
         stargates.addAll(newgates);
+        Controller.getInstance().addStargate(newgates.get(0));
+        Controller.getInstance().addStargate(newgates.get(1));
     }
 }

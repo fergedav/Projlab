@@ -66,7 +66,7 @@ public class Ufo extends Traveler {
         //nem kene null check mert az van a step-ben, mining csak nem null core eseten hivodik, 
         //de explicit hivasok miatt inkabb rakok
         Resource r = currentLocation.retrieveResource();
-        if(r != null) inv.addResource(r);
+        if(r != null) inventory.addResource(r);
 
         return r != null;
     }
