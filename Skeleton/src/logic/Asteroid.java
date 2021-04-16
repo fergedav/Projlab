@@ -34,7 +34,7 @@ public class Asteroid extends Orbit {
         core = c;
         layers = l;
         inLight = light;
-
+        setPrefix("asteroid_"+id_counter++);
         Logger.endFunctionLog();
     }    
 
@@ -199,5 +199,5 @@ public class Asteroid extends Orbit {
     @Override
     public Resource getCore() {return core;}
 
-
+    static int id_counter = 0;
 }

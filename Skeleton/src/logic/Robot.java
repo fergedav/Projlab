@@ -13,6 +13,7 @@ public class Robot extends Traveler {
     {
         super();
         Logger.startFunctionLogComment(this, "Robot", "<<create>>");
+        setPrefix("robot_"+id_counter++);
         Logger.endFunctionLog();
     }
     /**
@@ -127,4 +128,6 @@ public class Robot extends Traveler {
             "RobotId: robot_"+ robotId+" Location: "+ c.indexOrbit(currentLocation)
         );
     }
+
+    static int id_counter = 0;
 }

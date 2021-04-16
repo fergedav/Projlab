@@ -19,6 +19,7 @@ public class Stargate extends Orbit {
     {
         Logger.startFunctionLogComment(this, "Stargate", "<<create>>");
         stargeteController = Controller.getInstance();
+        setPrefix("stargate_"+id_counter++);
         Logger.endFunctionLog();
     }
 
@@ -239,4 +240,6 @@ public class Stargate extends Orbit {
     public boolean getCrazy(){
         return beCrazy;
     }
+
+    static int id_counter = 0;
 }
