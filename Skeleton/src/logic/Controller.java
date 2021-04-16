@@ -488,20 +488,18 @@ public class Controller implements java.io.Serializable {
      */
     public void liststargates()
     {
-        if(stargates.size()>0){
-            for (Stargate futo : stargates) {
-                System.out.println(
-                "StargateId: "+futo.getPrefix()+
-                " MyTwin: "+futo.getMyTwin().getPrefix()+
-                " MyStop: "+futo.getMyStop().getPrefix()+
-                " Crazy: "+futo.getCrazy());
-            }
+        for (Stargate futo : stargates) {
+            //core lehet nulla. lehet belõle baj. elõbb kell kezelni.
+            String MyStop = " - ";
+            if(futo.getMyStop() != null)
+                MyStop = futo.getMyStop().getPrefix();
+            System.out.println(
+                "StargateId: " + futo.getPrefix()+
+                " MyTwin: " + futo.getMyTwin().getPrefix()+
+                " MyStop: " + MyStop +
+                " Crazy: " + futo.getCrazy()
+            );
         }
-        else
-        {
-            return;
-        }
-        
     }
 
     public void listsettlers()
@@ -537,12 +535,17 @@ public class Controller implements java.io.Serializable {
     public void listAsteroids()
     {
         for (Asteroid futo : asteroids) {
+            //core lehet nulla. lehet belõle baj. elõbb kell kezelni.
+            String core = " - ";
+            if(futo.getCore() != null)
+                core = futo.getCore().getClass().getSimpleName();
             System.out.println(
                 "AsteroidId: "+ futo.getPrefix() + "_" + asteroids.indexOf(futo) +
                 " Coords: " + futo.getCoords()[0] + "_"+ futo.getCoords()[1] +
-                " Core: " + futo.getCore().getClass().getName() + 
-                " inLight: " + futo.inLight + 
-                " Layers: " + futo.getLayers());
+                " Core: " + core +
+                " inLight: " + futo.inLight +
+                " Layers: " + futo.getLayers()
+            );
         }
     }
     /**

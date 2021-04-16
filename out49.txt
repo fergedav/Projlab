@@ -4,8 +4,10 @@ Erkezes: OrbitId: asteroid_0_-Coords: 1 1 InLight: true
 Replace: Success
 SettlerId: settler_0_-1 Location: asteroid_0_- Coords: 11 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 1
 RobotId: robot_0 Location: 2
-Hiba: null
---- listAsteroids
+###Lista m�rete: 3
+AsteroidId: asteroid_0_0 Coords: 1_1 Core:  -  inLight: false Layers: 0
+AsteroidId: asteroid_1_1 Coords: 2_2 Core: logic.Iron inLight: true Layers: 5
+AsteroidId: asteroid_2_2 Coords: 3_3 Core:  -  inLight: true Layers: 0
 StargateId: stargate_0 MyTwin: stargate_1 MyStop: asteroid_1 Crazy: false
 Hiba: null
 --- listStargates
