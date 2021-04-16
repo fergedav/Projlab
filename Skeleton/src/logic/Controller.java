@@ -168,6 +168,15 @@ public class Controller implements java.io.Serializable {
         settlers.add(s);
     }
 
+     /**
+     * Hozzáadja a paraméterként kapott ufót a controller ufo-kat tartalmazó listájához
+     * @param u
+     */
+    public void addUfo(Ufo ufo)
+    {
+        ufos.add(ufo);
+    }
+
     /**
      * eltávolítja a kapott ufót a Controller ufos listájából, ha   a kapott ufo benne volt.
      * @param u ufo

@@ -15,6 +15,7 @@ public class Ufo extends Traveler {
         //remelhetoleg kelloen nagy
         inv = new Inventory(10000);
         setPrefix("ufo_"+id_counter++);
+        Controller.getInstance().addUfo(this);
     }
 
     private int whereTo()
