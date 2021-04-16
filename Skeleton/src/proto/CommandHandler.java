@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,9 +32,19 @@ public class CommandHandler {
     {
         try {
             String[] splits = line.toLowerCase().split(" ");
-            getMethod(splits[0]).invoke(null, (Object[]) splits);
-        } catch (Exception e) {
-            System.out.println("Hiba: " + e.getMessage());
+            Method m = CommandHandler.class.getDeclaredMethod(splits[0], Object[].class);
+            m.setAccessible(true);
+            m.invoke(null, new Object[] {splits}); 
+            
+        } 
+        catch (InvocationTargetException ex)
+        {
+            System.out.println("Hiba: " + ex.getTargetException().getMessage());
+            System.out.println("Paramter lista hiba: "+ line);
+        }
+        catch (Exception e) {
+            System.out.println("Hiba: " + e.toString());
+            System.out.println("Kivalto parancs: " + line);
         }
     }
 
@@ -85,6 +96,7 @@ public class CommandHandler {
     }
 
     //nincs kész, nem biztos hogy mûködik.
+    // kiírja hanyadik sornál akadt el???? még nincs meg.
     public static void loadtest(Object[] args) throws IOException 
     {
         try
@@ -262,7 +274,7 @@ public class CommandHandler {
     {
         Controller c = Controller.getInstance();
         Robot r = new Robot();
-        int orbitId = Integer.parseInt((String)args[0]);
+        int orbitId = Integer.parseInt((String)args[1]);
         r.setLocation(c.getOrbit(orbitId));
         boolean b;
         switch ((String)args[1]) {
@@ -282,7 +294,7 @@ public class CommandHandler {
     {
         Controller c = Controller.getInstance();
         Ufo u = new Ufo();
-        u.setLocation(c.getOrbit(Integer.parseInt((String)args[0])));
+        u.setLocation(c.getOrbit(Integer.parseInt((String)args[1])));
         boolean b;
         switch ((String)args[1]) {
             case "rand":
@@ -300,7 +312,7 @@ public class CommandHandler {
     public static void addsettler(Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[0])));
+        Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[1])));
         Inventory si = s.getInventory();
         for(int i=0; i<Integer.parseInt((String)args[1]); i++){
             si.addResource(new Uran());
@@ -325,11 +337,75 @@ public class CommandHandler {
         }
     }
 
-    public static void movesettler(Object[] args) {}
+    public static void movesettler(Object[] args)  throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        int orbitid = Integer.parseInt((String)args[2]);
+        Settler movingSettler = c.getSettler(settlerId);
+        Orbit pastLocation = movingSettler.getcurrentLocation();
+        movingSettler.move(orbitid);
+        Orbit newLocation = movingSettler.getcurrentLocation();
+        System.out.println(
+        "Inulas: OrbitId: "+ pastLocation.getPrefix()+"_"+
+                (pastLocation.getPrefix().equals("asteroid") ? 
+                c.indexAsteroid((Asteroid)pastLocation)
+                   : (pastLocation.getPrefix().equals("stargate") ?
+                        c.indexStargate((Stargate)pastLocation) : "-")
+                ) +
+                " Coords: " + pastLocation.getCoords()[0] + " " + pastLocation.getCoords()[1]
+                +
+                " InLight: " + pastLocation.getLight()
+                +
+        "\nErkezes: OrbitId: "+ newLocation.getPrefix()+"_"+
+                (newLocation.getPrefix().equals("asteroid") ? 
+                c.indexAsteroid((Asteroid)newLocation)
+                   : (newLocation.getPrefix().equals("stargate") ?
+                        c.indexStargate((Stargate)newLocation) : "-")
+                )
+                +
+                "Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
+                +
+                " InLight: " + newLocation.getLight()
+        );
+    }
 
-    public static void diggingsettler(Object[] args) {}
+    public static void diggingsettler(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler diggingSettler = c.getSettler(settlerId);
+        diggingSettler.digging();
 
-    public static void miningsettler(Object[] args) {}
+        System.out.println(
+            "OrbitId: " + diggingSettler.getcurrentLocation().getPrefix()+"_"+
+            (diggingSettler.getcurrentLocation().getPrefix().equals("asteroid") ? 
+            c.indexAsteroid((Asteroid)diggingSettler.getcurrentLocation())
+               : (diggingSettler.getcurrentLocation().getPrefix().equals("stargate") ?
+                    c.indexStargate((Stargate)diggingSettler.getcurrentLocation()) : "-")
+            ) +
+            " Coords: " + diggingSettler.getcurrentLocation().getCoords()[0] + " " + diggingSettler.getcurrentLocation().getCoords()[1]
+            +
+            " RemainingLayers: " + diggingSettler.getcurrentLocation().getLayers());
+
+    }
+
+    public static void miningsettler(Object[] args)  throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = Integer.parseInt((String)args[1]);
+        Settler miningSettler = c.getSettler(settlerId);
+
+        Resource core = miningSettler.getcurrentLocation().getCore();
+
+        miningSettler.mining();
+        if(core == null)
+            System.out.println("Resource: nothing");
+        else if(miningSettler.getcurrentLocation().getCore() == null)
+            System.out.println("Resource: " + core.toString());
+        else
+            System.out.println("Resource: nothing");
+    }
 
     public static void createrobot(Object[] args) throws Exception 
     {
@@ -437,12 +513,18 @@ public class CommandHandler {
 
     }
 
-    public static void settlerinfo(Object[] args) {}
+    public static void settlerinfo(Object[] args) throws Exception
+    {
+        Controller c = Controller.getInstance();
+        int settlertId = Integer.parseInt((String)args[1]);
+        Settler s = c.getSettler(settlertId);
+        s.SettlerInfo();
+    }
 
     public static void robotinfo (Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        int robotId = Integer.parseInt((String)args[0]);
+        int robotId = Integer.parseInt((String)args[1]);
         Robot r = c.getRobot(robotId);
         r.robotInfo();
     }
@@ -450,7 +532,7 @@ public class CommandHandler {
     public static void ufoinfo(Object[] args) throws Exception 
     {
         Controller c = Controller.getInstance();
-        int ufoId = Integer.parseInt((String)args[0]);
+        int ufoId = Integer.parseInt((String)args[1]);
         Ufo u = c.getUfo(ufoId);
         u.ufoInfo();
     }
@@ -458,7 +540,7 @@ public class CommandHandler {
     public static void asteroidinfo(Object[] args) throws Exception
     {
         Controller c = Controller.getInstance();
-        int asteroidId = Integer.parseInt((String)args[0]);
+        int asteroidId = Integer.parseInt((String)args[1]);
         Asteroid a = c.getAsteroid(asteroidId);
         String inLight;
         if(a.getLight()){
@@ -491,7 +573,10 @@ public class CommandHandler {
         );
     }
 
-    public static void listsettlers(Object[] args) {}
+    public static void listsettlers(Object[] args)
+    {
+        Controller.getInstance().listsettlers();
+    }
 
     public static void listRobots (Object[] args) 
     {
@@ -513,7 +598,7 @@ public class CommandHandler {
 
     public static void listasteroids(Object[] args) 
     {
-        Controller.getInstance().liststargates();
+        Controller.getInstance().listAsteroids();
     }
 
     public static void liststargates(Object[] args) 

@@ -21,6 +21,7 @@ public class Settler extends Traveler {
         currentLocation = start;
         currentLocation.addTraveler(this);
         inventory = new Inventory(10);
+        setPrefix("settler_"+id_counter++);
         Logger.endFunctionLog();
     }
 
@@ -187,4 +188,15 @@ public class Settler extends Traveler {
             stargates.add(s);
     }
 
+    public void SettlerInfo()
+    {
+        Controller c = Controller.getInstance();
+        int settlerId = c.indexSettler(this);
+        System.out.println(
+            "SettlerId: robot_"+ settlerId+" Location: "+ c.indexOrbit(currentLocation) + " Coords: " + this.currentLocation.getCoords()[0] + " " + this.currentLocation.getCoords()[1] 
+            + " Resources: Uran: " +  this.inventory.getNumOfUran() + " Ice: " + this.inventory.getNumOfIce() + " Iron: " + this.inventory.getNumOfIron()
+            + " Carbon: " + this.inventory.getNumOfCarbon() + " Gates: " + this.stargates.size());
+    }
+
+    static int id_counter = 0;
 }

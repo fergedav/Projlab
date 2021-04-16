@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 import skeleton.Logger;
 
 public class Stargate extends Orbit {
@@ -17,6 +19,7 @@ public class Stargate extends Orbit {
     {
         Logger.startFunctionLogComment(this, "Stargate", "<<create>>");
         stargeteController = Controller.getInstance();
+        setPrefix("stargate_"+id_counter++);
         Logger.endFunctionLog();
     }
 
@@ -167,8 +170,16 @@ public class Stargate extends Orbit {
      */
     private int whereTo()
     {
-        //TODO det nem det megcsinalni, behavior ertekenek alapjan
-        return 0;
+        int n = 0;
+        if(behavior)
+        {
+            int num = myStop.numOfNeighbor();
+            Random r = new Random(num);
+            n = r.nextInt(num);
+        }
+        
+        Logger.endFunctionLog();
+        return n;
     }
 
     @Override
@@ -229,4 +240,6 @@ public class Stargate extends Orbit {
     public boolean getCrazy(){
         return beCrazy;
     }
+
+    static int id_counter = 0;
 }

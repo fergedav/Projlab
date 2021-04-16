@@ -13,6 +13,7 @@ public class Robot extends Traveler {
     {
         super();
         Logger.startFunctionLogComment(this, "Robot", "<<create>>");
+        setPrefix("robot_"+id_counter++);
         Logger.endFunctionLog();
     }
     /**
@@ -24,9 +25,14 @@ public class Robot extends Traveler {
     {
         Logger.startFunctionLogComment(this, "whereTo", "");
 
-        int num = currentLocation.numOfNeighbor();
-        Random r = new Random(num);
-        int n = r.nextInt(num);
+        //rand = true, det = false
+        int n = 0;
+        if(behavior)
+        {
+            int num = currentLocation.numOfNeighbor();
+            Random r = new Random(num);
+            n = r.nextInt(num);
+        }
         
         Logger.endFunctionLog();
         return n;
@@ -36,7 +42,7 @@ public class Robot extends Traveler {
      * Lépést indít a pillanatnyi tartózkodási helyének véletlen szomszédjára.
      */
     private void robotMoves()
-    {
+    {  
         Logger.startFunctionLogComment(this, "robotMoves", "");
         int next = whereTo();
         move(next);
@@ -103,11 +109,12 @@ public class Robot extends Traveler {
 
  /**
      * Determinisztikus - random viselkedes
+     * rand = true, det = false
      */
     private boolean behavior;
     /**
      * Determinisztikus - random viselkedeshez
-     * 
+     *  rand = true, det = false
      */
     public void setBehavior(boolean det_rand)
     {
@@ -120,5 +127,7 @@ public class Robot extends Traveler {
         System.out.println(
             "RobotId: robot_"+ robotId+" Location: "+ c.indexOrbit(currentLocation)
         );
+    }
 
+    static int id_counter = 0;
 }

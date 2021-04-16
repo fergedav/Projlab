@@ -117,8 +117,9 @@ public class Controller implements java.io.Serializable {
     public void addRobot(Robot r)
     {
         Logger.startFunctionLogComment(this, "addRobot", "");
-
         robots.add(r);
+
+        //TODO beírni robotnak a prefixet; törölni majd
 
         Logger.endFunctionLog();
     }
@@ -182,8 +183,11 @@ public class Controller implements java.io.Serializable {
      */
     public void addStargate(Stargate s)
     {
+        //TODO PREFIXET FELVENNI
+
         orbits.add(s);
         stargates.add(s);
+
     }
 
     /**
@@ -203,11 +207,18 @@ public class Controller implements java.io.Serializable {
      */
     public void addOrbit(Orbit o)
     {
+
+
         orbits.add(o);
 
+        //TODO beírni a prefixét.
+        //TODO ez alul furcsa... nekem nem tetszik. mert add orbitot hív stargate, vagy asteroid beírás is följebb
+
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
-        if(o.getClass() == Asteroid.class){}
+        if(o.getClass() == Asteroid.class)
             asteroids.add((Asteroid)o);
+        else if(o.getClass() == Stargate.class)
+            stargates.add((Stargate)o);
     }
     /**
      * Kiveszi a paraméterként kapott Orbitot az orbits listából.
@@ -309,8 +320,8 @@ public class Controller implements java.io.Serializable {
 
     public void addAsteroid(Asteroid a) 
     { 
-        a.setPrefix("asteroid");
         asteroids.add(a);
+        orbits.add(a);
     }
 
     public Robot getRobot(int index) throws Exception
@@ -469,6 +480,23 @@ public class Controller implements java.io.Serializable {
                 " MyTwin: "+futo.getMyTwin().getPrefix()+"_"+stargates.indexOf(futo.getMyTwin())+
                 " MyStop: "+futo.getMyStop().getPrefix()+"_"+asteroids.indexOf((Asteroid)futo.getMyStop())+
                 " Crazy: "+futo.getCrazy());
+        }
+    }
+
+    public void listsettlers()
+    {
+        for (Settler futo : settlers) {
+            System.out.println(
+                "SettlerId: "+ futo.getPrefix()+"_"+stargates.indexOf(futo)+
+                " Location: "+ futo.getcurrentLocation().getPrefix() + "_" +
+                (futo.getcurrentLocation().getPrefix().equals("asteroid") ? 
+                asteroids.indexOf(futo.getcurrentLocation())
+                   : (futo.getcurrentLocation().getPrefix().equals("stargate") ?
+                        stargates.indexOf(futo.getcurrentLocation()) : "-")
+                ) +
+                " Coords: " + futo.getcurrentLocation().getCoords()[0]+futo.getcurrentLocation().getCoords()[1]+
+                " Resources: Uran: "+ futo.getInventory().getNumOfUran() + " Ice: " + futo.getInventory().getNumOfIce() + " Iron: "+ futo.getInventory().getNumOfIron() + "Carbon: "  + futo.getInventory().getNumOfCarbon() + " Gates: " + futo.getStargates().size()
+                );
         }
     }
 
