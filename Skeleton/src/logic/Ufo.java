@@ -24,7 +24,7 @@ public class Ufo extends Traveler {
         if(behavior)
         {
             int num = currentLocation.numOfNeighbor();
-            Random r = new Random(num);
+            Random r = new Random();
             n = r.nextInt(num);
         }
         return n;
