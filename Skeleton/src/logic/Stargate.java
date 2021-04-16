@@ -174,6 +174,8 @@ public class Stargate extends Orbit {
         if(behavior)
         {
             int num = myStop.numOfNeighbor();
+            if(num == 0) 
+                return 0;
             Random r = new Random();
             n = r.nextInt(num);
         }

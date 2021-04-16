@@ -41,6 +41,7 @@ public class CommandHandler {
         {
             System.out.println("Hiba: " + ex.getTargetException().getMessage());
             System.out.println("--- " + line);
+            ex.printStackTrace();
         }
         catch (Exception e) {
             System.out.println("Hiba: " + e.toString());
