@@ -302,6 +302,11 @@ public class Controller implements java.io.Serializable {
     public static Controller getNewControler()
     {
         instance = new Controller();
+        Asteroid.id_counter = 0;
+        Stargate.id_counter = 0;
+        Settler.id_counter = 0;
+        Robot.id_counter = 0;
+        Ufo.id_counter = 0;
         return instance;
     }
 
@@ -350,7 +355,7 @@ public class Controller implements java.io.Serializable {
 
     public Asteroid getAsteroid(int index) throws Exception
     {
-        if(index < 0 || index >= stargates.size())
+        if(index < 0 || index >= asteroids.size())
             throw new Exception("Nincs ilyen aszteroida: " + index);
 
         return asteroids.get(index);

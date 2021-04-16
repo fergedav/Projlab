@@ -129,5 +129,5 @@ public class Robot extends Traveler {
         );
     }
 
-    static int id_counter = 0;
+    public static int id_counter = 0;
 }
