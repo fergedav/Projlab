@@ -1,0 +1,20 @@
+createMap
+AddAsteroid uran 1 1 0 false
+sunlightCall 0 0 2 2
+sunlightCall 0 0 2 2
+AddAsteroid iron 2 2 5 false
+AddAsteroid null 3 3 0 false
+setNeighbor 0 1
+setNeighbor 1 2
+AddSettler 0 0 0 0 0 0
+AddHalfStargate 1 0 det
+AddPairedStargate 0 2 det
+AddRobot 2 det
+miningSettler 0
+moveSettler 0 1
+replaceResourceSettler 0 uran
+sunlightCall 2 2 4 4
+listSettlers
+listRobots        
+listAsteroids
+listStargates

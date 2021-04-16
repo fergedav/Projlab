@@ -198,5 +198,5 @@ public class Settler extends Traveler {
             + " Carbon: " + this.inventory.getNumOfCarbon() + " Gates: " + this.stargates.size());
     }
 
-    static int id_counter = 0;
+    public static int id_counter = 0;
 }
