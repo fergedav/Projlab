@@ -278,7 +278,7 @@ public class CommandHandler {
         int orbitId = Integer.parseInt((String)args[1]);
         r.setLocation(c.getOrbit(orbitId));
         boolean b;
-        switch ((String)args[1]) {
+        switch ((String)args[2]) {
             case "rand":
                 b = true;
                 break;        
@@ -286,7 +286,7 @@ public class CommandHandler {
                 b=false;
                 break;
             default:
-                throw new Exception("Ismeretlen mukodes: " + (String)args[1]);
+                throw new Exception("Ismeretlen mukodes: " + (String)args[2]);
         }
         r.setBehavior(b);
     }
@@ -297,7 +297,7 @@ public class CommandHandler {
         Ufo u = new Ufo();
         u.setLocation(c.getOrbit(Integer.parseInt((String)args[1])));
         boolean b;
-        switch ((String)args[1]) {
+        switch ((String)args[2]) {
             case "rand":
                 b = true;
                 break;        
@@ -305,7 +305,7 @@ public class CommandHandler {
                 b=false;
                 break;
             default:
-                throw new Exception("Ismeretlen mukodes: " + (String)args[1]);
+                throw new Exception("Ismeretlen mukodes: " + (String)args[2]);
         }
         u.setBehavior(b);
     }
@@ -550,7 +550,7 @@ public class CommandHandler {
         else inLight = "false";
 
         System.out.println(
-            "AsteroidId: asteroid_"+c.indexAsteroid(a)+ " Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
+            "AsteroidId: "+a.getPrefix()+ "Coords: "+a.getCoords()[0]+" "+ a.getCoords()[1]+
             " Core: " + a.getCore().toString()+ " inLight: "+ inLight+" Layers: "+ a.getLayers()
         );
     }
