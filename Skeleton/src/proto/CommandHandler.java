@@ -40,7 +40,7 @@ public class CommandHandler {
         catch (InvocationTargetException ex)
         {
             System.out.println("Hiba: " + ex.getTargetException().getMessage());
-            System.out.println("Paramter lista hiba: "+ line);
+            System.out.println("--- " + line);
         }
         catch (Exception e) {
             System.out.println("Hiba: " + e.toString());
@@ -126,6 +126,7 @@ public class CommandHandler {
     public static void createmap(Object[] args) 
     {
         Controller.getNewControler();
+
     }
 
     public static void robotstep(Object[] args) throws Exception 
@@ -166,7 +167,7 @@ public class CommandHandler {
             );
     }
 
-    public static void setneighbour(Object[] args) throws NumberFormatException, Exception 
+    public static void setneighbor(Object[] args) throws NumberFormatException, Exception 
     {
         Controller c = Controller.getInstance();
         Asteroid a1 = c.getAsteroid(Integer.parseInt((String)args[1]));
@@ -314,26 +315,26 @@ public class CommandHandler {
         Controller c = Controller.getInstance();
         Settler s = new Settler(c.getOrbit(Integer.parseInt((String)args[1])));
         Inventory si = s.getInventory();
-        for(int i=0; i<Integer.parseInt((String)args[1]); i++){
+        for(int i=0; i<Integer.parseInt((String)args[2]); i++){
             si.addResource(new Uran());
         }
-        for(int i=0; i<Integer.parseInt((String)args[2]); i++){
+        for(int i=0; i<Integer.parseInt((String)args[3]); i++){
             si.addResource(new Ice());
         }
-        for(int i=0; i<Integer.parseInt((String)args[3]); i++){
+        for(int i=0; i<Integer.parseInt((String)args[4]); i++){
             si.addResource(new Iron());
         }
-        for(int i=0; i<Integer.parseInt((String)args[4]); i++){
+        for(int i=0; i<Integer.parseInt((String)args[5]); i++){
             si.addResource(new Carbon());
         }
-        switch (Integer.parseInt((String)args[5])) {
+        switch (Integer.parseInt((String)args[6])) {
             case 0:
                 break;        
             case 2:
                 s.createStargate();
                 break;
             default:
-                throw new Exception("Ismeretlen mukodes: " + (String)args[5]);
+                throw new Exception("Ismeretlen mukodes: " + (String)args[6]);
         }
     }
 
