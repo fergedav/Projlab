@@ -120,5 +120,5 @@ public class Robot extends Traveler {
         System.out.println(
             "RobotId: robot_"+ robotId+" Location: "+ c.indexOrbit(currentLocation)
         );
-
+    }
 }
