@@ -215,10 +215,9 @@ public class Controller implements java.io.Serializable {
         //TODO ez alul furcsa... nekem nem tetszik. mert add orbitot hív stargate, vagy asteroid beírás is följebb
 
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
-        if(o.getClass() == Asteroid.class){}
+        if(o.getClass() == Asteroid.class)
             asteroids.add((Asteroid)o);
-        
-        if(o.getClass() == Stargate.class){}
+        else if(o.getClass() == Stargate.class)
             stargates.add((Stargate)o);
     }
     /**
