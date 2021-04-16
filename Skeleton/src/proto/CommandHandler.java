@@ -491,7 +491,8 @@ public class CommandHandler {
     public static void replaceresourcesettler(Object[] args) 
     {
         try {
-            Settler s = Controller.getInstance().getSettler((int)args[1]); // kikeres settler
+            int settlertId = Integer.parseInt((String)args[1]);
+            Settler s = Controller.getInstance().getSettler(settlertId); // kikeres settler
             HashMap<String, ArrayList<Resource>> materials = s.getInventory().getFullList();
             int before = materials.get((String)args[2]).size();
 

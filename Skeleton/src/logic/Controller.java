@@ -479,13 +479,20 @@ public class Controller implements java.io.Serializable {
      */
     public void liststargates()
     {
-        for (Stargate futo : stargates) {
-            System.out.println(
-                "StargateId: "+futo.getPrefix()+"_"+stargates.indexOf(futo)+
-                " MyTwin: "+futo.getMyTwin().getPrefix()+"_"+stargates.indexOf(futo.getMyTwin())+
-                " MyStop: "+futo.getMyStop().getPrefix()+"_"+asteroids.indexOf((Asteroid)futo.getMyStop())+
-                " Crazy: "+futo.getCrazy());
+        if(stargates.size()>0){
+            for (Stargate futo : stargates) {
+                System.out.println(
+                    "StargateId: "+futo.getPrefix()+"_"+stargates.indexOf(futo)+
+                    " MyTwin: "+futo.getMyTwin().getPrefix()+"_"+stargates.indexOf(futo.getMyTwin())+
+                    " MyStop: "+futo.getMyStop().getPrefix()+"_"+asteroids.indexOf((Asteroid)futo.getMyStop())+
+                    " Crazy: "+futo.getCrazy());
+            }
         }
+        else
+        {
+            return;
+        }
+        
     }
 
     public void listsettlers()
