@@ -207,6 +207,14 @@ public class Stargate extends Orbit {
     {
         return myStop.addNeighbour(o);
     }
+
+    @Override
+    public Orbit getNeighbour(int i)
+    {
+        if (i == 0)
+            return myStop;
+        else return this;
+    }
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
     /**

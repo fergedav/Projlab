@@ -8,12 +8,11 @@ public class Ufo extends Traveler {
      *
      */
     private static final long serialVersionUID = -6867257992338262330L;
-    private Inventory inv;
 
     public Ufo()
     {
         //remelhetoleg kelloen nagy
-        inv = new Inventory(10000);
+        inventory = new Inventory(10000);
         setPrefix("ufo_"+id_counter++);
         Controller.getInstance().addUfo(this);
     }
@@ -95,9 +94,11 @@ public class Ufo extends Traveler {
     public void ufoInfo(){
         Controller c = Controller.getInstance();
         System.out.println(
-            "UfoId: "+ this.prefix +" Location: "+ c.indexOrbit(currentLocation)+" Resources: Uran: "+
-            this.getInventory().getNumOfUran()+" Ice: "+ this.getInventory().getNumOfIce()+ " Iron: "+
-            this.getInventory().getNumOfIron()+" Carbon: "+ this.getInventory().getNumOfCarbon()
+            "UfoId: "+ this.prefix +" Location: "+ currentLocation.getPrefix() +
+            " Resources: Uran: "+ this.getInventory().getNumOfUran()+
+            " Ice: "+ this.getInventory().getNumOfIce()+ 
+            " Iron: "+ this.getInventory().getNumOfIron()+
+            " Carbon: "+ this.getInventory().getNumOfCarbon()
         );
     }
 

@@ -1,3 +1,0 @@
-Hiba: bound must be positive
---- RobotStep 0
-RobotId: robot_0 Location: stargate_0
