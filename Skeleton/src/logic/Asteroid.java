@@ -171,7 +171,6 @@ public class Asteroid extends Orbit {
             for (Traveler t : copy) {
                 t.die();
             }
-            travelers = copy;
         }
 
         Logger.endFunctionLog();

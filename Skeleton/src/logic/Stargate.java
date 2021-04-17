@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import skeleton.Logger;
@@ -193,13 +194,13 @@ public class Stargate extends Orbit {
             coords[1] <= y &&
             coords[2] >= x &&
             coords[3] >= y
-        ) 
-        ArrayList<Traveler> copy = new ArrayList<>();
-        copy.addAll(travelers);
-        for (Traveler t : copy) {
-            t.die();
-        }
-        travelers = copy;
+        ) {
+            ArrayList<Traveler> copy = new ArrayList<>();
+            copy.addAll(travelers);
+            for (Traveler t : copy)
+            {
+                t.die();
+            }
         };
 
         

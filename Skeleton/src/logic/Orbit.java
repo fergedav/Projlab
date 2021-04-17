@@ -149,8 +149,6 @@ public abstract class Orbit implements java.io.Serializable {
         for (Traveler t : copy) {
             t.die();
         }
-        travelers = copy;
-
     }
 
     /**
