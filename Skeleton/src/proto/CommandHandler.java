@@ -364,7 +364,7 @@ public class CommandHandler {
                 " InLight: " + pastLocation.getLight()
                 +
         "\nErkezes: OrbitId: "+ newLocation.getPrefix()+
-                "Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
+                " Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
                 +
                 " InLight: " + newLocation.getLight()
         );
