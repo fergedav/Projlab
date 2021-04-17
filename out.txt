@@ -1,3 +1,0 @@
-StargateId: stargate_0 Coords: 1 1 MyStop: asteroid_0 TwinId: stargate_1 InLight: false Crazy: false
-SettlerId: settler_0 Location: stargate_0 Coords: 1 1 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 0
-RobotId: robot_0 Location: stargate_0
