@@ -188,7 +188,7 @@ public class Asteroid extends Orbit {
         Logger.startFunctionLogComment(this, "sunLightArrive", "");
 
         super.sunLightArrive(coords);
-        if(inLight)
+        if(inLight && core != null)
             reaction();
 
         Logger.endFunctionLog();
