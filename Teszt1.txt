@@ -1,0 +1,6 @@
+createMap
+AddAsteroid Iron 1 2 4 false
+AddAsteroid Iron 2 1 4 false
+setNeighbor 0 1
+AddSettler 0 0 0 0 0 0
+moveSettler 0 0

@@ -1,0 +1,7 @@
+createMap
+AddAsteroid Iron 0 1 4 false
+AddAsteroid Iron 1 2 4 false
+AddSettler 0 0 0 0 0 0
+AddPairedStargate 0 1 det
+moveSettler 0 0
+listStargates
