@@ -535,7 +535,7 @@ public class Controller implements java.io.Serializable {
     {
         for (Asteroid futo : asteroids) {
             //core lehet nulla. lehet belõle baj. elõbb kell kezelni.
-            String core = " - ";
+            String core = "null";
             if(futo.getCore() != null)
                 core = futo.getCore().getClass().getSimpleName();
             System.out.println(

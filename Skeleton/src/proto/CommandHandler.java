@@ -543,7 +543,7 @@ public class CommandHandler {
         else inLight = "false";
 
         //Core vizsgálat nullpointer miatt
-        String core = " - ";
+        String core = "null";
             if(a.getCore() != null)
                 core = a.getCore().getClass().getSimpleName();
 
