@@ -356,23 +356,12 @@ public class CommandHandler {
         movingSettler.move(orbitid);
         Orbit newLocation = movingSettler.getcurrentLocation();
         System.out.println(
-        "Inulas: OrbitId: "+ pastLocation.getPrefix()+"_"+
-                (pastLocation.getPrefix().equals("asteroid") ? 
-                c.indexAsteroid((Asteroid)pastLocation)
-                   : (pastLocation.getPrefix().equals("stargate") ?
-                        c.indexStargate((Stargate)pastLocation) : "-")
-                ) +
+        "Inulas: OrbitId: "+ pastLocation.getPrefix() +
                 " Coords: " + pastLocation.getCoords()[0] + " " + pastLocation.getCoords()[1]
                 +
                 " InLight: " + pastLocation.getLight()
                 +
-        "\nErkezes: OrbitId: "+ newLocation.getPrefix()+"_"+
-                (newLocation.getPrefix().equals("asteroid") ? 
-                c.indexAsteroid((Asteroid)newLocation)
-                   : (newLocation.getPrefix().equals("stargate") ?
-                        c.indexStargate((Stargate)newLocation) : "-")
-                )
-                +
+        "\nErkezes: OrbitId: "+ newLocation.getPrefix()+
                 "Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
                 +
                 " InLight: " + newLocation.getLight()
