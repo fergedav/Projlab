@@ -377,7 +377,7 @@ public class Controller implements java.io.Serializable {
         List<Orbit> copy = new ArrayList<>();
         copy.addAll(orbits);
         for(Orbit o : copy){
-            o.sunLightArrive(coords);
+            o.sunstormArrive(coords);
         }
     }
 

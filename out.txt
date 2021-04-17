@@ -1,6 +1,6 @@
-<<<<<<< HEAD
-Inulas: OrbitId: asteroid_0_- Coords: 1 2 InLight: false
-Erkezes: OrbitId: asteroid_1_-Coords: 2 1 InLight: false
-=======
-OrbitId: asteroid_0  Coords: 3 6 RemainingLayers: 0
->>>>>>> d0f25e75e40fa07b39760b6311e3db4c470fc665
+StargateId: stargate_0 Coords: 1 1 MyStop: asteroid_0 TwinId: stargate_1 InLight: false Crazy: false
+SettlerId: settler_0 Location: asteroid_1 Coords: 8 8 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 0
+RobotId: robot_0 Location: stargate_0
+StargateId: stargate_0 Coords: 1 1 MyStop: asteroid_0 TwinId: stargate_1 InLight: false Crazy: false
+SettlerId: settler_0 Location: asteroid_1 Coords: 8 8 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 0
+RobotId: robot_0 Location: stargate_0
