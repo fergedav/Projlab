@@ -18,8 +18,7 @@ public class Settler extends Traveler {
     {
         super();
         Logger.startFunctionLogComment(this, "Settler", "<<create>>");
-        currentLocation = start;
-        currentLocation.addTraveler(this);
+        currentLocation = start.addTraveler(this);
         inventory = new Inventory(10);
         setPrefix("settler_"+id_counter++);
         Controller.getInstance().addSettler(this);
