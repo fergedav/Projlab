@@ -249,10 +249,11 @@ public class Controller implements java.io.Serializable {
     {
         Logger.startFunctionLogComment(this, "sunstormCall", "");
 
-        // TODO rendes coords
+        // TODO rendes coords random kellene legyen majd mûködés közben
         int coords[] = new int[4];
-
-        for(Orbit o: orbits){
+        ArrayList<Orbit> copy = new ArrayList<>();
+        copy.addAll(orbits);
+        for(Orbit o: copy){
             o.sunstormArrive(coords);
         }
         Logger.endFunctionLog();
@@ -513,7 +514,9 @@ public class Controller implements java.io.Serializable {
                 "SettlerId: "+ futo.getPrefix() +
                 " Location: "+ futo.getcurrentLocation().getPrefix() +
                 " Coords: " + futo.getcurrentLocation().getCoords()[0] + " " +futo.getcurrentLocation().getCoords()[1] +
-                " Resources: Uran: "+ futo.getInventory().getNumOfUran() + " Ice: " + futo.getInventory().getNumOfIce() + " Iron: "+ futo.getInventory().getNumOfIron() + "Carbon: "  + futo.getInventory().getNumOfCarbon() + " Gates: " + futo.getStargates().size()
+                " Resources: Uran: "+ futo.getInventory().getNumOfUran() + " Ice: " + futo.getInventory().getNumOfIce() + 
+                " Iron: "+ futo.getInventory().getNumOfIron() + " Carbon: "  + futo.getInventory().getNumOfCarbon() + 
+                " Gates: " + futo.getStargates().size()
                 );
         }
     }

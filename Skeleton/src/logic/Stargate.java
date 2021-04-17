@@ -137,7 +137,9 @@ public class Stargate extends Orbit {
 
         Logger.endFunctionLog();
 
+        travelers.add(t);
         return this;
+
     }
     
     /**
@@ -195,6 +197,7 @@ public class Stargate extends Orbit {
             coords[2] >= x &&
             coords[3] >= y
         ) {
+            beCrazy = true;
             ArrayList<Traveler> copy = new ArrayList<>();
             copy.addAll(travelers);
             for (Traveler t : copy)
