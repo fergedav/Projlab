@@ -11,23 +11,10 @@ public class ProtoMain {
     {
       BufferedReader r = new BufferedReader (new InputStreamReader (System.in));
 
-      //false => normal parancsertelmezo konzolos modban
-      //true => lefuttatja az osszes tesztet, és az out<teszt eset szama>.txt file ba írja az eredményt.
+      // false => normal parancsertelmezo konzolos modban
+      // true => lefuttatja az osszes tesztet, és az out<teszt eset szama>.txt file-ba 
+      // írja az eredményt. majd konzolos mode ba lép.
       final boolean AUTOMODE = false;
-
-
-      if(!AUTOMODE)
-      {
-         while(true)
-         {
-            try {
-               String line = r.readLine();
-               CommandHandler.processCommand(line);
-            } catch (Exception e) {
-               //TODO: handle exception
-            }  
-         }
-      }
       if(AUTOMODE)
       {
          for (int i = 0; i < 50; i ++)
@@ -37,7 +24,16 @@ public class ProtoMain {
             CommandHandler.processCommand(command);
          }
       }
-      
-  
+
+      while(true)
+      {
+         try {
+            String line = r.readLine();
+            CommandHandler.processCommand(line);
+         } catch (Exception e) {
+            //TODO: handle exception
+         }  
+      }
+   
     }
 }
