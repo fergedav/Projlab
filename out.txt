@@ -1,1 +1,6 @@
+<<<<<<< HEAD
+Inulas: OrbitId: asteroid_0_- Coords: 1 2 InLight: false
+Erkezes: OrbitId: asteroid_1_-Coords: 2 1 InLight: false
+=======
 OrbitId: asteroid_0  Coords: 3 6 RemainingLayers: 0
+>>>>>>> d0f25e75e40fa07b39760b6311e3db4c470fc665
