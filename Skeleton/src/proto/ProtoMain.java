@@ -10,8 +10,13 @@ public class ProtoMain {
     public static void main(String[] args) 
     {
       BufferedReader r = new BufferedReader (new InputStreamReader (System.in));
-      boolean automode = false;
-      if(!automode)
+
+      //false => normal parancsertelmezo konzolos modban
+      //true => lefuttatja az osszes tesztet, és az out<teszt eset szama>.txt file ba írja az eredményt.
+      final boolean AUTOMODE = false;
+
+
+      if(!AUTOMODE)
       {
          while(true)
          {
@@ -23,7 +28,7 @@ public class ProtoMain {
             }  
          }
       }
-      if(automode)
+      if(AUTOMODE)
       {
          for (int i = 0; i < 50; i ++)
          {
