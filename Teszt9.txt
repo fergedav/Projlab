@@ -1,0 +1,6 @@
+createMap
+AddAsteroid Ice 2 2 1 false
+AddSettler 0 0 0 0 0 0
+AddHalfStargate 0 0 det
+AddSettler 1 2 2 2 2 0
+diggingSettler 1

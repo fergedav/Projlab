@@ -1,0 +1,10 @@
+createMap
+AddAsteroid Uran 0 1 0 true
+AddSettler 0 0 0 0 0 0
+sunlightCall 0 0 5 5
+sunlightCall 0 0 5 5
+miningSettler 0
+replaceResourceSettler 0 Uran
+sunlightCall 0 0 5 5
+asteroidInfo 0
+listAsteroidContent 0

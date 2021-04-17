@@ -1,0 +1,7 @@
+CreateMap
+AddAsteroid Iron 2 2 3 false
+AddSettler 0 0 0 0 0 0
+AddHalfStargate 0 0 rand
+AddRobot 1 rand
+RobotStep 0
+RobotInfo 0

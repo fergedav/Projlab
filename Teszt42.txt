@@ -1,0 +1,10 @@
+createMap
+AddAsteroid Iron 3 6 4 false
+AddAsteroid Ice 2 6 2 false
+AddAsteroid Uran 1 7 3 false
+SetNeighbor 0 1
+AddSettler 0 2 2 2 2 0
+AddHalfStargate 2 0 det
+placeStargate 0
+settlerInfo 0
+listStargates

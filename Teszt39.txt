@@ -1,0 +1,7 @@
+createMap
+AddAsteroid Iron 3 6 4 false
+AddAsteroid Ice 2 6 2 false
+SetNeighbor 0 1
+AddSettler 0 2 2 2 2 2
+createStargate 0
+settlerInfo 0

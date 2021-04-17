@@ -1,0 +1,7 @@
+createMap
+AddAsteroid iron 1 1 0 false
+AddSettler 0 0 0 0 0 0
+AddRobot 0 det
+listAsteroidContent 0
+sunstormCall 0 0 2 2
+listAsteroidContent 0

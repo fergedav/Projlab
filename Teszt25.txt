@@ -1,0 +1,8 @@
+CreateMap
+AddAsteroid Iron 1 2 4 false
+AddAsteroid Iron 2 2 3 false
+setNeighbor 0 1
+AddRobot 0 rand
+RobotStep 0
+RobotInfo 0
+AsteroidInfo 0

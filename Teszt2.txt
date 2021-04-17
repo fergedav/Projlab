@@ -1,0 +1,10 @@
+createMap
+AddAsteroid Iron 1 2 4 false
+AddAsteroid Uran 2 1 0 true
+sunlightCall 2 1 2 1
+setNeighbor 0 1
+AddSettler 0 1 2 3 4 2
+moveSettler 0 0
+sunlightCall 0 0 5 5
+asteroidInfo 1
+listAsteroidContent 0

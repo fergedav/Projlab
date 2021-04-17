@@ -1,0 +1,4 @@
+createMap
+AddAsteroid Iron 0 1 0 false
+AddSettler 0 0 0 1 0 0
+replaceResourceSettler 0 Iron

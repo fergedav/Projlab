@@ -1,0 +1,5 @@
+createMap
+AddAsteroid NULL 3 6 0 false
+AddSettler 0 2 2 2 2 2
+asteroidInfo 0
+miningSettler 0
