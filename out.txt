@@ -1,6 +1,10 @@
-StargateId: stargate_0 Coords: 1 1 MyStop: asteroid_0 TwinId: stargate_1 InLight: false Crazy: false
-SettlerId: settler_0 Location: stargate_0 Coords: 1 1 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 0
-RobotId: robot_0 Location: stargate_0
-StargateId: stargate_0 Coords: 1 1 MyStop: asteroid_0 TwinId: stargate_1 InLight: false Crazy: false
-SettlerId: settler_0 Location: stargate_0 Coords: 1 1 Resources: Uran: 0 Ice: 0 Iron: 0Carbon: 0 Gates: 0
-RobotId: robot_0 Location: stargate_0
+Resource: Uran
+Inulas: OrbitId: asteroid_0_- Coords: 1 1 InLight: true
+Erkezes: OrbitId: asteroid_2_-Coords: 3 3 InLight: false
+Replace: Success
+RobotId: robot_0 Location: asteroid_1
+AsteroidId: asteroid_0 Coords: 1 1 Core:  -  inLight: false Layers: 0
+AsteroidId: asteroid_1 Coords: 2 2 Core: Iron inLight: true Layers: 5
+AsteroidId: asteroid_2 Coords: 3 3 Core:  -  inLight: true Layers: 0
+StargateId: stargate_2 MyTwin: stargate_3 MyStop: asteroid_0 Crazy: false
+StargateId: stargate_3 MyTwin: stargate_2 MyStop: asteroid_2 Crazy: false

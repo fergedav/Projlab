@@ -17,7 +17,7 @@ public class ProtoMain {
       final boolean AUTOMODE = false;
       if(AUTOMODE)
       {
-         for (int i = 0; i < 50; i ++)
+         for (int i = 1; i < 50; i ++)
          {
             String command = "loadTest Teszt"+i+".txt Out"+i+".txt";
             System.out.println(command);

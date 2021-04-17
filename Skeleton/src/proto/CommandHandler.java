@@ -31,6 +31,11 @@ public class CommandHandler {
     public static void processCommand(String line)
     {
         try {
+            if(line.equals(""))
+            { 
+                System.out.println();
+                return;
+            }
             String[] splits = line.toLowerCase().split(" ");
             Method m = CommandHandler.class.getDeclaredMethod(splits[0], Object[].class);
             m.setAccessible(true);
