@@ -374,8 +374,10 @@ public class Controller implements java.io.Serializable {
     {
         int coords[] = {x1,y1,x2,y2};
 
-        for(Orbit o: orbits){
-            o.sunstormArrive(coords);
+        List<Orbit> copy = new ArrayList<>();
+        copy.addAll(orbits);
+        for(Orbit o : copy){
+            o.sunLightArrive(coords);
         }
     }
 
@@ -383,7 +385,9 @@ public class Controller implements java.io.Serializable {
     {
         int coords[] = {x1,y1,x2,y2};
 
-        for(Orbit o : orbits){
+        List<Orbit> copy = new ArrayList<>();
+        copy.addAll(orbits);
+        for(Orbit o : copy){
             o.sunLightArrive(coords);
         }
     }
