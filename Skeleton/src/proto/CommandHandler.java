@@ -282,8 +282,8 @@ public class CommandHandler {
         Robot r = new Robot();
         int orbitId = Integer.parseInt((String)args[1]);
         Orbit destination = c.getOrbit(orbitId);
-        r.setLocation(destination);
-        destination.addTraveler(r);
+        Orbit actualDestination = destination.addTraveler(r);
+        r.setLocation(actualDestination);
 
         boolean b;
         switch ((String)args[2]) {
@@ -303,7 +303,9 @@ public class CommandHandler {
     {
         Controller c = Controller.getInstance();
         Ufo u = new Ufo();
-        u.setLocation(c.getOrbit(Integer.parseInt((String)args[1])));
+        Orbit valamijo = c.getOrbit(Integer.parseInt((String)args[1]));
+        Orbit valamimegjobb =  valamijo.addTraveler(u);
+        u.setLocation(valamimegjobb);
         boolean b;
         switch ((String)args[2]) {
             case "rand":
@@ -362,7 +364,7 @@ public class CommandHandler {
                 " InLight: " + pastLocation.getLight()
                 +
         "\nErkezes: OrbitId: "+ newLocation.getPrefix()+
-                "Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
+                " Coords: " + newLocation.getCoords()[0] + " " + newLocation.getCoords()[1]
                 +
                 " InLight: " + newLocation.getLight()
         );
@@ -612,7 +614,6 @@ public class CommandHandler {
         int asteroidId = Integer.parseInt((String)args[1]);
         Asteroid aktualis = Controller.getInstance().getAsteroid(asteroidId);
         System.out.print("Travelers: ");
-        String seged;
         for (Traveler t : aktualis.getTravelers()) {
             System.out.print(t.getPrefix()+", ");
         }

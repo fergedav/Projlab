@@ -93,7 +93,7 @@ public class Asteroid extends Orbit {
      * A hívó visszakapja az aszteroida magját. 
      * Ha a layers értéke 0, akkor visszatér a magjában található nyersanyaggal, az új core érték null. 
      * Ha a layers értéke 0-tól különbözõ akkor null-lal tér vissza.
-     * @return Resource 
+     * @return Resource , az aszteroida magját
      */
     @Override
     public Resource retrieveResource()
@@ -150,6 +150,7 @@ public class Asteroid extends Orbit {
     /**
      * Napvihar esetén megvizsgálja, hogy a layers értéke 0-e és hogy a core értéke null. 
      * Ha nem akkor az összes jelenleg rajta tartózkodó utazóra a Die() metódust hívja.
+     * @param int[] coords 
      */
     @Override
     public void sunstormArrive(int[] coords)
