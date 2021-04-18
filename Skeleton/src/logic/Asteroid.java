@@ -196,9 +196,14 @@ public class Asteroid extends Orbit {
     }
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * Visszaadja az aszteroida magjában lévõ Resourceot
+     */
     @Override
     public Resource getCore() {return core;}
 
+    /**
+     * a tesztesetekben megjelenenõ prefixhez szükséges id(controller szerinti szám)
+     */
     public static int id_counter = 0;
 }

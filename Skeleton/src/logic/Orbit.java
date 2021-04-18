@@ -10,13 +10,33 @@ public abstract class Orbit implements java.io.Serializable {
      *
      */
     private static final long serialVersionUID = 8842665086008545927L;
+    /**
+     * szomszédokat tartalmazó lista
+     */
     protected List<Orbit> neighbours;
+    /**
+     * a rajta álló travelereket tartalmazó lista
+     */
     protected List<Traveler> travelers;
+    /**
+     * megmondja, hogy az orbit napfényben van-e.
+     */
     protected boolean inLight = false;
+    /**
+     * az orbit kérge
+     */
     protected int layers = 0;
+    /**
+     * az orbit x koordinátája
+     */
     protected int x; 
+    /**
+     * az orbit y koordinátája
+     */
     protected int y;
-
+    /**
+    * konstruktor, létrehozza a szomszédok, és travelerek listáját.
+    */
     protected Orbit() {
         neighbours = new ArrayList<Orbit>();
         travelers = new ArrayList<Traveler>();
@@ -223,7 +243,7 @@ public abstract class Orbit implements java.io.Serializable {
         return prefix;
     }
     /**
-     * Módosítja a prefixet a parameterben kapott stringgel.
+     * Modosítja a prefixet a parameterben kapott stringgel.
      * @param s prefix uj erteke
      */
     public void setPrefix(String s)
@@ -232,5 +252,9 @@ public abstract class Orbit implements java.io.Serializable {
         //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz stargate/asteroid
     }
 
+    /**
+     * alapértelmezett getter, az asteroid overrideolja
+     * @return null
+     */
     public Resource getCore() {return null;}
 }

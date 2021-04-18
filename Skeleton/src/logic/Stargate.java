@@ -10,10 +10,26 @@ public class Stargate extends Orbit {
      *
      */
     private static final long serialVersionUID = -6397383425201864620L;
+    /**
+     * A stargate párja, amivel össze van kötve.
+     */
     private Stargate myTwin;
+    /**
+     * Megmondja, hogy le van-e helyezve a stargate
+     */
     private boolean isPlaced;
+    /**
+     * A stargatehez tartozó aszteroida
+     */
     private Orbit myStop;
+    /**
+     * Ha a stargatet napvihar éri, ez a változó igaz értéket kap.
+     * Ha az értéke igaz, elkezd bolyongani az aszteroidák között.
+     */
     private boolean beCrazy = false;
+    /**
+     * A játékot irányító controller
+     */
     public static Controller stargeteController;
 
     public Stargate()
@@ -188,6 +204,9 @@ public class Stargate extends Orbit {
         return n;
     }
 
+    /**
+     * A napvihar erkezéséért felelõs, paraméterként kapja 2 koordinátát, ezen belûl hív napvihart
+     */
     @Override
     public void sunstormArrive(int[] coords )
     {
@@ -209,12 +228,21 @@ public class Stargate extends Orbit {
         
     }
 
+    /**
+     * Ha a stargatehez hozzáadnak egy szomszédot, az
+     * automatikusan az õ aszteroidájához adódik hozzá
+     * @return az aszteroidához újonnan hozzáadott szomszéd
+     */
     @Override
     public Orbit addNeighbour(Orbit o)
     {
         return myStop.addNeighbour(o);
     }
 
+    /**
+     * Ha a paraméterben kapott érték 0, visszaadja az aszteroidáját, ha más, akkor önmagát.
+     * @return a stargate aszteroidája
+     */
     @Override
     public Orbit getNeighbour(int i)
     {
@@ -257,6 +285,8 @@ public class Stargate extends Orbit {
     public boolean getCrazy(){
         return beCrazy;
     }
-
+    /**
+     * a tesztesetekben megjelenenõ prefixhez szükséges id(controller szerinti szám)
+     */
     public static int id_counter = 0;
 }
