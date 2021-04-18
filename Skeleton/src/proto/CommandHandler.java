@@ -101,8 +101,6 @@ public class CommandHandler {
          }
     }
 
-    //nincs kész, nem biztos hogy mûködik.
-    // kiírja hanyadik sornál akadt el???? még nincs meg.
     public static void loadtest(Object[] args) throws IOException 
     {
         try

@@ -92,7 +92,6 @@ public class Ufo extends Traveler {
 
 
     public void ufoInfo(){
-        Controller c = Controller.getInstance();
         System.out.println(
             "UfoId: "+ this.prefix +" Location: "+ currentLocation.getPrefix() +
             " Resources: Uran: "+ this.getInventory().getNumOfUran()+

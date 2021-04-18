@@ -231,8 +231,6 @@ public class Settler extends Traveler {
     }
     public void SettlerInfo()
     {
-        Controller c = Controller.getInstance();
-        int settlerId = c.indexSettler(this);
         System.out.println(
             "SettlerId: "+ this.prefix+" Location: "+ currentLocation.getPrefix() + " Coords: " + this.currentLocation.getCoords()[0] + " " + this.currentLocation.getCoords()[1] 
             + " Resources: Uran: " +  this.inventory.getNumOfUran() + " Ice: " + this.inventory.getNumOfIce() + " Iron: " + this.inventory.getNumOfIron()
