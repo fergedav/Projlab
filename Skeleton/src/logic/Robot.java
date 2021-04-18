@@ -8,7 +8,9 @@ public class Robot extends Traveler {
      *
      */
     private static final long serialVersionUID = -3138426053591207283L;
-
+    /**
+     * Konstruktor
+     */
     public Robot()
     {
         super();
@@ -20,7 +22,7 @@ public class Robot extends Traveler {
     /**
      * Visszatér egy véletlen választott számmal. A robot
      * erre az idexû aszteroidára lép majd át.
-     * @return
+     * @return választott sorszámú aszteroida a listából
      */
     private int whereTo()
     {
@@ -110,7 +112,7 @@ public class Robot extends Traveler {
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
 
- /**
+    /**
      * Determinisztikus - random viselkedes
      * rand = true, det = false
      */
@@ -118,17 +120,19 @@ public class Robot extends Traveler {
     /**
      * Determinisztikus - random viselkedeshez
      *  rand = true, det = false
+     * @param det_rand boolean viselkedés
      */
     public void setBehavior(boolean det_rand)
     {
         behavior = det_rand;
     }
-
     public void robotInfo(){
         System.out.println(
             "RobotId: "+ this.prefix+" Location: "+ currentLocation.getPrefix()
         );
     }
-
+    /**
+     * Id -ja a robotnak
+     */
     public static int id_counter = 0;
 }

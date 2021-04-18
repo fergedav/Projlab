@@ -5,15 +5,24 @@ import skeleton.Logger;
 public abstract class Traveler implements java.io.Serializable {
 
     /**
-     *
+     * Szerializáló
      */
     private static final long serialVersionUID = 1409581797041834036L;
-
+    /**
+     * Az utazó készlete.
+     */
     protected Inventory inventory;
-
+    /**
+     * Az Orbit amelyen az utazó jelenleg tartózkodik.
+     */
     protected Orbit currentLocation;
+    /**
+     * A játék irányítója, számon tartja a leszármazottakat.
+     */
     protected Controller controler;
-
+    /**
+     * Konstruktor
+     */
     protected Traveler()
     {
         controler = Controller.getInstance();
@@ -30,7 +39,11 @@ public abstract class Traveler implements java.io.Serializable {
 
         Logger.endFunctionLog();
     }
-
+    /**
+     * A tartózkodási helyének i-edik szomszédjára megpróbál átlépni.
+     * Ha nem létezik i-edik szomszéd helyben marad.
+     * @param index int index
+     */
     public void move(int index)
     {
         Logger.startFunctionLogComment(this, "move", "");
