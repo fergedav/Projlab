@@ -5,14 +5,18 @@ import java.util.List;
 
 import skeleton.Logger;
 
+
+/**
+ * Az Objektum felelõssége a játékmenetet vezérelni. Õ tartja számon a teljes pálya objektumait, és azokat amelyeket kell, lépteti õket körönként,. Inicializálja, elindítja futtatja és megfelelõ körülmények esetén leállítja a játékot. 
+ * Õ hív napvihart és napfényt, az aszteroidákra, stargatekre, õ hívja meg a robotok, ufók, stargatek és telepesek lépéseit.
+ * Ha minden settler meghal befejezi a játékot.
+ */
 public class Controller implements java.io.Serializable {
-    /**
-	 *
-	 */
+
 	private static final long serialVersionUID = -425692066249723082L;
 
 	/**
-     * folyamatban van e a jatek
+     * Megadja hogy kell e futtatni a játékot vagy sem.
      */
     private boolean gameIsOn = false;
 
@@ -28,6 +32,11 @@ public class Controller implements java.io.Serializable {
     private List<Robot> robots = new ArrayList<>();
 
     /**
+     * A játékban éppen aktuálisan lév? összes Ufo típusú objektumot tároló privát lista
+     */
+    private List<Ufo> ufos = new ArrayList<>();
+
+    /**
      * A játékban található összes Orbit egy listában tárolva
      */
     private List<Orbit> orbits = new ArrayList<>();
@@ -37,10 +46,7 @@ public class Controller implements java.io.Serializable {
      */
     private List<Stargate> stargates = new ArrayList<>();
 
-    /**
-     * A játékban éppen aktuálisan lév? összes Ufo típusú objektumot tároló privát lista
-     */
-    private List<Ufo> ufos = new ArrayList<>();
+
 
     /**
      * Megszabja, hogy hány körönként legyen napvihar
@@ -52,15 +58,18 @@ public class Controller implements java.io.Serializable {
      */
     private int sunstormTimmer;
 
+    /**
+     * inicializálja a pályát, a maximum inventory kapacitást, valamint a napviharok között eltelõ idõt.
+     */
     public void initGame()
     {
-        // TODO idokoz random beallitasa majd mashol
+        // TODO idokoz random beallitasa majd mashol 
         sunstormTime = 8;
     }
 
     /**
-     * Elindítja és futtatja a játékot.
-     * 
+     * Elindítja a játékot: beállítja a gameIsOn attributum értékét true-ra.
+     * A GameEnd() metódus meghívásáig folyamatosan a saját Step() metódusát hívogatja.
      */
     public void startGame()
     {
@@ -100,31 +109,15 @@ public class Controller implements java.io.Serializable {
     }
 
     /**
-     * leállítja a játkot.
+     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmazó listájához
+     * @param s a hozzáadandó telepes
      */
-    public void endGame()
-    {   
-        Logger.startFunctionLogComment(this, "endGame", "");
-        gameIsOn = false;
-        Logger.endFunctionLog();
-
-    }
-
-    /**
-     * a paraméterként megkapott robotot hozzáadja a robots listájához
-     * @param r
-     */
-    public void addRobot(Robot r)
+    public void addSettler(Settler s)
     {
-        Logger.startFunctionLogComment(this, "addRobot", "");
-        robots.add(r);
-
-        //TODO beírni robotnak a prefixet; törölni majd
-
-        Logger.endFunctionLog();
+        settlers.add(s);
     }
 
-    /**
+        /**
      * Jegyzi egy telepes halálát
      * 
      * Ha egy telepes meghal, akkor meghívja  ezt a Settler_die() függvényt, 
@@ -147,9 +140,33 @@ public class Controller implements java.io.Serializable {
     }
 
     /**
-     * ha egy robot meghal, akkor meghívja ezt a Robot_die() függvényt, ami eltávolítja a robots listából az paraméterként kapott
-     * Robot objektumot.
+     * A játék végét kezelõ függvény, beállítja a gameIsOn attributumot “false”-ra. 
+     * Amikor a settlers listában nincsen már telepes vagy a bázis megépül
+     * akkor ez a függvény meghívódik, hogy véget vessen a játéknak, illetve kívülrõl is hívható.
+     */
+    public void endGame()
+    {   
+        Logger.startFunctionLogComment(this, "endGame", "");
+        gameIsOn = false;
+        Logger.endFunctionLog();
+
+    }
+
+    /**
+     * a paraméterként megkapott robotot hozzáadja a robots listájához
      * @param r
+     */
+    public void addRobot(Robot r)
+    {
+        Logger.startFunctionLogComment(this, "addRobot", "");
+        robots.add(r);
+        Logger.endFunctionLog();
+    }
+
+    /**
+     * ha egy robot meghal, akkor meghívja ezt a Robot_die() függvényt,
+     *  ami eltávolítja a robots listából az paraméterként kapott Robot objektumot.
+     * @param r az eltávolitandó robot.
      */
     public void robotDie(Robot r)
     {
@@ -158,14 +175,6 @@ public class Controller implements java.io.Serializable {
         robots.remove(r);
 
         Logger.endFunctionLog();
-    }
-    /**
-     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmazó listájához
-     * @param s
-     */
-    public void addSettler(Settler s)
-    {
-        settlers.add(s);
     }
 
      /**
@@ -178,7 +187,7 @@ public class Controller implements java.io.Serializable {
     }
 
     /**
-     * eltávolítja a kapott ufót a Controller ufos listájából, ha   a kapott ufo benne volt.
+     * eltávolítja a kapott ufót a Controller ufos listájából, ha  a kapott ufo benne volt.
      * @param u ufo
      */
     public void ufoDie(Ufo u)
@@ -216,13 +225,8 @@ public class Controller implements java.io.Serializable {
      */
     public void addOrbit(Orbit o)
     {
-
-
         orbits.add(o);
-
-        //TODO beírni a prefixét.
-        //TODO ez alul furcsa... nekem nem tetszik. mert add orbitot hív stargate, vagy asteroid beírás is följebb
-
+        //TODO ezt tisztázni
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
         if(o.getClass() == Asteroid.class)
             asteroids.add((Asteroid)o);
@@ -260,13 +264,13 @@ public class Controller implements java.io.Serializable {
     }
 
     /**
-     * Meghívja minden aszteroidán a sunLightArrive metódust.
+     * Meghívja az összes tárolt Orbit SunLightArrive()-metódusát, véletlen sorsolt koordinátákkal
      */
     private void sunLightCall()
     {
         Logger.startFunctionLogComment(this, "sunLightCall", "");
 
-        // TODO rendes coords
+        // TODO rendes random coords
         int coords[] = new int[4];
 
         for(Orbit o: orbits){
