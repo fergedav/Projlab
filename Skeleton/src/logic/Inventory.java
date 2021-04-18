@@ -14,8 +14,14 @@ public class Inventory implements java.io.Serializable {
      */
     private static final long serialVersionUID = -5282074853486280495L;
 
+    /**
+     * A tároló teljes mérete
+     */
     private final int size;
 
+    /**
+     * Adatstruktúra a nyersanyag fajták válogatott tárolására.
+     */
     private HashMap<String, ArrayList<Resource>> materials;
 
     public Inventory(int meret){
@@ -48,6 +54,8 @@ public class Inventory implements java.io.Serializable {
     
     /** 
      * Hozzáad egy nyersanyagot a tárolóhoz ha van benne még hely.
+     * 
+     * felvesz egy nyersanyagot a materials tárolóba, ha van még hely. Az adott nyersanyag CallBack() metódusát hívja.
      */
     public void addResource(Resource r)
     {
@@ -93,6 +101,9 @@ public class Inventory implements java.io.Serializable {
     /**
      * Callback függvény az urán hozzáadásához.
      * 
+     * Az urán CallBack függvénye hívja, hogy az uránt
+     * a megfelelõ helyre tegye a materials struktúrában.
+     * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addUran(Uran u)
@@ -107,6 +118,8 @@ public class Inventory implements java.io.Serializable {
     }
     /**
      * Callback függvény az szén hozzáadásához.
+     * 
+     * A szén CallBack függvénye hívja, hogy a szenet a megfelelõ helyre tegye a materials struktúrában.
      * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
@@ -123,6 +136,8 @@ public class Inventory implements java.io.Serializable {
     /**
      * Callback függvény az vas hozzáadásához.
      * 
+     * A vas CallBack függvénye hívja, hogy a vasat a megfelelõ helyre tegye a materials struktúrában.
+     * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addIron(Iron i)
@@ -138,6 +153,8 @@ public class Inventory implements java.io.Serializable {
     /**
      * Callback függvény az jég hozzáadásához.
      * 
+     * A jég CallBack függvénye hívja, hogy a jeget a megfelelõ helyre tegye a materials struktúrában.
+     * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addIce(Ice i)
@@ -148,7 +165,18 @@ public class Inventory implements java.io.Serializable {
 
         Logger.endFunctionLog();
     }
-
+    /**
+     * 
+     * Segédfüggvény, ellenõrzi, hogy van-e elegendõ a megadott 
+     * nyersanyagfajtákból, ha van kitörli õket és igazzal tér vissza, 
+     * ha nincs, akkor nem töröl semmit, és igazzal tér vissza
+     * 
+     * @param Uran
+     * @param Carbon
+     * @param Iron
+     * @param Ice
+     * @return
+     */
     private boolean doIHave(int Uran, int Carbon, int Iron, int Ice){
         int[] nums = {Uran, Carbon, Iron, Ice};
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
@@ -170,6 +198,9 @@ public class Inventory implements java.io.Serializable {
     /**
      * Léterehoz egy robotot, ha van elég nyersanyag.
      * 
+     * Ha van elegendõ nyersanyag az osztályban, létrehoz egy robotot és
+     *  visszatér vele, a felhasznált nyersanyagot törli, egyébként null-t ad vissza.
+     * 
      * @param o -nem használt.
      * @return vagy a étrehozott robot, vagy null.
      */
@@ -188,6 +219,10 @@ public class Inventory implements java.io.Serializable {
 
     /**
      * Létrehoz két stargate-t ha van rá elég nyersanyag.
+     * 
+     * Ha van elegendõ nyersanyag  és a játékosnál nincsen másik kapu
+     *  vagy kapu-pár éppen, létrehoz egy összekapcsolt kapu-párt, 
+     * és visszaadja, a felhasznált nyersanyagot törli, egyéblént null-t ad vissza.
      * 
      * @return a kreált két stargate vagy null.
      */
