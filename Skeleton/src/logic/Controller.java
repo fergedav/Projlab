@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import grafikus.MainFrame;
 import skeleton.Logger;
 
 
@@ -65,6 +66,9 @@ public class Controller implements java.io.Serializable {
     {
         // TODO idokoz random beallitasa majd mashol 
         sunstormTime = 8;
+        Asteroid a= new Asteroid(0, 0, 3, new Uran(), false);
+        addAsteroid(a);
+        addSettler(new Settler(a));
     }
 
     /**
@@ -76,10 +80,16 @@ public class Controller implements java.io.Serializable {
         Logger.startFunctionLogComment(this, "startGame", "");
 
         gameIsOn = true;
-        while(gameIsOn){
+        //while(gameIsOn){
 
-            step();
-        }
+          //  step();
+        //}
+
+            //TODO init, új pálya
+
+        initGame();
+        step();
+        NextSetller();
 
         Logger.endFunctionLog();
     }
@@ -105,7 +115,7 @@ public class Controller implements java.io.Serializable {
         for(Stargate s : stargates){ s.step();}
         for(Robot r : robots){ r.step(); }
         for(Ufo u : ufos){u.step();}
-        for(Settler s : settlers){s.step(); }
+        //for(Settler s : settlers){s.step(); }
     }
 
     /**
@@ -569,6 +579,25 @@ public class Controller implements java.io.Serializable {
     public Robot lastRobot()
     {
         return robots.get(robots.size()-1);
+    }
+
+    private static MainFrame frame;
+    private int settlerCounter = 0;
+
+    public static void setFrame(MainFrame mf)
+    {
+        frame = mf;
+    }
+
+    public void NextSetller()
+    {
+        frame.Draw(settlers.get(settlerCounter));
+        settlerCounter++;
+        if( settlerCounter >= settlers.size())
+        {
+            step();
+            settlerCounter = 0;
+        }
     }
 }
 
