@@ -13,9 +13,18 @@ import logic.Settler;
 
 import javax.swing.JComboBox;
 
-public class SettlerActionsPanel extends JPanel implements ActionListener{
+public class SettlerActionsPanel extends JPanel implements ActionListener, IDrawable{
 
 	private JButton btnSettlerDig;
+	private JButton btnSettlerMine;
+	private JButton btnCreateStargate;
+	private	JButton btnPlaceStargate;
+	private	JButton btnCreateRobot;
+	private	JButton btnCreateBase;
+	private	JComboBox<String> comboBoxSettlerMove;
+	private	JButton btnReplaceResource;
+	private	JComboBox<String> comboBoxReplaceResource;
+	private Settler currentSettler;
 
 	/**
 	 * Create the panel.
@@ -26,21 +35,34 @@ public class SettlerActionsPanel extends JPanel implements ActionListener{
 		
 		btnSettlerDig = new JButton("Dig Asteroid");
 		btnSettlerDig.addActionListener(this);
-		JButton btnSettlerMine = new JButton("Mine Asteroid");
-		
-		JButton btnCreateStargate = new JButton("Create Stargate");
-		
-		JButton btnPlaceStargate = new JButton("Place Stargate");
-		
-		JButton btnCreateRobot = new JButton("Create Robot");
-		
-		JButton btnCreateBase = new JButton("Create Base");
-		
-		JComboBox comboBoxSettlerMove = new JComboBox();
-		
-		JButton btnReplaceResource = new JButton("Replace Resource");
-		
-		JComboBox comboBoxReplaceResource = new JComboBox();
+
+		btnSettlerMine = new JButton("Mine Asteroid");
+		btnSettlerMine.addActionListener(this);
+
+		btnCreateStargate = new JButton("Create Stargate");
+		btnCreateStargate.addActionListener(this);
+
+		btnPlaceStargate = new JButton("Place Stargate");
+		btnPlaceStargate.addActionListener(this);
+
+		btnCreateRobot = new JButton("Create Robot");
+		btnCreateRobot.addActionListener(this);
+
+		btnCreateBase = new JButton("Create Base");
+		btnCreateBase.addActionListener(this);
+
+		comboBoxSettlerMove = new JComboBox<String>();
+		comboBoxSettlerMove.addActionListener(this);
+
+		btnReplaceResource = new JButton("Replace Resource");
+		btnReplaceResource.addActionListener(this);
+
+		comboBoxReplaceResource = new JComboBox<String>();
+		comboBoxReplaceResource.addItem("Iron");
+		comboBoxReplaceResource.addItem("Carbon");
+		comboBoxReplaceResource.addItem("Ice");
+		comboBoxReplaceResource.addItem("Uran");
+		comboBoxReplaceResource.addActionListener(this);
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -94,20 +116,48 @@ public class SettlerActionsPanel extends JPanel implements ActionListener{
 
 	}
 
-int c = 0;
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnSettlerDig)
 		{
 			MainFrame.currentSettler.digging();
-			btnSettlerDig.setText(""+c++);
+			Controller.getInstance().NextSetller();
+		}
+		if(e.getSource() == btnSettlerMine)
+		{
+			MainFrame.currentSettler.mining();
+			Controller.getInstance().NextSetller();
+		}
+		if(e.getSource() == btnCreateStargate)
+		{
+			MainFrame.currentSettler.createStargate();
+			Controller.getInstance().NextSetller();
+		}
+		if(e.getSource() == btnPlaceStargate)
+		{
+			MainFrame.currentSettler.placeStargate();
+			Controller.getInstance().NextSetller();
+		}
+		if(e.getSource() == btnCreateRobot)
+		{
+			MainFrame.currentSettler.createRobot();
+			Controller.getInstance().NextSetller();
+		}
+		if(e.getSource() == btnCreateBase)
+		{
+			MainFrame.currentSettler.createBase();
+			Controller.getInstance().NextSetller();
+		}
+		if(e.getSource() == btnReplaceResource)
+		{
+			MainFrame.currentSettler.replaceResource((String)comboBoxReplaceResource.getSelectedItem());
 			Controller.getInstance().NextSetller();
 		}
 	}
 
-	void setSettler(Settler s)
-	{
-
+	@Override
+	public void Draw(Settler s) {
+		currentSettler = s;
+		
 	}
 }
