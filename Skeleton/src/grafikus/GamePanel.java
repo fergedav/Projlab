@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import logic.Settler;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements IDrawable{
 
 	/**
 	 * Create the panel.
@@ -16,7 +16,8 @@ public class GamePanel extends JPanel {
 
 	}
 
-	void Draw(Settler s)
+	@Override
+	public void Draw(Settler s)
 	{
 		//TODO játék rajzolása mindennel
 	}

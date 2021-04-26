@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import grafikus.IDrawable;
 import grafikus.MainFrame;
 import skeleton.Logger;
 
@@ -581,17 +582,17 @@ public class Controller implements java.io.Serializable {
         return robots.get(robots.size()-1);
     }
 
-    private static MainFrame frame;
+    private IDrawable UI;
     private int settlerCounter = 0;
 
-    public static void setFrame(MainFrame mf)
+    public void setFrame(IDrawable ui)
     {
-        frame = mf;
+        UI = ui;
     }
 
     public void NextSetller()
     {
-        frame.Draw(settlers.get(settlerCounter));
+        UI.Draw(settlers.get(settlerCounter));
         settlerCounter++;
         if( settlerCounter >= settlers.size())
         {

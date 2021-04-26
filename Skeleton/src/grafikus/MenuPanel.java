@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class MenuPanel extends JPanel implements ActionListener, IDrawable{
+public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	private JTextField textFieldSave;
 	private JTextField Load;
 	private JButton btnStartGame;
@@ -31,6 +31,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable{
 	private	JTextPane textPaneSettlerInfo;	
 	private	JButton btnSave;		
 	private	JButton btnLoad;
+	private Settler currentSettler;
 
 	/**
 	 * Create the panel.
@@ -144,7 +145,8 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable{
 	}
 	@Override
 	public void Draw(Settler s) {
-		// TODO Auto-generated method stub
-		
+		currentSettler = s;
+		setSettlerInfo(s);
+		setOrbitInfo(s.getcurrentLocation());
 	}
 }

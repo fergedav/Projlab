@@ -9,6 +9,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import logic.Controller;
+import logic.Orbit;
 import logic.Settler;
 
 import javax.swing.JComboBox;
@@ -21,7 +22,7 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 	private	JButton btnPlaceStargate;
 	private	JButton btnCreateRobot;
 	private	JButton btnCreateBase;
-	private	JComboBox<String> comboBoxSettlerMove;
+	private	JComboBox<Orbit> comboBoxSettlerMove;
 	private	JButton btnReplaceResource;
 	private	JComboBox<String> comboBoxReplaceResource;
 	private Settler currentSettler;
@@ -51,7 +52,7 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 		btnCreateBase = new JButton("Create Base");
 		btnCreateBase.addActionListener(this);
 
-		comboBoxSettlerMove = new JComboBox<String>();
+		comboBoxSettlerMove = new JComboBox<Orbit>();
 		comboBoxSettlerMove.addActionListener(this);
 
 		btnReplaceResource = new JButton("Replace Resource");
@@ -120,37 +121,37 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnSettlerDig)
 		{
-			MainFrame.currentSettler.digging();
+			currentSettler.digging();
 			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnSettlerMine)
 		{
-			MainFrame.currentSettler.mining();
+			currentSettler.mining();
 			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateStargate)
 		{
-			MainFrame.currentSettler.createStargate();
+			currentSettler.createStargate();
 			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnPlaceStargate)
 		{
-			MainFrame.currentSettler.placeStargate();
+			currentSettler.placeStargate();
 			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateRobot)
 		{
-			MainFrame.currentSettler.createRobot();
+			currentSettler.createRobot();
 			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateBase)
 		{
-			MainFrame.currentSettler.createBase();
+			currentSettler.createBase();
 			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnReplaceResource)
 		{
-			MainFrame.currentSettler.replaceResource((String)comboBoxReplaceResource.getSelectedItem());
+			currentSettler.replaceResource((String)comboBoxReplaceResource.getSelectedItem());
 			Controller.getInstance().NextSetller();
 		}
 	}
@@ -158,6 +159,9 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 	@Override
 	public void Draw(Settler s) {
 		currentSettler = s;
-		
+		comboBoxSettlerMove.removeAllItems();
+		for (Orbit o : s.getcurrentLocation().getNeighborList()) {
+			comboBoxSettlerMove.addItem(o);
+		}
 	}
 }

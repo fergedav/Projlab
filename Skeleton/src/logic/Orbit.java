@@ -257,4 +257,9 @@ public abstract class Orbit implements java.io.Serializable {
      * @return null
      */
     public Resource getCore() {return null;}
+
+    public List<Orbit> getNeighborList()
+    {
+        return new ArrayList<Orbit>(neighbours);
+    }
 }
