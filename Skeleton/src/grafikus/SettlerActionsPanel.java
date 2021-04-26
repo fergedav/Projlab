@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 
 public class SettlerActionsPanel extends JPanel implements ActionListener, IDrawable{
 
+	private JButton btnSettlerMove;
 	private JButton btnSettlerDig;
 	private JButton btnSettlerMine;
 	private JButton btnCreateStargate;
@@ -32,8 +33,9 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 	 */
 	public SettlerActionsPanel() {
 		
-		JButton btnSettlerMove = new JButton("Move");
-		
+		btnSettlerMove = new JButton("Move");
+		btnSettlerMove.addActionListener(this);
+
 		btnSettlerDig = new JButton("Dig Asteroid");
 		btnSettlerDig.addActionListener(this);
 
@@ -163,5 +165,6 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 		for (Orbit o : s.getcurrentLocation().getNeighborList()) {
 			comboBoxSettlerMove.addItem(o);
 		}
+		
 	}
 }
