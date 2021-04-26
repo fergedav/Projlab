@@ -7,7 +7,6 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 
 import logic.Controller;
 import logic.Settler;
@@ -44,7 +43,7 @@ public class MainFrame extends JFrame implements IDrawable{
 
 		pack();
 		
-		Controller.setFrame(this);
+		Controller.getInstance().setFrame(this);
 	}
 
 	@Override
