@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class MenuPanel extends JPanel implements ActionListener{
+public class MenuPanel extends JPanel implements ActionListener, IDrawable{
 	private JTextField textFieldSave;
 	private JTextField Load;
 	private JButton btnStartGame;
@@ -42,7 +42,7 @@ public class MenuPanel extends JPanel implements ActionListener{
 		btnEndGame = new JButton("End Game");
 		btnStartGame.addActionListener(this);
 		btnNewGame = new JButton("New Game");
-		
+		btnNewGame.addActionListener(this);
 		lblCurrentLocationInfo = new JLabel("Current Location Info:");
 		
 		textPaneCurrentLocationInfo = new JTextPane();
@@ -52,9 +52,10 @@ public class MenuPanel extends JPanel implements ActionListener{
 		textPaneSettlerInfo = new JTextPane();
 		
 		btnSave = new JButton("Save");
-		
+		btnSave.addActionListener(this);
 		btnLoad = new JButton("Load");
-		
+		btnLoad.addActionListener(this);
+
 		textFieldSave = new JTextField();
 		textFieldSave.setColumns(10);
 		
@@ -139,6 +140,11 @@ public class MenuPanel extends JPanel implements ActionListener{
 	public void setSettlerInfo(Settler s)
 	{
 		//TODO string összerakása
+		
+	}
+	@Override
+	public void Draw(Settler s) {
+		// TODO Auto-generated method stub
 		
 	}
 }
