@@ -40,7 +40,8 @@ public class SettlerActionsPanel extends JPanel implements ActionListener{
 		
 		JButton btnReplaceResource = new JButton("Replace Resource");
 		
-		JComboBox comboBoxSettlerMove_1 = new JComboBox();
+		JComboBox comboBoxReplaceResource = new JComboBox();
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -64,7 +65,7 @@ public class SettlerActionsPanel extends JPanel implements ActionListener{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnReplaceResource, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-						.addComponent(comboBoxSettlerMove_1, 0, 121, Short.MAX_VALUE))
+						.addComponent(comboBoxReplaceResource, 0, 121, Short.MAX_VALUE))
 					.addGap(20))
 		);
 		groupLayout.setVerticalGroup(
@@ -86,7 +87,7 @@ public class SettlerActionsPanel extends JPanel implements ActionListener{
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnReplaceResource, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(comboBoxSettlerMove_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(comboBoxReplaceResource, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(13, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
