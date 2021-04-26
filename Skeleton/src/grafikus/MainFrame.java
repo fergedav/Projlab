@@ -14,7 +14,7 @@ import logic.Settler;
 
 
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame implements IDrawable{
 	
 	MenuPanel menupanel;
 	SettlerActionsPanel settlerpanel;
@@ -47,9 +47,12 @@ public class MainFrame extends JFrame{
 		Controller.setFrame(this);
 	}
 
+	@Override
 	public void Draw(Settler s) {
 		currentSettler = s;
-		menupanel.setSettlerInfo(s);
+		menupanel.Draw(s);
+		gamepanel.Draw(s);
+		settlerpanel.Draw(s);
 	}
 	
 }
