@@ -67,9 +67,89 @@ public class Controller implements java.io.Serializable {
     {
         // TODO idokoz random beallitasa majd mashol 
         sunstormTime = 8;
-        Asteroid a= new Asteroid(0, 0, 3, new Uran(), false);
-        addAsteroid(a);
-        addSettler(new Settler(a));
+
+        int asteroidCount = 40;
+        int settlerCount = 10;
+
+        //aszteroidák generálása
+        for (int i = 0; i < asteroidCount; i++) 
+        {
+            
+            addAsteroid(new Asteroid(
+                getRandomNumber(0, 100), 
+                getRandomNumber(0, 100), 
+                getRandomNumber(1, 5), generateRandomResource(), false));
+        }
+
+        // közeli aszteroidák összekapcsolása
+        for (int i = 0; i < asteroidCount; i++) 
+        {
+            for (int j = i + 1; j < asteroidCount; j++) 
+            {
+                Asteroid a1 = asteroids.get(i);
+                Asteroid a2 = asteroids.get(j);
+                if(getAsteroidDistance(a1, a2) <= 15)
+                {
+                    a1.addNeighbour(a2);
+                    a2.addNeighbour(a1);
+                }
+            }
+        }
+
+        //settlerek létrehozása
+        for (int i = 0; i < settlerCount; i++)
+        {
+            addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount))));
+        }
+    }
+
+    /**
+     * két aszteroida távolságának kiszámolása a generáláshoz, szomszéd összepárosításkor
+     * @param a1 elsõ aszteroida
+     * @param a2 második aszteroida
+     * @return távolságuk
+     */
+    private int getAsteroidDistance(Asteroid a1, Asteroid a2)
+    {
+        int[] c1 = a1.getCoords();
+        int[] c2 = a2.getCoords();
+
+        int x = c1[0] - c2[0];
+        int y = c1[1] - c2[2];
+
+        return (int)Math.sqrt(x*x + y*y);
+    }
+
+    /**
+     * random szám generálása megadott intervallumban
+     * @param min legkisebb szám
+     * @param max legnagyobb szám
+     * @return random szám
+     */
+    private int getRandomNumber(int min, int max)
+    {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    /**
+     * Random nyersanyag létrehozása a pálya generáláshoz
+     * @return random típusú nyersanyag (Carbon, ICe Iron, Uran)
+     */
+    private Resource generateRandomResource()
+    {
+        int n = getRandomNumber(0, 5);
+        switch (n) {
+            case 0:
+                return new Carbon();
+            case 1:
+                return new Ice();
+            case 2:
+                return new Iron();
+            case 3:
+                return new Uran();
+            default:
+                return null;
+        }
     }
 
     /**
@@ -106,7 +186,7 @@ public class Controller implements java.io.Serializable {
         if(sunstormTimmer == 0)
         {
             sunstormCall();
-            sunstormTimmer = sunstormTime;
+            sunstormTimmer = getRandomNumber(4,9);
         }
         else
             sunstormDecrease();
