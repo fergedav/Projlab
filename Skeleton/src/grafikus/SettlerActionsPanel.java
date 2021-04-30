@@ -2,6 +2,8 @@ package grafikus;
 
 
 import java.awt.event.*;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
@@ -124,39 +126,52 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 		if(e.getSource() == btnSettlerDig)
 		{
 			currentSettler.digging();
+			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnSettlerMine)
 		{
 			currentSettler.mining();
+			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateStargate)
 		{
 			currentSettler.createStargate();
+			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnPlaceStargate)
 		{
 			currentSettler.placeStargate();
+			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateRobot)
 		{
 			currentSettler.createRobot();
+			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateBase)
 		{
 			currentSettler.createBase();
+			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnReplaceResource)
 		{
 			currentSettler.replaceResource((String)comboBoxReplaceResource.getSelectedItem());
+			Controller.getInstance().NextSetller();
 		}
-		Controller.getInstance().NextSetller();
+		if(e.getSource() == btnSettlerMove)
+		{
+			currentSettler.move(comboBoxReplaceResource.getSelectedIndex());
+			Controller.getInstance().NextSetller();
+		}
+		
 	}
 
 	@Override
 	public void Draw(Settler s) {
 		currentSettler = s;
 		comboBoxSettlerMove.removeAllItems();
-		for (Orbit o : s.getcurrentLocation().getNeighborList()) {
+		List<Orbit> n = s.getcurrentLocation().getNeighborList();
+		for (Orbit o : n) {
 			comboBoxSettlerMove.addItem(o);
 		}
 		

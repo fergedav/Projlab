@@ -206,4 +206,10 @@ public class Asteroid extends Orbit {
      * a tesztesetekben megjelenenõ prefixhez szükséges id(controller szerinti szám)
      */
     public static int id_counter = 0;
+
+    @Override
+    public String toString()
+    {
+        return prefix;
+    }
 }

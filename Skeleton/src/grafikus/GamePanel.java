@@ -20,17 +20,12 @@ public class GamePanel extends JPanel implements IDrawable{
 	 * Create the panel.
 	 */
 	public GamePanel() {
-		setBackground(Color.DARK_GRAY);
-		try {
-			asteroidImage = new ImageIcon("Skeleton/src/assets/asteroid.png").getImage();
-			stargateImage = new ImageIcon("Skeleton/src/assets/stargate.png").getImage();
-			settlerImage = new ImageIcon("Skeleton/src/assets/settler.png").getImage();
-			ufoImage = new ImageIcon("Skeleton/src/assets/ufo.png").getImage();
-			robotImage = new ImageIcon("Skeleton/src/assets/robot.png").getImage();
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		setBackground(Color.BLACK);
+		asteroidImage = new ImageIcon("Skeleton/src/assets/asteroid.png").getImage();
+		stargateImage = new ImageIcon("Skeleton/src/assets/stargate.png").getImage();
+		settlerImage = new ImageIcon("Skeleton/src/assets/settler.png").getImage();
+		ufoImage = new ImageIcon("Skeleton/src/assets/ufo.png").getImage();
+		robotImage = new ImageIcon("Skeleton/src/assets/robot.png").getImage();
 	}
 
 	Image asteroidImage;
@@ -46,7 +41,9 @@ public class GamePanel extends JPanel implements IDrawable{
 	{
 		//TODO j˜t˜k rajzol˜sa mindennel
 		currentSettler = s;
-		revalidate();
+		//revalidate();
+		//invalidate();
+		repaint();
 	}
 
 	private void drawOrbits(Graphics g, Orbit o)
@@ -57,22 +54,31 @@ public class GamePanel extends JPanel implements IDrawable{
 
 		//center orbit
 		g.drawImage(orbitImage, xc, yc, this);
+		g.setColor(Color.WHITE);
+		g.drawString(o.getPrefix(), xc, yc-4);
 
 		drawTravelers(g, o, xc, yc);
 		
 		List<Orbit> neighbors = o.getNeighborList();
-		int scale = 64;
+		int scale = 196;
 		int numOfNeighbors = neighbors.size();
-
+		int phi = (int)(Math.random() * 360);
 		for(int i = 0; i < neighbors.size(); i++)
 		{
-			double deg = Math.toRadians(360 / numOfNeighbors * i);
-			int x = (int)Math.cos(deg) * scale + (getWidth() / 2);
-			int y = (int)Math.sin(deg) * scale + (getHeight() / 2);
+			double deg = 360 / numOfNeighbors * (i+1) + phi;
+			deg = Math.min(deg, deg % 360);
 
-			g.drawImage((neighbors.get(i).getClass() == Asteroid.class) ? asteroidImage : stargateImage,
+			double rad = Math.toRadians(deg);
+			int x = (int)(Math.cos(rad) * scale) + xc;
+			int y = (int)(Math.sin(rad) * scale) + yc;
+			orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
+
+			g.drawImage(orbitImage,
 					x, y, this);
 			
+			g.setColor(Color.WHITE);
+			g.drawString(neighbors.get(i).getPrefix(), x, y-4);
+
 			drawTravelers(g, neighbors.get(i), x, y);
 		}
 	}
@@ -86,8 +92,8 @@ public class GamePanel extends JPanel implements IDrawable{
 			Image travelerImage = (t.getClass() == Settler.class) ? settlerImage : (t.getClass() == Robot.class ? robotImage : ufoImage);
 
 			g.drawImage(travelerImage, 
-			x + (9 % 3 * 20), 
-			y + (9 / 3 * 20), 
+			x + (9 % 3 * 5), 
+			y + (9 / 3 * 5), 
 			16, 16, this);
 		}
 	}

@@ -99,7 +99,7 @@ public class Controller implements java.io.Serializable {
         //settlerek létrehozása
         for (int i = 0; i < settlerCount; i++)
         {
-            addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount))));
+            addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1))));
         }
     }
 
@@ -115,7 +115,7 @@ public class Controller implements java.io.Serializable {
         int[] c2 = a2.getCoords();
 
         int x = c1[0] - c2[0];
-        int y = c1[1] - c2[2];
+        int y = c1[1] - c2[1];
 
         return (int)Math.sqrt(x*x + y*y);
     }

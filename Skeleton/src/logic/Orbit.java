@@ -262,4 +262,10 @@ public abstract class Orbit implements java.io.Serializable {
     {
         return new ArrayList<Orbit>(neighbours);
     }
+
+    @Override
+    public String toString()
+    {
+        return prefix;
+    }
 }

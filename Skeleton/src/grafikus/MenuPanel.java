@@ -165,7 +165,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		}
 
 
-		lblCurrentLocationInfo.setText(str);
+		textPaneCurrentLocationInfo.setText(str);
 	}
 
 
@@ -182,7 +182,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		str = str + "Uran: " + s.getInventory().getNumOfUran() + "\n";
 		str = str + "Stargates: " + s.getStargates().size() + "\n";
 
-		lblSettlerInfo.setText(str);
+		textPaneSettlerInfo.setText(str);
 	}
 	@Override
 	public void Draw(Settler s) {
