@@ -70,6 +70,7 @@ public class Controller implements java.io.Serializable {
 
         int asteroidCount = 40;
         int settlerCount = 10;
+        int ufoCount = 30;
 
         //aszteroidák generálása
         for (int i = 0; i < asteroidCount; i++) 
@@ -100,6 +101,12 @@ public class Controller implements java.io.Serializable {
         for (int i = 0; i < settlerCount; i++)
         {
             addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+        }
+
+        //Ufok generálása
+        for (int i = 0; i < ufoCount; i++)
+        {
+            addUfo(new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1))));
         }
     }
 

@@ -92,8 +92,8 @@ public class GamePanel extends JPanel implements IDrawable{
 			Image travelerImage = (t.getClass() == Settler.class) ? settlerImage : (t.getClass() == Robot.class ? robotImage : ufoImage);
 
 			g.drawImage(travelerImage, 
-			x + (9 % 3 * 5), 
-			y + (9 / 3 * 5), 
+			x + (i % 3 * 20) + 4, 
+			y + (i / 3 * 20) + 4, 
 			16, 16, this);
 		}
 	}

@@ -9,11 +9,12 @@ public class Ufo extends Traveler {
      */
     private static final long serialVersionUID = -6867257992338262330L;
 
-    public Ufo()
+    public Ufo(Orbit start)
     {
         //remelhetoleg kelloen nagy
         inventory = new Inventory(10000);
         setPrefix("ufo_"+id_counter++);
+        currentLocation = start;
         Controller.getInstance().addUfo(this);
     }
 
