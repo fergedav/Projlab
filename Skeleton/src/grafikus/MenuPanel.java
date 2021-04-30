@@ -9,7 +9,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import logic.Asteroid;
 import logic.Controller;
 import logic.Orbit;
+import logic.Resource;
 import logic.Settler;
+import logic.Stargate;
 
 import java.awt.Component;
 import javax.swing.Box;
@@ -131,17 +133,56 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		
 	}
 
-	public void setOrbitInfo(Orbit a)
+	public void setOrbitInfo(Orbit o)
 	{
-		//TODO string összerakása
+		String str = "";
 
+		str = str + "Location: " + o.getPrefix() + "\n";
+		str = str + "Neighbors:" + o.numOfNeighbor() + "\n";
+		str = str + "In light: " + (o.getLight() ? "Yes" : "No") + "\n";
+
+		int[] c = o.getCoords();
+		str = str + "x: " + c[0] + ", y: " + c[1] + "\n";
+
+		if(o.getClass() == Asteroid.class)
+		{
+			int l = o.getLayers();
+			str = str + "Layers: " + ((l == 0) ? "Drilled" : l) + "\n";
+
+			if(l != 0)
+			{
+				Resource r = o.getCore();
+				str = str + "Layers: " + (r == null ? "Empty" : r.toString()) + "\n";
+			}
+			
+		}
+		else if(o.getClass() == Stargate.class)
+		{
+			Stargate s = (Stargate)o;
+			str = str + "Crazy: " + (s.getLight() ? "Yes" : "No") + "\n";
+			str = str + "Exit: " + s.getMyTwin().getPrefix() + "\n";
+			str = str + "Location: " + s.getMyStop().getPrefix() + "\n";
+		}
+
+
+		lblCurrentLocationInfo.setText(str);
 	}
 
 
 	public void setSettlerInfo(Settler s)
 	{
-		//TODO string összerakása
-		
+		String str = "";
+
+		str = str + "Settler: " + s.getPrefix() + "\n";
+		int[] c = s.getcurrentLocation().getCoords();
+		str = str + "x: " + c[0] + ", y: " + c[1] + "\n";
+		str = str + "Carbon: " + s.getInventory().getNumOfCarbon() + "\n";
+		str = str + "Ice: " + s.getInventory().getNumOfIce() + "\n";
+		str = str + "Iron: " + s.getInventory().getNumOfIron() + "\n";
+		str = str + "Uran: " + s.getInventory().getNumOfUran() + "\n";
+		str = str + "Stargates: " + s.getStargates().size() + "\n";
+
+		lblSettlerInfo.setText(str);
 	}
 	@Override
 	public void Draw(Settler s) {

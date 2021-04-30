@@ -124,38 +124,32 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 		if(e.getSource() == btnSettlerDig)
 		{
 			currentSettler.digging();
-			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnSettlerMine)
 		{
 			currentSettler.mining();
-			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateStargate)
 		{
 			currentSettler.createStargate();
-			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnPlaceStargate)
 		{
 			currentSettler.placeStargate();
-			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateRobot)
 		{
 			currentSettler.createRobot();
-			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnCreateBase)
 		{
 			currentSettler.createBase();
-			Controller.getInstance().NextSetller();
 		}
 		if(e.getSource() == btnReplaceResource)
 		{
 			currentSettler.replaceResource((String)comboBoxReplaceResource.getSelectedItem());
-			Controller.getInstance().NextSetller();
 		}
+		Controller.getInstance().NextSetller();
 	}
 
 	@Override
