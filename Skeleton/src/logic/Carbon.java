@@ -16,8 +16,7 @@ public class Carbon extends Resource {
         inv.addCarbon(this);
     }
 
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    @Override
     public String toString(){
         return "Carbon";
     }

@@ -15,11 +15,4 @@ public abstract class Resource implements java.io.Serializable {
 	 * @param a Asteroida, amelyikben a nyersanyag található
 	 */
 	public void reaction(Asteroid a) { }
-
-	
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public abstract String toString();
-
-
 }

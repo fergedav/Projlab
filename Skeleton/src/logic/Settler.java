@@ -20,7 +20,7 @@ public class Settler extends Traveler {
         super();
         currentLocation = start.addTraveler(this);
         inventory = new Inventory(10);
-        setPrefix("settler_"+id_counter++);
+        prefix = "settler_"+id_counter++;
         Controller.getInstance().addSettler(this);
     }
     /**
@@ -78,17 +78,10 @@ public class Settler extends Traveler {
      */
     public void createRobot()
     {
-        /** Megkísérel a createRobot egy új robotot létrehozni. Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. */
-        Robot newrobot = inventory.createRobot(currentLocation);
-        
-        /** Ha sikeresen létrehozta az új robotot, akkor felveszi az aktuális objektumon lévõ utazók közé az új robotot az addTraveler-el, 
-         * majd pedig az addRobot-al szól a controler-nek, hogy adja hozzá az új robotot az aktív robotok listájához. */
-        if(newrobot != null)
-        {
-            currentLocation.addTraveler(newrobot);
-            controler.addRobot(newrobot);
-            newrobot.currentLocation = this.currentLocation;
-        }
+        /** Megkísérel a createRobot egy új robotot létrehozni. 
+         * Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. 
+         * A robot megkapja az orbitot ha sikeres a létrehozás, rárakja magát, és beregisztrál a controllerbe is*/
+        inventory.createRobot(currentLocation);
     }
     /**
      * Ha van nála teleportkapu, akkor a soron következõ kaput pályára állítja az orbit körül,
@@ -181,7 +174,6 @@ public class Settler extends Traveler {
         die();
     }
     
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Visszatér a settlernél lévõ stargate listával
      * @return stargate lista
@@ -190,38 +182,9 @@ public class Settler extends Traveler {
     {
         return stargates;
     }
-    /**
-     * Hozzáad a lista elejéhez egy stargatet
-     * @param s új stargate
-     */
-    public void addOneStargate (Stargate s)
-    {
-        if(stargates.size()!=0)
-            stargates.add(0, s);
-        else
-            stargates.add(s);
-    }
-    public void SettlerInfo()
-    {
-        System.out.println(
-            "SettlerId: "+ this.prefix+" Location: "+ currentLocation.getPrefix() + " Coords: " + this.currentLocation.getCoords()[0] + " " + this.currentLocation.getCoords()[1] 
-            + " Resources: Uran: " +  this.inventory.getNumOfUran() + " Ice: " + this.inventory.getNumOfIce() + " Iron: " + this.inventory.getNumOfIron()
-            + " Carbon: " + this.inventory.getNumOfCarbon() + " Gates: " + this.stargates.size());
-    }
+
     /**
      * Id -ja a settlernek
      */
     public static int id_counter = 0;
-    /**
-     * Hozzáad a settlerhez egy stargate párt,
-     * úgy hogy nem hazsnál fel hozzá nyersanyagot.
-     * A PROTO parancsokhoz segéd!!!
-     */
-    public void addFreeStargatePair()
-    {
-        List<Stargate> newgates = inventory.giveFreeStargates();
-        stargates.addAll(newgates);
-        Controller.getInstance().addStargate(newgates.get(0));
-        Controller.getInstance().addStargate(newgates.get(1));
-    }
 }

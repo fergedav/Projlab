@@ -27,11 +27,8 @@ public class Ice extends Resource {
         a.retrieveResource();
     }
 
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    @Override
     public String toString(){
         return "Ice";
     }
-
-
 }

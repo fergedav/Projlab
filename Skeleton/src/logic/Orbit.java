@@ -33,6 +33,10 @@ public abstract class Orbit implements java.io.Serializable {
      */
     protected int y;
     /**
+     * prefix az adott orbit azonosítására
+     */
+    String prefix;
+    /**
     * konstruktor, létrehozza a szomszédok, és travelerek listáját.
     */
     protected Orbit() {
@@ -90,7 +94,6 @@ public abstract class Orbit implements java.io.Serializable {
     {
         neighbours.remove(o);
     }
-
 
     /**
      * Visszatér az orbit i-edik szomszédjával. Ha i-edik szomszéd nem létezik null-t ad vissza.
@@ -191,8 +194,6 @@ public abstract class Orbit implements java.io.Serializable {
         return neighbours.size();
     }
     
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * Visszadja az orbit koordinantatit 
      * x,y kooridnata
@@ -210,9 +211,8 @@ public abstract class Orbit implements java.io.Serializable {
     public boolean getLight()
     {
         return inLight;
-    }
-    // perfix
-    String prefix;
+    }    
+
     /**
      * Visszater az adott Orbithoz tartozo prefixxel
      * @return String prefix
@@ -221,26 +221,28 @@ public abstract class Orbit implements java.io.Serializable {
     {
         return prefix;
     }
-    /**
-     * Modosítja a prefixet a parameterben kapott stringgel.
-     * @param s prefix uj erteke
-     */
-    public void setPrefix(String s)
-    {
-        prefix = s;
-    }
 
     /**
      * alapértelmezett getter, az asteroid overrideolja
      * @return null
      */
-    public Resource getCore() {return null;}
+    public Resource getCore()
+    {
+        return null;
+    }
 
+    /**
+     * Egy másolt lista az Orbit szomszédairól
+     * @return a lista
+     */
     public List<Orbit> getNeighborList()
     {
         return new ArrayList<Orbit>(neighbours);
     }
 
+    /**
+     * kell a comboBox megjelenítéshez
+     */
     @Override
     public String toString()
     {

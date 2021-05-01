@@ -13,7 +13,7 @@ public class Ufo extends Traveler {
     {
         //remelhetoleg kelloen nagy
         inventory = new Inventory(10000);
-        setPrefix("ufo_"+id_counter++);
+        prefix = "ufo_"+id_counter++;
         currentLocation = start;
         Controller.getInstance().addUfo(this);
     }
@@ -21,14 +21,13 @@ public class Ufo extends Traveler {
     private int whereTo()
     {
         int n = 0;
-        if(behavior)
-        {
-            int num = currentLocation.numOfNeighbor();
-            if(num == 0) 
-                return 0;
-            Random r = new Random();
-            n = r.nextInt(num);
-        }
+        int num = currentLocation.numOfNeighbor();
+
+        if(num == 0) 
+            return 0;
+
+        Random r = new Random();
+        n = r.nextInt(num);
         return n;
     }
 
@@ -39,21 +38,23 @@ public class Ufo extends Traveler {
     }
 
     @Override
-    public void die() {
+    public void die() 
+    {
         currentLocation.removeTraveler(this);
         controler.ufoDie(this);
     }
 
     @Override
-    public void explosion() {
+    public void explosion() 
+    {
         die();   
     }
 
     @Override
-    public void step() {
+    public void step() 
+    {
         if(!mining())
-            ufoMoves();
-        
+            ufoMoves();   
     }
     
     @Override
@@ -67,39 +68,13 @@ public class Ufo extends Traveler {
         //nem kene null check mert az van a step-ben, mining csak nem null core eseten hivodik, 
         //de explicit hivasok miatt inkabb rakok
         Resource r = currentLocation.retrieveResource();
-        if(r != null) inventory.addResource(r);
 
+        //kiszedte, elrakja
+        if(r != null)
+            inventory.addResource(r);
+
+        //sikeres volt a bányászat, ha r nem null akkor megkaptam a nyeranyagot
         return r != null;
-    }
-    
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
- /**
-     * Determinisztikus - random viselkedes
-     */
-    private boolean behavior;
-    /**
-     * Determinisztikus - random viselkedeshez
-     * 
-     */
-    public void setBehavior(boolean det_rand)
-    {
-        behavior = det_rand;
-    }
-
-    public void setLocation(Orbit o){
-        currentLocation = o;
-    }
-
-
-    public void ufoInfo(){
-        System.out.println(
-            "UfoId: "+ this.prefix +" Location: "+ currentLocation.getPrefix() +
-            " Resources: Uran: "+ this.getInventory().getNumOfUran()+
-            " Ice: "+ this.getInventory().getNumOfIce()+ 
-            " Iron: "+ this.getInventory().getNumOfIron()+
-            " Carbon: "+ this.getInventory().getNumOfCarbon()
-        );
     }
 
     public static int id_counter = 0;

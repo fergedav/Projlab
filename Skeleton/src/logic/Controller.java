@@ -55,7 +55,7 @@ public class Controller implements java.io.Serializable {
     /**
      * Megszabja, hogy hány körönként legyen napvihar
      */
-    private int sunstormTime;
+    private int sunstormTime = 8;
 
     /**
      * hány kör van még hátra a napviharig
@@ -78,7 +78,7 @@ public class Controller implements java.io.Serializable {
             fileOut.close();
             System.out.printf("A palya mentése sikeres volt ide: " + path);
         }
-		catch (IOException i) 
+		catch (Exception i) 
 		{
             System.out.printf("A palya mentése sikertelen volt: "+ path);
             i.printStackTrace();
@@ -100,6 +100,7 @@ public class Controller implements java.io.Serializable {
         	in.close();
          	fileIn.close();
             instance = load;
+            instance.NextSetller();
        	} 
 		catch (Exception i) 
 		{
@@ -113,10 +114,10 @@ public class Controller implements java.io.Serializable {
      */
     public void initGame()
     {
-        sunstormTimer = 8;
+        sunstormTimer = sunstormTime;
 
-        int asteroidCount = 20;
-        int settlerCount = 2;
+        int asteroidCount = 100;
+        int settlerCount = 1;
         int ufoCount = 1;
 
         //aszteroidák gener˜l˜sa
@@ -236,7 +237,7 @@ public class Controller implements java.io.Serializable {
         if(sunstormTimer == 0)
         {
             sunstormCall();
-            sunstormTimer = getRandomNumber(4,9);
+            sunstormTimer = sunstormTime;
         }
         else
             sunstormDecrease();

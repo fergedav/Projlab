@@ -38,8 +38,7 @@ public class Uran extends Resource {
         }
     }
 
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    @Override
     public String toString(){
         return "Uran";
     }

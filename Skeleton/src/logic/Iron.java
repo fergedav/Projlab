@@ -17,8 +17,7 @@ public class Iron extends Resource {
         inv.addIron(this);
     }
 
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    @Override
     public String toString(){
         return "Iron";
     }

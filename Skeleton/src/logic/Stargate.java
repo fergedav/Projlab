@@ -33,7 +33,7 @@ public class Stargate extends Orbit {
     public Stargate()
     {
         stargeteController = Controller.getInstance();
-        setPrefix("stargate_"+id_counter++);
+        prefix = "stargate_"+id_counter++;
     }
 
     /**
@@ -152,14 +152,13 @@ public class Stargate extends Orbit {
     private int whereTo()
     {
         int n = 0;
-        if(behavior)
-        {
-            int num = myStop.numOfNeighbor();
-            if(num == 0) 
-                return 0;
-            Random r = new Random();
-            n = r.nextInt(num);
-        }
+        int num = myStop.numOfNeighbor();
+
+        if(num == 0) 
+            return 0;
+        
+        Random r = new Random();
+        n = r.nextInt(num);
         return n;
     }
 
@@ -210,48 +209,32 @@ public class Stargate extends Orbit {
         else return this;
     }
     
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Determinisztikus - random viselkedes
-     */
-    private boolean behavior;
-    /**
-     * Determinisztikus - random viselkedeshez
-     * setter
-     */
-    public void setBehavior(boolean det_rand)
-    {
-        behavior = det_rand;
-    }
     /**
      * Visszater az aktualis helyevel (orbit)
      * @return Orbit myStop
      */
-    public Orbit getMyStop(){
+    public Orbit getMyStop()
+    {
         return myStop;
     }
     /**
      * Visszater a kapu parjaval
      * @return Stargate myTwin
      */
-    public Stargate getMyTwin(){
+    public Stargate getMyTwin()
+    {
         return myTwin;
     }
     /**
      * Visszater hogy a kapu megorult-e?
      * @return boolean beCrazy
      */
-    public boolean getCrazy(){
+    public boolean getCrazy()
+    {
         return beCrazy;
     }
     /**
      * a tesztesetekben megjelenenõ prefixhez szükséges id(controller szerinti szám)
      */
     public static int id_counter = 0;
-
-    @Override
-    public String toString()
-    {
-        return prefix;
-    }
 }

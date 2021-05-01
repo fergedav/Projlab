@@ -10,11 +10,13 @@ public class Robot extends Traveler {
     /**
      * Konstruktor
      */
-    public Robot()
+    public Robot(Orbit start)
     {
         super();
-        setPrefix("robot_"+id_counter++);
+        prefix = "robot_"+id_counter++;
         Controller.getInstance().addRobot(this);
+
+        currentLocation = start.addTraveler(this);
     }
     /**
      * Visszatér egy véletlen választott számmal. A robot
@@ -23,16 +25,12 @@ public class Robot extends Traveler {
      */
     private int whereTo()
     {
-        //rand = true, det = false
         int n = 0;
-        if(behavior)
-        {
-            int num = currentLocation.numOfNeighbor();
-            if(num == 0) 
-                return 0;
-            Random r = new Random();
-            n = r.nextInt(num);
-        }
+        int num = currentLocation.numOfNeighbor();
+        if(num == 0) 
+            return 0;
+        Random r = new Random();
+        n = r.nextInt(num);
         return n;
     }
 
@@ -77,39 +75,14 @@ public class Robot extends Traveler {
     @Override
     public void step()
     {
-        if(currentLocation.getLayers()!=0){
+        if(currentLocation.getLayers() != 0)
+        {
             digging();
         }
         else
             robotMoves();
     }
 
-    //a skeleton erejéig segédfgv
-    public void setLocation(Orbit o){
-        currentLocation = o;
-    }
-    
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Determinisztikus - random viselkedes
-     * rand = true, det = false
-     */
-    private boolean behavior;
-    /**
-     * Determinisztikus - random viselkedeshez
-     *  rand = true, det = false
-     * @param det_rand boolean viselkedés
-     */
-    public void setBehavior(boolean det_rand)
-    {
-        behavior = det_rand;
-    }
-    public void robotInfo(){
-        System.out.println(
-            "RobotId: "+ this.prefix+" Location: "+ currentLocation.getPrefix()
-        );
-    }
     /**
      * Id -ja a robotnak
      */

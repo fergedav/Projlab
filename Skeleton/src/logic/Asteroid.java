@@ -30,7 +30,7 @@ public class Asteroid extends Orbit {
         core = c;
         layers = l;
         inLight = light;
-        setPrefix("asteroid_"+id_counter++);
+        prefix = "asteroid_"+id_counter++;
     }    
 
     /**
@@ -156,21 +156,17 @@ public class Asteroid extends Orbit {
             reaction();
     }
 
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Visszaadja az aszteroida magjában lévõ Resourceot
      */
     @Override
-    public Resource getCore() {return core;}
+    public Resource getCore() 
+    {
+        return core; 
+    }
 
     /**
      * a tesztesetekben megjelenenõ prefixhez szükséges id(controller szerinti szám)
      */
     public static int id_counter = 0;
-
-    @Override
-    public String toString()
-    {
-        return prefix;
-    }
 }
