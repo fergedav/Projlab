@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import logic.Asteroid;
 import logic.Orbit;
+import logic.Resource;
 import logic.Robot;
 import logic.Settler;
 import logic.Traveler;
@@ -21,11 +22,19 @@ public class GamePanel extends JPanel implements IDrawable{
 	 */
 	public GamePanel() {
 		setBackground(Color.BLACK);
-		asteroidImage = new ImageIcon("Skeleton/src/assets/asteroid.png").getImage();
-		stargateImage = new ImageIcon("Skeleton/src/assets/stargate.png").getImage();
-		settlerImage = new ImageIcon("Skeleton/src/assets/settler.png").getImage();
-		ufoImage = new ImageIcon("Skeleton/src/assets/ufo.png").getImage();
-		robotImage = new ImageIcon("Skeleton/src/assets/robot.png").getImage();
+
+		String basePath = "Skeleton/src/assets/";
+
+		asteroidImage = new ImageIcon(basePath + "asteroid.png").getImage();
+		stargateImage = new ImageIcon(basePath + "stargate.png").getImage();
+		settlerImage = new ImageIcon(basePath + "settler.png").getImage();
+		ufoImage = new ImageIcon(basePath + "ufo.png").getImage();
+		robotImage = new ImageIcon(basePath + "robot.png").getImage();
+
+		carbonImage = new ImageIcon(basePath + "carbon.png").getImage();
+		ironImage = new ImageIcon(basePath + "iron.png").getImage();
+		iceImage = new ImageIcon(basePath + "ice.png").getImage();
+		uranImage = new ImageIcon(basePath + "uran.png").getImage();
 	}
 
 	Image asteroidImage;
@@ -33,68 +42,134 @@ public class GamePanel extends JPanel implements IDrawable{
 	Image settlerImage;
 	Image ufoImage;
 	Image robotImage;
+	Image carbonImage;
+	Image ironImage;
+	Image iceImage;
+	Image uranImage;
 
 	Settler currentSettler = null;
+	/**
+	 * random szög hogy ne mindig ugyanúgy legyenek az aszteroidák 
+	 */
+	int phi;
+	/**
+	 * hány pixel legyen a karakterek mérete
+	 */
+	int spriteSize = 96;
+	/**
+	 * Napfény színe
+	 */
+	Color lightColor = new  Color(220, 200, 10, 64);
 
 	@Override
 	public void Draw(Settler s)
 	{
 		//TODO j˜t˜k rajzol˜sa mindennel
 		currentSettler = s;
-		//revalidate();
-		//invalidate();
+		phi = (int)(Math.random() * 360);
 		repaint();
+	}
+
+	private void drawOrbit(Graphics g, Orbit o, int x, int y)
+	{
+		Image orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
+
+			g.drawImage(orbitImage,
+					x, y,96,96, this);
+			
+			g.setColor(Color.WHITE);
+			g.drawString(o.getPrefix(), x, y-4);
+
+			drawTravelers(g, o, x, y);
+
+			Resource core = o.getCore();
+			if(core != null)
+			{
+				Image resourecImage = null;
+
+				switch (core.toString()) {
+					case "Carbon":
+						resourecImage = carbonImage;
+						break;
+					case "Ice":
+						resourecImage = iceImage;
+						break;
+					case "Iron":
+						resourecImage = ironImage;
+						break;
+					case "Uran":
+						resourecImage = uranImage;
+						break;
+				}
+
+				int smallSize = spriteSize / 4;
+				int offset = smallSize / 4;
+
+				g.drawImage(resourecImage, 
+				x + (1 * (smallSize+offset)) + offset, 
+				y + (1 * (smallSize+offset)) + offset, 
+				smallSize, smallSize, this);
+			}
+
+			if(o.getLight())
+			{
+				g.setColor(lightColor);
+				g.fillRect(x, y, spriteSize, spriteSize);
+			}
 	}
 
 	private void drawOrbits(Graphics g, Orbit o)
 	{
-		Image orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
-		int xc = getWidth() / 2 - orbitImage.getWidth(this) / 2;
-		int yc = getHeight() / 2 - orbitImage.getHeight(this) / 2;
+		//Image orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
+		int xc = getWidth() / 2 - spriteSize / 2;
+		int yc = getHeight() / 2 - spriteSize / 2;
 
 		//center orbit
-		g.drawImage(orbitImage, xc, yc, this);
-		g.setColor(Color.WHITE);
-		g.drawString(o.getPrefix(), xc, yc-4);
-
-		drawTravelers(g, o, xc, yc);
+		drawOrbit(g, o, xc, yc);
 		
 		List<Orbit> neighbors = o.getNeighborList();
-		int scale = 196;
+		int distance = 256;
 		int numOfNeighbors = neighbors.size();
-		int phi = (int)(Math.random() * 360);
+		
 		for(int i = 0; i < neighbors.size(); i++)
 		{
+			Orbit neighbor = neighbors.get(i);
+
 			double deg = 360 / numOfNeighbors * (i+1) + phi;
 			deg = Math.min(deg, deg % 360);
 
 			double rad = Math.toRadians(deg);
-			int x = (int)(Math.cos(rad) * scale) + xc;
-			int y = (int)(Math.sin(rad) * scale) + yc;
-			orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
-
-			g.drawImage(orbitImage,
-					x, y, this);
+			int x = (int)(Math.cos(rad) * distance) + xc;
+			int y = (int)(Math.sin(rad) * distance) + yc;
 			
-			g.setColor(Color.WHITE);
-			g.drawString(neighbors.get(i).getPrefix(), x, y-4);
-
-			drawTravelers(g, neighbors.get(i), x, y);
+			drawOrbit(g, neighbor, x, y);
 		}
 	}
 
 	private void drawTravelers(Graphics g, Orbit o, int x, int y)
 	{
 		List<Traveler> travelers = o.getTravelers();
-		for (int i = 0; i < Math.min(travelers.size(), 9); i++)
+		int j = 0;
+		for (int i = 0; i < Math.min(travelers.size(), 8); i++)
 		{
+			//középsõ hely kihagyása a nyersanyagnak
+			if(i == 4)
+			{
+				j++;
+				continue;
+			}
+
 			Traveler t = travelers.get(i);
 			Image travelerImage = (t.getClass() == Settler.class) ? settlerImage : (t.getClass() == Robot.class ? robotImage : ufoImage);
 
+			int smallSize = spriteSize / 4;
+			int offset = smallSize / 4;
+
 			g.drawImage(travelerImage, 
-			x + (i % 3 * 20) + 4, 
-			y + (i / 3 * 20) + 4, 
-			16, 16, this);
+			x + (j % 3 * (smallSize+offset)) + offset, 
+			y + (j / 3 * (smallSize+offset)) + offset, 
+			smallSize, smallSize, this);
+			j++;
 		}
 	}
 

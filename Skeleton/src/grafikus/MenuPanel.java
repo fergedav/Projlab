@@ -14,6 +14,8 @@ import logic.Settler;
 import logic.Stargate;
 
 import java.awt.Component;
+import java.awt.Font;
+
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -40,19 +42,31 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	 */
 	public MenuPanel() {
 		
+		Font f = new Font("Arial", Font.PLAIN, 16);
+
 		btnStartGame = new JButton("Start Game");
-		
-		btnEndGame = new JButton("End Game");
 		btnStartGame.addActionListener(this);
+
+
+		btnEndGame = new JButton("End Game");
+		btnEndGame.addActionListener(this);
+
+
 		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(this);
+
+
 		lblCurrentLocationInfo = new JLabel("Current Location Info:");
+		lblCurrentLocationInfo.setFont(f);
 		
 		textPaneCurrentLocationInfo = new JTextPane();
+		textPaneCurrentLocationInfo.setFont(f);
 		
 		lblSettlerInfo = new JLabel("Settler Info:");
+		lblSettlerInfo.setFont(f);
 		
 		textPaneSettlerInfo = new JTextPane();
+		textPaneSettlerInfo.setFont(f);
 		
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(this);
@@ -87,10 +101,10 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 										.addComponent(btnStartGame)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnEndGame, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnEndGame, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
-									.addComponent(lblSettlerInfo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblSettlerInfo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 									.addComponent(textPaneCurrentLocationInfo, Alignment.LEADING)
 									.addComponent(textPaneSettlerInfo, Alignment.LEADING)))
 							.addGap(29))))
@@ -106,11 +120,11 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 					.addGap(18)
 					.addComponent(lblCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textPaneCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textPaneCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addGap(39)
 					.addComponent(lblSettlerInfo)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textPaneSettlerInfo, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textPaneSettlerInfo, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSave)
@@ -128,6 +142,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnStartGame)
 		{
+			Controller.getNewControler();
 			Controller.getInstance().startGame();
 		}
 		
@@ -141,8 +156,8 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		str = str + "Neighbors:" + o.numOfNeighbor() + "\n";
 		str = str + "In light: " + (o.getLight() ? "Yes" : "No") + "\n";
 
-		int[] c = o.getCoords();
-		str = str + "x: " + c[0] + ", y: " + c[1] + "\n";
+		//int[] c = o.getCoords();
+		//str = str + "x: " + c[0] + ", y: " + c[1] + "\n";
 
 		if(o.getClass() == Asteroid.class)
 		{
@@ -152,7 +167,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 			if(l != 0)
 			{
 				Resource r = o.getCore();
-				str = str + "Layers: " + (r == null ? "Empty" : r.toString()) + "\n";
+				str = str + "Core: " + (r == null ? "Empty" : r.toString()) + "\n";
 			}
 			
 		}
@@ -174,8 +189,8 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		String str = "";
 
 		str = str + "Settler: " + s.getPrefix() + "\n";
-		int[] c = s.getcurrentLocation().getCoords();
-		str = str + "x: " + c[0] + ", y: " + c[1] + "\n";
+		//int[] c = s.getcurrentLocation().getCoords();
+		//str = str + "x: " + c[0] + ", y: " + c[1] + "\n";
 		str = str + "Carbon: " + s.getInventory().getNumOfCarbon() + "\n";
 		str = str + "Ice: " + s.getInventory().getNumOfIce() + "\n";
 		str = str + "Iron: " + s.getInventory().getNumOfIron() + "\n";

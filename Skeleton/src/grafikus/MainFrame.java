@@ -27,21 +27,22 @@ public class MainFrame extends JFrame implements IDrawable{
 		settlerpanel = new SettlerActionsPanel();
 		gamepanel = new GamePanel();
 		
-
 		setBackground(Color.BLUE);
 		setTitle("Demo Asteroid Controlls");
-		setPreferredSize(new Dimension(1000, 737));
-		setVisible(true);
+		setPreferredSize(new Dimension(1000, 800));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new JMenuBar());
-		setResizable(true);
+		setResizable(false);
 
 		add(menupanel, BorderLayout.EAST);
 		add(settlerpanel, BorderLayout.SOUTH);
 		
 		add(gamepanel, BorderLayout.CENTER);
-
+		
 		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
 		
 		Controller.getInstance().setFrame(this);
 	}

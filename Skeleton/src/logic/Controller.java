@@ -68,7 +68,7 @@ public class Controller implements java.io.Serializable {
         // TODO idokoz random beallitasa majd mashol 
         sunstormTime = 8;
 
-        int asteroidCount = 40;
+        int asteroidCount = 80;
         int settlerCount = 10;
         int ufoCount = 30;
 
@@ -79,7 +79,7 @@ public class Controller implements java.io.Serializable {
             addAsteroid(new Asteroid(
                 getRandomNumber(0, 100), 
                 getRandomNumber(0, 100), 
-                getRandomNumber(1, 5), generateRandomResource(), false));
+                getRandomNumber(1, 5), generateRandomResource(), true));
         }
 
         // közeli aszteroidák összekapcsolása
@@ -669,7 +669,7 @@ public class Controller implements java.io.Serializable {
         return robots.get(robots.size()-1);
     }
 
-    private IDrawable UI;
+    private static IDrawable UI;
     private int settlerCounter = 0;
 
     public void setFrame(IDrawable ui)
