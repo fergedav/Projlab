@@ -3,8 +3,6 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import skeleton.Logger;
-
 public abstract class Orbit implements java.io.Serializable {
     /**
      *
@@ -51,9 +49,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Orbit addTraveler(Traveler t)
     {
-        Logger.startFunctionLogComment(this, "addTraveler", "");
         travelers.add(t);
-        Logger.endFunctionLog();
         return this;
     }
 
@@ -64,8 +60,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public List<Traveler> getTravelers()
     {
-        Logger.startFunctionLogComment(this, "getTravelers", "");
-        Logger.endFunctionLog();
         return travelers;
     }
 
@@ -75,9 +69,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public void removeTraveler(Traveler t)
     {
-        Logger.startFunctionLogComment(this, "removeTraveler", "");
         travelers.remove(t);
-        Logger.endFunctionLog();
     }
 
     /**
@@ -86,9 +78,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Orbit addNeighbour(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "addNeighbour", "");
         neighbours.add(o);
-        Logger.endFunctionLog();
         return this;
     }
 
@@ -98,9 +88,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public void removeNeighbour(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "removeNeighbour", "");
         neighbours.remove(o);
-        Logger.endFunctionLog();
     }
 
 
@@ -111,14 +99,13 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Orbit getNeighbour(int i)
     {
-        Logger.startFunctionLogComment(this, "getNeighbour", "");
-
-        try {
+        try 
+        {
             Orbit o = neighbours.get(i);
-            Logger.endFunctionLog();
             return o;
-        } catch (Exception e) {
-            Logger.endFunctionLog();
+        } 
+        catch (Exception e) 
+        {
             return this;
         }
 
@@ -133,8 +120,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Resource retrieveResource()
     {
-        Logger.startFunctionLogComment(this, "retrieveResource", "");
-        Logger.endFunctionLog();
         return null;
     }
 
@@ -145,8 +130,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public boolean putResource(Resource r)
     {
-        Logger.startFunctionLogComment(this, "putResource", "");
-        Logger.endFunctionLog();
         return false;
     }
 
@@ -155,8 +138,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public void sunstormArrive(int[] coords )
     {
-        Logger.startFunctionLogComment(this, "sunstormArrive", "");
-        
         if(!(
             coords[0] <= x &&
             coords[1] <= y &&
@@ -199,8 +180,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public int getLayers()
     {
-        Logger.startFunctionLogComment(this, "getLayers", "");
-        Logger.endFunctionLog();
         return layers;
     }
 
@@ -249,7 +228,6 @@ public abstract class Orbit implements java.io.Serializable {
     public void setPrefix(String s)
     {
         prefix = s;
-        //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz stargate/asteroid
     }
 
     /**

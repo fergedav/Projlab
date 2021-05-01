@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grafikus.IDrawable;
-import skeleton.Logger;
 
 
 /**
@@ -114,7 +113,6 @@ public class Controller implements java.io.Serializable {
      */
     public void initGame()
     {
-        // TODO idokoz random beallitasa majd mashol 
         sunstormTimer = 8;
 
         int asteroidCount = 20;
@@ -220,15 +218,11 @@ public class Controller implements java.io.Serializable {
      */
     public void startGame()
     {
-        Logger.startFunctionLogComment(this, "startGame", "");
-
         gameIsOn = true;
 
         initGame();
         step();
         NextSetller();
-
-        Logger.endFunctionLog();
     }
 
     /**
@@ -276,14 +270,10 @@ public class Controller implements java.io.Serializable {
      */
     public void settlerDie(Settler s)
     {
-        Logger.startFunctionLogComment(this, "settlerDie", "");
-
         settlers.remove(s);
 
         if(settlers.size()==0)
             endGame();
-
-        Logger.endFunctionLog();
     }
 
     /**
@@ -293,10 +283,7 @@ public class Controller implements java.io.Serializable {
      */
     public void endGame()
     {   
-        Logger.startFunctionLogComment(this, "endGame", "");
         gameIsOn = false;
-        Logger.endFunctionLog();
-
     }
 
     /**
@@ -305,9 +292,7 @@ public class Controller implements java.io.Serializable {
      */
     public void addRobot(Robot r)
     {
-        Logger.startFunctionLogComment(this, "addRobot", "");
         robots.add(r);
-        Logger.endFunctionLog();
     }
 
     /**
@@ -317,11 +302,7 @@ public class Controller implements java.io.Serializable {
      */
     public void robotDie(Robot r)
     {
-        Logger.startFunctionLogComment(this, "robotDie", "");
-
         robots.remove(r);
-
-        Logger.endFunctionLog();
     }
 
      /**
@@ -348,11 +329,8 @@ public class Controller implements java.io.Serializable {
      */
     public void addStargate(Stargate s)
     {
-        //TODO PREFIXET FELVENNI
-
         orbits.add(s);
         stargates.add(s);
-
     }
 
     /**
@@ -373,7 +351,6 @@ public class Controller implements java.io.Serializable {
     public void addOrbit(Orbit o)
     {
         orbits.add(o);
-        //TODO ezt tiszt˜zni
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
         if(o.getClass() == Asteroid.class)
             asteroids.add((Asteroid)o);
@@ -398,8 +375,6 @@ public class Controller implements java.io.Serializable {
      */
     private void sunstormCall()
     {
-        Logger.startFunctionLogComment(this, "sunstormCall", "");
-
         int stormAreaSize = 20;
         int coords[] = new int[4];
         coords[0] = getRandomNumber(0, mapSize - stormAreaSize);
@@ -413,7 +388,6 @@ public class Controller implements java.io.Serializable {
         for(Orbit o: copy){
             o.sunstormArrive(coords);
         }
-        Logger.endFunctionLog();
     }
 
     /**
@@ -421,8 +395,6 @@ public class Controller implements java.io.Serializable {
      */
     private void sunLightCall()
     {
-        Logger.startFunctionLogComment(this, "sunLightCall", "");
-
         int lightAreaSize = 30;
         int coords[] = new int[4];
         coords[0] = getRandomNumber(0, mapSize - lightAreaSize);
@@ -433,7 +405,6 @@ public class Controller implements java.io.Serializable {
         for(Orbit o: orbits){
             o.sunLightArrive(coords);
         }
-        Logger.endFunctionLog();
     }
 
     /**
@@ -441,9 +412,7 @@ public class Controller implements java.io.Serializable {
      */
     private void sunstormDecrease()
     {
-        Logger.startFunctionLogComment(this, "sunstormDecrease", "");
         sunstormTimer--;
-        Logger.endFunctionLog();
     }
 
     /**
@@ -461,8 +430,6 @@ public class Controller implements java.io.Serializable {
 
     private Controller()
     {
-        Logger.startFunctionLogComment(this, "Controler", "<<create>>");
-        Logger.endFunctionLog();
     }
 
      /**

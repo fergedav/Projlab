@@ -1,7 +1,5 @@
 package logic;
 
-import skeleton.Logger;
-
 public class Uran extends Resource {
 
     /**
@@ -20,11 +18,7 @@ public class Uran extends Resource {
     @Override
     public void callBack(Inventory inv)
     {
-        Logger.startFunctionLogComment(this, "callBack", "");
-
         inv.addUran(this);
-
-        Logger.endFunctionLog();
     }
     /**
      * Az aszteroida hívja meg és a nyersanyag végrehajtja rajta a saját reakcióját,
@@ -35,8 +29,6 @@ public class Uran extends Resource {
     @Override
 	public void reaction(Asteroid a)
     {
-        Logger.startFunctionLogComment(this, "reaction", "");
-
         exposure++;
 
         if(exposure >= 3)
@@ -44,8 +36,6 @@ public class Uran extends Resource {
             a.explosion();
             a.retrieveResource();
         }
-
-        Logger.endFunctionLog();
     }
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////

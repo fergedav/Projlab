@@ -3,8 +3,6 @@ package logic;
 import java.util.ArrayList;
 import java.util.Random;
 
-import skeleton.Logger;
-
 public class Stargate extends Orbit {
     /**
      *
@@ -34,10 +32,8 @@ public class Stargate extends Orbit {
 
     public Stargate()
     {
-        Logger.startFunctionLogComment(this, "Stargate", "<<create>>");
         stargeteController = Controller.getInstance();
         setPrefix("stargate_"+id_counter++);
-        Logger.endFunctionLog();
     }
 
     /**
@@ -46,22 +42,17 @@ public class Stargate extends Orbit {
      */
     private void dieAnother()
     {
-        Logger.startFunctionLogComment(this, "dieAnother", "");
-
         if(myStop!=null){
             myStop.removeNeighbour(this); 
             for(Traveler t : travelers) {t.die();}
         }
 
         stargeteController.stargateDie(this);
-        Logger.endFunctionLog();
     }
 
     @Override
     public void drilled()
     {
-        Logger.startFunctionLogComment(this, "drilled", "");
-        Logger.endFunctionLog();
     }
     /**
      * Átküldi az utazót a sajat myStopjára.
@@ -70,12 +61,7 @@ public class Stargate extends Orbit {
      */
     private Orbit transport(Traveler t)
     {
-        Logger.startFunctionLogComment(this, "transport", "");
-
         Orbit ret_o = myStop.addTraveler(t);
-
-        Logger.endFunctionLog();
-
         return ret_o;
     }
 
@@ -83,13 +69,9 @@ public class Stargate extends Orbit {
      * Megöli a kapu párját.
      */
     public void die()
-    {  
-        Logger.startFunctionLogComment(this, "die", "");
-
+    {
         myTwin.dieAnother();
         dieAnother();
-
-        Logger.endFunctionLog();
     }
 
     /**
@@ -98,11 +80,7 @@ public class Stargate extends Orbit {
      */
     public void entagle(Stargate other)
     {
-        Logger.startFunctionLogComment(this, "entangle", "");
-
         myTwin = other;
-
-        Logger.endFunctionLog();
     }
 
     /**
@@ -111,10 +89,6 @@ public class Stargate extends Orbit {
      */
     public boolean getPlaced()
     {
-        Logger.startFunctionLogComment(this, "getPlaced", "");
-
-        Logger.endFunctionLog();
-
         return isPlaced;
     }
 
@@ -124,14 +98,10 @@ public class Stargate extends Orbit {
      */
     public void place(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "place", "");
-
         myStop = o.addNeighbour(this);
         this.x = o.getCoords()[0];
         this.y = o.getCoords()[1];
         isPlaced = true;
-
-        Logger.endFunctionLog();
     }
     
     /**
@@ -140,22 +110,13 @@ public class Stargate extends Orbit {
      * @return Orbit az utazó érkezik. 
      */
     @Override
-    public Orbit addTraveler(Traveler t){
-        Logger.startFunctionLogComment(this, "addTraveler", "");
-        Orbit ret_o;
+    public Orbit addTraveler(Traveler t)
+    {
         if(myTwin.getPlaced()){
-            ret_o=myTwin.transport(t);
-
-            Logger.endFunctionLog();
-
-            return ret_o;
+            return myTwin.transport(t);
         }
-
-        Logger.endFunctionLog();
-
         travelers.add(t);
         return this;
-
     }
     
     /**
@@ -199,8 +160,6 @@ public class Stargate extends Orbit {
             Random r = new Random();
             n = r.nextInt(num);
         }
-        
-        Logger.endFunctionLog();
         return n;
     }
 

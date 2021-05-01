@@ -1,9 +1,7 @@
 package logic;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import skeleton.Logger;
 
 public class Settler extends Traveler {
     
@@ -20,12 +18,10 @@ public class Settler extends Traveler {
     public Settler(Orbit start)
     {
         super();
-        Logger.startFunctionLogComment(this, "Settler", "<<create>>");
         currentLocation = start.addTraveler(this);
         inventory = new Inventory(10);
         setPrefix("settler_"+id_counter++);
         Controller.getInstance().addSettler(this);
-        Logger.endFunctionLog();
     }
     /**
      * A telepes meghal. 
@@ -38,8 +34,6 @@ public class Settler extends Traveler {
     @Override
     public void die()
     {
-        Logger.startFunctionLogComment(this, "die", "");
-
         /** kitörli magát az aszteroidából. */
         currentLocation.removeTraveler(this);
 
@@ -56,8 +50,6 @@ public class Settler extends Traveler {
 
         /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy õ meghalt és kéri, hogy húzza ki az élõ telepesek listájából (a settlerDie függvénnyel) */
         controler.settlerDie(this);
-
-        Logger.endFunctionLog();
     }
     /**
      * A játékos kiválaszthat egy mûveletet(fúrhat, bányászhat, mozoghat, építhet),
@@ -72,7 +64,6 @@ public class Settler extends Traveler {
      */
     public void mining()
     {
-        Logger.startFunctionLogComment(this, "mining", "");
         /** A retrieveResource null-al tér vissza, ha teleportkapun vagy üreges aszteroidán bányásznánk, egyéb esetben pedig a bányászott nyersanyaggal. */
         Resource res = currentLocation.retrieveResource();
 
@@ -81,14 +72,12 @@ public class Settler extends Traveler {
         {
             inventory.addResource(res);
         }
-        Logger.endFunctionLog();
     }
     /**
      * Ha elegendõ nyersanyag áll a rendelkezésére, akkor létrehoz egy új robotot.
      */
     public void createRobot()
     {
-        Logger.startFunctionLogComment(this, "createRobot", "");
         /** Megkísérel a createRobot egy új robotot létrehozni. Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. */
         Robot newrobot = inventory.createRobot(currentLocation);
         
@@ -100,7 +89,6 @@ public class Settler extends Traveler {
             controler.addRobot(newrobot);
             newrobot.currentLocation = this.currentLocation;
         }
-        Logger.endFunctionLog();
     }
     /**
      * Ha van nála teleportkapu, akkor a soron következõ kaput pályára állítja az orbit körül,
@@ -108,8 +96,6 @@ public class Settler extends Traveler {
      */
     public void placeStargate()
     {
-        Logger.startFunctionLogComment(this, "placeStargate", "");
-
         if(stargates.size() > 0)
         {
             /** Elhelyezi a lista 0. indexe alatt lévõ teleportkaput a place függvénnyel, 
@@ -119,9 +105,6 @@ public class Settler extends Traveler {
             
             stargates.remove(s);
         }
-        
-        Logger.endFunctionLog();
-        
     }
 
     /** 
@@ -129,8 +112,6 @@ public class Settler extends Traveler {
      */
     public void replaceResource(String what)
     {
-        Logger.startFunctionLogComment(this, "replaceResource", "");
-
         /** Eltávolítja a removeResource a what paraméterben meghatározott nyersanyagot */
         Resource resource = inventory.removeResource(what);
         boolean replecement = false;
@@ -144,7 +125,6 @@ public class Settler extends Traveler {
              inventory.addResource(resource);
             }
         }
-        Logger.endFunctionLog();
     }
     /**
      * A telepes kezdeményezi a bázis felépítését azon az aszteroidán,
@@ -154,7 +134,6 @@ public class Settler extends Traveler {
      */
     public void createBase()
     {
-        Logger.startFunctionLogComment(this, "createBase", "");
         /** Lekéri az összes utazót a tartózkodási helyérõl és létrehoz egy inventory-t, amiben számolja, hogy elég nyersanyaga van-e összesen a lista tagjainak. */
         List<Traveler> travelers = currentLocation.getTravelers();
 
@@ -172,7 +151,6 @@ public class Settler extends Traveler {
         {
             controler.endGame();
         }
-        Logger.endFunctionLog();
     }
     /**
      * Ha jelenleg nincs vagy csak 1 darab teleportkapu van a telepesnél,
@@ -181,8 +159,6 @@ public class Settler extends Traveler {
      */
     public void createStargate()
     {
-        Logger.startFunctionLogComment(this, "createStargate", "");
-
         if(stargates.size() <= 1)
         {
             List<Stargate> newgates = inventory.createStargate();
@@ -195,8 +171,6 @@ public class Settler extends Traveler {
                 controler.addStargate(newgates.get(1));
             } 
         }
-
-        Logger.endFunctionLog();
     }
     /**
      * A telepes a robbanás során meghal, meghívja önmagára a Die() metódust.
@@ -204,9 +178,7 @@ public class Settler extends Traveler {
     @Override
     public void explosion() 
     {
-        Logger.startFunctionLogComment(this, "explosion", "");
         die();
-        Logger.endFunctionLog();
     }
     
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////

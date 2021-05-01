@@ -3,7 +3,6 @@ package grafikus;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 import java.util.List;
 
 import javax.swing.*;
@@ -65,7 +64,6 @@ public class GamePanel extends JPanel implements IDrawable{
 	@Override
 	public void Draw(Settler s)
 	{
-		//TODO j˜t˜k rajzol˜sa mindennel
 		currentSettler = s;
 		phi = (int)(Math.random() * 360);
 		repaint();

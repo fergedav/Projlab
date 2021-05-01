@@ -1,5 +1,4 @@
 package logic;
-import skeleton.Logger;
 import java.util.Random;
 
 public class Robot extends Traveler {
@@ -14,10 +13,8 @@ public class Robot extends Traveler {
     public Robot()
     {
         super();
-        Logger.startFunctionLogComment(this, "Robot", "<<create>>");
         setPrefix("robot_"+id_counter++);
         Controller.getInstance().addRobot(this);
-        Logger.endFunctionLog();
     }
     /**
      * Visszatér egy véletlen választott számmal. A robot
@@ -26,8 +23,6 @@ public class Robot extends Traveler {
      */
     private int whereTo()
     {
-        Logger.startFunctionLogComment(this, "whereTo", "");
-
         //rand = true, det = false
         int n = 0;
         if(behavior)
@@ -38,8 +33,6 @@ public class Robot extends Traveler {
             Random r = new Random();
             n = r.nextInt(num);
         }
-        
-        Logger.endFunctionLog();
         return n;
     }
 
@@ -48,10 +41,8 @@ public class Robot extends Traveler {
      */
     private void robotMoves()
     {  
-        Logger.startFunctionLogComment(this, "robotMoves", "");
         int next = whereTo();
         move(next);
-        Logger.endFunctionLog();
     }
 
     /**
@@ -60,10 +51,7 @@ public class Robot extends Traveler {
     @Override
     public void explosion()
     {
-        Logger.startFunctionLogComment(this, "explosion", "");
         robotMoves();
-        Logger.endFunctionLog();
-
     }
 
     /**
@@ -76,14 +64,9 @@ public class Robot extends Traveler {
     @Override
     public void die()
     {
-        Logger.startFunctionLogComment(this, "die", "");
-
         currentLocation.removeTraveler(this);        
 
         controler.robotDie(this);
-
-        Logger.endFunctionLog();
-
     }
 
     /**
@@ -94,15 +77,11 @@ public class Robot extends Traveler {
     @Override
     public void step()
     {
-        Logger.startFunctionLogComment(this, "step", "");
-
         if(currentLocation.getLayers()!=0){
             digging();
         }
         else
             robotMoves();
-
-        Logger.endFunctionLog();
     }
 
     //a skeleton erejéig segédfgv

@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-import skeleton.Logger;
-
 public class Inventory implements java.io.Serializable {
 
     /**
@@ -25,7 +23,6 @@ public class Inventory implements java.io.Serializable {
     private HashMap<String, ArrayList<Resource>> materials;
 
     public Inventory(int meret){
-        Logger.startFunctionLogComment(this, "Inventory", "<<create>>");
         size = meret;
 
         materials = new HashMap<String, ArrayList<Resource>>();
@@ -34,9 +31,6 @@ public class Inventory implements java.io.Serializable {
         materials.put("Carbon", new ArrayList<Resource>());
         materials.put("Iron", new ArrayList<Resource>());
         materials.put("Ice", new ArrayList<Resource>());
-
-        Logger.endFunctionLog();
-        
     }
     /** 
      * Visszaadja a tárolt nyersanyagok számát
@@ -59,12 +53,9 @@ public class Inventory implements java.io.Serializable {
      */
     public void addResource(Resource r)
     {
-        Logger.startFunctionLogComment(this, "addResource", "");
-        // TODO ez itt nem <= kene legyen?
         if(inventorySize() < size){
             r.callBack(this);
         }
-        Logger.endFunctionLog();
     }
     /**
      * Visszaad egy adott nevû nyersanyagot.
@@ -74,26 +65,21 @@ public class Inventory implements java.io.Serializable {
      */
     public Resource removeResource(String rName)
     {
-        Logger.startFunctionLogComment(this, "removeResource", "");
-
-       try{
+       try
+       {
             if(materials.get(rName).size() > 0)
             {   
                 Resource r = null;
 
-                if (materials.get(rName).size()>0)
+                if (materials.get(rName).size() > 0)
                     r = materials.get(rName).remove(0);
-
-                Logger.endFunctionLog();
-
                 return r;
             }
-       }catch(Exception e){
+       }
+       catch(Exception e)
+       {
 
        }
-
-       Logger.endFunctionLog();
-
        return null;
         
     }
@@ -108,13 +94,7 @@ public class Inventory implements java.io.Serializable {
      */
     public void addUran(Uran u)
     {
-
-        Logger.startFunctionLogComment(this, "addUran", "");
-
         materials.get("Uran").add(u);
-
-        Logger.endFunctionLog();
-
     }
     /**
      * Callback függvény az szén hozzáadásához.
@@ -125,13 +105,7 @@ public class Inventory implements java.io.Serializable {
      */
     public void addCarbon(Carbon c)
     {
-
-        Logger.startFunctionLogComment(this, "addCarbon", "");
-
         materials.get("Carbon").add(c);
-
-        Logger.endFunctionLog();
-
     }
     /**
      * Callback függvény az vas hozzáadásához.
@@ -142,13 +116,7 @@ public class Inventory implements java.io.Serializable {
      */
     public void addIron(Iron i)
     {
-
-        Logger.startFunctionLogComment(this, "addIron", "");
-
-        materials.get("Iron").add(i);      
-
-        Logger.endFunctionLog();
-        
+        materials.get("Iron").add(i);
     }
     /**
      * Callback függvény az jég hozzáadásához.
@@ -159,11 +127,7 @@ public class Inventory implements java.io.Serializable {
      */
     public void addIce(Ice i)
     {
-        Logger.startFunctionLogComment(this, "addIce", "");
-
         materials.get("Ice").add(i);     
-
-        Logger.endFunctionLog();
     }
     /**
      * 
@@ -206,14 +170,10 @@ public class Inventory implements java.io.Serializable {
      */
     public Robot createRobot(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "createRobot", "");   
-
         if(doIHave(1, 1, 1, 0))
         {
-            Logger.endFunctionLog();
             return new Robot();
         }
-        Logger.endFunctionLog();
         return null;
     }
 
@@ -228,8 +188,6 @@ public class Inventory implements java.io.Serializable {
      */
     public List<Stargate> createStargate()
     {
-        Logger.startFunctionLogComment(this, "createStargate", "");
-
         if(doIHave(1, 0, 2, 1)){
             List<Stargate> list = new ArrayList<Stargate>();
             Stargate a = new Stargate();
@@ -240,13 +198,8 @@ public class Inventory implements java.io.Serializable {
 
             list.add(a);
             list.add(b);
-
-            Logger.endFunctionLog();
-
             return list;
         }
-        Logger.endFunctionLog();
-        
         return null;
     }
 
@@ -261,12 +214,7 @@ public class Inventory implements java.io.Serializable {
      */
     public boolean createBase()
     {
-        Logger.startFunctionLogComment(this, "createBase", "");
-
         Boolean b =  doIHave(3, 3, 3, 3);
-
-        Logger.endFunctionLog();
-
         return b;
     }
     /**
@@ -278,16 +226,11 @@ public class Inventory implements java.io.Serializable {
      */
     public void addInventory(Inventory other)
     {
-        Logger.startFunctionLogComment(this, "addInventory", "");
-
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
 
         for(int i = 0; i < anyagok.length; i ++){
             materials.get(anyagok[i]).addAll(other.materials.get(anyagok[i]));
         }
-        
-        Logger.endFunctionLog();
-        
     }
 
     //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////

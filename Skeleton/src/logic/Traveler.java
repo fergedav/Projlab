@@ -1,7 +1,5 @@
 package logic;
 
-import skeleton.Logger;
-
 public abstract class Traveler implements java.io.Serializable {
 
     /**
@@ -33,11 +31,7 @@ public abstract class Traveler implements java.io.Serializable {
      */
     public void digging()
     {
-        Logger.startFunctionLogComment(this, "digging", "");
-
         currentLocation.drilled();
-
-        Logger.endFunctionLog();
     }
     /**
      * A tartózkodási helyének i-edik szomszédjára megpróbál átlépni.
@@ -46,16 +40,12 @@ public abstract class Traveler implements java.io.Serializable {
      */
     public void move(int index)
     {
-        Logger.startFunctionLogComment(this, "move", "");
-
         /** Megkeresi az index paraméterben kapott szomszédját a tartózkodási helynek. */
         Orbit destination = currentLocation.getNeighbour(index);
         /** Eltávolítja magátz eddigi tartózkodási helyérõl. */
         currentLocation.removeTraveler(this);
         /** Hozzáadja magát a célállomáshoz. */
         currentLocation = destination.addTraveler(this);
-
-        Logger.endFunctionLog();
     }
 
     /** A Settler és a Robot magának implementálja. */
@@ -67,12 +57,7 @@ public abstract class Traveler implements java.io.Serializable {
     /** Visszaadja a saját inventory-ját */
     public Inventory getInventory()
     {
-        Logger.startFunctionLogComment(this, "getInventory", "");
-
         Inventory inv = inventory;
-
-        Logger.endFunctionLog();
-        
         return inv;
     }
 
@@ -99,7 +84,6 @@ public abstract class Traveler implements java.io.Serializable {
     public void setPrefix(String s)
     {
         prefix = s;
-        //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz robot/ufo/settler
     }
     /**
      * Megadja  traveler aktuális tartozkodási helyét
