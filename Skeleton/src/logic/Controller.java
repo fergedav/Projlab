@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,52 @@ public class Controller implements java.io.Serializable {
      */
     private int sunstormTimer;
 
+
+    /**
+     * Jatek elmentese szerializalassal
+     * @param path fajl neve
+     */
+    public void saveGame(String path)
+    {
+       	try 
+		{
+            FileOutputStream fileOut = new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Controller.getInstance());
+            out.close();
+            fileOut.close();
+            System.out.printf("A palya mentése sikeres volt ide: " + path);
+        }
+		catch (IOException i) 
+		{
+            System.out.printf("A palya mentése sikertelen volt: "+ path);
+            i.printStackTrace();
+        }
+    }
+
+    /**
+     * Jatek betoltese szerializalassal
+     * @param path fajl neve
+     */
+    public void loadGame(String path)
+    {
+        Controller load;
+        try 
+		{
+            FileInputStream fileIn = new FileInputStream(path);
+         	ObjectInputStream in = new ObjectInputStream(fileIn);
+        	load = (Controller) in.readObject();
+        	in.close();
+         	fileIn.close();
+            instance = load;
+       	} 
+		catch (Exception i) 
+		{
+        	System.out.println("Betoltés sikertelen: "+path);
+         	i.printStackTrace();
+       	}
+    }
+
     /**
      * inicializ˜lja a p˜ly˜t, a maximum inventory kapacit˜st, valamint a napviharok k˜z˜tt eltel˜ id˜t.
      */
@@ -99,7 +146,7 @@ public class Controller implements java.io.Serializable {
             }
         }
 
-        //settlerek l˜trehoz˜sa
+        //settlerek letrehozasa
         for (int i = 0; i < settlerCount; i++)
         {
             //addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1))));
@@ -441,11 +488,6 @@ public class Controller implements java.io.Serializable {
         Robot.id_counter = 0;
         Ufo.id_counter = 0;
         return instance;
-    }
-
-    public static void LoadController(Controller c)
-    {
-        instance = c;
     }
 
     /// Singleton ends here

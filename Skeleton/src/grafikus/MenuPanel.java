@@ -13,10 +13,8 @@ import logic.Resource;
 import logic.Settler;
 import logic.Stargate;
 
-import java.awt.Component;
 import java.awt.Font;
 
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
@@ -35,7 +33,6 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	private	JTextPane textPaneSettlerInfo;	
 	private	JButton btnSave;		
 	private	JButton btnLoad;
-	private Settler currentSettler;
 
 	/**
 	 * Create the panel.
@@ -145,7 +142,14 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 			Controller.getNewControler();
 			Controller.getInstance().startGame();
 		}
-		
+		if(e.getSource() == btnSave)
+		{
+			Controller.getInstance().saveGame(textFieldSave.getText());
+		}
+		if(e.getSource() == btnLoad)
+		{
+			Controller.getInstance().loadGame(Load.getText());
+		}
 	}
 
 	public void setOrbitInfo(Orbit o)
@@ -201,7 +205,6 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	}
 	@Override
 	public void Draw(Settler s) {
-		currentSettler = s;
 		setSettlerInfo(s);
 		setOrbitInfo(s.getcurrentLocation());
 	}
