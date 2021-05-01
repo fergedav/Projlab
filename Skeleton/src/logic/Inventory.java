@@ -165,14 +165,14 @@ public class Inventory implements java.io.Serializable {
      * Ha van elegendõ nyersanyag az osztályban, létrehoz egy robotot és
      *  visszatér vele, a felhasznált nyersanyagot törli, egyébként null-t ad vissza.
      * 
-     * @param o -nem használt.
+     * @param o kezdõ helye a robotnak ha sikeres a készítés
      * @return vagy a étrehozott robot, vagy null.
      */
     public Robot createRobot(Orbit o)
     {
         if(doIHave(1, 1, 1, 0))
         {
-            return new Robot();
+            return new Robot(o);
         }
         return null;
     }
@@ -232,9 +232,6 @@ public class Inventory implements java.io.Serializable {
             materials.get(anyagok[i]).addAll(other.materials.get(anyagok[i]));
         }
     }
-
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public int getNumOfUran(){
         return materials.get("Uran").size();
     }
@@ -247,18 +244,4 @@ public class Inventory implements java.io.Serializable {
     public int getNumOfCarbon(){
         return materials.get("Carbon").size();
     }
-    public HashMap<String, ArrayList<Resource>> getFullList() { return materials; }
-    
-    public List<Stargate> giveFreeStargates()
-    {
-        List<Stargate> list = new ArrayList<Stargate>();
-        Stargate a = new Stargate();
-        Stargate b = new Stargate();
-        a.entagle(b);
-        b.entagle(a);
-        list.add(a);
-        list.add(b);
-        return list;
-    }
-
 }
