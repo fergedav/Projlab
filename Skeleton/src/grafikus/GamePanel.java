@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.*;
 
 import logic.Asteroid;
+import logic.Controller;
 import logic.Orbit;
 import logic.Resource;
 import logic.Robot;
@@ -182,6 +183,8 @@ public class GamePanel extends JPanel implements IDrawable{
 			return;
 
         drawOrbits(g, currentSettler.getcurrentLocation());
+		int rounds = Controller.getInstance().getSunstormTime();
+		g.drawString(rounds == 0 ? "Sunstorm arrived!" : "Sunstorm in " + rounds + " rounds.", 10, 20);
     }
 	
 }
