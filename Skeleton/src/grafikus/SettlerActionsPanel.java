@@ -160,7 +160,7 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 		}
 		if(e.getSource() == btnSettlerMove)
 		{
-			currentSettler.move(comboBoxReplaceResource.getSelectedIndex());
+			currentSettler.move(comboBoxSettlerMove.getSelectedIndex());
 			Controller.getInstance().NextSetller();
 		}
 		
@@ -170,7 +170,7 @@ public class SettlerActionsPanel extends JPanel implements ActionListener, IDraw
 	public void Draw(Settler s) {
 		currentSettler = s;
 		comboBoxSettlerMove.removeAllItems();
-		List<Orbit> n = s.getcurrentLocation().getNeighborList();
+		List<Orbit> n = currentSettler.getcurrentLocation().getNeighborList();
 		for (Orbit o : n) {
 			comboBoxSettlerMove.addItem(o);
 		}

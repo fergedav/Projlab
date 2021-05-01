@@ -102,13 +102,19 @@ public class Controller implements java.io.Serializable {
         //settlerek l˜trehoz˜sa
         for (int i = 0; i < settlerCount; i++)
         {
-            addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+            //addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+
+             //kontruktorban hozzáadja magát a listához
+            new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1)));
         }
 
         //Ufok gener˜l˜sa
         for (int i = 0; i < ufoCount; i++)
         {
-            addUfo(new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+            //addUfo(new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+
+            //kontruktorban hozzáadja magát a listához
+            new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1)));
         }
     }
 

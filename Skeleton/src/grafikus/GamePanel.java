@@ -184,6 +184,7 @@ public class GamePanel extends JPanel implements IDrawable{
 
         drawOrbits(g, currentSettler.getcurrentLocation());
 		int rounds = Controller.getInstance().getSunstormTime();
+		g.setColor(Color.WHITE);
 		g.drawString(rounds == 0 ? "Sunstorm arrived!" : "Sunstorm in " + rounds + " rounds.", 10, 20);
     }
 	
