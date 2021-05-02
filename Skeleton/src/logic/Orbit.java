@@ -188,9 +188,6 @@ public abstract class Orbit implements java.io.Serializable {
 
     public int numOfNeighbor()
     {   
-        //ezt nem kell logolni.
-        //Logger.startFunctionLogComment(this, "numOfNeighbor", "");
-        //Logger.endFunctionLog();L
         return neighbours.size();
     }
     
