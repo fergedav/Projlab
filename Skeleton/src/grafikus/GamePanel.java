@@ -68,7 +68,7 @@ public class GamePanel extends JPanel implements IDrawable{
 	public void Draw(Settler s)
 	{
 		currentSettler = s;
-		phi = (int)(Math.random() * 360);
+		phi =  1; //(int)(Math.random() * 360);
 		repaint();
 	}
 

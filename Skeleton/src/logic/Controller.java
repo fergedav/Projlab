@@ -469,13 +469,14 @@ public class Controller implements java.io.Serializable {
      */
     public void NextSetller()
     {
-        UI.Draw(settlers.get(settlerCounter));
-        settlerCounter++;
         if( settlerCounter >= settlers.size())
         {
             step();
             settlerCounter = 0;
         }
+        UI.Draw(settlers.get(settlerCounter));
+        settlerCounter++;
+        
     }
 
     public void endGame() 
