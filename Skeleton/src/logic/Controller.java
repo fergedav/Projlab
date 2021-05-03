@@ -19,7 +19,7 @@ public class Controller implements java.io.Serializable {
     /**
      * Lekérdezhetõ játék állapot
      */
-    enum GameState
+    public enum GameState
     {
         NotStarted, // Controller létrejöttekor, alapkérték
         Running, //ha a játék elindult, startGame()
@@ -142,9 +142,9 @@ public class Controller implements java.io.Serializable {
 
         int asteroidCount = 100;
         int settlerCount = 1;
-        int ufoCount = 1;
+        int ufoCount = 0;
 
-        //aszteroidák gener˜l˜sa
+        //aszteroidák generálása
         for (int i = 0; i < asteroidCount; i++) 
         {
             

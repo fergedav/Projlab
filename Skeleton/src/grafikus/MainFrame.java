@@ -28,7 +28,7 @@ public class MainFrame extends JFrame implements IDrawable{
 		gamepanel = new GamePanel();
 		
 		setBackground(Color.BLUE);
-		setTitle("Demo Asteroid Controlls");
+		setTitle("Asteroids");
 		setPreferredSize(new Dimension(1000, 800));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

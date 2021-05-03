@@ -132,7 +132,6 @@ public class Settler extends Traveler {
 
         Inventory inventoryforbase = new Inventory(10000);
 
-
         /** Hozzáadja a travelers tagjainak az inventoriait az inventoryforbase-hez. */
         for(int i = 0; i < travelers.size(); i++)
         {

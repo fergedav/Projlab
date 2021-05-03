@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.util.List;
 
 import javax.swing.*;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 import logic.Asteroid;
 import logic.Controller;
@@ -14,6 +16,7 @@ import logic.Resource;
 import logic.Robot;
 import logic.Settler;
 import logic.Traveler;
+import logic.Controller.GameState;
 
 public class GamePanel extends JPanel implements IDrawable{
 
@@ -176,6 +179,29 @@ public class GamePanel extends JPanel implements IDrawable{
     public void paintComponent(Graphics g) 
 	{
     	super.paintComponent(g);
+
+		if(Controller.getInstance().getGameState() == GameState.Lost)
+		{
+			Font f = new Font("Arial", Font.PLAIN, 32);
+			g.setColor(Color.RED);
+			Font old = g.getFont();
+			g.setFont(f);
+			FontMetrics m = g.getFontMetrics(f);
+			g.drawString("GAME OVER", (getWidth() - m.stringWidth("GAME OVER")) / 2,( getHeight() - m.getHeight()) / 2 );
+			g.setFont(old);
+			return;
+		}
+		else if(Controller.getInstance().getGameState() == GameState.Won)
+		{
+			Font f = new Font("Arial", Font.PLAIN, 32);
+			g.setColor(Color.GREEN);
+			Font old = g.getFont();
+			g.setFont(f);
+			FontMetrics m = g.getFontMetrics(f);
+			g.drawString("YOU WON!", (getWidth() - m.stringWidth("YOU WON!")) / 2,( getHeight() - m.getHeight()) / 2 );
+			g.setFont(old);
+			return;
+		}
 
 		if(currentSettler == null)
 			return;

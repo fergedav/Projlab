@@ -12,6 +12,7 @@ import logic.Orbit;
 import logic.Resource;
 import logic.Settler;
 import logic.Stargate;
+import logic.Controller.GameState;
 
 import java.awt.Font;
 
@@ -24,8 +25,6 @@ import java.awt.event.ActionEvent;
 public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	private JTextField textFieldSave;
 	private JTextField Load;
-	private JButton btnStartGame;
-	private	JButton btnEndGame;	
 	private	JButton btnNewGame;
 	private	JLabel lblCurrentLocationInfo;	
 	private	JTextPane textPaneCurrentLocationInfo;
@@ -41,17 +40,9 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		
 		Font f = new Font("Arial", Font.PLAIN, 16);
 
-		btnStartGame = new JButton("Start Game");
-		btnStartGame.addActionListener(this);
-
-
-		btnEndGame = new JButton("End Game");
-		btnEndGame.addActionListener(this);
-
-
 		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(this);
-
+		btnNewGame.setFont(f);
 
 		lblCurrentLocationInfo = new JLabel("Current Location Info:");
 		lblCurrentLocationInfo.setFont(f);
@@ -96,11 +87,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 										.addComponent(textFieldSave, GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)))
 								.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.TRAILING, false)
 									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-										.addComponent(btnStartGame)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnEndGame, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+										.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
 									.addComponent(lblSettlerInfo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 									.addComponent(textPaneCurrentLocationInfo, Alignment.LEADING)
 									.addComponent(textPaneSettlerInfo, Alignment.LEADING)))
@@ -109,19 +96,17 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(34)
+					.addGap(10)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnStartGame)
-						.addComponent(btnEndGame)
-						.addComponent(btnNewGame))
+						.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(lblCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textPaneCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textPaneCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
 					.addGap(39)
 					.addComponent(lblSettlerInfo)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textPaneSettlerInfo, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textPaneSettlerInfo, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSave)
@@ -136,13 +121,15 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnStartGame)
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == btnNewGame)
 		{
 			Controller.getNewControler();
 			Controller.getInstance().startGame();
 		}
-		if(e.getSource() == btnSave)
+		if(e.getSource() == btnSave && 
+			Controller.getInstance().getGameState() == GameState.Running)
 		{
 			Controller.getInstance().saveGame(textFieldSave.getText());
 		}
