@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements IDrawable{
 		Image orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
 
 			g.drawImage(orbitImage,
-					x, y,96,96, this);
+					x, y,spriteSize,spriteSize, this);
 			
 			g.setColor(Color.WHITE);
 			g.drawString(o.getPrefix(), x, y-4);
@@ -122,7 +122,6 @@ public class GamePanel extends JPanel implements IDrawable{
 
 	private void drawOrbits(Graphics g, Orbit o)
 	{
-		//Image orbitImage = (o.getClass() == Asteroid.class) ? asteroidImage : stargateImage;
 		int xc = getWidth() / 2 - spriteSize / 2;
 		int yc = getHeight() / 2 - spriteSize / 2;
 
