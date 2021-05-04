@@ -140,8 +140,8 @@ public class Controller implements java.io.Serializable {
     {
         sunstormTimer = sunstormTime;
 
-        int asteroidCount = 100;
-        int settlerCount = 1;
+        int asteroidCount = 3;
+        int settlerCount = 2;
         int ufoCount = 0;
 
         //aszteroidák generálása
@@ -469,14 +469,36 @@ public class Controller implements java.io.Serializable {
      */
     public void NextSetller()
     {
-        if( settlerCounter >= settlers.size())
-        {
-            step();
-            settlerCounter = 0;
+        //kovetkezõ meghatározása: megkeressük az elsõt aki még nem lépett. //jó ez? break? TODO biztosra menni.
+        Settler TheChosenOne = null;
+        settlerCounter = 0;
+
+        boolean WeGotSomebodyToStep = false;
+        for (Settler s : settlers) {
+            if(!s.getHasStepped()){
+                TheChosenOne = s;
+                WeGotSomebodyToStep = true;
+                break;
+            }
         }
-        UI.Draw(settlers.get(settlerCounter));
-        settlerCounter++;
-        
+        // ha már mindenki lépett, reseteljük a settlereket, és léptetjük a pályát.
+        if (!WeGotSomebodyToStep){
+            for (Settler s : settlers) {
+                s.InvertHasStepped();
+            }           
+            step();
+            
+            //lista lehet üres, mert mindenki meghalt a step után
+            if(settlers.size() > 0){
+            TheChosenOne = settlers.get(0);
+            }
+        }
+
+        // ezen a ponton, ha a TheChosenOne == null, akkor a játék véget ért, és a gameStatus = GameStatus.Lost kell legyen!!
+        // Ha a TheChosenOne == null, de a játk nem ért véget, akkor tuti kiakadás jön a grafikus résznél.
+        if(TheChosenOne != null)
+        TheChosenOne.InvertHasStepped();
+        UI.Draw(TheChosenOne);
     }
 
     public void endGame() 

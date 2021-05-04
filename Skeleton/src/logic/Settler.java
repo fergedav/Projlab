@@ -6,6 +6,22 @@ import java.util.List;
 public class Settler extends Traveler {
     
     /**
+     * Azt jelzi hogy a settler lépett-e már egy körben.
+     *  
+     */ 
+    private boolean hasStepped = false;
+    /**
+     * Invertálja a HasStepped értékét.
+     */
+    public void InvertHasStepped(){ hasStepped = !hasStepped;}
+    /**
+     * Visszatér a HasStepped értékével.
+     * 
+     * @return A telepes HasStepped értéke.
+     */
+    public boolean getHasStepped(){ return hasStepped; } 
+
+    /**
 	 *
 	 */
 	private static final long serialVersionUID = 1002966729770761380L;

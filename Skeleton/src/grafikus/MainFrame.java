@@ -49,6 +49,11 @@ public class MainFrame extends JFrame implements IDrawable{
 
 	@Override
 	public void Draw(Settler s) {
+		if (s == null){
+			gamepanel.Draw(s);
+			return;
+		}
+
 		currentSettler = s;
 		menupanel.Draw(s);
 		gamepanel.Draw(s);

@@ -180,7 +180,8 @@ public class GamePanel extends JPanel implements IDrawable{
 	{
     	super.paintComponent(g);
 
-		if(Controller.getInstance().getGameState() == GameState.Lost)
+		if((Controller.getInstance().getGameState() == GameState.Lost) ||
+		 (currentSettler == null && Controller.getInstance().getGameState() != GameState.NotStarted))
 		{
 			Font f = new Font("Arial", Font.PLAIN, 32);
 			g.setColor(Color.RED);
