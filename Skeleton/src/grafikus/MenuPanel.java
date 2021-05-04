@@ -50,12 +50,14 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 		
 		textPaneCurrentLocationInfo = new JTextPane();
 		textPaneCurrentLocationInfo.setFont(f);
+		textPaneCurrentLocationInfo.setEditable(false);
 		
 		lblSettlerInfo = new JLabel("Settler Info:");
 		lblSettlerInfo.setFont(f);
 		
 		textPaneSettlerInfo = new JTextPane();
 		textPaneSettlerInfo.setFont(f);
+		textPaneSettlerInfo.setEditable(false);
 		
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(this);
@@ -64,6 +66,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 
 		textFieldSave = new JTextField();
 		textFieldSave.setColumns(10);
+		
 
 		textSettlerCount = new JTextField();
 		textFieldSave.setColumns(10);
