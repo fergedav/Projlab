@@ -152,7 +152,7 @@ public class GamePanel extends JPanel implements IDrawable{
 	{
 		List<Traveler> travelers = o.getTravelers();
 		int j = 0;
-		for (int i = 0; i < Math.min(travelers.size(), 8); i++)
+		for (int i = 0; i < Math.min(travelers.size(), 9); i++)
 		{
 			//középsõ hely kihagyása a nyersanyagnak
 			if(i == 4)

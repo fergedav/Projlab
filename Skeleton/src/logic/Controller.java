@@ -82,10 +82,7 @@ public class Controller implements java.io.Serializable {
      * Felület ami felelõs a grafikus megjelenítésért
      */
     private static IDrawable UI;
-    /**
-     * számláló ami számon tartja hogy az adott körbe melyik settler van épp soron
-     */
-    private int settlerCounter = 0;
+
     
     /**
      * Jatek elmentese szerializalassal
@@ -136,12 +133,12 @@ public class Controller implements java.io.Serializable {
     /**
      * inicializálja a plyát, a maximum inventory kapacitást, valamint a napviharok között eltelõ idõt.
      */
-    public void initGame()
+    public void initGame(int settlercount)
     {
         sunstormTimer = sunstormTime;
 
         int asteroidCount = 3;
-        int settlerCount = 2;
+        int settlerCount = settlercount;
         int ufoCount = 0;
 
         //aszteroidák generálása
@@ -240,12 +237,12 @@ public class Controller implements java.io.Serializable {
     /**
      * Elindítja a játékot
      */
-    public void startGame()
+    public void startGame(int settlercount)
     {
         //Játék állapot változtatása
         gameState = GameState.Running;
         //pálya felépítése
-        initGame();
+        initGame(settlercount);
         //Gép vezérelt elemek léptetése
         step();
         //settler rajzolása
@@ -469,10 +466,7 @@ public class Controller implements java.io.Serializable {
      */
     public void NextSetller()
     {
-        //kovetkezõ meghatározása: megkeressük az elsõt aki még nem lépett. //jó ez? break? TODO biztosra menni.
         Settler TheChosenOne = null;
-        settlerCounter = 0;
-
         boolean WeGotSomebodyToStep = false;
         for (Settler s : settlers) {
             if(!s.getHasStepped()){

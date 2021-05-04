@@ -26,6 +26,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	private JTextField textFieldSave;
 	private JTextField Load;
 	private	JButton btnNewGame;
+	private	JTextField textSettlerCount;
 	private	JLabel lblCurrentLocationInfo;	
 	private	JTextPane textPaneCurrentLocationInfo;
 	public	JLabel lblSettlerInfo;	
@@ -63,6 +64,10 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 
 		textFieldSave = new JTextField();
 		textFieldSave.setColumns(10);
+
+		textSettlerCount = new JTextField();
+		textFieldSave.setColumns(10);
+		textSettlerCount.setText("Settler Count");
 		
 		Load = new JTextField();
 		Load.setColumns(10);
@@ -88,6 +93,7 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 								.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.TRAILING, false)
 									.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 										.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+										.addComponent(textSettlerCount, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblSettlerInfo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 									.addComponent(textPaneCurrentLocationInfo, Alignment.LEADING)
 									.addComponent(textPaneSettlerInfo, Alignment.LEADING)))
@@ -98,8 +104,9 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(10)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addGap(9)
+					.addComponent(textSettlerCount, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 					.addComponent(lblCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textPaneCurrentLocationInfo, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
@@ -125,8 +132,14 @@ public class MenuPanel extends JPanel implements ActionListener, IDrawable {
 	{
 		if(e.getSource() == btnNewGame)
 		{
-			Controller.getNewControler();
-			Controller.getInstance().startGame();
+			try 
+			{
+				int num = Integer.parseInt(textSettlerCount.getText());
+				Controller.getNewControler();
+				Controller.getInstance().startGame(num);
+			} 
+			catch (NumberFormatException ex) 
+			{}
 		}
 		if(e.getSource() == btnSave && 
 			Controller.getInstance().getGameState() == GameState.Running)
