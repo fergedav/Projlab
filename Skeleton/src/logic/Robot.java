@@ -1,5 +1,4 @@
 package logic;
-import skeleton.Logger;
 import java.util.Random;
 
 public class Robot extends Traveler {
@@ -8,36 +7,30 @@ public class Robot extends Traveler {
      *
      */
     private static final long serialVersionUID = -3138426053591207283L;
-
-    public Robot()
+    /**
+     * Konstruktor
+     */
+    public Robot(Orbit start)
     {
         super();
-        Logger.startFunctionLogComment(this, "Robot", "<<create>>");
-        setPrefix("robot_"+id_counter++);
+        prefix = "robot_"+id_counter++;
         Controller.getInstance().addRobot(this);
-        Logger.endFunctionLog();
+
+        currentLocation = start.addTraveler(this);
     }
     /**
      * Visszatér egy véletlen választott számmal. A robot
      * erre az idexû aszteroidára lép majd át.
-     * @return
+     * @return választott sorszámú aszteroida a listából
      */
     private int whereTo()
     {
-        Logger.startFunctionLogComment(this, "whereTo", "");
-
-        //rand = true, det = false
         int n = 0;
-        if(behavior)
-        {
-            int num = currentLocation.numOfNeighbor();
-            if(num == 0) 
-                return 0;
-            Random r = new Random();
-            n = r.nextInt(num);
-        }
-        
-        Logger.endFunctionLog();
+        int num = currentLocation.numOfNeighbor();
+        if(num == 0) 
+            return 0;
+        Random r = new Random();
+        n = r.nextInt(num);
         return n;
     }
 
@@ -46,10 +39,8 @@ public class Robot extends Traveler {
      */
     private void robotMoves()
     {  
-        Logger.startFunctionLogComment(this, "robotMoves", "");
         int next = whereTo();
         move(next);
-        Logger.endFunctionLog();
     }
 
     /**
@@ -58,10 +49,7 @@ public class Robot extends Traveler {
     @Override
     public void explosion()
     {
-        Logger.startFunctionLogComment(this, "explosion", "");
         robotMoves();
-        Logger.endFunctionLog();
-
     }
 
     /**
@@ -74,14 +62,9 @@ public class Robot extends Traveler {
     @Override
     public void die()
     {
-        Logger.startFunctionLogComment(this, "die", "");
-
         currentLocation.removeTraveler(this);        
 
         controler.robotDie(this);
-
-        Logger.endFunctionLog();
-
     }
 
     /**
@@ -92,43 +75,16 @@ public class Robot extends Traveler {
     @Override
     public void step()
     {
-        Logger.startFunctionLogComment(this, "step", "");
-
-        if(currentLocation.getLayers()!=0){
+        if(currentLocation.getLayers() != 0)
+        {
             digging();
         }
         else
             robotMoves();
-
-        Logger.endFunctionLog();
     }
 
-    //a skeleton erejéig segédfgv
-    public void setLocation(Orbit o){
-        currentLocation = o;
-    }
-    
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
- /**
-     * Determinisztikus - random viselkedes
-     * rand = true, det = false
-     */
-    private boolean behavior;
     /**
-     * Determinisztikus - random viselkedeshez
-     *  rand = true, det = false
+     * Id -ja a robotnak
      */
-    public void setBehavior(boolean det_rand)
-    {
-        behavior = det_rand;
-    }
-
-    public void robotInfo(){
-        System.out.println(
-            "RobotId: "+ this.prefix+" Location: "+ currentLocation.getPrefix()
-        );
-    }
-
     public static int id_counter = 0;
 }

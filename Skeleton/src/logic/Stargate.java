@@ -3,25 +3,37 @@ package logic;
 import java.util.ArrayList;
 import java.util.Random;
 
-import skeleton.Logger;
-
 public class Stargate extends Orbit {
     /**
      *
      */
     private static final long serialVersionUID = -6397383425201864620L;
+    /**
+     * A stargate párja, amivel össze van kötve.
+     */
     private Stargate myTwin;
+    /**
+     * Megmondja, hogy le van-e helyezve a stargate
+     */
     private boolean isPlaced;
+    /**
+     * A stargatehez tartozó aszteroida
+     */
     private Orbit myStop;
+    /**
+     * Ha a stargatet napvihar éri, ez a változó igaz értéket kap.
+     * Ha az értéke igaz, elkezd bolyongani az aszteroidák között.
+     */
     private boolean beCrazy = false;
+    /**
+     * A játékot irányító controller
+     */
     public static Controller stargeteController;
 
     public Stargate()
     {
-        Logger.startFunctionLogComment(this, "Stargate", "<<create>>");
         stargeteController = Controller.getInstance();
-        setPrefix("stargate_"+id_counter++);
-        Logger.endFunctionLog();
+        prefix = "stargate_"+id_counter++;
     }
 
     /**
@@ -30,22 +42,17 @@ public class Stargate extends Orbit {
      */
     private void dieAnother()
     {
-        Logger.startFunctionLogComment(this, "dieAnother", "");
-
         if(myStop!=null){
             myStop.removeNeighbour(this); 
             for(Traveler t : travelers) {t.die();}
         }
 
         stargeteController.stargateDie(this);
-        Logger.endFunctionLog();
     }
 
     @Override
     public void drilled()
     {
-        Logger.startFunctionLogComment(this, "drilled", "");
-        Logger.endFunctionLog();
     }
     /**
      * Átküldi az utazót a sajat myStopjára.
@@ -54,12 +61,7 @@ public class Stargate extends Orbit {
      */
     private Orbit transport(Traveler t)
     {
-        Logger.startFunctionLogComment(this, "transport", "");
-
         Orbit ret_o = myStop.addTraveler(t);
-
-        Logger.endFunctionLog();
-
         return ret_o;
     }
 
@@ -67,13 +69,9 @@ public class Stargate extends Orbit {
      * Megöli a kapu párját.
      */
     public void die()
-    {  
-        Logger.startFunctionLogComment(this, "die", "");
-
+    {
         myTwin.dieAnother();
         dieAnother();
-
-        Logger.endFunctionLog();
     }
 
     /**
@@ -82,11 +80,7 @@ public class Stargate extends Orbit {
      */
     public void entagle(Stargate other)
     {
-        Logger.startFunctionLogComment(this, "entangle", "");
-
         myTwin = other;
-
-        Logger.endFunctionLog();
     }
 
     /**
@@ -95,10 +89,6 @@ public class Stargate extends Orbit {
      */
     public boolean getPlaced()
     {
-        Logger.startFunctionLogComment(this, "getPlaced", "");
-
-        Logger.endFunctionLog();
-
         return isPlaced;
     }
 
@@ -108,14 +98,10 @@ public class Stargate extends Orbit {
      */
     public void place(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "place", "");
-
         myStop = o.addNeighbour(this);
         this.x = o.getCoords()[0];
         this.y = o.getCoords()[1];
         isPlaced = true;
-
-        Logger.endFunctionLog();
     }
     
     /**
@@ -124,22 +110,13 @@ public class Stargate extends Orbit {
      * @return Orbit az utazó érkezik. 
      */
     @Override
-    public Orbit addTraveler(Traveler t){
-        Logger.startFunctionLogComment(this, "addTraveler", "");
-        Orbit ret_o;
+    public Orbit addTraveler(Traveler t)
+    {
         if(myTwin.getPlaced()){
-            ret_o=myTwin.transport(t);
-
-            Logger.endFunctionLog();
-
-            return ret_o;
+            return myTwin.transport(t);
         }
-
-        Logger.endFunctionLog();
-
         travelers.add(t);
         return this;
-
     }
     
     /**
@@ -175,19 +152,19 @@ public class Stargate extends Orbit {
     private int whereTo()
     {
         int n = 0;
-        if(behavior)
-        {
-            int num = myStop.numOfNeighbor();
-            if(num == 0) 
-                return 0;
-            Random r = new Random();
-            n = r.nextInt(num);
-        }
+        int num = myStop.numOfNeighbor();
+
+        if(num == 0) 
+            return 0;
         
-        Logger.endFunctionLog();
+        Random r = new Random();
+        n = r.nextInt(num);
         return n;
     }
 
+    /**
+     * A napvihar erkezéséért felelõs, paraméterként kapja 2 koordinátát, ezen belûl hív napvihart
+     */
     @Override
     public void sunstormArrive(int[] coords )
     {
@@ -209,12 +186,21 @@ public class Stargate extends Orbit {
         
     }
 
+    /**
+     * Ha a stargatehez hozzáadnak egy szomszédot, az
+     * automatikusan az õ aszteroidájához adódik hozzá
+     * @return az aszteroidához újonnan hozzáadott szomszéd
+     */
     @Override
     public Orbit addNeighbour(Orbit o)
     {
         return myStop.addNeighbour(o);
     }
 
+    /**
+     * Ha a paraméterben kapott érték 0, visszaadja az aszteroidáját, ha más, akkor önmagát.
+     * @return a stargate aszteroidája
+     */
     @Override
     public Orbit getNeighbour(int i)
     {
@@ -223,40 +209,32 @@ public class Stargate extends Orbit {
         else return this;
     }
     
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Determinisztikus - random viselkedes
-     */
-    private boolean behavior;
-    /**
-     * Determinisztikus - random viselkedeshez
-     * setter
-     */
-    public void setBehavior(boolean det_rand)
-    {
-        behavior = det_rand;
-    }
     /**
      * Visszater az aktualis helyevel (orbit)
      * @return Orbit myStop
      */
-    public Orbit getMyStop(){
+    public Orbit getMyStop()
+    {
         return myStop;
     }
     /**
      * Visszater a kapu parjaval
      * @return Stargate myTwin
      */
-    public Stargate getMyTwin(){
+    public Stargate getMyTwin()
+    {
         return myTwin;
     }
     /**
      * Visszater hogy a kapu megorult-e?
      * @return boolean beCrazy
      */
-    public boolean getCrazy(){
+    public boolean getCrazy()
+    {
         return beCrazy;
     }
-
+    /**
+     * a tesztesetekben megjelenenõ prefixhez szükséges id(controller szerinti szám)
+     */
     public static int id_counter = 0;
 }

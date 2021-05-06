@@ -3,20 +3,42 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import skeleton.Logger;
-
 public abstract class Orbit implements java.io.Serializable {
     /**
      *
      */
     private static final long serialVersionUID = 8842665086008545927L;
+    /**
+     * szomszédokat tartalmazó lista
+     */
     protected List<Orbit> neighbours;
+    /**
+     * a rajta álló travelereket tartalmazó lista
+     */
     protected List<Traveler> travelers;
+    /**
+     * megmondja, hogy az orbit napfényben van-e.
+     */
     protected boolean inLight = false;
+    /**
+     * az orbit kérge
+     */
     protected int layers = 0;
+    /**
+     * az orbit x koordinátája
+     */
     protected int x; 
+    /**
+     * az orbit y koordinátája
+     */
     protected int y;
-
+    /**
+     * prefix az adott orbit azonosítására
+     */
+    String prefix;
+    /**
+    * konstruktor, létrehozza a szomszédok, és travelerek listáját.
+    */
     protected Orbit() {
         neighbours = new ArrayList<Orbit>();
         travelers = new ArrayList<Traveler>();
@@ -31,9 +53,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Orbit addTraveler(Traveler t)
     {
-        Logger.startFunctionLogComment(this, "addTraveler", "");
         travelers.add(t);
-        Logger.endFunctionLog();
         return this;
     }
 
@@ -44,8 +64,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public List<Traveler> getTravelers()
     {
-        Logger.startFunctionLogComment(this, "getTravelers", "");
-        Logger.endFunctionLog();
         return travelers;
     }
 
@@ -55,9 +73,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public void removeTraveler(Traveler t)
     {
-        Logger.startFunctionLogComment(this, "removeTraveler", "");
         travelers.remove(t);
-        Logger.endFunctionLog();
     }
 
     /**
@@ -66,9 +82,7 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Orbit addNeighbour(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "addNeighbour", "");
         neighbours.add(o);
-        Logger.endFunctionLog();
         return this;
     }
 
@@ -78,11 +92,8 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public void removeNeighbour(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "removeNeighbour", "");
         neighbours.remove(o);
-        Logger.endFunctionLog();
     }
-
 
     /**
      * Visszatér az orbit i-edik szomszédjával. Ha i-edik szomszéd nem létezik null-t ad vissza.
@@ -91,14 +102,13 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Orbit getNeighbour(int i)
     {
-        Logger.startFunctionLogComment(this, "getNeighbour", "");
-
-        try {
+        try 
+        {
             Orbit o = neighbours.get(i);
-            Logger.endFunctionLog();
             return o;
-        } catch (Exception e) {
-            Logger.endFunctionLog();
+        } 
+        catch (Exception e) 
+        {
             return this;
         }
 
@@ -113,8 +123,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public Resource retrieveResource()
     {
-        Logger.startFunctionLogComment(this, "retrieveResource", "");
-        Logger.endFunctionLog();
         return null;
     }
 
@@ -125,8 +133,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public boolean putResource(Resource r)
     {
-        Logger.startFunctionLogComment(this, "putResource", "");
-        Logger.endFunctionLog();
         return false;
     }
 
@@ -135,8 +141,6 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public void sunstormArrive(int[] coords )
     {
-        Logger.startFunctionLogComment(this, "sunstormArrive", "");
-        
         if(!(
             coords[0] <= x &&
             coords[1] <= y &&
@@ -179,21 +183,14 @@ public abstract class Orbit implements java.io.Serializable {
      */
     public int getLayers()
     {
-        Logger.startFunctionLogComment(this, "getLayers", "");
-        Logger.endFunctionLog();
         return layers;
     }
 
     public int numOfNeighbor()
     {   
-        //ezt nem kell logolni.
-        //Logger.startFunctionLogComment(this, "numOfNeighbor", "");
-        //Logger.endFunctionLog();L
         return neighbours.size();
     }
     
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * Visszadja az orbit koordinantatit 
      * x,y kooridnata
@@ -211,9 +208,8 @@ public abstract class Orbit implements java.io.Serializable {
     public boolean getLight()
     {
         return inLight;
-    }
-    // perfix
-    String prefix;
+    }    
+
     /**
      * Visszater az adott Orbithoz tartozo prefixxel
      * @return String prefix
@@ -222,15 +218,31 @@ public abstract class Orbit implements java.io.Serializable {
     {
         return prefix;
     }
+
     /**
-     * Módosítja a prefixet a parameterben kapott stringgel.
-     * @param s prefix uj erteke
+     * alapértelmezett getter, az asteroid overrideolja
+     * @return null
      */
-    public void setPrefix(String s)
+    public Resource getCore()
     {
-        prefix = s;
-        //TODO Controllerben beírni megfelleõ perixet, amikor hozzaadja a listahoz stargate/asteroid
+        return null;
     }
 
-    public Resource getCore() {return null;}
+    /**
+     * Egy másolt lista az Orbit szomszédairól
+     * @return a lista
+     */
+    public List<Orbit> getNeighborList()
+    {
+        return new ArrayList<Orbit>(neighbours);
+    }
+
+    /**
+     * kell a comboBox megjelenítéshez
+     */
+    @Override
+    public String toString()
+    {
+        return prefix;
+    }
 }

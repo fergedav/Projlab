@@ -1,20 +1,36 @@
 package logic;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import skeleton.Logger;
+import grafikus.IDrawable;
 
+
+/**
+ * Az Objektum felelõssége a játékmenetet vezérelni. Õ tartja számon a teljes pálya objektumait, és azokat amelyeket kell, lépteti õket körönként,. Inicializálja, elindítja futtatja és megfelelõ körülmények esetén leállítja a játékot. 
+ * Õ hív napvihart és napfényt, az aszteroidákra, stargatekre, õ hívja meg a robotok, ufók, stargatek és telepesek lépéseit.
+ * Ha minden settler meghal befejezi a játékot.
+ */
 public class Controller implements java.io.Serializable {
-    /**
-	 *
-	 */
+
 	private static final long serialVersionUID = -425692066249723082L;
 
-	/**
-     * folyamatban van e a jatek
+    /**
+     * Lekérdezhetõ játék állapot
      */
-    private boolean gameIsOn = false;
+    public enum GameState
+    {
+        NotStarted, // Controller létrejöttekor, alapkérték
+        Running, //ha a játék elindult, startGame()
+        Lost, // settlerDie() ha az utolsó settler is meghalt
+        Won //játék vége nyertek EndGame()
+    }
+
+    /**
+     * Játék aktuális állapota
+     */
+    private GameState gameState = GameState.NotStarted;
 
     /**
      * a játékban  éppen aktuálisan létezõ összes Settler típusú objektumot tároló privát lista.
@@ -28,6 +44,11 @@ public class Controller implements java.io.Serializable {
     private List<Robot> robots = new ArrayList<>();
 
     /**
+     * A játékban éppen aktuálisan lév? összes Ufo típusú objektumot tároló privát lista
+     */
+    private List<Ufo> ufos = new ArrayList<>();
+
+    /**
      * A játékban található összes Orbit egy listában tárolva
      */
     private List<Orbit> orbits = new ArrayList<>();
@@ -38,55 +59,208 @@ public class Controller implements java.io.Serializable {
     private List<Stargate> stargates = new ArrayList<>();
 
     /**
-     * A játékban éppen aktuálisan lév? összes Ufo típusú objektumot tároló privát lista
+     * A játékban található összes Asteroid egy listában tárolva
      */
-    private List<Ufo> ufos = new ArrayList<>();
+    public List<Asteroid> asteroids = new ArrayList<>();
+
+    /**
+     * megkora a pálya, generáláshoz és napfényhez kell
+     */
+    private int mapSize = 100;
 
     /**
      * Megszabja, hogy hány körönként legyen napvihar
      */
-    private int sunstormTime;
+    private int sunstormTime = 8;
 
     /**
      * hány kör van még hátra a napviharig
      */
-    private int sunstormTimmer;
+    private int sunstormTimer;
 
-    public void initGame()
+    /** 
+     * Felület ami felelõs a grafikus megjelenítésért
+     */
+    private static IDrawable UI;
+
+    
+    /**
+     * Jatek elmentese szerializalassal
+     * @param path fajl neve
+     */
+    public void saveGame(String path)
     {
-        // TODO idokoz random beallitasa majd mashol
-        sunstormTime = 8;
+       	try 
+		{
+            FileOutputStream fileOut = new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(Controller.getInstance());
+            out.close();
+            fileOut.close();
+            System.out.printf("A palya mentése sikeres volt ide: " + path);
+        }
+		catch (Exception i) 
+		{
+            System.out.printf("A palya mentése sikertelen volt: "+ path);
+            i.printStackTrace();
+        }
     }
 
     /**
-     * Elindítja és futtatja a játékot.
-     * 
+     * Jatek betoltese szerializalassal
+     * @param path fajl neve
      */
-    public void startGame()
+    public void loadGame(String path)
     {
-        Logger.startFunctionLogComment(this, "startGame", "");
+        Controller load;
+        try 
+		{
+            FileInputStream fileIn = new FileInputStream(path);
+         	ObjectInputStream in = new ObjectInputStream(fileIn);
+        	load = (Controller) in.readObject();
+        	in.close();
+         	fileIn.close();
+            instance = load;
+            instance.NextSetller();
+       	} 
+		catch (Exception i) 
+		{
+        	System.out.println("Betoltés sikertelen: "+path);
+         	i.printStackTrace();
+       	}
+    }
 
-        gameIsOn = true;
-        while(gameIsOn){
+    /**
+     * inicializálja a plyát, a maximum inventory kapacitást, valamint a napviharok között eltelõ idõt.
+     */
+    public void initGame(int settlercount)
+    {
+        sunstormTimer = sunstormTime;
 
-            step();
+        int asteroidCount = 100;
+        int settlerCount = settlercount;
+        int ufoCount = (int)Math.round((double)settlerCount/3.0);
+
+        //aszteroidák generálása
+        for (int i = 0; i < asteroidCount; i++) 
+        {
+            
+            addAsteroid(new Asteroid(
+                getRandomNumber(0, mapSize), 
+                getRandomNumber(0, mapSize), 
+                getRandomNumber(1, 5), generateRandomResource(), true));
         }
 
-        Logger.endFunctionLog();
+        // közeli aszteroidák összekapcsolása
+        for (int i = 0; i < asteroidCount; i++) 
+        {
+            for (int j = i + 1; j < asteroidCount; j++) 
+            {
+                Asteroid a1 = asteroids.get(i);
+                Asteroid a2 = asteroids.get(j);
+                if(getAsteroidDistance(a1, a2) <= mapSize / 5)
+                {
+                    a1.addNeighbour(a2);
+                    a2.addNeighbour(a1);
+                }
+            }
+        }
+
+        //settlerek letrehozasa
+        for (int i = 0; i < settlerCount; i++)
+        {
+            //addSettler(new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+
+             //kontruktorban hozzáadja magát a listához
+            new Settler(asteroids.get(getRandomNumber(0, asteroidCount-1)));
+        }
+
+        //Ufok generálása
+        for (int i = 0; i < ufoCount; i++)
+        {
+            //addUfo(new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1))));
+
+            //kontruktorban hozzáadja magát a listához
+            new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1)));
+        }
+    }
+
+    /**
+     * kkt aszteroida távolságának kiszámolása a generáláshoz, szomszéd összepárosításkor
+     * @param a1 elsõ aszteroida
+     * @param a2 második aszteroida
+     * @return távolságuk
+     */
+    private int getAsteroidDistance(Asteroid a1, Asteroid a2)
+    {
+        int[] c1 = a1.getCoords();
+        int[] c2 = a2.getCoords();
+
+        int x = c1[0] - c2[0];
+        int y = c1[1] - c2[1];
+
+        return (int)Math.sqrt(x*x + y*y);
+    }
+
+    /**
+     * random szám generálása megadott intervallumban
+     * @param min legkisebb szám
+     * @param max legnagyobb szám
+     * @return random szám
+     */
+    private int getRandomNumber(int min, int max)
+    {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    /**
+     * Random nyersanyag létrehozása a pálya generáláshoz
+     * @return random típusú nyersanyag (Carbon, Ice Iron, Uran)
+     */
+    private Resource generateRandomResource()
+    {
+        int n = getRandomNumber(0, 5);
+        switch (n) {
+            case 0:
+                return new Carbon();
+            case 1:
+                return new Ice();
+            case 2:
+                return new Iron();
+            case 3:
+                return new Uran();
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Elindítja a játékot
+     */
+    public void startGame(int settlercount)
+    {
+        //Játék állapot változtatása
+        gameState = GameState.Running;
+        //pálya felépítése
+        initGame(settlercount);
+        //Gép vezérelt elemek léptetése
+        step();
+        //settler rajzolása
+        NextSetller();
     }
 
     /**
      * A meghívásakor futtat egy kört a játékból, ebben meghívja a környezeti változásokat és lépteti 
-     * a játékban el?forduló léptethet? objektumokat a megfelel? sorrendben 
-     * (sorrend: Napvihar és napfény események, megkergült ?rkapuk, robotok, ufók, végül telepesek).
+     * a játékban elõforduló léptethetõ objektumokat a megfelelõ sorrendben 
+     * (sorrend: Napvihar és napfény események, megkergült ûrkapuk, robotok, ufók).
      */
     private void step()
     {
 
-        if(sunstormTimmer == 0)
+        if(sunstormTimer == 0)
         {
             sunstormCall();
-            sunstormTimmer = sunstormTime;
+            sunstormTimer = sunstormTime;
         }
         else
             sunstormDecrease();
@@ -96,32 +270,15 @@ public class Controller implements java.io.Serializable {
         for(Stargate s : stargates){ s.step();}
         for(Robot r : robots){ r.step(); }
         for(Ufo u : ufos){u.step();}
-        for(Settler s : settlers){s.step(); }
     }
 
     /**
-     * leállítja a játkot.
+     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmaza listájához
+     * @param s a hozzáadandó telepes
      */
-    public void endGame()
-    {   
-        Logger.startFunctionLogComment(this, "endGame", "");
-        gameIsOn = false;
-        Logger.endFunctionLog();
-
-    }
-
-    /**
-     * a paraméterként megkapott robotot hozzáadja a robots listájához
-     * @param r
-     */
-    public void addRobot(Robot r)
+    public void addSettler(Settler s)
     {
-        Logger.startFunctionLogComment(this, "addRobot", "");
-        robots.add(r);
-
-        //TODO beírni robotnak a prefixet; törölni majd
-
-        Logger.endFunctionLog();
+        settlers.add(s);
     }
 
     /**
@@ -129,43 +286,36 @@ public class Controller implements java.io.Serializable {
      * 
      * Ha egy telepes meghal, akkor meghívja  ezt a Settler_die() függvényt, 
      * ami eltávolítja a settlers listából a paraméterként kapott Settler objektumot
-     * és átírja a Settler_alive változó értékét.
      * Ha nem marad több settler, játék végét hív.
-     * 
-     * @param s
+     * @param s meghallt settler
      */
     public void settlerDie(Settler s)
     {
-        Logger.startFunctionLogComment(this, "settlerDie", "");
-
         settlers.remove(s);
 
-        if(settlers.size()==0)
-            endGame();
-
-        Logger.endFunctionLog();
+        if(settlers.size() == 0)
+        {
+            gameState = GameState.Lost;
+        }
     }
 
     /**
-     * ha egy robot meghal, akkor meghívja ezt a Robot_die() függvényt, ami eltávolítja a robots listából az paraméterként kapott
-     * Robot objektumot.
-     * @param r
+     * a paraméterként megkapott robotot hozzáadja a robots listájához
+     * @param r új robot
+     */
+    public void addRobot(Robot r)
+    {
+        robots.add(r);
+    }
+
+    /**
+     * ha egy robot meghal, akkor meghívja ezt a Robot_die() függvényt,
+     * ami eltávolítja a robots listából az paraméterként kapott Robot objektumot.
+     * @param r az eltávolitandó robot.
      */
     public void robotDie(Robot r)
     {
-        Logger.startFunctionLogComment(this, "robotDie", "");
-
         robots.remove(r);
-
-        Logger.endFunctionLog();
-    }
-    /**
-     * Hozzáadja a paraméterként kapott telepest a controller telepeseket tartalmazó listájához
-     * @param s
-     */
-    public void addSettler(Settler s)
-    {
-        settlers.add(s);
     }
 
      /**
@@ -178,7 +328,7 @@ public class Controller implements java.io.Serializable {
     }
 
     /**
-     * eltávolítja a kapott ufót a Controller ufos listájából, ha   a kapott ufo benne volt.
+     * eltávolítja a kapott ufót a Controller ufos listájából, ha  a kapott ufo benne volt.
      * @param u ufo
      */
     public void ufoDie(Ufo u)
@@ -192,15 +342,12 @@ public class Controller implements java.io.Serializable {
      */
     public void addStargate(Stargate s)
     {
-        //TODO PREFIXET FELVENNI
-
         orbits.add(s);
         stargates.add(s);
-
     }
 
     /**
-     *  ha egy teleportkaput meghal, akkor a destuktorának a meghívása el?tt, 
+     *  ha egy teleportkaput meghal, akkor a destuktorának a meghívása elõtt, 
      *  meghívja  ezt a Stargate_die() függvényt, ami eltávolítja a stargates listából az adott Stargate objektumot.
      * @param s
      */
@@ -216,13 +363,7 @@ public class Controller implements java.io.Serializable {
      */
     public void addOrbit(Orbit o)
     {
-
-
         orbits.add(o);
-
-        //TODO beírni a prefixét.
-        //TODO ez alul furcsa... nekem nem tetszik. mert add orbitot hív stargate, vagy asteroid beírás is följebb
-
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
         if(o.getClass() == Asteroid.class)
             asteroids.add((Asteroid)o);
@@ -240,6 +381,8 @@ public class Controller implements java.io.Serializable {
         //ideiglenes a prto idejere, konnyebb eleres erdekeben
         if(o.getClass() == Asteroid.class)
             asteroids.remove(o);
+        else if(o.getClass() == Stargate.class)
+            stargates.remove(o);
     }
 
     /**
@@ -247,32 +390,37 @@ public class Controller implements java.io.Serializable {
      */
     private void sunstormCall()
     {
-        Logger.startFunctionLogComment(this, "sunstormCall", "");
-
-        // TODO rendes coords random kellene legyen majd mûködés közben
+        int stormAreaSize = 20;
         int coords[] = new int[4];
+        coords[0] = getRandomNumber(0, mapSize - stormAreaSize);
+        coords[1] = getRandomNumber(0, mapSize - stormAreaSize);
+        coords[2] = coords[0] + stormAreaSize;
+        coords[3] = coords[1] + stormAreaSize;
+
+        //a lista módosulna ezért másolni kell és azon végig menni
         ArrayList<Orbit> copy = new ArrayList<>();
         copy.addAll(orbits);
         for(Orbit o: copy){
             o.sunstormArrive(coords);
         }
-        Logger.endFunctionLog();
     }
 
     /**
-     * Meghívja minden aszteroidán a sunLightArrive metódust.
+     * Meghívja az összes tárolt Orbit SunLightArrive()-metódusát, véletlen sorsolt koordinátákkal
      */
     private void sunLightCall()
     {
-        Logger.startFunctionLogComment(this, "sunLightCall", "");
-
-        // TODO rendes coords
+        int lightAreaSize = 30;
         int coords[] = new int[4];
+        coords[0] = getRandomNumber(0, mapSize - lightAreaSize);
+        coords[1] = getRandomNumber(0, mapSize - lightAreaSize);
+        coords[2] = coords[0] + lightAreaSize;
+        coords[3] = coords[1] + lightAreaSize;
 
-        for(Orbit o: orbits){
+        for(Orbit o: orbits)
+        {
             o.sunLightArrive(coords);
         }
-        Logger.endFunctionLog();
     }
 
     /**
@@ -280,20 +428,87 @@ public class Controller implements java.io.Serializable {
      */
     private void sunstormDecrease()
     {
-        Logger.startFunctionLogComment(this, "sunstormDecrease", "");
-        sunstormTimmer--;
-        Logger.endFunctionLog();
+        sunstormTimer--;
     }
 
+    /**
+     * Megmondja hány kör van vissza a következõ napviharig.
+     * @return hátralévõ körök
+     */
+    public int getSunstormTime()
+    {
+        return sunstormTimer;
+    }
+
+    /**
+     * Új Aszteroida berigisztrálása a Controllerbe
+     * @param a új Aszteroida
+     */
+    public void addAsteroid(Asteroid a) 
+    { 
+        asteroids.add(a);
+        orbits.add(a);
+    }
+
+    /**
+     * Grafikus felület referenciájának beállítása
+     * @param ui felület ami a megjelenítást végzi
+     */
+    public void setFrame(IDrawable ui)
+    {
+        UI = ui;
+    }
+
+    /**
+     * Értesíti a grafikus felületet, hogy lehet rajzolni a következõ Settlert.
+     * növeli a settlerCounter-t, ha a körbe az összes Settler megvolt léptepi a többi játék elemet
+     * és reseteli a settlerCounter-t
+     */
+    public void NextSetller()
+    {
+        Settler TheChosenOne = null;
+        boolean WeGotSomebodyToStep = false;
+        for (Settler s : settlers) {
+            if(!s.getHasStepped()){
+                TheChosenOne = s;
+                WeGotSomebodyToStep = true;
+                break;
+            }
+        }
+        // ha már mindenki lépett, reseteljük a settlereket, és léptetjük a pályát.
+        if (!WeGotSomebodyToStep){
+            for (Settler s : settlers) {
+                s.InvertHasStepped();
+            }           
+            step();
+            
+            //lista lehet üres, mert mindenki meghalt a step után
+            if(settlers.size() > 0){
+            TheChosenOne = settlers.get(0);
+            }
+        }
+
+        // ezen a ponton, ha a TheChosenOne == null, akkor a játék véget ért, és a gameStatus = GameStatus.Lost kell legyen!!
+        // Ha a TheChosenOne == null, de a játk nem ért véget, akkor tuti kiakadás jön a grafikus résznél.
+        if(TheChosenOne != null)
+        TheChosenOne.InvertHasStepped();
+        UI.Draw(TheChosenOne);
+    }
+
+    public void endGame() 
+    {
+        gameState = GameState.Won;
+	}
+
+    public GameState getGameState()
+    {
+        return gameState;
+    }
 
     ///Singleton stuff
     private static Controller instance;
 
-    private Controller()
-    {
-        Logger.startFunctionLogComment(this, "Controler", "<<create>>");
-        Logger.endFunctionLog();
-    }
+    private Controller(){}
 
      /**
      * Létrhoz és visszaadja, vagy ha már volt létrehozva akkor visszaadja az elsõ létrehozott controllert.
@@ -307,7 +522,7 @@ public class Controller implements java.io.Serializable {
         return instance;
     }
     /**
-     *  teszteléshez szükséges, új példányt ad vissza mindig.
+     *  ÚJ játék esetén teljes reset, új controller, id számlálók reset
      */ 
     public static Controller getNewControler()
     {
@@ -320,251 +535,6 @@ public class Controller implements java.io.Serializable {
         return instance;
     }
 
-    public static void LoadController(Controller c)
-    {
-        instance = c;
-    }
-
     /// Singleton ends here
-    
-//PROTO FÜGGVÉNYEK INNENTÕL///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    //Proto fuggvenyek ------------------------------------------------------------------------------
-
-    public List<Asteroid> asteroids = new ArrayList<>();
-
-    public void addAsteroid(Asteroid a) 
-    { 
-        asteroids.add(a);
-        orbits.add(a);
-    }
-
-    public Robot getRobot(int index) throws Exception
-    {
-        if(index < 0 || index >= robots.size())
-            throw new Exception("Nincs ilyen robot: " + index);
-
-        return robots.get(index);
-    }
-
-    public Ufo getUfo(int index) throws Exception
-    {
-        if(index < 0 || index >= ufos.size())
-            throw new Exception("Nincs ilyen ufo: " + index);
-
-        return ufos.get(index);
-    }
-
-    public Stargate getStargate(int index) throws Exception
-    {
-        if(index < 0 || index >= stargates.size())
-            throw new Exception("Nincs ilyen kapu: " + index);
-
-        return stargates.get(index);
-    }
-
-    public Asteroid getAsteroid(int index) throws Exception
-    {
-        if(index < 0 || index >= asteroids.size())
-            throw new Exception("Nincs ilyen aszteroida: " + index);
-
-        return asteroids.get(index);
-    }
-
-    public void explicitSunstorm(int x1, int y1, int x2, int y2)
-    {
-        int coords[] = {x1,y1,x2,y2};
-
-        List<Orbit> copy = new ArrayList<>();
-        copy.addAll(orbits);
-        for(Orbit o : copy){
-            o.sunstormArrive(coords);
-        }
-    }
-
-    public void explicitSunlight(int x1, int y1, int x2, int y2)
-    {
-        int coords[] = {x1,y1,x2,y2};
-
-        List<Orbit> copy = new ArrayList<>();
-        copy.addAll(orbits);
-        for(Orbit o : copy){
-            o.sunLightArrive(coords);
-        }
-    }
-
-    public List<Robot> getRobots(){
-        return robots;
-    }
-    public List<Ufo> getUfos(){
-        return ufos;
-    }
-
-    //end of Proto fuggvenyek ---------------------------------------------------------------------------
-
-    /**
-     * Index alapján visszatér a settlers lista adott elemével
-     * @param index
-     * @return az adott indexu Settler a settlers listaban
-     * @throws Exception  nincs ilyen indexu telepes
-     */
-    public Settler getSettler(int index) throws Exception
-    {
-        if(index < 0 || index >= settlers.size())
-            throw new Exception("Nincs ilyen telepes: " + index);
-
-        return settlers.get(index);
-    }
-    /**
-     * Index alapján visszatér az orbits lista adott elemével
-     * @param index
-     * @return az adott indexu Orbit az orbits listaban
-     * @throws Exception  nincs ilyen indexu orbit
-     */
-    public Orbit getOrbit(int index) throws Exception
-    {
-        if(index < 0 || index >= orbits.size())
-            throw new Exception("Nincs ilyen orbit: " + index);
-
-        return orbits.get(index);
-    }
-    /**
-     * Megadja egy Orbit sorszamat az orbits listaban
-     * @param o keresett orbit
-     * @return a listaban levo sorszama
-     * @throws ClassCastException rossz parameteru 
-     */
-    public int indexOrbit(Orbit o) throws ClassCastException
-    {
-        return orbits.indexOf(o);
-    }
-    /**
-     * Megadja egy Asteroid sorszamat az asteroids listaban
-     * @param a keresett aszteroida
-     * @return a listaban levo sorszama
-     * @throws ClassCastException rossz parameteru 
-     */
-    public int indexAsteroid(Asteroid a) throws ClassCastException
-    {
-        return asteroids.indexOf(a);
-    }
-    /**
-     * Megadja egy Stargate sorszamat a stargates listaban
-     * @param s keresett stargate
-     * @return a listaban levo sorszama
-     * @throws ClassCastException rossz parameteru 
-     */
-    public int indexStargate(Stargate s) throws ClassCastException
-    {
-        return stargates.indexOf(s);
-    }
-    /**
-     * Megadja egy Robot sorszamat a robots listaban
-     * @param r keresett robot
-     * @return a listaban levo sorszama
-     * @throws ClassCastException rossz parameteru 
-     */
-    public int indexRobot(Robot r) throws ClassCastException
-    {
-        return robots.indexOf(r);
-    }
-    /**
-     * Megadja egy Ufo sorszamat az ufos listaban
-     * @param u keresett ufo
-     * @return a listaban levo sorszama
-     * @throws ClassCastException rossz parameteru 
-     */
-    public int indexUfo(Ufo u) throws ClassCastException
-    {
-        return ufos.indexOf(u);
-    }
-    /**
-     * Megadja egy Settler sorszamat az settlers listaban
-     * @param s keresett telepes
-     * @return a listaban levo sorszama
-     * @throws ClassCastException rossz parameteru 
-     */
-    public int indexSettler(Settler s) throws ClassCastException
-    {
-        return settlers.indexOf(s);
-    }
-    /**
-     * Kiirja a kimenetre a stargatek tartalmat
-     */
-    public void liststargates()
-    {
-        for (Stargate futo : stargates) {
-            //core lehet nulla. lehet belõle baj. elõbb kell kezelni.
-            String MyStop = " - ";
-            if(futo.getMyStop() != null)
-                MyStop = futo.getMyStop().getPrefix();
-            System.out.println(
-                "StargateId: " + futo.getPrefix()+
-                " MyTwin: " + futo.getMyTwin().getPrefix()+
-                " MyStop: " + MyStop +
-                " Crazy: " + futo.getCrazy()
-            );
-        }
-    }
-
-    public void listsettlers()
-    {
-        for (Settler futo : settlers) {
-            System.out.println(
-                "SettlerId: "+ futo.getPrefix() +
-                " Location: "+ futo.getcurrentLocation().getPrefix() +
-                " Coords: " + futo.getcurrentLocation().getCoords()[0] + " " +futo.getcurrentLocation().getCoords()[1] +
-                " Resources: Uran: "+ futo.getInventory().getNumOfUran() + " Ice: " + futo.getInventory().getNumOfIce() + 
-                " Iron: "+ futo.getInventory().getNumOfIron() + " Carbon: "  + futo.getInventory().getNumOfCarbon() + 
-                " Gates: " + futo.getStargates().size()
-                );
-        }
-    }
-
-    /**
-     * beállítja a game is on váltó értékét
-     */
-    public void setGameIsOn(boolean a) { gameIsOn = a;}
-
-    /**
-     * visszaadja a game is on váltó értékét
-     */
-    public boolean getGameIsOn() {return gameIsOn;}
-
-    /**
-     * kiírja az összes aszteroidát
-     */
-    public void listAsteroids()
-    {
-        for (Asteroid futo : asteroids) {
-            //core lehet nulla. lehet belõle baj. elõbb kell kezelni.
-            String core = "null";
-            if(futo.getCore() != null)
-                core = futo.getCore().getClass().getSimpleName();
-            System.out.println(
-                "AsteroidId: "+ futo.getPrefix() +
-                " Coords: " + futo.getCoords()[0] + " "+ futo.getCoords()[1] +
-                " Core: " + core +
-                " inLight: " + futo.inLight +
-                " Layers: " + futo.getLayers()
-            );
-        }
-    }
-    /**
-     * Visszadja az aktuálisan aktiv robotok darabszamat
-     * @return int robotok szama
-     */
-    public int numOfRobots()
-    {
-        return robots.size();
-    }
-    /**
-     * Visszadja az aktuálisan aktív robotok darabszámát
-     * @return az utolso robot a robots listaban
-     */
-    public Robot lastRobot()
-    {
-        return robots.get(robots.size()-1);
-    }
 }
 

@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-import skeleton.Logger;
-
 public class Inventory implements java.io.Serializable {
 
     /**
@@ -14,12 +12,17 @@ public class Inventory implements java.io.Serializable {
      */
     private static final long serialVersionUID = -5282074853486280495L;
 
+    /**
+     * A tároló teljes mérete
+     */
     private final int size;
 
+    /**
+     * Adatstruktúra a nyersanyag fajták válogatott tárolására.
+     */
     private HashMap<String, ArrayList<Resource>> materials;
 
     public Inventory(int meret){
-        Logger.startFunctionLogComment(this, "Inventory", "<<create>>");
         size = meret;
 
         materials = new HashMap<String, ArrayList<Resource>>();
@@ -28,9 +31,6 @@ public class Inventory implements java.io.Serializable {
         materials.put("Carbon", new ArrayList<Resource>());
         materials.put("Iron", new ArrayList<Resource>());
         materials.put("Ice", new ArrayList<Resource>());
-
-        Logger.endFunctionLog();
-        
     }
     /** 
      * Visszaadja a tárolt nyersanyagok számát
@@ -48,15 +48,14 @@ public class Inventory implements java.io.Serializable {
     
     /** 
      * Hozzáad egy nyersanyagot a tárolóhoz ha van benne még hely.
+     * 
+     * felvesz egy nyersanyagot a materials tárolóba, ha van még hely. Az adott nyersanyag CallBack() metódusát hívja.
      */
     public void addResource(Resource r)
     {
-        Logger.startFunctionLogComment(this, "addResource", "");
-        // TODO ez itt nem <= kene legyen?
         if(inventorySize() < size){
             r.callBack(this);
         }
-        Logger.endFunctionLog();
     }
     /**
      * Visszaad egy adott nevû nyersanyagot.
@@ -66,26 +65,21 @@ public class Inventory implements java.io.Serializable {
      */
     public Resource removeResource(String rName)
     {
-        Logger.startFunctionLogComment(this, "removeResource", "");
-
-       try{
+       try
+       {
             if(materials.get(rName).size() > 0)
             {   
                 Resource r = null;
 
-                if (materials.get(rName).size()>0)
+                if (materials.get(rName).size() > 0)
                     r = materials.get(rName).remove(0);
-
-                Logger.endFunctionLog();
-
                 return r;
             }
-       }catch(Exception e){
+       }
+       catch(Exception e)
+       {
 
        }
-
-       Logger.endFunctionLog();
-
        return null;
         
     }
@@ -93,62 +87,60 @@ public class Inventory implements java.io.Serializable {
     /**
      * Callback függvény az urán hozzáadásához.
      * 
+     * Az urán CallBack függvénye hívja, hogy az uránt
+     * a megfelelõ helyre tegye a materials struktúrában.
+     * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addUran(Uran u)
     {
-
-        Logger.startFunctionLogComment(this, "addUran", "");
-
         materials.get("Uran").add(u);
-
-        Logger.endFunctionLog();
-
     }
     /**
      * Callback függvény az szén hozzáadásához.
+     * 
+     * A szén CallBack függvénye hívja, hogy a szenet a megfelelõ helyre tegye a materials struktúrában.
      * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addCarbon(Carbon c)
     {
-
-        Logger.startFunctionLogComment(this, "addCarbon", "");
-
         materials.get("Carbon").add(c);
-
-        Logger.endFunctionLog();
-
     }
     /**
      * Callback függvény az vas hozzáadásához.
+     * 
+     * A vas CallBack függvénye hívja, hogy a vasat a megfelelõ helyre tegye a materials struktúrában.
      * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addIron(Iron i)
     {
-
-        Logger.startFunctionLogComment(this, "addIron", "");
-
-        materials.get("Iron").add(i);      
-
-        Logger.endFunctionLog();
-        
+        materials.get("Iron").add(i);
     }
     /**
      * Callback függvény az jég hozzáadásához.
+     * 
+     * A jég CallBack függvénye hívja, hogy a jeget a megfelelõ helyre tegye a materials struktúrában.
      * 
      * @param u a hozzáadni kívánt nyersanyag.
      */
     public void addIce(Ice i)
     {
-        Logger.startFunctionLogComment(this, "addIce", "");
-
         materials.get("Ice").add(i);     
-
-        Logger.endFunctionLog();
     }
-
+    /**
+     * 
+     * Segédfüggvény, ellenõrzi, hogy van-e elegendõ a megadott 
+     * nyersanyagfajtákból, ha van kitörli õket és igazzal tér vissza, 
+     * ha nincs, akkor nem töröl semmit, és igazzal tér vissza
+     * 
+     * @param Uran
+     * @param Carbon
+     * @param Iron
+     * @param Ice
+     * @return
+     */
     private boolean doIHave(int Uran, int Carbon, int Iron, int Ice){
         int[] nums = {Uran, Carbon, Iron, Ice};
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
@@ -170,31 +162,32 @@ public class Inventory implements java.io.Serializable {
     /**
      * Léterehoz egy robotot, ha van elég nyersanyag.
      * 
-     * @param o -nem használt.
+     * Ha van elegendõ nyersanyag az osztályban, létrehoz egy robotot és
+     *  visszatér vele, a felhasznált nyersanyagot törli, egyébként null-t ad vissza.
+     * 
+     * @param o kezdõ helye a robotnak ha sikeres a készítés
      * @return vagy a étrehozott robot, vagy null.
      */
     public Robot createRobot(Orbit o)
     {
-        Logger.startFunctionLogComment(this, "createRobot", "");   
-
         if(doIHave(1, 1, 1, 0))
         {
-            Logger.endFunctionLog();
-            return new Robot();
+            return new Robot(o);
         }
-        Logger.endFunctionLog();
         return null;
     }
 
     /**
      * Létrehoz két stargate-t ha van rá elég nyersanyag.
      * 
+     * Ha van elegendõ nyersanyag  és a játékosnál nincsen másik kapu
+     *  vagy kapu-pár éppen, létrehoz egy összekapcsolt kapu-párt, 
+     * és visszaadja, a felhasznált nyersanyagot törli, egyéblént null-t ad vissza.
+     * 
      * @return a kreált két stargate vagy null.
      */
     public List<Stargate> createStargate()
     {
-        Logger.startFunctionLogComment(this, "createStargate", "");
-
         if(doIHave(1, 0, 2, 1)){
             List<Stargate> list = new ArrayList<Stargate>();
             Stargate a = new Stargate();
@@ -205,13 +198,8 @@ public class Inventory implements java.io.Serializable {
 
             list.add(a);
             list.add(b);
-
-            Logger.endFunctionLog();
-
             return list;
         }
-        Logger.endFunctionLog();
-        
         return null;
     }
 
@@ -226,12 +214,7 @@ public class Inventory implements java.io.Serializable {
      */
     public boolean createBase()
     {
-        Logger.startFunctionLogComment(this, "createBase", "");
-
         Boolean b =  doIHave(3, 3, 3, 3);
-
-        Logger.endFunctionLog();
-
         return b;
     }
     /**
@@ -243,20 +226,12 @@ public class Inventory implements java.io.Serializable {
      */
     public void addInventory(Inventory other)
     {
-        Logger.startFunctionLogComment(this, "addInventory", "");
-
         String[] anyagok = {"Uran","Carbon","Iron","Ice"};
 
         for(int i = 0; i < anyagok.length; i ++){
             materials.get(anyagok[i]).addAll(other.materials.get(anyagok[i]));
         }
-        
-        Logger.endFunctionLog();
-        
     }
-
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public int getNumOfUran(){
         return materials.get("Uran").size();
     }
@@ -269,18 +244,4 @@ public class Inventory implements java.io.Serializable {
     public int getNumOfCarbon(){
         return materials.get("Carbon").size();
     }
-    public HashMap<String, ArrayList<Resource>> getFullList() { return materials; }
-    
-    public List<Stargate> giveFreeStargates()
-    {
-        List<Stargate> list = new ArrayList<Stargate>();
-        Stargate a = new Stargate();
-        Stargate b = new Stargate();
-        a.entagle(b);
-        b.entagle(a);
-        list.add(a);
-        list.add(b);
-        return list;
-    }
-
 }

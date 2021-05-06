@@ -1,35 +1,55 @@
 package logic;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import skeleton.Logger;
 
 public class Settler extends Traveler {
     
+    /**
+     * Azt jelzi hogy a settler lépett-e már egy körben.
+     *  
+     */ 
+    private boolean hasStepped = false;
+    /**
+     * Invertálja a HasStepped értékét.
+     */
+    public void InvertHasStepped(){ hasStepped = !hasStepped;}
+    /**
+     * Visszatér a HasStepped értékével.
+     * 
+     * @return A telepes HasStepped értéke.
+     */
+    public boolean getHasStepped(){ return hasStepped; } 
+
     /**
 	 *
 	 */
 	private static final long serialVersionUID = 1002966729770761380L;
 	//0-3 stargetes
     private List<Stargate> stargates = new ArrayList<>();
-
+    /**
+     * Konstruktor
+     * @param start kezdõ orbitja a settlernek
+     */
     public Settler(Orbit start)
     {
         super();
-        Logger.startFunctionLogComment(this, "Settler", "<<create>>");
         currentLocation = start.addTraveler(this);
         inventory = new Inventory(10);
-        setPrefix("settler_"+id_counter++);
+        prefix = "settler_"+id_counter++;
         Controller.getInstance().addSettler(this);
-        Logger.endFunctionLog();
     }
-
+    /**
+     * A telepes meghal. 
+     * 
+     * Az aszteroidára, amin jelenleg tartózkodik, önmagával (saját magát adja meg paraméterként) 
+     * meghívja a RemoveTraveler(Traveler t) metódust, 
+     * majd a controller-nek is jelzi önmagával meghívva Settler_die(Settler s) metódust, 
+     * majd törli önmagát.
+     */
     @Override
     public void die()
     {
-        Logger.startFunctionLogComment(this, "die", "");
-
         /** kitörli magát az aszteroidából. */
         currentLocation.removeTraveler(this);
 
@@ -46,17 +66,20 @@ public class Settler extends Traveler {
 
         /** Miután elpusztította a kapuit, azután jelzi a controllernek, hogy õ meghalt és kéri, hogy húzza ki az élõ telepesek listájából (a settlerDie függvénnyel) */
         controler.settlerDie(this);
-
-        Logger.endFunctionLog();
     }
-
+    /**
+     * A játékos kiválaszthat egy mûveletet(fúrhat, bányászhat, mozoghat, építhet),
+     * amit szeretne a telepesével elvégeztetni.
+     * Jelenleg NEM használjuk a protoban.
+     */
     @Override
     public void step()
     {}
-
+    /**
+     * Kibányássza az aszteroidában található nyersanyagot, ha át van fúrva annak kérge.
+     */
     public void mining()
     {
-        Logger.startFunctionLogComment(this, "mining", "");
         /** A retrieveResource null-al tér vissza, ha teleportkapun vagy üreges aszteroidán bányásznánk, egyéb esetben pedig a bányászott nyersanyaggal. */
         Resource res = currentLocation.retrieveResource();
 
@@ -65,30 +88,23 @@ public class Settler extends Traveler {
         {
             inventory.addResource(res);
         }
-        Logger.endFunctionLog();
     }
-
+    /**
+     * Ha elegendõ nyersanyag áll a rendelkezésére, akkor létrehoz egy új robotot.
+     */
     public void createRobot()
     {
-        Logger.startFunctionLogComment(this, "createRobot", "");
-        /** Megkísérel a createRobot egy új robotot létrehozni. Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. */
-        Robot newrobot = inventory.createRobot(currentLocation);
-        
-        /** Ha sikeresen létrehozta az új robotot, akkor felveszi az aktuális objektumon lévõ utazók közé az új robotot az addTraveler-el, 
-         * majd pedig az addRobot-al szól a controler-nek, hogy adja hozzá az új robotot az aktív robotok listájához. */
-        if(newrobot != null)
-        {
-            currentLocation.addTraveler(newrobot);
-            controler.addRobot(newrobot);
-            newrobot.currentLocation = this.currentLocation;
-        }
-        Logger.endFunctionLog();
+        /** Megkísérel a createRobot egy új robotot létrehozni. 
+         * Ha nincs elég nyersanyag az inventory-ban, akkor null-al tér vissza. 
+         * A robot megkapja az orbitot ha sikeres a létrehozás, rárakja magát, és beregisztrál a controllerbe is*/
+        inventory.createRobot(currentLocation);
     }
-
+    /**
+     * Ha van nála teleportkapu, akkor a soron következõ kaput pályára állítja az orbit körül,
+     * ahol tartózkodik.
+     */
     public void placeStargate()
     {
-        Logger.startFunctionLogComment(this, "placeStargate", "");
-
         if(stargates.size() > 0)
         {
             /** Elhelyezi a lista 0. indexe alatt lévõ teleportkaput a place függvénnyel, 
@@ -98,16 +114,13 @@ public class Settler extends Traveler {
             
             stargates.remove(s);
         }
-        
-        Logger.endFunctionLog();
-        
     }
 
-    /** A what paraméter határozza meg, hogy milyen nyersanagot helyezne vissza a játékos. */
+    /** 
+     * A what paraméter határozza meg, hogy milyen nyersanagot helyezne vissza a játékos. 
+     */
     public void replaceResource(String what)
     {
-        Logger.startFunctionLogComment(this, "replaceResource", "");
-
         /** Eltávolítja a removeResource a what paraméterben meghatározott nyersanyagot */
         Resource resource = inventory.removeResource(what);
         boolean replecement = false;
@@ -121,17 +134,19 @@ public class Settler extends Traveler {
              inventory.addResource(resource);
             }
         }
-        Logger.endFunctionLog();
     }
-
+    /**
+     * A telepes kezdeményezi a bázis felépítését azon az aszteroidán,
+     * amelyiken jelenleg tartózkodik.
+     * Ehhez összeszámolja az aszteroidán a többi telepesnél található nyersanyagokat is és ha van elég,
+     * megépítik a bázist, ezzel megnyerik a játékot(GameEnd())
+     */
     public void createBase()
     {
-        Logger.startFunctionLogComment(this, "createBase", "");
         /** Lekéri az összes utazót a tartózkodási helyérõl és létrehoz egy inventory-t, amiben számolja, hogy elég nyersanyaga van-e összesen a lista tagjainak. */
         List<Traveler> travelers = currentLocation.getTravelers();
 
         Inventory inventoryforbase = new Inventory(10000);
-
 
         /** Hozzáadja a travelers tagjainak az inventoriait az inventoryforbase-hez. */
         for(int i = 0; i < travelers.size(); i++)
@@ -144,13 +159,14 @@ public class Settler extends Traveler {
         {
             controler.endGame();
         }
-        Logger.endFunctionLog();
     }
-
+    /**
+     * Ha jelenleg nincs vagy csak 1 darab teleportkapu van a telepesnél,
+     * akkor ha elegendõ nyersanyag áll a rendelkezésére,
+     * akkor létrehoz egy új teleportkapu-párt.
+     */
     public void createStargate()
     {
-        Logger.startFunctionLogComment(this, "createStargate", "");
-
         if(stargates.size() <= 1)
         {
             List<Stargate> newgates = inventory.createStargate();
@@ -163,49 +179,27 @@ public class Settler extends Traveler {
                 controler.addStargate(newgates.get(1));
             } 
         }
-
-        Logger.endFunctionLog();
     }
-
+    /**
+     * A telepes a robbanás során meghal, meghívja önmagára a Die() metódust.
+     */
     @Override
     public void explosion() 
     {
-        Logger.startFunctionLogComment(this, "explosion", "");
         die();
-        Logger.endFunctionLog();
     }
     
-    //PROTO FÜGGVÉNYEK INNENTÕL//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * Visszatér a settlernél lévõ stargate listával
+     * @return stargate lista
+     */
     public List<Stargate> getStargates()
     {
         return stargates;
     }
-    public void addOneStargate (Stargate s)
-    {
-        if(stargates.size()!=0)
-            stargates.add(0, s);
-        else
-            stargates.add(s);
-    }
 
-    public void SettlerInfo()
-    {
-        Controller c = Controller.getInstance();
-        int settlerId = c.indexSettler(this);
-        System.out.println(
-            "SettlerId: "+ this.prefix+" Location: "+ currentLocation.getPrefix() + " Coords: " + this.currentLocation.getCoords()[0] + " " + this.currentLocation.getCoords()[1] 
-            + " Resources: Uran: " +  this.inventory.getNumOfUran() + " Ice: " + this.inventory.getNumOfIce() + " Iron: " + this.inventory.getNumOfIron()
-            + " Carbon: " + this.inventory.getNumOfCarbon() + " Gates: " + this.stargates.size());
-    }
-
+    /**
+     * Id -ja a settlernek
+     */
     public static int id_counter = 0;
-
-    public void addFreeStargatePair()
-    {
-        List<Stargate> newgates = inventory.giveFreeStargates();
-        stargates.addAll(newgates);
-        Controller.getInstance().addStargate(newgates.get(0));
-        Controller.getInstance().addStargate(newgates.get(1));
-    }
 }
