@@ -137,9 +137,9 @@ public class Controller implements java.io.Serializable {
     {
         sunstormTimer = sunstormTime;
 
-        int asteroidCount = 3;
+        int asteroidCount = 100;
         int settlerCount = settlercount;
-        int ufoCount = 0;
+        int ufoCount = (int)Math.round((double)settlerCount/3.0);
 
         //aszteroidák generálása
         for (int i = 0; i < asteroidCount; i++) 

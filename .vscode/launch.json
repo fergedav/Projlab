@@ -6,10 +6,16 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MainClass",
+            "request": "launch",
+            "mainClass": "grafikus.MainClass",
+            "projectName": "Asteroids Game"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
-            
         },
         {
             "type": "java",
