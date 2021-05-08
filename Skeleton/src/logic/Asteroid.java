@@ -63,7 +63,6 @@ public class Asteroid extends Orbit {
         for (Traveler t : copy) {
             t.explosion();
         }
-        travelers = copy;
 
         Logger.endFunctionLog();
     }
