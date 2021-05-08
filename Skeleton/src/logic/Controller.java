@@ -139,7 +139,8 @@ public class Controller implements java.io.Serializable {
 
         int asteroidCount = 100;
         int settlerCount = settlercount;
-        int ufoCount = (int)Math.round((double)settlerCount/3.0);
+
+        int ufoCount = settlerCount/3 + 1;
 
         //aszteroidák generálása
         for (int i = 0; i < asteroidCount; i++) 
@@ -180,7 +181,7 @@ public class Controller implements java.io.Serializable {
         {
             //addUfo(new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1))));
 
-            //kontruktorban hozzáadja magát a listához
+            //kontruktorban hozzáadja magát a listához (ufos + asteroid->travelers)
             new Ufo(asteroids.get(getRandomNumber(0, asteroidCount-1)));
         }
     }

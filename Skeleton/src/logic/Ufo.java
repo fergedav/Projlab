@@ -10,7 +10,7 @@ public class Ufo extends Traveler {
     private static final long serialVersionUID = -6867257992338262330L;
 
     /**
-     * Ufo konstruktor, egy új Ufo létrehozása, Orbitra helyezése és beregisztrálása a Controller-be
+     * Ufo konstruktor, egy új Ufo létrehozása, Orbitra helyezése és beregisztrálása a Controller-be, és az orbitra is felteszi magát.
      * @param start kezdõ Orbit
      */
     public Ufo(Orbit start)
@@ -19,6 +19,7 @@ public class Ufo extends Traveler {
         inventory = new Inventory(10000);
         prefix = "ufo_"+id_counter++;
         currentLocation = start;
+        currentLocation.addTraveler(this);
         Controller.getInstance().addUfo(this);
     }
 
