@@ -6,10 +6,16 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ProtoMain",
+            "request": "launch",
+            "mainClass": "proto.ProtoMain",
+            "projectName": "Asteroids Game"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
-            
         },
         {
             "type": "java",
