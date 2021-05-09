@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements IDrawable{
 	/**
 	 * hány pixel legyen a karakterek mérete
 	 */
-	int spriteSize = 96;
+	int spriteSize = 32;
 	/**
 	 * Napfény színe
 	 */
@@ -68,6 +68,12 @@ public class GamePanel extends JPanel implements IDrawable{
 	public void Draw(Settler s)
 	{
 		currentSettler = s;
+		int scale = s.getcurrentLocation().numOfNeighbor();
+		
+		if(scale >= 0 && scale <= 12) { spriteSize = 96;}
+		if(scale >= 13 && scale <= 22) { spriteSize = 64;}
+		if(scale >= 23) { spriteSize = 32;}
+
 		phi =  1; //(int)(Math.random() * 360);
 		repaint();
 	}
